@@ -16,14 +16,14 @@ const stylesheet = createStyleSheet('DecksPage', (theme) => {
   return {
     root: {
       padding: 20,
-      display: "flex",
-      flexWrap: "wrap"
+      display: 'flex',
+      flexWrap: 'wrap'
     },
     deckItem: theme.mixins.gutters({
       paddingTop: theme.spacing.unit * 2,
       paddingBottom: theme.spacing.unit * 2,
-      minHeight: 120,
-      width: 240,
+      minHeight: 140,
+      minWidth: 240,
       display: 'flex',
       flexDirection: 'column',
       margin: theme.spacing.unit
@@ -35,6 +35,12 @@ const stylesheet = createStyleSheet('DecksPage', (theme) => {
       position: 'fixed',
       right: theme.spacing.unit * 2,
       bottom: theme.spacing.unit * 3
+    },
+    [theme.breakpoints.down(648)]: {
+      deckItem: { minWidth: 200 }
+    },
+    [theme.breakpoints.down(536)]: {
+      deckItem: { width: '100%' }
     }
   };
 });
