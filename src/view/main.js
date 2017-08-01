@@ -12,9 +12,11 @@ const stylesheet = createStyleSheet('Main', (theme) => {
   return {
     root: {
       background: theme.palette.background.default,
-      height: "100%"
+      height: '100%',
+      display: 'flex'
     },
     content: {
+      flexGrow:1,
       paddingTop: 60
     },
     [theme.breakpoints.up("sm")]: {

@@ -14,19 +14,33 @@ Stylesheet.
 */
 const stylesheet = createStyleSheet('DecksPage', (theme) => {
   return {
-    root: {
-      padding: 20,
-      display: 'flex',
-      flexWrap: 'wrap'
-    },
-    deckItem: theme.mixins.gutters({
-      paddingTop: theme.spacing.unit * 2,
-      paddingBottom: theme.spacing.unit * 2,
-      minHeight: 140,
-      minWidth: 240,
+    noDeckContainer: {
       display: 'flex',
       flexDirection: 'column',
-      margin: theme.spacing.unit
+      height: '100%',
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    decksContainer: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      padding: theme.spacing.unit,
+    },
+    root: {
+      height: '100%'
+    },
+    deckItem: theme.mixins.gutters({
+      display: 'flex',
+      flexDirection: 'column',
+      margin: theme.spacing.unit,
+      paddingTop: theme.spacing.unit * 2,
+      paddingBottom: theme.spacing.unit * 2,
+      height: 120,
+      width: '100%',
+      boxSizing: 'border-box',
+      [theme.breakpoints.up(528)]: { width: 240, height: 160 },
+      [theme.breakpoints.up(601)]: { width: 260, height: 160 },
+      [theme.breakpoints.up(701)]: { width: 300, height: 160 },
     }),
     deckDescription: {
       flexGrow: 1
@@ -35,12 +49,6 @@ const stylesheet = createStyleSheet('DecksPage', (theme) => {
       position: 'fixed',
       right: theme.spacing.unit * 2,
       bottom: theme.spacing.unit * 3
-    },
-    [theme.breakpoints.down(648)]: {
-      deckItem: { minWidth: 200 }
-    },
-    [theme.breakpoints.down(536)]: {
-      deckItem: { width: '100%' }
     }
   };
 });
@@ -78,13 +86,34 @@ class DecksPage extends React.Component {
   }
 
   renderDecks(classes) {
-    return this.state.decks.map(deck => {
+    if (this.state.decks.length > 0)
+      return this.renderDecksItems(classes);
+    else
+      return this.renderNoDecks(classes);
+  }
+
+  renderDecksItems(classes) {
+    const items = this.state.decks.map(deck => {
       return <Paper key={deck.id} className={classes.deckItem}>
         <Typography type="title">{deck.name}</Typography>
         <Typography type="body1" className={classes.deckDescription}>{deck.description}</Typography>
         <Typography type="caption">{deck.cards.length} cards.</Typography>
       </Paper>;
     });
+    return (
+      <div className={classes.decksContainer}>
+        {items}
+      </div>
+    );
+  }
+
+  renderNoDecks(classes) {
+    return (
+      <div className={classes.noDeckContainer}>
+        <Typography type="display1">There's no decks yet.</Typography>
+        <Typography type="subheading">Click the button to add a new deck.</Typography>
+      </div>
+    );
   }
 
   handleCreateDeckButtonClick() {
