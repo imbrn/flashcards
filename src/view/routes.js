@@ -1,13 +1,12 @@
 import React from 'react';
-import DecksPage, { DecksPageTitle, DecksPageActions } from './decks-page';
+import DecksPage, { DecksPageTitle } from './decks-page';
 import { Redirect } from 'react-router-dom';
 
 const Routes = [
   {
     path: '/decks',
     page: DecksPage,
-    title: DecksPageTitle,
-    actions: DecksPageActions
+    title: DecksPageTitle
   },
   {
     path: '/',

@@ -104,25 +104,8 @@ class Title extends React.Component {
   }
 }
 
-/**
- * Decks page actions.
- */
-class Actions extends React.Component {
-  render() {
-    return (
-      <Button color="inherit" onClick={this.startCreatingDeck.bind(this)}>
-        Create Deck
-      </Button>
-    )
-  }
-  startCreatingDeck() {
-    DecksActions.startCreatingDeck();
-  }
-}
-
 // exports
 export default StyledPage;
 export {
-  Title as DecksPageTitle,
-  Actions as DecksPageActions
+  Title as DecksPageTitle
 }
