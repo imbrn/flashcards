@@ -4,7 +4,6 @@ import { createStyleSheet, withStyles } from 'material-ui/styles';
 import Dialog, { DialogTitle, DialogContent, DialogActions } from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
-import Typography from 'material-ui/Typography';
 
 /*
 Stylesheet.
