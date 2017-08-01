@@ -7,6 +7,7 @@ import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
+import CreateDeckDialog from './create-deck-dialog';
 
 /*
 Stylesheet.
@@ -62,10 +63,10 @@ class DecksPage extends React.Component {
     return (
       <div className={classes.root}>
         {this.renderDecks(classes)}
-        <Button fab color="accent" className={classes.floatButton}>
+        <Button fab color="accent" className={classes.floatButton} onClick={this.handleCreateDeckButtonClick.bind(this)}>
           <AddIcon />
         </Button>
-        <h1>Creating: {this.state.creatingDeck.toString()}</h1>
+        <CreateDeckDialog open={this.state.creatingDeck} onRequestClose={this.handleCreateDialogClose.bind(this)} />
       </div>
     );
   }
@@ -79,6 +80,15 @@ class DecksPage extends React.Component {
       </Paper>;
     });
   }
+
+  handleCreateDeckButtonClick() {
+    DecksActions.startCreatingDeck();
+  }
+
+  handleCreateDialogClose() {
+    DecksActions.stopCreatingDeck();
+  }
+
 }
 
 const PageContainer = Container.create(DecksPage);

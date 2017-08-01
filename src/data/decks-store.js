@@ -1,4 +1,4 @@
-import { Store, ReduceStore } from 'flux/utils';
+import { ReduceStore } from 'flux/utils';
 import DecksDispatcher from './decks-dispatcher';
 import ActionsTypes from './decks-actions-types';
 
@@ -92,18 +92,10 @@ class CreatingDeckStore extends ReduceStore {
 
   reduce(state, action) {
     switch (action.type) {
-      case ActionsTypes.START_CREATING_DECK: return this.startCreatingDeck(state, action);
-      case ActionsTypes.STOP_CREATING_DECK: return this.stopCreatingDeck(state, action);
+      case ActionsTypes.START_CREATING_DECK: return true;
+      case ActionsTypes.STOP_CREATING_DECK: return false;
       default: return state;
     }
-  }
-
-  startCreatingDeck(state, action) {
-    return true;
-  }
-
-  stopCreatingDeck(state, action) {
-    return false;
   }
 
 }
