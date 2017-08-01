@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
-import DecksActions from './data/decks-actions';
-import RootContainer from './containers/root-container';
 import './index.css';
+import App from './app';
+import DecksActions from './data/decks-actions';
 
-ReactDOM.render(<RootContainer />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
 
-DecksActions.addDeck('One', 'Deck one');
-DecksActions.addDeck('Two', 'Deck two');
+// TODO: remover testes (também: import DecksActions)
+DecksActions.addDeck("Pronouns", "Pronomes");
+DecksActions.addDeck("Nouns", "Substantivos");
 window.DecksActions = DecksActions;

@@ -1,5 +1,5 @@
 import {Container} from 'flux/utils';
-import RootView from '../view/root';
+import AppView from '../view/app';
 import DecksStore from '../data/decks-store'
 
 function getStores() {
@@ -14,4 +14,4 @@ function getState() {
   };
 }
 
-export default Container.createFunctional(RootView, getStores, getState);
+export default Container.create(AppView, getStores, getState);

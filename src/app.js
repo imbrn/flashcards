@@ -2,10 +2,10 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme, createPalette } from 'material-ui/styles';
 import { blueGrey, deepPurple } from 'material-ui/colors';
-import Main from './main';
+import Main from './view/main';
 
 /*
-Application theme.
+Custom application theme
 */
 let theme = createMuiTheme({
   palette: createPalette({
@@ -29,15 +29,14 @@ theme = {
   }
 }
 
-/**
- * Application root.
- */
-export default function(props) {
+function App(props) {
   return (
-    <MuiThemeProvider theme={theme}>
-      <BrowserRouter>
-        <Main {...props} />
-      </BrowserRouter>
-    </MuiThemeProvider>
+    <BrowserRouter>
+      <MuiThemeProvider theme={theme}>
+        <Main />
+      </MuiThemeProvider>
+    </BrowserRouter>
   );
 }
+
+export default App;

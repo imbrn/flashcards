@@ -1,8 +1,9 @@
 import React from 'react';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import { createStyleSheet, withStyles } from 'material-ui/styles';
+import Routes from './routes';
 import Topbar from './topbar';
-import DecksPage from './decks-page';
+import DecksStore from '../data/decks-store';
 
 /*
 Stylesheets.
@@ -10,39 +11,56 @@ Stylesheets.
 const stylesheet = createStyleSheet('Main', (theme) => {
   return {
     root: {
-      height: "100%",
-      boxSizing: "border-box",
-      margin: 0,
-      padding: 0,
-      paddingTop: 70,
-      background: theme.palette.background.default
+      background: theme.palette.background.default,
+      height: "100%"
+    },
+    content: {
+      paddingTop: 60
+    },
+    [theme.breakpoints.up("sm")]: {
+      content: {
+        paddingTop: 70
+      }
     }
   };
 });
 
 /**
- * Main.
+ * Main view.
  */
 class Main extends React.Component {
+
+  static getStores() {
+    return [
+      DecksStore
+    ];
+  }
+
+  static calculateState() {
+    return {
+      decks: DecksStore.getState()
+    }
+  }
 
   render() {
     return (
       <div className={this.props.classes.root}>
-        <Topbar title="Flashcards" />
-        {this.renderContentRoutes()}
+        <Topbar />
+        <div className={this.props.classes.content}>
+          {this.mapContentRoutes()}
+        </div>
       </div>
     );
   }
 
-  renderContentRoutes() {
-    return (
-      <Switch>
-        <Route path='/decks' component={(props) => <DecksPage {...this.props} {...props} />} />
-        <Route path='/' component={() => <Redirect to='decks' />} />
-      </Switch>
-    );
+  mapContentRoutes() {
+    return Routes.map((route, index) => {
+      return <Route key={index} path={route.path} exact={route.exact} component={route.page} />
+    });
   }
 
 }
 
-export default withStyles(stylesheet)(Main);
+const StyledMain = withStyles(stylesheet)(Main);
+
+export default StyledMain;
