@@ -1,9 +1,14 @@
-body {
+html, body {
+  height: 100vh;
   margin: 0;
   padding: 0;
 }
 
-html, body, #root {
-  height: 100%;
-  box-sizing: 'border-box';
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+#root {
+  flex: 1;
 }
