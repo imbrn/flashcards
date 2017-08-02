@@ -9,7 +9,6 @@ class DecksStore extends ReduceStore {
 
   constructor() {
     super(DecksDispatcher);
-    this.nextId = 0;
   }
 
   getInitialState() {
@@ -18,6 +17,7 @@ class DecksStore extends ReduceStore {
 
   reduce(state, action) {
     switch (action.type) {
+      case ActionsTypes.DECKS_LOADED: return this.onDecksLoaded(state, action);
       case ActionsTypes.ADD_DECK: return this.addDeck(state, action);
       case ActionsTypes.EDIT_DECK: return this.editDeck(state, action);
       case ActionsTypes.DELETE_DECK: return this.deleteDeck(state, action);
@@ -26,14 +26,13 @@ class DecksStore extends ReduceStore {
     }
   }
 
+  onDecksLoaded(state, action) {
+    return action.decks;
+  }
+
   addDeck(state, action) {
     const newState = state.slice();
-    newState.push({
-      id: ++this.nextId,
-      name: action.name,
-      description: action.description,
-      cards: []
-    });
+    newState.push(Object.assign({}, action.deck));
     return newState;
   }
 

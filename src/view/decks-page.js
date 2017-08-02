@@ -72,6 +72,17 @@ class DecksPage extends React.Component {
     }
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      decks: []
+    };
+  }
+
+  componentWillMount() {
+    DecksActions.fetchDecks();
+  }
+
   render() {
     const { classes } = this.props;
     return (

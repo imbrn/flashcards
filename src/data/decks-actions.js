@@ -1,13 +1,24 @@
 import DecksDispatcher from "./decks-dispatcher";
 import Types from './decks-actions-types';
+import DecksAPI from './decks-api';
 
 const Actions = {
-  
+
+  fetchDecks() {
+    DecksAPI.fetchDecks().then(decks => {
+      DecksDispatcher.dispatch({
+        type: Types.DECKS_LOADED,
+        decks
+      });
+    });
+  },
+
   addDeck(name, description) {
-    DecksDispatcher.dispatch({
-      type: Types.ADD_DECK,
-      name,
-      description
+    DecksAPI.addDeck({ name, description }).then(deck => {
+      DecksDispatcher.dispatch({
+        type: Types.ADD_DECK,
+        deck
+      });
     });
   },
 
