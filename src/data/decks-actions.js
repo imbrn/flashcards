@@ -1,4 +1,4 @@
-import DecksDispatcher from "./decks-dispatcher";
+import AppDispatcher from "./dispatcher";
 import Types from './decks-actions-types';
 import { BasicDecksService, BrowserPersistence } from './service/basic-decks-service';
 
@@ -13,7 +13,7 @@ class BasicDecksActions {
 
   loadDecks() {
     const decks = this._service.fetchAllDecks();
-    DecksDispatcher.dispatch({
+    AppDispatcher.dispatch({
       type: Types.ON_DECKS_LOADED,
       decks
     });
@@ -29,14 +29,14 @@ class BasicDecksActions {
 
   _addValidDeck(deck) {
     deck = this._service.saveDeck(deck);
-    DecksDispatcher.dispatch({
+    AppDispatcher.dispatch({
       type: Types.ADD_DECK,
       deck
     });
   }
 
   _onAddInvalidDeck(deck, error) {
-    DecksDispatcher.dispatch({
+    AppDispatcher.dispatch({
       type: Types.ON_ADD_DECK_FAILED,
       deck,
       error
@@ -53,14 +53,14 @@ class BasicDecksActions {
 
   _updateValidDeck(deck) {
     deck = this._service.saveDeck(deck);
-    DecksDispatcher.dispatch({
+    AppDispatcher.dispatch({
       type: Types.EDIT_DECK,
       deck
     });
   }
 
   _onUpdateInvalidDeck(deck, error) {
-    DecksDispatcher.dispatch({
+    AppDispatcher.dispatch({
       type: Types.ON_EDIT_DECK_FAILED,
       deck,
       error
@@ -77,21 +77,21 @@ class BasicDecksActions {
 
   _deleteAddedDeck(deckId) {
     this._service.deleteDeck(deckId);
-    DecksDispatcher.dispatch({
+    AppDispatcher.dispatch({
       type: Types.DELETE_DECK,
       deckId
     })
   }
 
   _onDeleteNonAddedDeck(deckId) {
-    DecksDispatcher.dispatch({
+    AppDispatcher.dispatch({
       type: Types.ON_DELETE_NON_ADDED_DECK,
       deckId
     })
   }
 
   resetDecks() {
-    DecksDispatcher.dispatch({
+    AppDispatcher.dispatch({
       type: Types.RESET_DECK
     });
   }

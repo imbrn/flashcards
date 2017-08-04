@@ -1,5 +1,5 @@
 import { ReduceStore } from 'flux/utils';
-import DecksDispatcher from './decks-dispatcher';
+import AppDispatcher from './dispatcher';
 import Types from './decks-actions-types';
 import { OrderedMap } from 'immutable';
 
@@ -9,7 +9,7 @@ import { OrderedMap } from 'immutable';
 class DecksStore extends ReduceStore {
 
   constructor() {
-    super(DecksDispatcher);
+    super(AppDispatcher);
   }
 
   getInitialState() {

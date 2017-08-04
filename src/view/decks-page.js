@@ -3,9 +3,9 @@ import { Redirect } from 'react-router-dom';
 import { Container } from 'flux/utils';
 import { createStyleSheet, withStyles } from 'material-ui/styles';
 import DecksActions from '../data/decks-actions';
-import CreatingDecksActions from '../data/creating-decks-actions';
 import DecksStore from '../data/decks-store';
-import CreatingDeckStore from '../data/creating-decks-store';
+import CreatingDeckActions from '../data/creating-deck-actions';
+import CreatingDeckStore from '../data/creating-deck-store';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
@@ -148,11 +148,11 @@ class DecksPage extends React.Component {
   }
 
   handleCreateDeckButtonClick() {
-    CreatingDecksActions.start();
+    CreatingDeckActions.startCreatingDeck();
   }
 
   handleCreateDialogClose() {
-    CreatingDecksActions.stop();
+    CreatingDeckActions.stopDeckCreation();
   }
 
 }

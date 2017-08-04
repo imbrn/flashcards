@@ -3,7 +3,6 @@ import { Route } from 'react-router-dom';
 import { createStyleSheet, withStyles } from 'material-ui/styles';
 import Routes from './routes';
 import Topbar from './topbar';
-import DecksStore from '../data/decks-store';
 
 /*
 Stylesheets.
@@ -31,18 +30,6 @@ const stylesheet = createStyleSheet('Main', (theme) => {
  * Main view.
  */
 class Main extends React.Component {
-
-  static getStores() {
-    return [
-      DecksStore
-    ];
-  }
-
-  static calculateState() {
-    return {
-      decks: DecksStore.getState()
-    }
-  }
 
   render() {
     return (
