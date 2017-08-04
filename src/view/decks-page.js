@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { Container } from 'flux/utils';
 import { createStyleSheet, withStyles } from 'material-ui/styles';
 import DecksActions from '../data/decks-actions';
@@ -32,6 +33,7 @@ const stylesheet = createStyleSheet('DecksPage', (theme) => {
       height: '100%'
     },
     deckItem: theme.mixins.gutters({
+      cursor: 'default',
       display: 'flex',
       flexDirection: 'column',
       margin: theme.spacing.unit,
@@ -86,6 +88,14 @@ class DecksPage extends React.Component {
   }
 
   render() {
+    if (this.state.selectedDeck) {
+      return <Redirect push to={`/decks/${this.state.selectedDeck.id}`} />
+    } else {
+      return this._renderThisPage();
+    }
+  }
+
+  _renderThisPage() {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
@@ -107,11 +117,13 @@ class DecksPage extends React.Component {
 
   renderDecksItems(decks, classes) {
     const items = decks.toList().map(deck => {
-      return <Paper key={deck.id} className={classes.deckItem}>
-        <Typography type="title">{deck.name}</Typography>
-        <Typography type="body1" className={classes.deckDescription}>{deck.description}</Typography>
-        <Typography type="caption">{deck.cards.length} cards.</Typography>
-      </Paper>;
+      return (
+        <Paper key={deck.id} className={classes.deckItem} onClick={this.handleCardClick.bind(this, deck)}>
+          <Typography type="title">{deck.name}</Typography>
+          <Typography type="body1" className={classes.deckDescription}>{deck.description}</Typography>
+          <Typography type="caption">{deck.cards.length} cards.</Typography>
+        </Paper>
+      );
     });
     return (
       <div className={classes.decksContainer}>
@@ -127,6 +139,12 @@ class DecksPage extends React.Component {
         <Typography type="subheading">Click the button to add a new deck.</Typography>
       </div>
     );
+  }
+
+  handleCardClick(deck) {
+    this.setState({
+      selectedDeck: deck
+    });
   }
 
   handleCreateDeckButtonClick() {
