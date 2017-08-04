@@ -2,7 +2,9 @@ import React from 'react';
 import { Container } from 'flux/utils';
 import { createStyleSheet, withStyles } from 'material-ui/styles';
 import DecksActions from '../data/decks-actions';
-import DecksStore, { CreatingDeckStore } from '../data/decks-store';
+import CreatingDecksActions from '../data/creating-decks-actions';
+import DecksStore from '../data/decks-store';
+import CreatingDeckStore from '../data/creating-decks-store';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
@@ -80,7 +82,7 @@ class DecksPage extends React.Component {
   }
 
   componentWillMount() {
-    DecksActions.fetchDecks();
+    DecksActions.loadDecks();
   }
 
   render() {
@@ -97,14 +99,14 @@ class DecksPage extends React.Component {
   }
 
   renderDecks(classes) {
-    if (this.state.decks.length > 0)
-      return this.renderDecksItems(classes);
+    if (this.state.decks.size > 0)
+      return this.renderDecksItems(this.state.decks, classes);
     else
       return this.renderNoDecks(classes);
   }
 
-  renderDecksItems(classes) {
-    const items = this.state.decks.map(deck => {
+  renderDecksItems(decks, classes) {
+    const items = decks.toList().map(deck => {
       return <Paper key={deck.id} className={classes.deckItem}>
         <Typography type="title">{deck.name}</Typography>
         <Typography type="body1" className={classes.deckDescription}>{deck.description}</Typography>
@@ -128,11 +130,11 @@ class DecksPage extends React.Component {
   }
 
   handleCreateDeckButtonClick() {
-    DecksActions.startCreatingDeck();
+    CreatingDecksActions.start();
   }
 
   handleCreateDialogClose() {
-    DecksActions.stopCreatingDeck();
+    CreatingDecksActions.stop();
   }
 
 }

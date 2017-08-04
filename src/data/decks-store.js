@@ -1,6 +1,7 @@
 import { ReduceStore } from 'flux/utils';
 import DecksDispatcher from './decks-dispatcher';
-import ActionsTypes from './decks-actions-types';
+import Types from './decks-actions-types';
+import { OrderedMap } from 'immutable';
 
 /**
  * Decks store.
@@ -12,100 +13,43 @@ class DecksStore extends ReduceStore {
   }
 
   getInitialState() {
-    return [];
+    return OrderedMap();
   }
 
   reduce(state, action) {
     switch (action.type) {
-      case ActionsTypes.DECKS_LOADED: return this.onDecksLoaded(state, action);
-      case ActionsTypes.ADD_DECK: return this.addDeck(state, action);
-      case ActionsTypes.EDIT_DECK: return this.editDeck(state, action);
-      case ActionsTypes.DELETE_DECK: return this.deleteDeck(state, action);
-      case ActionsTypes.ADD_CARD: return this.addCard(state, action);
+      case Types.ON_DECKS_LOADED: return this._loadDecks(state, action);
+      case Types.ADD_DECK: return this._addDeck(state, action);
+      case Types.EDIT_DECK: return this._editDeck(state, action);
+      case Types.DELETE_DECK: return this._deleteDeck(state, action);
+      case Types.RESET_DECK: return this._resetDecks(state, action);
       default: return state
     }
   }
 
-  onDecksLoaded(state, action) {
-    return action.decks;
+  _loadDecks(state, action) {
+    return OrderedMap(action.decks);
   }
 
-  addDeck(state, action) {
-    const newState = state.slice();
-    newState.push(Object.assign({}, action.deck));
-    return newState;
+  _addDeck(state, action) {
+    return state.set(action.deck.id, action.deck);
   }
 
-  editDeck(state, action) {
-    const newState = state.slice();
-    const index = state.findIndex(deck => deck.id === action.id);
-    if (index !== -1) {
-      const newDeck = Object.assign({}, state[index], action.data);
-      newState[index] = newDeck;
-      return newState;
-    }
-    return state;
+  _editDeck(state, action) {
+    return state.set(action.deck.id, action.deck);
   }
 
-  deleteDeck(state, action) {
-    const index = state.findIndex(deck => deck.id === action.id);
-    if (index !== -1) {
-      const newState = state.slice();
-      newState.splice(index, 1);
-      return newState;
-    }
-    return state;
+  _deleteDeck(state, action) {
+    return state.delete(action.deckId);
   }
 
-  addCard(state, action) {
-    const index = state.findIndex(deck => deck.id === action.id);
-    if (index !== -1) {
-      const deck = state[index];
-      const cards = deck.cards ? deck.cards.slice() : [];
-      cards.push({
-        front: action.front,
-        back: action.back
-      });
-      const newDeck = Object.assign({}, deck, { cards });
-      const newState = state.slice();
-      newState[index] = newDeck;
-      return newState;
-    }
-    return state;
+  _resetDecks(state, action) {
+    return state.clear();
   }
 
 }
 
-/**
- * Store for managing creating deck action.
- */
-class CreatingDeckStore extends ReduceStore {
-
-  constructor() {
-    super(DecksDispatcher);
-  }
-
-  getInitialState() {
-    return false;
-  }
-
-  reduce(state, action) {
-    switch (action.type) {
-      case ActionsTypes.START_CREATING_DECK: return true;
-      case ActionsTypes.STOP_CREATING_DECK: return false;
-      default: return state;
-    }
-  }
-
-}
-
-const decksStore = new DecksStore();
-const creatingDeckStore = new CreatingDeckStore();
-
-// exports
-
-export default decksStore;
+export default new DecksStore();
 export {
-  decksStore as DecksStore,
-  creatingDeckStore as CreatingDeckStore
+  DecksStore
 }
