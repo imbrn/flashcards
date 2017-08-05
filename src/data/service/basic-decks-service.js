@@ -144,8 +144,12 @@ class BasicDecksService {
 Abstraction for local storage.
 */
 class Persistence {
-  set(id, value) { throw new Error('Not implemented yet.'); }
-  get(id) { throw new Error('Not implemented yet.'); }
+  set(id, value) {
+    throw new Error(`Not implemented yet. Id: ${id}, value: ${value}.`);
+  }
+  get(id) {
+    throw new Error(`Not implemented yet. Id: ${id}.`);
+  }
 }
 
 /*
@@ -189,4 +193,4 @@ export {
   BasicDecksService,
   InMemoryPersistence,
   BrowserPersistence
-}
+};

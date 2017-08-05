@@ -1,5 +1,5 @@
 import { BasicDecksService, InMemoryPersistence } from './basic-decks-service';
-import { List, OrderedMap } from 'immutable';
+import { List } from 'immutable';
 import Deck, { Card } from '../deck-record';
 
 describe('BasicDecksService', function () {
@@ -55,7 +55,7 @@ describe('BasicDecksService', function () {
     const one = this.service.saveDeck({ name: 'One' });
     const two = this.service.saveDeck({ name: 'Two' });
     const decks = this.service.fetchAllDecks();
-    expect(decks.toObject()).toEqual({ "1": one, "2": two });
+    expect(decks.toObject()).toEqual({ '1': one, '2': two });
   });
 
 });

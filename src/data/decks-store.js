@@ -18,12 +18,12 @@ class DecksStore extends ReduceStore {
 
   reduce(state, action) {
     switch (action.type) {
-      case Types.ON_DECKS_LOADED: return this._loadDecks(state, action);
-      case Types.ADD_DECK: return this._addDeck(state, action);
-      case Types.EDIT_DECK: return this._editDeck(state, action);
-      case Types.DELETE_DECK: return this._deleteDeck(state, action);
-      case Types.RESET_DECK: return this._resetDecks(state, action);
-      default: return state
+    case Types.ON_DECKS_LOADED: return this._loadDecks(state, action);
+    case Types.ADD_DECK: return this._addDeck(state, action);
+    case Types.EDIT_DECK: return this._editDeck(state, action);
+    case Types.DELETE_DECK: return this._deleteDeck(state, action);
+    case Types.RESET_DECK: return this._resetDecks(state);
+    default: return state;
     }
   }
 
@@ -43,7 +43,7 @@ class DecksStore extends ReduceStore {
     return state.delete(action.deckId);
   }
 
-  _resetDecks(state, action) {
+  _resetDecks(state) {
     return state.clear();
   }
 
@@ -52,4 +52,4 @@ class DecksStore extends ReduceStore {
 export default new DecksStore();
 export {
   DecksStore
-}
+};

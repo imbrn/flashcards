@@ -1,18 +1,8 @@
 import React from 'react';
 import DecksActions from '../data/decks-actions';
-import CreatingDeckActions from '../data/creating-deck-actions';
-import { createStyleSheet, withStyles } from 'material-ui/styles';
 import Dialog, { DialogTitle, DialogContent, DialogActions } from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
-
-/*
-Stylesheet.
-*/
-const stylesheet = createStyleSheet('CreateDeckDialog', (theme) => {
-  return {
-  };
-});
 
 /**
  * Create deck dialog component.
@@ -24,15 +14,15 @@ class CreateDeckDialog extends React.Component {
     this.state = {
       name: '',
       description: ''
-    }
+    };
   }
 
   render() {
-    const { classes, open } = this.props;
+    const { open } = this.props;
 
     return (
       <Dialog open={open} onRequestClose={this.handleCloseRequest.bind(this)}>
-        <DialogTitle className={classes.header}>
+        <DialogTitle>
           Create new deck
         </DialogTitle>
         <DialogContent>
@@ -89,6 +79,4 @@ class CreateDeckDialog extends React.Component {
 
 }
 
-const StyledCreateDeckDialog = withStyles(stylesheet)(CreateDeckDialog);
-
-export default StyledCreateDeckDialog;
+export default CreateDeckDialog;

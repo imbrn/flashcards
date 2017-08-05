@@ -24,12 +24,12 @@ theme = {
     ...theme.palette,
     background: {
       ...theme.palette.background,
-      default: "#f3f3f3"
+      default: '#f3f3f3'
     }
   }
-}
+};
 
-function App(props) {
+function App() {
   return (
     <BrowserRouter>
       <MuiThemeProvider theme={theme}>

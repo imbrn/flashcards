@@ -21,4 +21,4 @@ const Card = Record({
 export default Deck;
 export {
   Card
-}
+};

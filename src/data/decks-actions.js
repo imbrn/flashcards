@@ -1,4 +1,4 @@
-import AppDispatcher from "./dispatcher";
+import AppDispatcher from './dispatcher';
 import Types from './decks-actions-types';
 import { BasicDecksService, BrowserPersistence } from './service/basic-decks-service';
 
@@ -80,14 +80,14 @@ class BasicDecksActions {
     AppDispatcher.dispatch({
       type: Types.DELETE_DECK,
       deckId
-    })
+    });
   }
 
   _onDeleteNonAddedDeck(deckId) {
     AppDispatcher.dispatch({
       type: Types.ON_DELETE_NON_ADDED_DECK,
       deckId
-    })
+    });
   }
 
   resetDecks() {
@@ -101,4 +101,4 @@ class BasicDecksActions {
 export default new BasicDecksActions(new BrowserPersistence());
 export {
   BasicDecksActions
-}
+};

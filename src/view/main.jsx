@@ -18,7 +18,7 @@ const stylesheet = createStyleSheet('Main', (theme) => {
       flexGrow:1,
       paddingTop: 60
     },
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up('sm')]: {
       content: {
         paddingTop: 70
       }
@@ -44,7 +44,7 @@ class Main extends React.Component {
 
   mapContentRoutes() {
     return Routes.map((route, index) => {
-      return <Route key={index} path={route.path} exact={route.exact} component={route.page} />
+      return <Route key={index} path={route.path} exact={route.exact} component={route.page} />;
     });
   }
 

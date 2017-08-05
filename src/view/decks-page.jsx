@@ -73,7 +73,7 @@ class DecksPage extends React.Component {
     return {
       decks: DecksStore.getState(),
       creatingDeck: CreatingDeckStore.getState()
-    }
+    };
   }
 
   constructor(props) {
@@ -89,7 +89,7 @@ class DecksPage extends React.Component {
 
   render() {
     if (this.state.selectedDeck) {
-      return <Redirect push to={`/decks/${this.state.selectedDeck.id}`} />
+      return <Redirect push to={`/decks/${this.state.selectedDeck.id}`} />;
     } else {
       return this._renderThisPage();
     }
@@ -166,7 +166,7 @@ const StyledPage = withStyles(stylesheet)(PageContainer);
  */
 class Title extends React.Component {
   render() {
-    return <span>My decks</span>
+    return <span>My decks</span>;
   }
 }
 
@@ -174,4 +174,4 @@ class Title extends React.Component {
 export default StyledPage;
 export {
   Title as DecksPageTitle
-}
+};

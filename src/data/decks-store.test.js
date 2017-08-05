@@ -1,5 +1,5 @@
 import DecksStore from './decks-store';
-import Actions, { BasicDecksActions } from './decks-actions';
+import { BasicDecksActions } from './decks-actions';
 import { InMemoryPersistence } from './service/basic-decks-service';
 import Deck, { Card } from './deck-record';
 import { List } from 'immutable';
@@ -25,7 +25,7 @@ describe('DecksStore', function () {
     expect(DecksStore.getState().toObject()).toMatchObject({
       1: Deck({ id: 1, name: 'One', description: 'Deck one' }),
       2: Deck({ id: 2, name: 'Two', description: 'Deck two' }),
-    })
+    });
   });
 
   it('adding deck without name should fail', () => {

@@ -1,4 +1,4 @@
-import AppDispatcher from "./dispatcher";
+import AppDispatcher from './dispatcher';
 import Types from './creating-deck-actions-types';
 
 /**

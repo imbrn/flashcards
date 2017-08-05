@@ -17,7 +17,7 @@ const stylesheet = createStyleSheet('Topbar', (theme) => {
       flexGrow: 1,
       marginLeft: theme.spacing.unit * 3
     }
-  }
+  };
 });
 
 /**
@@ -39,18 +39,18 @@ class Topbar extends React.Component {
           {this.mapActionsRoutes()}
         </Toolbar>
       </AppBar>
-    )
+    );
   }
 
   mapTitleRoutes() {
     return Routes.map((route, index) => {
-      return <Route key={index} path={route.path} exact={route.exact} component={route.title} />
+      return <Route key={index} path={route.path} exact={route.exact} component={route.title} />;
     });
   }
 
   mapActionsRoutes() {
     return Routes.map((route, index) => {
-      return <Route key={index} path={route.path} exact={route.exact} component={route.actions} />
+      return <Route key={index} path={route.path} exact={route.exact} component={route.actions} />;
     });
   }
 

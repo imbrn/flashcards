@@ -17,17 +17,17 @@ class CreatingDeckStore extends ReduceStore {
 
   reduce(state, action) {
     switch (action.type) {
-      case Types.START_CREATING_DECK: return this._startCreatingDeck(state, action);
-      case Types.STOP_DECK_CREATION: return this._stopDeckCreation(state, action);
-      default: return state;
+    case Types.START_CREATING_DECK: return this._startCreatingDeck();
+    case Types.STOP_DECK_CREATION: return this._stopDeckCreation();
+    default: return state;
     }
   }
 
-  _startCreatingDeck(state, action) {
+  _startCreatingDeck() {
     return true;
   }
 
-  _stopDeckCreation(state, action) {
+  _stopDeckCreation() {
     return false;
   }
 
