@@ -1,5 +1,6 @@
 import React from 'react';
 import DecksActions from '../data/decks-actions';
+import CreatingDeckActions from '../data/creating-deck-actions';
 import Dialog, { DialogTitle, DialogContent, DialogActions } from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
@@ -67,6 +68,7 @@ class CreateDeckDialog extends React.Component {
 
   createDeck(name, description) {
     DecksActions.addDeck({name, description});
+    CreatingDeckActions.stopDeckCreation();
     this.clear();
   }
 
