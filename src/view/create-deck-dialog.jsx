@@ -1,6 +1,4 @@
 import React from 'react';
-import DecksActions from '../data/decks-actions';
-import CreatingDeckActions from '../data/creating-deck-actions';
 import Dialog, { DialogTitle, DialogContent, DialogActions } from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
@@ -22,57 +20,61 @@ class CreateDeckDialog extends React.Component {
     const { open } = this.props;
 
     return (
-      <Dialog open={open} onRequestClose={this.handleCloseRequest.bind(this)}>
+      <Dialog open={open} onRequestClose={this._handleCloseRequest.bind(this)}>
         <DialogTitle>
           Create new deck
         </DialogTitle>
         <DialogContent>
           <TextField fullWidth autoFocus required label="Name" value={this.state.name} margin="dense" 
-            onChange={this.handleNameTextChange.bind(this)} />
+            onChange={this._handleNameTextChange.bind(this)} />
           <TextField fullWidth multiline rows={2}label="Description" value={this.state.description} margin="dense" 
-            onChange={this.handleDescriptionTextChange.bind(this)} />
+            onChange={this._handleDescriptionTextChange.bind(this)} />
         </DialogContent>
         <DialogActions>
-          <Button color="accent" onClick={this.handleCreateDeckButtonClick.bind(this)}>Create</Button>
-          <Button onClick={this.handleCancelButtonClick.bind(this)}>Cancel</Button>
+          <Button color="accent" onClick={this._handleCreateDeckButtonClick.bind(this)}>Create</Button>
+          <Button onClick={this._handleCancelButtonClick.bind(this)}>Cancel</Button>
         </DialogActions>
       </Dialog>
     );
   }
 
-  handleNameTextChange(e) {
+  _handleNameTextChange(e) {
     this.setState({ name: e.target.value });
   }
 
-  handleDescriptionTextChange(e) {
+  _handleDescriptionTextChange(e) {
     this.setState({ description: e.target.value });
   }
 
-  handleCloseRequest() {
+  _handleCloseRequest() {
     if (this.props.onRequestClose)
       this.props.onRequestClose();
   }
 
-  handleCreateDeckButtonClick() {
+  _handleCreateDeckButtonClick() {
     const name = this.state.name.trim();
     const description = this.state.description.trim();
-    if (name)
-      this.createDeck(name, description);
+    if (name) this._createDeck(name, description);
   }
 
-  handleCancelButtonClick() {
+  _handleCancelButtonClick() {
     if (this.props.onRequestClose)
       this.props.onRequestClose();
-    this.clear();
+    this._clear();
   }
 
-  createDeck(name, description) {
-    DecksActions.addDeck({name, description});
-    CreatingDeckActions.stopDeckCreation();
-    this.clear();
+  _createDeck(name, description) {
+    const deck = {name, description};
+    this._clear();
+    this._onCreateDeck(deck);
   }
 
-  clear() {
+  _onCreateDeck(deck) {
+    if (this.props.onCreateDeck)
+      this.props.onCreateDeck(deck);
+  }
+
+  _clear() {
     this.setState({
       name: '',
       description: ''

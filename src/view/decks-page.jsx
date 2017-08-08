@@ -4,8 +4,6 @@ import { Container } from 'flux/utils';
 import { createStyleSheet, withStyles } from 'material-ui/styles';
 import DecksActions from '../data/decks-actions';
 import DecksStore from '../data/decks-store';
-import CreatingDeckActions from '../data/creating-deck-actions';
-import CreatingDeckStore from '../data/creating-deck-store';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
@@ -62,24 +60,23 @@ const stylesheet = createStyleSheet('DecksPage', (theme) => {
  */
 class DecksPage extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      creatingDeck: false,
+      selectedDeck: null
+    };
+  }
+
   static getStores() {
     return [
-      DecksStore,
-      CreatingDeckStore
+      DecksStore
     ];
   }
 
   static calculateState() {
     return {
-      decks: DecksStore.getState(),
-      creatingDeck: CreatingDeckStore.getState()
-    };
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      decks: []
+      decks: DecksStore.getState()
     };
   }
 
@@ -100,10 +97,13 @@ class DecksPage extends React.Component {
     return (
       <div className={classes.root}>
         {this.renderDecks(classes)}
-        <Button fab color="accent" className={classes.floatButton} onClick={this.handleCreateDeckButtonClick.bind(this)}>
+        <Button fab color="accent" className={classes.floatButton}
+          onClick={this.handleCreateDeckButtonClick.bind(this)}>
           <AddIcon />
         </Button>
-        <CreateDeckDialog open={this.state.creatingDeck} onRequestClose={this.handleCreateDialogClose.bind(this)} />
+        <CreateDeckDialog open={this.state.creatingDeck}
+          onCreateDeck={this.handleDialogOnCreateDeck.bind(this)}
+          onRequestClose={this.handleDialogClose.bind(this)} />
       </div>
     );
   }
@@ -142,17 +142,20 @@ class DecksPage extends React.Component {
   }
 
   handleCardClick(deck) {
-    this.setState({
-      selectedDeck: deck
-    });
+    this.setState({selectedDeck: deck});
   }
 
   handleCreateDeckButtonClick() {
-    CreatingDeckActions.startCreatingDeck();
+    this.setState({creatingDeck: true});
   }
 
-  handleCreateDialogClose() {
-    CreatingDeckActions.stopDeckCreation();
+  handleDialogOnCreateDeck(deck) {
+    this.setState({creatingDeck: false});
+    DecksActions.addDeck(deck);
+  }
+
+  handleDialogClose() {
+    this.setState({creatingDeck: false});
   }
 
 }
