@@ -52,11 +52,11 @@ class InMemoryStorageEngine {
   }
 
   validateDeck(deck) {
-    return deck.name.trim().length > 0;
+    return deck.name && deck.name.trim().length > 0;
   }
 
-  addDeck(deckData) {
-    const deck = this._buildDeck(deckData);
+  addDeck(deck) {
+    deck = this._buildDeck(deck);
     return new Promise((resolve, reject) => {
       if (this.validateDeck(deck)) {
         resolve(this._doAddDeck(deck));
@@ -66,11 +66,8 @@ class InMemoryStorageEngine {
     });
   }
 
-  _buildDeck(deckData) {
-    return new Deck({
-      id: this._nextDeckId(),
-      ...deckData
-    });
+  _buildDeck(deck) {
+    return deck.set('id', this._nextDeckId());
   }
 
   _doAddDeck(deck) {
@@ -95,6 +92,23 @@ class InMemoryStorageEngine {
     const removed = this._decks.get(deckId);
     this._decks = this._decks.remove(deckId);
     return removed;
+  }
+
+  updateDeck(deck) {
+    return new Promise((resolve, reject) => {
+      if (!this._decks.has(deck.id.toString())) {
+        reject(`Not found deck with id: ${deck.id}`);
+      } else if (!this.validateDeck(deck)) {
+        reject('Invalid new deck');
+      } else {
+        resolve(this._doUpdateDeck(deck));
+      }
+    });
+  }
+
+  _doUpdateDeck(deck) {
+    this._decks = this._decks.set(deck.id.toString(), deck);
+    return deck;
   }
   
   fetchAllDecks() {
@@ -201,6 +215,13 @@ class LocalStorageEngine {
 
   _persistLastDeckId() {
     window.localStorage.setItem(LocalStorageEngine.lastDeckIdKey, this._composition.lastDeckId);
+  }
+
+  updateDeck(deck) {
+    return this._composition.updateDeck(deck).then(updated => {
+      this._persist();
+      return updated;
+    });
   }
 
   get decksObject() {
