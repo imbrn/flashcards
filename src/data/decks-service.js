@@ -1,5 +1,6 @@
-import { OrderedMap } from 'immutable';
+import { fromJS, List, OrderedMap } from 'immutable';
 import Deck from './deck';
+import Card from './card';
 import config from '../config';
 
 /**
@@ -81,9 +82,11 @@ class InMemoryStorageEngine {
 
   removeDeck(deckId) {
     deckId = deckId.toString();
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       if (this._decks.has(deckId)) {
         resolve(this._doRemoveDeck(deckId));
+      } else {
+        reject(`Not found deck with id: ${deckId}`);
       }
     });
   }
@@ -147,9 +150,9 @@ class LocalStorageEngine {
   }
 
   addDeck(deck) {
-    return this._composition.addDeck(deck).then(() => {
+    return this._composition.addDeck(deck).then(added => {
       this._persist();
-      return deck;
+      return added;
     });
   }
 
@@ -174,7 +177,7 @@ class LocalStorageEngine {
   }
 
   _loadDecks() {
-    const decksJson = window.localStorage.getItem(LocalStorageEngine.decksKey);
+    const decksJson = LocalStorageEngine.localStorageDecks;
     if (decksJson) {
       return OrderedMap(this._convertObjectToDecks(JSON.parse(decksJson)));
     } else {
@@ -183,17 +186,18 @@ class LocalStorageEngine {
   }
 
   _convertObjectToDecks(decksObject) {
-    const decks = {};
-    decksObject.forEach(deck => {
-      decks[deck.id] = new Deck(deck);
+    return fromJS(decksObject, (key, value) => {
+      if (key === '') return value.toOrderedMap(); // Complete map
+      if (key === 'cards') return List(value); // Only cards collection
+      if (Number.isInteger(key)) return new Card(value); // Card item
+      if (!isNaN(key)) return new Deck(value.toObject()); // Deck item
     });
-    return decks;
   }
 
   _loadLastDeckId() {
-    const lastDeckIdJson = window.localStorage.getItem(LocalStorageEngine.lastDeckIdKey);
+    const lastDeckIdJson = LocalStorageEngine.localStorageLastDeckId;
     if (lastDeckIdJson) {
-      return parseInt(lastDeckIdJson);
+      return parseInt(lastDeckIdJson, 10);
     } else {
       return 0;
     }
@@ -206,11 +210,11 @@ class LocalStorageEngine {
 
   _persistDecks() {
     const decksAsJson = this._decksToJson();
-    window.localStorage.setItem(LocalStorageEngine.decksKey, decksAsJson);
+    LocalStorageEngine.localStorageDecks = decksAsJson;
   }
 
   _decksToJson() {
-    return JSON.stringify(this._composition.decks.toArray());
+    return JSON.stringify(this._composition.decks.toJS());
   }
 
   _persistLastDeckId() {
@@ -244,6 +248,18 @@ class LocalStorageEngine {
     return 'lastDeckId';
   }
 
+  static get localStorageDecks() {
+    return window.localStorage.getItem(LocalStorageEngine.decksKey);
+  }
+
+  static set localStorageDecks(value) {
+    window.localStorage.setItem(LocalStorageEngine.decksKey, value);
+  }
+
+  static get localStorageLastDeckId() {
+    return window.localStorage.getItem(LocalStorageEngine.lastDeckIdKey);
+  }
+
 }
 
 /*
@@ -275,10 +291,12 @@ Factory method used to build an engine.
 function createDefaultEngine() {
   switch (config.env) {
   case 'test':
-  case 'development':
     return new InMemoryStorageEngine();
+  case 'development':
   case 'production':
     return new LocalStorageEngine();
+  default:
+    throw new Error('Invalid enviroment');
   }
 }
 
