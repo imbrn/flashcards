@@ -81,7 +81,7 @@ class DecksPage extends React.Component {
   }
 
   componentWillMount() {
-    DecksActions.loadDecks();
+    DecksActions.fetchAllDecks();
   }
 
   render() {
@@ -116,12 +116,12 @@ class DecksPage extends React.Component {
   }
 
   renderDecksItems(decks, classes) {
-    const items = decks.toList().map(deck => {
+    const items = decks.map(deck => {
       return (
         <Paper key={deck.id} className={classes.deckItem} onClick={this.handleCardClick.bind(this, deck)}>
           <Typography type="title">{deck.name}</Typography>
           <Typography type="body1" className={classes.deckDescription}>{deck.description}</Typography>
-          <Typography type="caption">{deck.cards.length} cards.</Typography>
+          <Typography type="caption">{deck.cards.size} cards.</Typography>
         </Paper>
       );
     });

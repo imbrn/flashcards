@@ -2,6 +2,7 @@ import React from 'react';
 import Dialog, { DialogTitle, DialogContent, DialogActions } from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
+import Deck from '../data/deck';
 
 /**
  * Create deck dialog component.
@@ -64,7 +65,7 @@ class CreateDeckDialog extends React.Component {
   }
 
   _createDeck(name, description) {
-    const deck = {name, description};
+    const deck = new Deck({name, description});
     this._clear();
     this._onCreateDeck(deck);
   }
