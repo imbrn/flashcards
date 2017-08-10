@@ -142,7 +142,6 @@ class DecksPage extends React.Component {
   }
 
   handleCardClick(deck) {
-    DecksActions.selectDeck(deck);
     this.setState({
       selectedDeck: deck
     });

@@ -17,12 +17,12 @@ class DeckStore extends ReduceStore {
 
   reduce(state, action) {
     switch (action.type) {
-    case DecksActionsTypes.SELECT_DECK: return this._selectDeck(action);
+    case DecksActionsTypes.FETCH_DECK: return this._fetchDeck(action);
     default: return state;
     }
   }
 
-  _selectDeck(action) {
+  _fetchDeck(action) {
     return action.deck;
   }
 
