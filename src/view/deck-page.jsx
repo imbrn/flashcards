@@ -1,7 +1,6 @@
 import React from 'react';
 import { Container } from 'flux/utils';
-import DecksStore from '../data/decks-store.js';
-import DecksActions from '../data/decks-actions';
+import DeckStore from '../data/deck-store.js';
 
 /**
  * One deck page.
@@ -9,18 +8,13 @@ import DecksActions from '../data/decks-actions';
 class DeckPage extends React.Component {
 
   static getStores() {
-    return [DecksStore];
+    return [DeckStore];
   }
 
-  static calculateState(prevState, props) {
-    const id = props.match.params.deckId;
+  static calculateState() {
     return {
-      deck: DecksStore.getState().get(id)
+      deck: DeckStore.getState()
     };
-  }
-
-  componentWillMount() {
-    DecksActions.loadDecks();
   }
 
   render() {
@@ -31,4 +25,30 @@ class DeckPage extends React.Component {
 
 }
 
-export default Container.create(DeckPage, {withProps: true});
+/*
+DeckPageTitle
+*/
+class Title extends React.Component {
+
+  static getStores() {
+    return [DeckStore];
+  }
+
+  static calculateState() {
+    return {
+      deck: DeckStore.getState()
+    };
+  }
+
+  render() {
+    return <span>{this.state.deck.name}</span>;
+  }
+
+}
+
+const TitleContainer = Container.create(Title);
+
+export default Container.create(DeckPage);
+export {
+  TitleContainer as DeckPageTitle
+};

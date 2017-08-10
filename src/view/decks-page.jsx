@@ -142,20 +142,29 @@ class DecksPage extends React.Component {
   }
 
   handleCardClick(deck) {
-    this.setState({selectedDeck: deck});
+    DecksActions.selectDeck(deck);
+    this.setState({
+      selectedDeck: deck
+    });
   }
 
   handleCreateDeckButtonClick() {
-    this.setState({creatingDeck: true});
+    this.setState({
+      creatingDeck: true
+    });
   }
 
   handleDialogOnCreateDeck(deck) {
-    this.setState({creatingDeck: false});
+    this.setState({
+      creatingDeck: false
+    });
     DecksActions.addDeck(deck);
   }
 
   handleDialogClose() {
-    this.setState({creatingDeck: false});
+    this.setState({
+      creatingDeck: false
+    });
   }
 
 }

@@ -6,7 +6,8 @@ import Dispatcher from './dispatcher';
  */
 const Types = {
   FETCH_ALL_DECKS: 'FETCH_ALL_DECKS',
-  ADD_DECK: 'ADD_DECK'
+  ADD_DECK: 'ADD_DECK',
+  SELECT_DECK: 'SELECT_DECK'
 };
 
 /**
@@ -29,6 +30,13 @@ class DecksActions {
         type: Types.ADD_DECK,
         deck: added
       });
+    });
+  }
+
+  selectDeck(deck) {
+    Dispatcher.dispatch({
+      type: Types.SELECT_DECK,
+      deck
     });
   }
 
