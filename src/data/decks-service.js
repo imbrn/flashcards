@@ -115,7 +115,7 @@ class InMemoryStorageEngine {
   }
   
   fetchAllDecks() {
-    return Promise.resolve(this._decks.toList());
+    return Promise.resolve(this._decks);
   }
   
   fetchDeckById(deckId) {

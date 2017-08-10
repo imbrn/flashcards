@@ -80,9 +80,9 @@ describe('DecksService', function() {
           name: 'New one',
           description: 'Deck one'
         }));
-        expect(Service.fetchAllDecks()).resolves.toEqual(List([
-          new Deck({ id: 1, name: 'New one', description: 'Deck one' })
-        ]));
+        expect(Service.fetchAllDecks()).resolves.toEqual(OrderedMap({
+          '1': new Deck({ id: 1, name: 'New one', description: 'Deck one' })
+        }));
       });
     });
   });
@@ -106,10 +106,10 @@ describe('DecksService', function() {
     Service.addDeck(new Deck({ name: 'One' })).then(() => {
       Service.addDeck(new Deck({ name: 'Two' })).then(() => {
         Service.fetchAllDecks().then(decks => {
-          expect(decks).toEqual(List([
-            new Deck({ id: 1, name: 'One' }),
-            new Deck({ id: 2, name: 'Two' })
-          ]));
+          expect(decks).toEqual(OrderedMap({
+            '1': new Deck({ id: 1, name: 'One' }),
+            '2': new Deck({ id: 2, name: 'Two' })
+          }));
         });
       });
     });
@@ -211,10 +211,10 @@ describe('InMemoryStorageEngine', function() {
       2: new Deck({ id: 2, name: 'Two', description: 'Deck two' })
     });
     expect.assertions(1);
-    expect(engine.fetchAllDecks()).resolves.toEqual(List([
-      new Deck({ id: 1, name: 'One', description: 'Deck one' }),
-      new Deck({ id: 2, name: 'Two', description: 'Deck two' })
-    ]));
+    expect(engine.fetchAllDecks()).resolves.toEqual(OrderedMap({
+      '1': new Deck({ id: 1, name: 'One', description: 'Deck one' }),
+      '2': new Deck({ id: 2, name: 'Two', description: 'Deck two' })
+    }));
   });
 
   it('fetching deck by id', () => {
@@ -281,10 +281,10 @@ describe('LocalStorageEngine', function() {
     const engine = new LocalStorageEngine();
     await engine.addDeck(new Deck({ name: 'One', description: 'Deck one' }));
     await engine.addDeck(new Deck({ name: 'Two', description: 'Deck two' }));
-    await expect(engine.fetchAllDecks()).resolves.toEqual(List([
-      new Deck({ id: 1, name: 'One', description: 'Deck one' }),
-      new Deck({ id: 2, name: 'Two', description: 'Deck two' })
-    ]));
+    await expect(engine.fetchAllDecks()).resolves.toEqual(OrderedMap({
+      '1': new Deck({ id: 1, name: 'One', description: 'Deck one' }),
+      '2': new Deck({ id: 2, name: 'Two', description: 'Deck two' })
+    }));
   });
 
   it('adding a deck with no description should pass', async () => {
@@ -296,22 +296,24 @@ describe('LocalStorageEngine', function() {
   it('adding a deck with no name should fail', async () => {
     const engine = new LocalStorageEngine();
     await expect(engine.addDeck(new Deck({ description: 'Deck one' }))).rejects.toBeDefined();
-    await expect(engine.fetchAllDecks()).resolves.toEqual(List());
+    await expect(engine.fetchAllDecks()).resolves.toEqual(OrderedMap());
   });
 
   it('removing deck with success', async () => {
     const engine = new LocalStorageEngine();
     const deck = await engine.addDeck(new Deck({ name: 'Deck one' }));
-    await expect(engine.fetchAllDecks()).resolves.not.toEqual(List());
+    await expect(engine.fetchAllDecks()).resolves.not.toEqual(OrderedMap());
     await expect(engine.removeDeck(deck.id)).resolves.toEqual(deck);
-    await expect(engine.fetchAllDecks()).resolves.toEqual(List());
+    await expect(engine.fetchAllDecks()).resolves.toEqual(OrderedMap());
   });
 
   it('removing non added should fail', async () => {
     const engine = new LocalStorageEngine();
     const added = await engine.addDeck(new Deck({ name: 'One' }));
     await expect(engine.removeDeck(added.id + 1)).rejects.toBeDefined();
-    await expect(engine.fetchAllDecks()).resolves.toEqual(new List([added]));
+    await expect(engine.fetchAllDecks()).resolves.toEqual(new OrderedMap({
+      '1': added
+    }));
   });
 
   it('updating deck with success', async () => {
@@ -333,14 +335,19 @@ describe('LocalStorageEngine', function() {
     const engine = new LocalStorageEngine();
     const added = await engine.addDeck(new Deck({ name: 'One' }));
     await expect(engine.updateDeck(added.set('name', ''))).rejects.toBeDefined();
-    await expect(engine.fetchAllDecks()).resolves.toEqual(List([added]));
+    await expect(engine.fetchAllDecks()).resolves.toEqual(OrderedMap({
+      '1': added
+    }));
   });
 
   it('fetching all decks with success', async () => {
     const engine = new LocalStorageEngine();
     const deckOne = await engine.addDeck(new Deck({ name: 'One' }));
     const deckTwo = await engine.addDeck(new Deck({ name: 'Two' }));
-    await expect(engine.fetchAllDecks()).resolves.toEqual(List([deckOne, deckTwo]));
+    await expect(engine.fetchAllDecks()).resolves.toEqual(OrderedMap({
+      '1': deckOne,
+      '2': deckTwo
+    }));
   });
 
   it('fetching deck by id', async () => {

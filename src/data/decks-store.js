@@ -1,6 +1,6 @@
 import { ReduceStore } from 'flux/utils';
 import Dispatcher from './dispatcher';
-import { List } from 'immutable';
+import { OrderedMap } from 'immutable';
 import { DecksActionsTypes } from './decks-actions';
 
 /**
@@ -13,7 +13,7 @@ class DecksStore extends ReduceStore {
   }
 
   getInitialState() {
-    return List();
+    return OrderedMap();
   }
 
   reduce(state, action) {
@@ -29,7 +29,7 @@ class DecksStore extends ReduceStore {
   }
 
   _addDeck(state, action) {
-    return state.push(action.deck);
+    return state.set(action.deck.id, action.deck);
   }
 
 }

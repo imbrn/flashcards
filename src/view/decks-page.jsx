@@ -116,7 +116,7 @@ class DecksPage extends React.Component {
   }
 
   renderDecksItems(decks, classes) {
-    const items = decks.map(deck => {
+    const items = decks.toArray().map(deck => {
       return (
         <Paper key={deck.id} className={classes.deckItem} onClick={this.handleCardClick.bind(this, deck)}>
           <Typography type="title">{deck.name}</Typography>
