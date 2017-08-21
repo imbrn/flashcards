@@ -4,10 +4,10 @@ import { Container } from 'flux/utils';
 import { createStyleSheet, withStyles } from 'material-ui/styles';
 import DecksActions from '../data/decks-actions';
 import DecksStore from '../data/decks-store';
-import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
+import DeckItem from './deck-item';
 import CreateDeckDialog from './create-deck-dialog';
 
 /*
@@ -29,23 +29,6 @@ const stylesheet = createStyleSheet('DecksPage', (theme) => {
     },
     root: {
       height: '100%'
-    },
-    deckItem: theme.mixins.gutters({
-      cursor: 'default',
-      display: 'flex',
-      flexDirection: 'column',
-      margin: theme.spacing.unit,
-      paddingTop: theme.spacing.unit * 2,
-      paddingBottom: theme.spacing.unit * 2,
-      height: 120,
-      width: '100%',
-      boxSizing: 'border-box',
-      [theme.breakpoints.up(528)]: { width: 240, height: 160 },
-      [theme.breakpoints.up(601)]: { width: 260, height: 160 },
-      [theme.breakpoints.up(701)]: { width: 300, height: 160 },
-    }),
-    deckDescription: {
-      flexGrow: 1
     },
     floatButton: {
       position: 'fixed',
@@ -117,13 +100,7 @@ class DecksPage extends React.Component {
 
   renderDecksItems(decks, classes) {
     const items = decks.toArray().map(deck => {
-      return (
-        <Paper key={deck.id} className={classes.deckItem} onClick={this.handleCardClick.bind(this, deck)}>
-          <Typography type="title">{deck.name}</Typography>
-          <Typography type="body1" className={classes.deckDescription}>{deck.description}</Typography>
-          <Typography type="caption">{deck.cards.size} cards.</Typography>
-        </Paper>
-      );
+      return <DeckItem key={deck.id} deck={deck} onClick={this.handleCardClick.bind(this, deck)} />;
     });
     return (
       <div className={classes.decksContainer}>
