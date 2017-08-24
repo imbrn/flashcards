@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { Container } from 'flux/utils';
-import { createStyleSheet, withStyles } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import DecksActions from '../data/decks-actions';
 import DecksStore from '../data/decks-store';
 import Typography from 'material-ui/Typography';
@@ -13,7 +13,7 @@ import CreateDeckDialog from './create-deck-dialog';
 /*
 Stylesheet.
 */
-const stylesheet = createStyleSheet('DecksPage', (theme) => {
+const stylesheet = (theme) => {
   return {
     noDeckContainer: {
       display: 'flex',
@@ -36,7 +36,7 @@ const stylesheet = createStyleSheet('DecksPage', (theme) => {
       bottom: theme.spacing.unit * 3
     }
   };
-});
+};
 
 /**
  * Decks page.

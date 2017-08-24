@@ -1,18 +1,18 @@
 import React from 'react';
 import DoubleFaceCard from './double-face-card';
 import Paper from 'material-ui/Paper';
-import { createStyleSheet, withStyles } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 
 /*
 Stylesheets.
 */
-const stylesheets = createStyleSheet('Card', () => {
+const stylesheets = () => {
   return {
     face: {
       height: '100%'
     }
   };
-});
+};
 
 /**
  * Card component.

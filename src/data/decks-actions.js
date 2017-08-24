@@ -7,6 +7,7 @@ import Dispatcher from './dispatcher';
 const Types = {
   FETCH_ALL_DECKS: 'FETCH_ALL_DECKS',
   ADD_DECK: 'ADD_DECK',
+  UPDATED_DECK: 'UPDATE_DECK',
   FETCH_DECK: 'FETCH_DECK'
 };
 
@@ -33,13 +34,23 @@ class DecksActions {
     });
   }
 
+  updateDeck(deck) {
+    Service.updateDeck(deck).then(updated => {
+      Dispatcher.dispatch({
+        type: Types.UPDATE_DECK,
+        deck: updated
+      });
+    });
+  }
+
   fetchDeckById(deckId) {
     Service.fetchDeckById(deckId).then(deck => {
       Dispatcher.dispatch({
         type: Types.FETCH_DECK,
         deck
       });
-    }).catch(() => {
+    }).catch((err) => {
+      console.error(err);
       Dispatcher.dispatch({
         type: Types.FETCH_DECK,
         deck: null

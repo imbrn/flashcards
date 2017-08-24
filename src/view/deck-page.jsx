@@ -1,17 +1,19 @@
 import React from 'react';
 import { Container } from 'flux/utils';
-import { createStyleSheet, withStyles } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import DecksActions from '../data/decks-actions';
 import DeckStore from '../data/deck-store.js';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import Actions from './actions';
 import ActionsTypes from './actions-types';
+import AddCardDialog from './add-card-dialog';
+import Card from './card/card';
 
 /*
 DeckPage stylesheets.
 */
-const stylesheet = createStyleSheet('DeckPage', () => {
+const stylesheet = () => {
   return {
     root: {
       height: '100%'
@@ -24,12 +26,19 @@ const stylesheet = createStyleSheet('DeckPage', () => {
       justifyContent: 'center'
     }
   };
-});
+};
 
 /**
  * One deck page.
  */
 class DeckPage extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      addingCard: false
+    };
+  }
 
   static getStores() {
     return [DeckStore];
@@ -52,41 +61,71 @@ class DeckPage extends React.Component {
   }
 
   onActionPerformed(action) {
-    this.setState({
-      action
-    });
+    if (action === ActionsTypes.ADD_CARD) {
+      this.setState({ addingCard: true });
+    }
   }
 
   render() {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        {this._renderPage(classes)}
+        {this.renderAddCardDialog()}
+        {this.renderPage(classes)}
       </div>
     );
   }
 
-  _renderPage(classes) {
+  renderAddCardDialog() {
+    if (this.state.addingCard) {
+      return <AddCardDialog
+        onCreateCard={this.onCreateCard.bind(this)}
+        onRequestClose={this.onDialogRequestClose.bind(this)}
+      />;
+    } else {
+      return null;
+    }
+  }
+
+  onCreateCard(card) {
+    let deck = this.state.deck;
+    deck = deck.set('cards', deck.cards.push(card));
+    this.setState({
+      deck,
+      addingCard: false
+    });
+    DecksActions.updateDeck(deck);
+  }
+
+  onDialogRequestClose() {
+    this.setState({ addingCard: false });
+  }
+
+  renderPage(classes) {
     if (this.state.deck) {
-      return this._renderCards(classes);
+      return this.renderCards(classes, this.state.deck.cards);
     } else {
-      return <span>No deck</span>;
+      return <span>Loading...</span>;
     }
   }
 
-  _renderCards(classes) {
-    if (this.state.deck.cards.size > 0) {
-      return this._renderCardsItems(classes);
+  renderCards(classes) {
+    const cards = this.state.deck.cards;
+    if (cards && cards.size > 0) {
+      return this.renderCardsItems(classes, cards);
     } else {
-      return this._renderNoCardsMessage(classes);
+      return this.renderNoCardsMessage(classes);
     }
   }
 
-  _renderCardsItems() {
-    return <span/>;
+  renderCardsItems(classes, cards) {
+    const items = cards.map((card, index) => {
+      return <Card key={index} kcard={card} />;
+    });
+    return <div>{items}</div>;
   }
 
-  _renderNoCardsMessage(classes) {
+  renderNoCardsMessage(classes) {
     return (
       <div className={classes.noCardsContainer}>
         <Typography type="display1">No cards</Typography>
@@ -118,13 +157,13 @@ class PageTitle extends React.Component {
 
   render() {
     if (this.state.deck) {
-      return this._renderDeck();
+      return this.renderDeck();
     } else {
       return <span />;
     }
   }
 
-  _renderDeck() {
+  renderDeck() {
     return (
       <span>
         {this.state.deck.name}
@@ -139,20 +178,12 @@ const TitleContainer = Container.create(PageTitle);
 /*
 DeckPageActions
 */
-class PageActions extends React.Component {
-
-  render() {
-    return (
-      <Button color="inherit" onClick={this.handleAddCardClick.bind(this)}>
-        Add card
-      </Button>
-    );
-  }
-
-  handleAddCardClick() {
-    Actions.execute(ActionsTypes.ADD_CARD);
-  }
-
+function PageActions() {
+  return (
+    <Button color="inherit" onClick={() => Actions.execute(ActionsTypes.ADD_CARD)}>
+      Add card
+    </Button>
+  );
 }
 
 export default withStyles(stylesheet)(Container.create(DeckPage));

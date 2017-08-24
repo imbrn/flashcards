@@ -1,12 +1,12 @@
 import React from 'react';
-import { createStyleSheet, withStyles } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 
 /*
 Stylesheets.
 */
-const stylesheet = createStyleSheet('DeckItem', (theme) => {
+const stylesheet = (theme) => {
   return {
     deckItem: theme.mixins.gutters({
       cursor: 'default',
@@ -26,7 +26,7 @@ const stylesheet = createStyleSheet('DeckItem', (theme) => {
       flexGrow: 1
     },
   };
-});
+};
 
 /**
  * Represents a deck item exhibited in the decks page.

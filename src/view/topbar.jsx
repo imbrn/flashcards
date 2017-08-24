@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import {createStyleSheet, withStyles} from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
@@ -11,27 +11,27 @@ import Routes from './routes';
 /*
 Stylesheet.
 */
-const stylesheet = createStyleSheet('Topbar', (theme) => {
+const stylesheet = (theme) => {
   return {
     title: {
       flexGrow: 1,
       marginLeft: theme.spacing.unit * 3
     }
   };
-});
+};
 
 /**
  * Application topbar.
  */
 class Topbar extends React.Component {
-  
+
   render() {
     const { classes } = this.props;
     return (
       <AppBar>
         <Toolbar>
           <IconButton color="inherit">
-            <MenuIcon/>
+            <MenuIcon />
           </IconButton>
           <Typography type="title" color="inherit" className={classes.title}>
             {this.mapTitleRoutes()}

@@ -1,13 +1,13 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { createStyleSheet, withStyles } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import Routes from './routes';
 import Topbar from './topbar';
 
 /*
 Stylesheets.
 */
-const stylesheet = createStyleSheet('Main', (theme) => {
+const stylesheet = (theme) => {
   return {
     root: {
       background: theme.palette.background.default,
@@ -24,7 +24,7 @@ const stylesheet = createStyleSheet('Main', (theme) => {
       }
     }
   };
-});
+};
 
 /**
  * Main view.

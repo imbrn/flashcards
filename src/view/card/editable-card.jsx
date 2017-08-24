@@ -1,12 +1,12 @@
 import React from 'react';
-import { createStyleSheet, withStyles } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import classnames from 'classnames';
 import Card from './card';
 
 /*
 Stylesheets.
 */
-const stylesheets = createStyleSheet('EditableCard', (theme) => {
+const stylesheets = (theme) => {
   return {
     face: {
       height: '100%'
@@ -32,7 +32,7 @@ const stylesheets = createStyleSheet('EditableCard', (theme) => {
       textAlign: 'center'
     }
   };
-});
+};
 
 /**
  * Editable card component.
