@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { withStyles } from 'material-ui/styles';
-import Routes from './routes';
-import Topbar from './topbar';
+import Routes from './page/routes';
+import Topbar from './component/Topbar';
 
 /*
 Stylesheets.
@@ -44,7 +44,11 @@ class Main extends React.Component {
 
   mapContentRoutes() {
     return Routes.map((route, index) => {
-      return <Route key={index} path={route.path} exact={route.exact} component={route.page} />;
+      return <Route
+        key={index}
+        path={route.path}
+        exact={route.exact}
+        component={route.page} />;
     });
   }
 

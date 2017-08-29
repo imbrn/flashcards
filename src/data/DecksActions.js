@@ -1,5 +1,5 @@
-import Service from './decks-service';
-import Dispatcher from './dispatcher';
+import Service from './DecksService';
+import Dispatcher from './Dispatcher';
 
 /**
  * Decks actions types.
@@ -49,8 +49,7 @@ class DecksActions {
         type: Types.FETCH_DECK,
         deck
       });
-    }).catch((err) => {
-      console.error(err);
+    }).catch(() => {
       Dispatcher.dispatch({
         type: Types.FETCH_DECK,
         deck: null

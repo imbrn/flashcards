@@ -1,6 +1,6 @@
 import { fromJS, List, OrderedMap } from 'immutable';
-import Deck from './deck';
-import Card from './card';
+import DeckModel from './DeckModel';
+import CardModel from './CardModel';
 import config from '../config';
 
 /**
@@ -189,8 +189,8 @@ class LocalStorageEngine {
     return fromJS(decksObject, (key, value) => {
       if (key === '') return value.toOrderedMap(); // Complete map
       if (key === 'cards') return List(value); // Only cards collection
-      if (Number.isInteger(key)) return new Card(value); // Card item
-      if (!isNaN(key)) return new Deck(value.toObject()); // Deck item
+      if (Number.isInteger(key)) return new CardModel(value); // Card item
+      if (!isNaN(key)) return new DeckModel(value.toObject()); // Deck item
     });
   }
 

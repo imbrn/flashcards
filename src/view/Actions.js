@@ -8,7 +8,7 @@ class Actions {
   }
   
   execute(action, data = null) {
-    this._dispatch(action, data);
+    this.dispatch(action, data);
   }
 
   addListener(listener) {
@@ -21,7 +21,7 @@ class Actions {
       this._listeners.splice(index, 1);
   }
 
-  _dispatch(action, data = null) {
+  dispatch(action, data = null) {
     this._listeners.forEach(listener => {
       if (listener.onActionPerformed) {
         listener.onActionPerformed(action, data);

@@ -2,13 +2,15 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { Container } from 'flux/utils';
 import { withStyles } from 'material-ui/styles';
-import DecksActions from '../data/decks-actions';
-import DecksStore from '../data/decks-store';
+import ActionsTypes from '../ActionsTypes';
+import Actions from '../Actions';
+import DecksActions from '../../data/DecksActions';
+import DecksStore from '../../data/DecksStore';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
-import DeckItem from './deck-item';
-import CreateDeckDialog from './create-deck-dialog';
+import DisplayDeckCard from '../component/DeckCard/DisplayDeckCard';
+import EditableDeckCard from '../component/DeckCard/EditableDeckCard';
 
 /*
 Stylesheet.
@@ -46,7 +48,7 @@ class DecksPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      creatingDeck: false,
+      creatingDeck: true,
       selectedDeck: null
     };
   }
@@ -64,18 +66,29 @@ class DecksPage extends React.Component {
   }
 
   componentWillMount() {
+    Actions.addListener(this);
     DecksActions.fetchAllDecks();
+  }
+
+  componentWillUnmount() {
+    Actions.removeListener(this);
+  }
+
+  onActionPerformed(action) {
+    if (action === ActionsTypes.CREATE_DECK) {
+      this.setState({ creatingDeck: true });
+    }
   }
 
   render() {
     if (this.state.selectedDeck) {
       return <Redirect push to={`/decks/${this.state.selectedDeck.id}`} />;
     } else {
-      return this._renderThisPage();
+      return this.renderThisPage();
     }
   }
 
-  _renderThisPage() {
+  renderThisPage() {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
@@ -84,9 +97,6 @@ class DecksPage extends React.Component {
           onClick={this.handleCreateDeckButtonClick.bind(this)}>
           <AddIcon />
         </Button>
-        <CreateDeckDialog open={this.state.creatingDeck}
-          onCreateDeck={this.handleDialogOnCreateDeck.bind(this)}
-          onRequestClose={this.handleDialogClose.bind(this)} />
       </div>
     );
   }
@@ -99,14 +109,32 @@ class DecksPage extends React.Component {
   }
 
   renderDecksItems(decks, classes) {
-    const items = decks.toArray().map(deck => {
-      return <DeckItem key={deck.id} deck={deck} onClick={this.handleCardClick.bind(this, deck)} />;
-    });
+    const items = decks.toArray().map(deck => this.renderDisplayDeckCard(deck, classes, deck.id));
     return (
       <div className={classes.decksContainer}>
         {items}
+        {this.renderCreateDeckCard()}
       </div>
     );
+  }
+
+  renderDisplayDeckCard(deck, classes, key) {
+    return <DisplayDeckCard
+      key={key}
+      name={deck.name}
+      description={deck.description}
+      cardsCount={deck.cards.size}
+      onClick={this.handleCardClick.bind(this, deck)}
+    />;
+  }
+
+  renderCreateDeckCard() {
+    if (this.state.creatingDeck) {
+      return <EditableDeckCard
+        name='Card one'
+        description='This is the card one generated to test'
+      />;
+    }
   }
 
   renderNoDecks(classes) {
@@ -125,22 +153,7 @@ class DecksPage extends React.Component {
   }
 
   handleCreateDeckButtonClick() {
-    this.setState({
-      creatingDeck: true
-    });
-  }
-
-  handleDialogOnCreateDeck(deck) {
-    this.setState({
-      creatingDeck: false
-    });
-    DecksActions.addDeck(deck);
-  }
-
-  handleDialogClose() {
-    this.setState({
-      creatingDeck: false
-    });
+    this.setState({ creatingDeck: true });
   }
 
 }
@@ -152,10 +165,8 @@ const StyledPage = withStyles(stylesheet)(PageContainer);
 /**
  * Decks page title
  */
-class Title extends React.Component {
-  render() {
-    return <span>My decks</span>;
-  }
+function Title() {
+  return <span>My decks</span>;
 }
 
 // exports

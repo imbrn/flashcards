@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme, createPalette } from 'material-ui/styles';
 import { blueGrey, deepPurple } from 'material-ui/colors';
-import Main from './view/main';
+import Main from './view/Main';
 
 /*
 Custom application theme

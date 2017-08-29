@@ -1,7 +1,7 @@
 import { ReduceStore } from 'flux/utils';
-import Dispatcher from './dispatcher';
 import { OrderedMap } from 'immutable';
-import { DecksActionsTypes } from './decks-actions';
+import Dispatcher from './Dispatcher';
+import { DecksActionsTypes } from './DecksActions';
 
 /**
  * Decks store.

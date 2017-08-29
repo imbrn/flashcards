@@ -1,7 +1,7 @@
 import React from 'react';
-import DecksPage, { DecksPageTitle } from './decks-page';
-import DeckPage, { DeckPageTitle, DeckPageActions } from './deck-page';
 import { Redirect } from 'react-router-dom';
+import DecksPage, { DecksPageTitle } from './DecksPage';
+import DeckPage, { DeckPageTitle, DeckPageActions } from './DeckPage';
 
 const Routes = [
   {

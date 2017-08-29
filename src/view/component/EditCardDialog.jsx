@@ -1,9 +1,9 @@
 import React from 'react';
 import { withStyles } from 'material-ui/styles';
 import Dialog from 'material-ui/Dialog';
-import EditableCard from './card/editable-card';
 import Button from 'material-ui/Button';
-import CardModel from '../data/card';
+import EditableCard from './Card/EditableCard';
+import CardModel from '../../data/CardModel';
 
 /*
 Stylesheets.
@@ -17,9 +17,9 @@ const stylesheets = (theme) => {
       alignItems: 'center',
       justifyContent: 'center'
     },
-    card: theme.mixins.gutters({
+    card: {
       margin: theme.spacing.unit * 4
-    }),
+    },
     cardPaper: {
       background: theme.palette.background.default
     }
@@ -29,14 +29,14 @@ const stylesheets = (theme) => {
 /**
  * Add card dialog.
  */
-class AddCardDialog extends React.Component {
+class EditCardDialog extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
       reversed: false,
-      front: '',
-      back: ''
+      front: props.front ? props.front : null,
+      back: props.back ? props.back : null
     };
   }
 
@@ -52,14 +52,10 @@ class AddCardDialog extends React.Component {
     );
   }
 
-  sideTitle() {
-    return this.state.reversed ? 'Back' : 'Front';
-  }
-
   renderCard() {
-    const face = this.state.reversed ? 'back' : 'front';
     return <EditableCard className={this.props.classes.card}
-      face={face} front={this.state.front} back={this.state.back}
+      reversed={this.state.reversed}
+      front={this.state.front} back={this.state.back}
       frontPlaceholder='Front' backPlaceholder='Back'
       onFrontChange={this.onFrontChange.bind(this)}
       onBackChange={this.onBackChange.bind(this)}
@@ -69,10 +65,18 @@ class AddCardDialog extends React.Component {
   renderButtons() {
     return (
       <div>
-        <Button onClick={this.handleFlipButtonClick.bind(this)}>Flip</Button>
-        <Button color='primary' onClick={this.onCreateButtonClick.bind(this)}>Create</Button>
+        <Button onClick={this.handleFlipButtonClick.bind(this)}>{this.flipText()}</Button>
+        <Button color='primary' onClick={this.onDoneButtonClick.bind(this)}>{this.doneText()}</Button>
       </div>
     );
+  }
+
+  flipText() {
+    return this.props.flipText ? this.props.flipText : 'Flip';
+  }
+
+  doneText() {
+    return this.props.doneText ? this.props.doneText : 'Done';
   }
 
   onFrontChange(value) {
@@ -91,7 +95,7 @@ class AddCardDialog extends React.Component {
     });
   }
 
-  onCreateButtonClick() {
+  onDoneButtonClick() {
     const card = new CardModel({
       front: this.state.front,
       back: this.state.back
@@ -105,10 +109,10 @@ class AddCardDialog extends React.Component {
   }
 
   notifyCardCreation(card) {
-    if (this.props.onCreateCard)
-      this.props.onCreateCard(card, this);
+    if (this.props.onEditDone)
+      this.props.onEditDone(card, this);
   }
 
 }
 
-export default withStyles(stylesheets)(AddCardDialog);
+export default withStyles(stylesheets)(EditCardDialog);

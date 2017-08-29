@@ -1,11 +1,11 @@
 import { ReduceStore } from 'flux/utils';
-import Dispatcher from './dispatcher';
-import { DecksActionsTypes } from './decks-actions';
+import Dispatcher from './Dispatcher';
+import { DecksActionsTypes } from './DecksActions';
 
 /**
  * Only one deck store.
  */
-class DeckStore extends ReduceStore {
+class DeckModelStore extends ReduceStore {
   
   constructor() {
     super(Dispatcher);
@@ -17,15 +17,15 @@ class DeckStore extends ReduceStore {
 
   reduce(state, action) {
     switch (action.type) {
-    case DecksActionsTypes.FETCH_DECK: return this._fetchDeck(action);
+    case DecksActionsTypes.FETCH_DECK: return this.fetchDeck(action);
     default: return state;
     }
   }
 
-  _fetchDeck(action) {
+  fetchDeck(action) {
     return action.deck;
   }
 
 }
 
-export default new DeckStore();
+export default new DeckModelStore();
