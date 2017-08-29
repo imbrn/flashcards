@@ -4,6 +4,7 @@ import { Container } from 'flux/utils';
 import { withStyles } from 'material-ui/styles';
 import ActionsTypes from '../ActionsTypes';
 import Actions from '../Actions';
+import DeckModel from '../../data/DeckModel';
 import DecksActions from '../../data/DecksActions';
 import DecksStore from '../../data/DecksStore';
 import Typography from 'material-ui/Typography';
@@ -32,6 +33,9 @@ const stylesheet = (theme) => {
     root: {
       height: '100%'
     },
+    displayDeckCard: {
+      cursor: 'default'
+    },
     floatButton: {
       position: 'fixed',
       right: theme.spacing.unit * 2,
@@ -48,7 +52,7 @@ class DecksPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      creatingDeck: true,
+      creatingDeck: false,
       selectedDeck: null
     };
   }
@@ -102,10 +106,14 @@ class DecksPage extends React.Component {
   }
 
   renderDecks(classes) {
-    if (this.state.decks.size > 0)
+    if (this.hasDecks())
       return this.renderDecksItems(this.state.decks, classes);
     else
       return this.renderNoDecks(classes);
+  }
+
+  hasDecks() {
+    return this.state.decks.size > 0 || this.state.creatingDeck;
   }
 
   renderDecksItems(decks, classes) {
@@ -120,6 +128,7 @@ class DecksPage extends React.Component {
 
   renderDisplayDeckCard(deck, classes, key) {
     return <DisplayDeckCard
+      className={classes.displayDeckCard}
       key={key}
       name={deck.name}
       description={deck.description}
@@ -131,10 +140,26 @@ class DecksPage extends React.Component {
   renderCreateDeckCard() {
     if (this.state.creatingDeck) {
       return <EditableDeckCard
-        name='Card one'
-        description='This is the card one generated to test'
+        onCancel={this.onCreateDeckCancelled.bind(this)}
+        onDone={this.onCreateDeckDone.bind(this)}
       />;
     }
+  }
+
+  onCreateDeckCancelled() {
+    this.setState({ creatingDeck: false });
+  }
+
+  onCreateDeckDone(data) {
+    const model = new DeckModel(data);
+    if (model.isValid()) {
+      this.createDeck(model);
+    }
+  }
+
+  createDeck(model) {
+    DecksActions.addDeck(model);
+    this.setState({ creatingDeck: false });
   }
 
   renderNoDecks(classes) {

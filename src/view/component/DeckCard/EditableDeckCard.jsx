@@ -11,6 +11,9 @@ const stylesheets = () => {
   return {
     input: {
       padding: 0
+    },
+    multiline: {
+      padding: 0
     }
   };
 };
@@ -18,35 +21,121 @@ const stylesheets = () => {
 /**
  * Editable deck card component.
  */
-function EditableDeckCard(props) {
-  const { classes, ...rest } = props;
-  return (
-    <DeckCard {...rest}
-      name={<Name classes={classes} />}
-      description={<Description classes={classes} />}
-      toolbox={<Buttons classes={classes} />}
-    />
-  );
+class EditableDeckCard extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      description: ''
+    };
+  }
+
+  componentDidMount() {
+    this.nameInputRef.focus();
+  }
+
+  render() {
+    const { classes } = this.props;
+    return (
+      <DeckCard 
+        onKeyUp={this.processKey.bind(this)}
+        name={this.renderName(classes)}
+        description={this.renderDescription(classes)}
+        toolbox={this.renderButtons(classes)}
+      />
+    );
+  }
+
+  processKey(e) {
+    switch (e.keyCode) {
+    case 27: return this.processEsc(e);
+    case 13: return this.processEnter(e);
+    }
+  }
+
+  processEsc() {
+    this.cancel();
+  }
+
+  processEnter(e) {
+    if (e.ctrlKey)
+      this.done();
+  }
+
+  renderName(classes) {
+    return (
+      <Edit value={this.state.name}
+        placeholder='Name'
+        classes={classes}
+        onChange={this.onChangeName.bind(this)}
+        inputRef={(ref) => this.nameInputRef = ref} />
+    );
+  }
+
+  renderDescription(classes) {
+    return (
+      <Edit value={this.state.description}
+        placeholder='Description'
+        classes={classes}
+        onChange={this.onChangeDescription.bind(this)} />
+    );
+  }
+
+  renderButtons(classes) {
+    return <Buttons classes={classes}
+      onCancelPerformed={this.onCancelPerformed.bind(this)}
+      onDonePerformed={this.onDonePerformed.bind(this)}
+    />;
+  }
+
+  onChangeName(e) {
+    this.setState({ name: e.target.value });
+  }
+
+  onChangeDescription(e) {
+    this.setState({ description: e.target.value });
+  }
+
+  onCancelPerformed() {
+    this.cancel();
+  }
+
+  onDonePerformed() {
+    this.done();
+  }
+
+  cancel() {
+    if (this.props.onCancel)
+      this.props.onCancel(this);
+  }
+
+  done() {
+    if (this.props.onDone)
+      this.props.onDone({
+        name: this.state.name,
+        description: this.state.description
+      }, this);
+  }
+
 }
 
-/* Name component */
-function Name(props) {
-  const classes = { input: props.classes.input };
-  return <Input classes={classes} placeholder='Name' disableUnderline />;
-}
-
-/* Description component */
-function Description(props) {
-  const classes = { input: props.classes.input };
-  return <Input multiline classes={classes} placeholder='Description' disableUnderline />;
+/* Editable component */
+function Edit(props) {
+  const { value, placeholder, classes, ...rest } = props;
+  return <Input {...rest} multiline disableUnderline
+    value={value}
+    classes={{ multiline: classes.multiline, input: classes.input }}
+    placeholder={placeholder}
+  />;
 }
 
 /* Buttons component */
 function Buttons(props) {
   return (
     <div>
-      <IconButton><CloseIcon/></IconButton>
-      <IconButton color='accent'><DoneIcon/></IconButton>
+      <IconButton onClick={props.onCancelPerformed}><CloseIcon /></IconButton>
+      <IconButton onClick={props.onDonePerformed} color='accent'><DoneIcon /></IconButton>
     </div>
   );
 }

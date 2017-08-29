@@ -17,10 +17,10 @@ const stylesheets = (theme) => {
  * Display deck card component.
  */
 function DisplayDeckCard(props) {
-  const { classes, ...rest } = props;
+  const { classes, cardsCount, ...rest } = props;
   return (
     <DeckCard {...rest}
-      toolbox={<CardsCount classes={classes} count={props.cardsCount} />}
+      toolbox={<CardsCount classes={classes} count={cardsCount} />}
     />
   );
 }

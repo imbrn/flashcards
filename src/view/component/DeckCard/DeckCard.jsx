@@ -1,6 +1,7 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
 import { withStyles } from 'material-ui/styles';
+import classnames from 'classnames';
 import { FormControl } from 'material-ui/Form';
 
 /* Stylesheets */
@@ -36,21 +37,25 @@ const stylesheets = (theme) => {
  * Deck card.
  */
 function DeckCard(props) {
+  const { className, classes, name, description, toolbox, ...rest } = props;
   return (
-    <Root classes={props.classes}>
-      <Content classes={props.classes}>
-        <Name classes={props.classes}>{props.name}</Name>
-        <Description classes={props.classes}>{props.description}</Description>
+    <Root className={className} classes={classes} {...rest}>
+      <Content classes={classes}>
+        <Name classes={classes}>{name}</Name>
+        <Description classes={classes}>{description}</Description>
       </Content>
-      <Toolbox classes={props.classes}>{props.toolbox}</Toolbox>
+      <Toolbox classes={classes}>{toolbox}</Toolbox>
     </Root>
   );
 }
 
 /* Root component */
 function Root(props) {
+  const { className, classes, children, ...rest } = props;
   return (
-    <Paper className={props.classes.root}>{props.children}</Paper>
+    <Paper {...rest} className={classnames(className, classes.root)}>
+      {children}
+    </Paper>
   );
 }
 
