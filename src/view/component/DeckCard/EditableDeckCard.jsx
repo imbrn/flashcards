@@ -39,7 +39,8 @@ class EditableDeckCard extends React.Component {
     const { classes } = this.props;
     return (
       <DeckCard 
-        onKeyUp={this.processKey.bind(this)}
+        onKeyPress={this.processKeyPress.bind(this)}
+        onKeyUp={this.processKeyUp.bind(this)}
         name={this.renderName(classes)}
         description={this.renderDescription(classes)}
         toolbox={this.renderButtons(classes)}
@@ -47,10 +48,15 @@ class EditableDeckCard extends React.Component {
     );
   }
 
-  processKey(e) {
-    switch (e.keyCode) {
-    case 27: return this.processEsc(e);
-    case 13: return this.processEnter(e);
+  processKeyUp(e) {
+    if (e.key === 'Escape') {
+      this.processEsc(e);
+    }
+  }
+
+  processKeyPress(e) {
+    if (e.key === 'Enter') {
+      this.processEnter(e);
     }
   }
 
@@ -59,7 +65,7 @@ class EditableDeckCard extends React.Component {
   }
 
   processEnter(e) {
-    if (e.ctrlKey)
+    if (!e.shiftKey)
       this.done();
   }
 

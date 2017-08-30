@@ -10,7 +10,6 @@ import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui-icons/MoreVert';
 import Menu, { MenuItem } from 'material-ui/Menu';
-import EditCardDialog from '../component/EditCardDialog';
 import Card from '../component/Card/Card';
 
 /*
@@ -95,11 +94,7 @@ class DeckPage extends React.Component {
 
   renderAddCardDialog() {
     if (this.state.creatingCard) {
-      return <EditCardDialog
-        doneText='Create'
-        onEditDone={this.onCreateCard.bind(this)}
-        onRequestClose={this.onAddCardDialogClose.bind(this)}
-      />;
+      // TODO: edit card
     } else {
       return null;
     }
@@ -123,13 +118,7 @@ class DeckPage extends React.Component {
   renderEditCardDialog() {
     if (this.state.editingCard) {
       const card = this.state.editingCard;
-      return <EditCardDialog
-        doneText='Save'
-        front={card.front}
-        back={card.back}
-        onRequestClose={this.onEditCardDialogClose.bind(this)}
-        onEditDone={this.onEditCard.bind(this)}
-      />;
+      return null; // TODO: edit card
     }
   }
 
