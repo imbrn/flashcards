@@ -1,6 +1,10 @@
 import Storage from './Storage';
+import config from '../../../config';
 
-/** */
+/**
+ * Implementation of storage which uses browser's localStorage to
+ * store data.
+ */
 class LocalStorage extends Storage {
 
   constructor() {
@@ -32,21 +36,28 @@ class LocalStorage extends Storage {
  * Mock to use in test with window.localStorage.
  */
 class MockLocalStorage {
+
   constructor() {
     this.clear();
   }
+
   clear() {
     this.data = {};
   }
+
   getItem(key) {
     return this.data[key];
   }
+
   setItem(key, value) {
     this.data[key] = value;
   }
+
 }
 
-export default LocalStorage;
-export {
-  MockLocalStorage
-};
+/* Mocks the localStorage for testing purposes. */
+if (config.env === 'test') {
+  window.localStorage = new MockLocalStorage();
+}
+
+export default new LocalStorage();
