@@ -1,4 +1,5 @@
 import Operation from './Operation';
+import FetchDeckByCriteria from './FetchDeckByCriteria';
 
 /**
  * Searches and fetch the deck with an specified ID.
@@ -11,7 +12,7 @@ class FetchDeckById extends Operation {
   }
 
   execute() {
-    return this.data.decks.find(deck => deck.id === this.id);
+    return new FetchDeckByCriteria(it => it.id === this.id).execute();
   }
 
 }
