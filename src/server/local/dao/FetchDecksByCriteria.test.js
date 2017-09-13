@@ -1,4 +1,4 @@
-import AddDeck from './AddDeck';
+import CreateDeck from './CreateDeck';
 import FetchDecksByCriteria from './FetchDecksByCriteria';
 import Storage from '../storage';
 
@@ -9,8 +9,8 @@ describe('FetchDecksByCriteria', function() {
   });
 
   it('fetching decks with success', () => {
-    const one = new AddDeck({ name: 'One', description: 'Deck one' }).execute();
-    const two = new AddDeck({ name: 'Two', description: 'Deck two' }).execute();
+    const one = new CreateDeck({ name: 'One', description: 'Deck one' }).execute();
+    const two = new CreateDeck({ name: 'Two', description: 'Deck two' }).execute();
     const decks = new FetchDecksByCriteria(it => it.description.startsWith('D')).execute();
     expect(decks).toEqual([one, two]);
   });

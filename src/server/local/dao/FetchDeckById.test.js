@@ -1,4 +1,4 @@
-import AddDeck from './AddDeck';
+import CreateDeck from './CreateDeck';
 import FetchDeckById from './FetchDeckById';
 import Storage from '../storage';
 
@@ -9,8 +9,8 @@ describe('FetchDeckById', function() {
   });
 
   it('fetching deck with success', () => {
-    const one = new AddDeck({ name: 'One' }).execute();
-    const two = new AddDeck({ name: 'Two' }).execute();
+    const one = new CreateDeck({ name: 'One' }).execute();
+    const two = new CreateDeck({ name: 'Two' }).execute();
     expect(new FetchDeckById(one.id).execute()).toEqual(one);
     expect(new FetchDeckById(two.id).execute()).toEqual(two);
   });

@@ -3,9 +3,9 @@ import { Deck } from '../data';
 import { DeckValidation } from '../validation';
 
 /**
- * Operation for adding deck.
+ * Operation for creating deck.
  */
-class AddDeck extends Operation {
+class CreateDeck extends Operation {
 
   constructor(params) {
     super();
@@ -29,4 +29,4 @@ function buildDeck(params, data) {
   }));
 }
 
-export default AddDeck;
+export default CreateDeck;

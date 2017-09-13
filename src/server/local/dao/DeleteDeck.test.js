@@ -1,11 +1,11 @@
-import AddDeck from './AddDeck';
+import CreateDeck from './CreateDeck';
 import DeleteDeck from './DeleteDeck';
 import FetchDeckById from './FetchDeckById';
 
 describe('DeleteDeck', function() {
 
   it('deleting with success', () => {
-    const deck = new AddDeck({ name: 'One' }).execute();
+    const deck = new CreateDeck({ name: 'One' }).execute();
     expect(new FetchDeckById(deck.id).execute()).toEqual(deck);
     new DeleteDeck(deck.id).execute();
     expect(new FetchDeckById(deck.id).execute()).toBeUndefined();
