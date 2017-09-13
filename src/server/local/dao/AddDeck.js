@@ -1,5 +1,6 @@
 import Operation from './Operation';
 import { Deck } from '../data';
+import { DeckValidation } from '../validation';
 
 /**
  * Operation for adding deck.
@@ -13,7 +14,7 @@ class AddDeck extends Operation {
 
   execute() {
     const deck = buildDeck(this.params, this.data);
-    validate(deck);
+    DeckValidation(deck);
     this.data.decks.push(deck);
     this.commit();
     return deck;
@@ -22,13 +23,10 @@ class AddDeck extends Operation {
 }
 
 function buildDeck(params, data) {
-  return Deck(Object.assign({}, params, { id: ++data.lastDeckId, cards: [] }));
-}
-
-function validate(deck) {
-  if (!deck || !deck.name || deck.name.trim().length === 0) {
-    throw new Error('Invalid deck');
-  }
+  return Deck(Object.assign({}, params, {
+    id: ++data.lastDeckId,
+    cards: []
+  }));
 }
 
 export default AddDeck;

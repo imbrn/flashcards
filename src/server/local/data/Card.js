@@ -1,4 +1,4 @@
-import { objectValue } from './Utils';
+import { objectValue, trim } from './Utils';
 
 /**
  * Create a card only with the valid properties.
@@ -7,8 +7,8 @@ import { objectValue } from './Utils';
 function Card(params) {
   return {
     id: objectValue(params, 'id'),
-    front: objectValue(params, 'front'),
-    back: objectValue(params, 'back'),
+    front: objectValue(params, 'front', null, trim),
+    back: objectValue(params, 'back', null, trim),
     deck: objectValue(params, 'deck')
   };
 }

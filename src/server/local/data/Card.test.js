@@ -38,4 +38,14 @@ describe('Card', function() {
     });
   });
 
+  it('should trim front', () => {
+    const card = Card({ front: '   One   '});
+    expect(card).toEqual(Card({ front: 'One' }));
+  });
+
+  it('should trim back', () => {
+    const card = Card({ back: '    One   '});
+    expect(card).toEqual(Card({ back: 'One' }));
+  });
+
 });

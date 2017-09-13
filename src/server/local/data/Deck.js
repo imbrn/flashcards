@@ -1,4 +1,4 @@
-import { objectValue } from './Utils';
+import { objectValue, trim } from './Utils';
 
 /**
  * Create a valid deck only with the valid properties.
@@ -7,8 +7,8 @@ import { objectValue } from './Utils';
 function Deck(params) {
   return {
     id: objectValue(params, 'id'),
-    name: objectValue(params, 'name'),
-    description: objectValue(params, 'description'),
+    name: objectValue(params, 'name', null, trim),
+    description: objectValue(params, 'description', null, trim),
     cards: objectValue(params, 'cards', [], cards => cards.slice())
   };
 }

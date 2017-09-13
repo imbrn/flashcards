@@ -34,4 +34,14 @@ describe('Deck', function() {
     expect(deck).not.toHaveProperty('invalid');
   });
 
+  it('should trim name', () => {
+    const deck = Deck({ name: '   One    '});
+    expect(deck).toEqual(Deck({ name: 'One' }));
+  });
+
+  it('should trim description', () => {
+    const deck = Deck({ description: '   One   '});
+    expect(deck).toEqual(Deck({ description: 'One' }));
+  });
+
 });
