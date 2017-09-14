@@ -1,4 +1,5 @@
 import Operation from './Operation';
+import { Deck } from '../data';
 
 /**
  * Fetches all decks which apply the specified criteria. If no decks are found, returns an
@@ -12,7 +13,7 @@ class FetchDecksByCriteria extends Operation {
   }
 
   execute() {
-    return this.data.decks.filter(this.criteria);
+    return this.data.decks.filter(this.criteria).map(Deck);
   }
 
 }
