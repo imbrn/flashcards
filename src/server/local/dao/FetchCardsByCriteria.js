@@ -7,13 +7,12 @@ import { Card } from '../data';
  */
 class FetchCardsByCriteria extends Operation {
 
-  constructor(criteria) {
-    super();
-    this.criteria = criteria;
+  constructor(storage) {
+    super(storage);
   }
 
-  execute() {
-    return this.data.cards.filter(this.criteria).map(Card);
+  execute(criteria) {
+    return this.data.cards.filter(criteria).map(Card);
   }
 
 }

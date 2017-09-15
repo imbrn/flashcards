@@ -7,19 +7,18 @@ import { CardValidation } from '../validation';
  */
 class CreateCard extends Operation {
 
-  constructor(params) {
-    super();
-    this.params = params;
+  constructor(storage) {
+    super(storage);
   }
 
-  execute() {
-    const deck = fetchDeck(this.data, this.params.deck);
-    const card = buildCard(this.data, this.params);
+  execute(params) {
+    const deck = fetchDeck(this.data, params.deck);
+    const card = buildCard(this.data, params);
     CardValidation(card);
     deck.cards.push(card.id);
     this.data.cards.push(card);
     this.commit();
-    return card;
+    return Card(card);
   }
 
 }

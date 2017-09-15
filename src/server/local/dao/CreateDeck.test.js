@@ -1,47 +1,85 @@
 import CreateDeck from './CreateDeck';
-import Storage from '../storage';
+import { MockStorage } from '../storage';
+import { MockData } from '../data';
 
-describe('dao.CreateDeck', function() {
+describe('CreateDeck', function() {
 
-  beforeEach(() => {
-    Storage.reset();
+  beforeAll(() => {
+    this.storage = new MockStorage(MockData());
   });
 
-  it('adding deck with success', () => {
-    new CreateDeck({ name: 'One', description: 'Deck one' }).execute();
-    expect(Storage.data.decks).toEqual([
-      { id: 1, name: 'One', description: 'Deck one', cards: [] }
-    ]);
-  });
-
-  it('adding deck with invalid name should fail', () => {
-    expect(() => new CreateDeck({ description: 'One' }).execute()).toThrow();
-    expect(() => new CreateDeck({ name: null, description: 'One' }).execute()).toThrow();
-    expect(() => new CreateDeck({ name: undefined, description: 'One' }).execute()).toThrow();
-    expect(() => new CreateDeck({ name: '', description: 'One' }).execute()).toThrow();
-    expect(() => new CreateDeck({ name: '  ', description: 'One' }).execute()).toThrow();
-  });
-
-  it('adding deck without description should pass', () => {
-    expect(() => new CreateDeck({ name: 'One' }).execute()).not.toThrow();
-    expect(() => new CreateDeck({ name: 'One', description: null }).execute()).not.toThrow();
-    expect(() => new CreateDeck({ name: 'One', description: undefined }).execute()).not.toThrow();
-    expect(() => new CreateDeck({ name: 'One', description: '' }).execute()).not.toThrow();
-    expect(() => new CreateDeck({ name: 'One', description: '   ' }).execute()).not.toThrow();
+  it('should add deck', () => {
+    new CreateDeck(this.storage).execute({ name: 'One', description: 'Deck one' });
+    expect(this.storage.data.decks).toHaveLength(1);
+    expect(this.storage.data.decks[0]).toMatchObject({
+      name: 'One',
+      description: 'Deck one'
+    });
   });
 
   it('adding deck with predefined cards should have no effect', () => {
-    new CreateDeck({ name: 'One', description: 'Deck one', cards: [1, 2, 3] }).execute();
-    expect(Storage.data.decks).toEqual([
-      { id: 1, name: 'One', description: 'Deck one', cards: [] }
-    ]);
+    const deck = new CreateDeck(this.storage).execute({ name: 'One', description: 'Deck one', cards: [1, 2, 3] });
+    expect(deck).toMatchObject({
+      name: 'One', description: 'Deck one', cards: []
+    });
   });
 
   it('adding deck with predefined id should have no effect', () => {
-    new CreateDeck({ id: 123, name: 'One', description: 'Deck one' }).execute();
-    expect(Storage.data.decks).toEqual([
-      { id: 1, name: 'One', description: 'Deck one', cards: [] }
-    ]);
+    const deck = new CreateDeck(this.storage).execute({ id: 100, name: 'One', description: 'Deck one' });
+    expect(deck.id).not.toBe(100);
   });
 
 });
+
+describe('Name is not optional', function() {
+
+  beforeAll(() => {
+    this.storage = new MockStorage(MockData());
+  });
+
+  it('should throw an error when name is undefined', () => {
+    expect(() => new CreateDeck({ description: 'One' }).execute()).toThrow();
+  });
+  
+  it('should throw an error when name is null', () => {
+    expect(() => new CreateDeck({ name: null, description: 'One' }).execute()).toThrow();
+  });
+
+  it('should throw an error when name is empty', () => {
+    expect(() => new CreateDeck({ name: '', description: 'One' }).execute()).toThrow();
+  });
+
+  it('should throw an error when name contains only spaces', () => {
+    expect(() => new CreateDeck({ name: ' ', description: 'One' }).execute()).toThrow();
+  });
+
+});
+
+describe('Description is optional', function() {
+  
+  beforeAll(() => {
+    this.storage = new MockStorage(MockData());
+  });
+
+  it('should accept when description is undefined', () => {
+    const deck = new CreateDeck(this.storage).execute({ name: 'Deck' });
+    expect(deck).toBeDefined();
+  });
+
+  it('should accept when description is null', () => {
+    const deck = new CreateDeck(this.storage).execute({ name: 'Deck', description: null });
+    expect(deck).toBeDefined();
+  });
+
+  it('should accept when description is empty', () => {
+    const deck = new CreateDeck(this.storage).execute({ name: 'Deck', description: '' });
+    expect(deck).toBeDefined();
+  });
+
+  it('should accept when description contains only spaces', () => {
+    const deck = new CreateDeck(this.storage).execute({ name: 'Deck', description: ' ' });
+    expect(deck).toBeDefined();
+  });
+  
+});
+  

@@ -7,26 +7,25 @@ import { DeckValidation } from '../validation';
  */
 class UpdateDeck extends Operation {
 
-  constructor(params) {
-    super();
-    this.params = params;
+  constructor(storage) {
+    super(storage);
   }
 
-  execute() {
-    const index = this.data.decks.findIndex(it => it.id === this.params.id);
+  execute(params) {
+    const index = this.data.decks.findIndex(it => it.id === params.id);
     if (index !== -1) {
-      return this.doExecute(index);
+      return this.doExecute(index, params);
     } else {
-      throw new Error(`Not found deck with id: ${this.params.id}`);
+      throw new Error(`Not found deck with id: ${params.id}`);
     }
   }
 
-  doExecute(index) {
-    const deck = buildDeck(this.data.decks[index], this.params);
+  doExecute(index, params) {
+    const deck = buildDeck(this.data.decks[index], params);
     DeckValidation(deck);
     this.data.decks[index] = deck;
     this.commit();
-    return deck;
+    return Deck(deck);
   }
 
 }

@@ -1,4 +1,5 @@
 import Operation from './Operation';
+import { Card } from '../data';
 
 /**
  * Fetches a card by criteria.
@@ -6,13 +7,15 @@ import Operation from './Operation';
  */
 class FetchCardByCriteria extends Operation {
 
-  constructor(criteria) {
-    super();
-    this.criteria = criteria;
+  constructor(storage) {
+    super(storage);
   }
 
-  execute() {
-    return this.data.cards.find(this.criteria);
+  execute(criteria) {
+    const card = this.data.cards.find(criteria);
+    if (card) {
+      return Card(card);
+    }
   }
 
 }

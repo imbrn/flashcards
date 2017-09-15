@@ -1,28 +1,28 @@
 import FetchDeckCards from './FetchDeckCards';
-import CreateDeck from './CreateDeck';
-import CreateCard from './CreateCard';
-import Storage from '../storage';
+import { MockStorage } from '../storage';
+import { MockData } from '../data';
 
 describe('FetchDeckCards', function() {
-  
-  beforeEach(() => {
-    Storage.reset();
-  });
 
-  it('should return cards with success', () => {
-    const deck = new CreateDeck({ name: 'One' }).execute();
-    const one = new CreateCard({ front: 'A', back: 'B', deck: deck.id }).execute();
-    const two = new CreateCard({ front: 'C', back: 'D', deck: deck.id }).execute();
-    expect(new FetchDeckCards(deck.id).execute()).toEqual([one, two]);
+  it('should fetch all cards from the specified deck', () => {
+    const storage = new MockStorage(MockData({ decksCount: 2, cardsPerDeck: 4 }));
+    const cards = new FetchDeckCards(storage).execute(storage.data.decks[1].id);
+    expect(cards).toEqual(decksByIndices(storage, [4, 5, 6, 7]));
   });
 
   it('should return an empty array whent the specified deck have no cards', () => {
-    const deck = new CreateDeck({ name: 'One' }).execute();
-    expect(new FetchDeckCards(deck.id).execute()).toEqual([]);
+    const storage = new MockStorage(MockData({ decksCount: 1 }));
+    const decks = new FetchDeckCards(storage).execute(storage.data.decks[0].id);
+    expect(decks).toEqual([]);
   });
 
   it('should throw an error when the specified deck not exist', () => {
-    expect(() => new FetchDeckCards(1).execute()).toThrow();
+    const storage = new MockStorage(MockData());
+    expect(() => new FetchDeckCards(storage).execute(15)).toThrow();
   });
 
 });
+
+function decksByIndices(storage, indices) {
+  return indices.map(index => storage.data.cards[index]);
+}

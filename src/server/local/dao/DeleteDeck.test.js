@@ -1,33 +1,27 @@
-import CreateDeck from './CreateDeck';
-import CreateCard from './CreateCard';
 import DeleteDeck from './DeleteDeck';
-import FetchDeckById from './FetchDeckById';
-import FetchCardById from './FetchCardById';
-import Storage from '../storage';
+import { MockStorage } from '../storage';
+import { MockData } from '../data';
 
 describe('DeleteDeck', function() {
 
-  beforeEach(() => {
-    Storage.reset();
+  it('should delete deck with success', () => {
+    const storage = new MockStorage(MockData({ decksCount: 2 }));
+    expect(storage.data.decks).toHaveLength(2);
+    const deleted = new DeleteDeck(storage).execute(storage.data.decks[0].id);
+    expect(deleted).toBeDefined();
+    expect(deleted).not.toEqual(storage.data.decks[0]);
   });
 
-  it('deleting with success', () => {
-    const deck = new CreateDeck({ name: 'One' }).execute();
-    expect(new FetchDeckById(deck.id).execute()).toEqual(deck);
-    new DeleteDeck(deck.id).execute();
-    expect(new FetchDeckById(deck.id).execute()).toBeUndefined();
+  it('should throw an error when trying to delete non added deck', () => {
+    const storage = new MockStorage(MockData());
+    expect(() => new DeleteDeck(storage).execute(1)).toThrow();
   });
 
-  it('deleting non added deck should fail', () => {
-    expect(() => new DeleteDeck(1).execute()).toThrow();
-  });
-
-  it('should delete cards which belong to deleted deck', () => {
-    const deck = new CreateDeck({ name: 'One' }).execute();
-    const card = new CreateCard({ front: 'A', back: 'B', deck: deck.id }).execute();
-    expect(new FetchCardById(card.id).execute()).toEqual(card);
-    new DeleteDeck(deck.id).execute();
-    expect(new FetchCardById(card.id).execute()).toBeUndefined();
+  it('should delete cards which belong to the deleted deck', () => {
+    const storage = new MockStorage(MockData({ decksCount: 1, cardsPerDeck: 3 }));
+    expect(storage.data.cards).toHaveLength(3);
+    new DeleteDeck(storage).execute(storage.data.decks[0].id);
+    expect(storage.data.cards).toHaveLength(0);
   });
 
 });

@@ -1,77 +1,100 @@
-import CreateDeck from './CreateDeck';
-import FetchDeckById from './FetchDeckById';
 import UpdateDeck from './UpdateDeck';
-import Storage from '../storage';
+import { MockStorage } from '../storage';
+import { MockData } from '../data';
 
 describe('UpdateDeck', function() {
 
-  beforeEach(() => {
-    Storage.reset();
-  });
-
   it('should update deck with success', () => {
-    const initial = new CreateDeck({ name: 'One', description: '1' }).execute();
-    expect(new FetchDeckById(initial.id).execute()).toEqual(initial);
-    const updated = new UpdateDeck({ id: initial.id, name: 'Two', description: '2' }).execute();
-    expect(new FetchDeckById(initial.id).execute()).toEqual(updated);
-    expect(initial).not.toEqual(updated);
+    const storage = new MockStorage(MockData({
+      decksCount: 1,
+      cardsPerDeck: 2,
+      deckNamePattern: 'Wrong deck ${id}'
+    }));
+
+    const updated = new UpdateDeck(storage).execute({
+      id: 1,
+      name: 'Right deck 1'
+    });
+
+    expect(updated).toEqual(storage.data.decks[0]);
+    expect(updated).toMatchObject({ name: 'Right deck 1' });
   });
 
   it('should throw when updating non added deck', () => {
-    expect(() => UpdateDeck({ id : 1, name: 'Two' }).execute()).toThrow();
+    const storage = new MockStorage(MockData());
+    expect(() => UpdateDeck(storage).execute({ id : 1, name: 'Two' })).toThrow();
   });
 
   it('should not update name when it is not specified', () => {
-    const one = new CreateDeck({ name: 'A', description: 'a' }).execute();
-    const two = new UpdateDeck({ id: one.id, description: 'b' }).execute();
-    expect(two.name).toBe('A');
-    expect(two.description).toBe('b');
+    const storage = new MockStorage(MockData({ decksCount: 1, deckNamePattern: 'Deck ${id}' }));
+    const deck = new UpdateDeck(storage).execute({ id: 1, description: 'New description' });
+    expect(deck).toMatchObject({
+      name: 'Deck 1',
+      description: 'New description'
+    });
   });
 
   it('should not update description when it is not specified', () => {
-    const one = new CreateDeck({ name: 'A', description: 'a' }).execute();
-    const two = new UpdateDeck({ id: one.id, name: 'B' }).execute();
-    expect(two.name).toBe('B');
-    expect(two.description).toBe('a');
+    const storage = new MockStorage(MockData({ decksCount: 1, deckDescriptionPattern: 'Description ${id}' }));
+    const deck = new UpdateDeck(storage).execute({ id: 1, name: 'New name' });
+    expect(deck).toMatchObject({
+      name: 'New name',
+      description: 'Description 1'
+    });
+  });
+  
+});
+
+describe('Name is not null', function() {
+
+  beforeAll(() => {
+    this.storage = new MockStorage(MockData({
+      decksCount: 1,
+      deckNamePattern: 'Deck ${id}'
+    }));
   });
 
   it('should throw an error when name is null', () => {
-    const one = new CreateDeck({ name: 'A', description: 'a' }).execute();
-    expect(() => new UpdateDeck({ id: one.id, name: null }).execute()).toThrow();
+    expect(() => new UpdateDeck(this.storage).execute({ name: null })).toThrow();
+    expect(this.storage.data.decks[0]).toMatchObject({ name: 'Deck 1' });
   });
 
   it('should throw an error when name is empty', () => {
-    const one = new CreateDeck({ name: 'A', description: 'a' }).execute();
-    expect(() => new UpdateDeck({ id: one.id, name: '' }).execute()).toThrow();
+    expect(() => new UpdateDeck(this.storage).execute({ name: '' })).toThrow();
+    expect(this.storage.data.decks[0]).toMatchObject({ name: 'Deck 1' });
   });
 
   it('should throw an error when name cotains only spaces', () => {
-    const one = new CreateDeck({ name: 'A', description: 'a' }).execute();
-    expect(() => new UpdateDeck({ id: one.id, name: '   ' }).execute()).toThrow();
+    expect(() => new UpdateDeck(this.storage).execute({ name: '  ' })).toThrow();
+    expect(this.storage.data.decks[0]).toMatchObject({ name: 'Deck 1' });
+  });
+
+});
+
+describe('Description can be null', function() {
+
+  beforeAll(() => {
+    this.storage = new MockStorage(MockData({ decksCount: 1 }));
   });
 
   it('should update with success when description is null', () => {
-    const one = new CreateDeck({ name: 'A', description: 'a' }).execute();
-    const two = new UpdateDeck({ id: one.id, description: null }).execute();
-    expect(two).toMatchObject({ name: 'A', description: null });
+    expect(() => new UpdateDeck(this.storage).execute({ id: 1, description: null })).not.toThrow();
+    expect(this.storage.data.decks[0]).toMatchObject({ description: null });
   });
 
   it('should update with success when description is undefined', () => {
-    const one = new CreateDeck({ name: 'A', description: 'a' }).execute();
-    const two = new UpdateDeck({ id: one.id, description: undefined }).execute();
-    expect(two).toMatchObject({ name: 'A', description: undefined });
+    expect(() => new UpdateDeck(this.storage).execute({ id: 1, description: undefined })).not.toThrow();
+    expect(this.storage.data.decks[0]).toMatchObject({ description: undefined });
   });
 
   it('should update with success when description is empty', () => {
-    const one = new CreateDeck({ name: 'A', description: 'a' }).execute();
-    const two = new UpdateDeck({ id: one.id, description: '' }).execute();
-    expect(two).toMatchObject({ name: 'A', description: '' });
+    expect(() => new UpdateDeck(this.storage).execute({ id: 1, description: '' })).not.toThrow();
+    expect(this.storage.data.decks[0]).toMatchObject({ description: '' });
   });
 
   it('should update with success when description contains only spaces', () => {
-    const one = new CreateDeck({ name: 'A', description: 'a' }).execute();
-    const two = new UpdateDeck({ id: one.id, description: '  ' }).execute();
-    expect(two).toMatchObject({ name: 'A', description: '' });
+    expect(() => new UpdateDeck(this.storage).execute({ id: 1, description: '  ' })).not.toThrow();
+    expect(this.storage.data.decks[0]).toMatchObject({ description: '' });
   });
-  
+
 });

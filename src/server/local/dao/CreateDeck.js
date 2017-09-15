@@ -7,17 +7,16 @@ import { DeckValidation } from '../validation';
  */
 class CreateDeck extends Operation {
 
-  constructor(params) {
-    super();
-    this.params = params;
+  constructor(storage) {
+    super(storage);
   }
 
-  execute() {
-    const deck = buildDeck(this.params, this.data);
+  execute(params) {
+    const deck = buildDeck(params, this.data);
     DeckValidation(deck);
     this.data.decks.push(deck);
     this.commit();
-    return deck;
+    return Deck(deck);
   }
 
 }

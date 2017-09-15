@@ -1,22 +1,18 @@
-import CreateDeck from './CreateDeck';
 import FetchDeckById from './FetchDeckById';
-import Storage from '../storage';
+import { MockStorage } from '../storage';
+import { MockData } from '../data';
 
 describe('FetchDeckById', function() {
 
-  beforeEach(() => {
-    Storage.reset();
-  });
-
-  it('fetching deck with success', () => {
-    const one = new CreateDeck({ name: 'One' }).execute();
-    const two = new CreateDeck({ name: 'Two' }).execute();
-    expect(new FetchDeckById(one.id).execute()).toEqual(one);
-    expect(new FetchDeckById(two.id).execute()).toEqual(two);
+  it('should fetch deck with success', () => {
+    const storage = new MockStorage(MockData({ decksCount: 4 }));
+    const deck = new FetchDeckById(storage).execute(3);
+    expect(deck).toEqual(storage.data.decks[2]);
   });
 
   it('returns undefined when no deck is found', () => {
-    expect(new FetchDeckById(1).execute()).toBeUndefined();
+    const storage = new MockStorage(MockData());
+    expect(new FetchDeckById(storage).execute(1)).toBeUndefined();
   });
 
 });

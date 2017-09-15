@@ -6,13 +6,12 @@ import FetchCardByCriteria from './FetchCardByCriteria';
  */
 class FetchCardById extends Operation {
 
-  constructor(id) {
-    super();
-    this.id = id;
+  constructor(storage) {
+    super(storage);
   }
 
-  execute() {
-    return new FetchCardByCriteria(it => it.id === this.id).execute();
+  execute(id) {
+    return new FetchCardByCriteria(this.storage).execute(it => it.id === id);
   }
 
 }

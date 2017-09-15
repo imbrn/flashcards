@@ -23,9 +23,16 @@ class Storage {
  * Mock storage object for testing.
  */
 class MockStorage extends Storage {
+
+  constructor(initialData) {
+    super();
+    this.data = initialData;
+  }
+
   onChange(data) {
     this.changedData = data;
   }
+  
 }
 
 export default Storage;

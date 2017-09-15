@@ -6,13 +6,12 @@ import FetchDeckByCriteria from './FetchDeckByCriteria';
  */
 class FetchDeckById extends Operation {
 
-  constructor(id) {
-    super();
-    this.id = id;
+  constructor(storage) {
+    super(storage);
   }
 
-  execute() {
-    return new FetchDeckByCriteria(it => it.id === this.id).execute();
+  execute(id) {
+    return new FetchDeckByCriteria(this.storage).execute(it => it.id === id);
   }
 
 }

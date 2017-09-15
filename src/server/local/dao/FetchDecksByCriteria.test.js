@@ -1,22 +1,21 @@
-import CreateDeck from './CreateDeck';
 import FetchDecksByCriteria from './FetchDecksByCriteria';
-import Storage from '../storage';
+import { MockStorage } from '../storage';
+import { MockData } from '../data';
 
 describe('FetchDecksByCriteria', function() {
 
-  beforeEach(() => {
-    Storage.reset();
-  });
-
-  it('fetching decks with success', () => {
-    const one = new CreateDeck({ name: 'One', description: 'Deck one' }).execute();
-    const two = new CreateDeck({ name: 'Two', description: 'Deck two' }).execute();
-    const decks = new FetchDecksByCriteria(it => it.description.startsWith('D')).execute();
-    expect(decks).toEqual([one, two]);
+  it('should fetch all decks which match the criteria', () => {
+    const storage = new MockStorage(MockData({ decksCount: 4 }));
+    const decks = new FetchDecksByCriteria(storage).execute(it => it.id % 2 === 0);
+    expect(decks).toEqual([
+      storage.data.decks[1],
+      storage.data.decks[3]
+    ]);
   });
 
   it('should return empty array when no decks are applied by criteria', () => {
-    const decks = new FetchDecksByCriteria(it => it.name === 'Hello').execute();
+    const storage = new MockStorage(MockData({ decksCount: 10 }));
+    const decks = new FetchDecksByCriteria(storage).execute(it => it.id > 30);
     expect(decks).toHaveLength(0);
   });
 

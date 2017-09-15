@@ -7,16 +7,15 @@ import FetchCardsByCriteria from './FetchCardsByCriteria';
  */
 class FetchDeckCards extends Operation {
 
-  constructor(deckId) {
-    super();
-    this.deckId = deckId;
+  constructor(storage) {
+    super(storage);
   }
 
-  execute() {
-    if (hasDeck(this.data, this.deckId)) {
-      return new FetchCardsByCriteria(it => it.deck === this.deckId).execute();
+  execute(deckId) {
+    if (hasDeck(this.data, deckId)) {
+      return new FetchCardsByCriteria(this.storage).execute(it => it.deck === deckId);
     } else {
-      throw new Error(`Not found deck with id: ${this.deckId}`);
+      throw new Error(`Not found deck with id: ${deckId}`);
     }
   }
 

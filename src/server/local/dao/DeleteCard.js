@@ -6,17 +6,16 @@ import Operation from './Operation';
  */
 class DeleteCard extends Operation {
 
-  constructor(id) {
-    super();
-    this.id = id;
+  constructor(storage) {
+    super(storage);
   }
 
-  execute() {
-    const index = this.data.cards.findIndex(it => it.id === this.id);
+  execute(id) {
+    const index = this.data.cards.findIndex(it => it.id === id);
     if (index !== -1) {
       return this.doExecute(index);
     } else {
-      throw new Error(`Not found card with id: ${this.id}`);
+      throw new Error(`Not found card with id: ${id}`);
     }
   }
 

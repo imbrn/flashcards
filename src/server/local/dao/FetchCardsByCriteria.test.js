@@ -1,24 +1,18 @@
 import FetchCardsByCriteria from './FetchCardsByCriteria';
-import CreateDeck from './CreateDeck';
-import CreateCard from './CreateCard';
-import Storage from '../storage';
+import { MockStorage } from '../storage';
+import { MockData } from '../data';
 
 describe('FetchCardsByCriteria', function() {
 
-  beforeEach(() => {
-    Storage.reset();
-  });
-  
   it('should fetch cards with success', () => {
-    const deck = new CreateDeck({ name: 'One' }).execute();
-    const one = new CreateCard({ front: 'A', back: 'Bb', deck: deck.id }).execute();
-    const two = new CreateCard({ front: 'C', back: 'Bb', deck: deck.id }).execute();
-    expect(new FetchCardsByCriteria(it => it.back.startsWith('B')).execute()).toEqual([one, two]);
-    expect(new FetchCardsByCriteria(it => it.front === 'A').execute()).toEqual([one]);
+    const storage = new MockStorage(MockData({ decksCount: 1, cardsPerDeck: 3 }));
+    const found = new FetchCardsByCriteria(storage).execute(it => it.id % 2 !== 0);
+    expect(found).toEqual([storage.data.cards[0], storage.data.cards[2]]);
   });
 
   it('should return an empty array when no cards are matched by the criteria', () => {
-    expect(new FetchCardsByCriteria(it => it.front === 'A').execute()).toEqual([]);
+    const storage = new MockStorage(MockData());
+    expect(new FetchCardsByCriteria(storage).execute(it => it.front === 'A')).toEqual([]);
   });
 
 });

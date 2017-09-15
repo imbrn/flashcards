@@ -1,5 +1,4 @@
 import { Data } from '../data';
-import Storage from '../storage';
 
 /**
  * Abstract class for DAOs operations. It provides a util structure for implementation of
@@ -7,13 +6,14 @@ import Storage from '../storage';
  */
 class Operation {
 
-  constructor() {
-    this.data = Data(Storage.data);
+  constructor(storage) {
+    this.storage = storage;
+    this.data = Data(this.storage.data);
   }
 
   commit() {
-    Storage.data = Data(this.data);
-    this.data = Data(Storage.data);
+    this.storage.data = Data(this.data);
+    this.data = Data(this.storage.data);
   }
 
 }

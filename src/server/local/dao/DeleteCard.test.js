@@ -1,35 +1,27 @@
-import CreateDeck from './CreateDeck';
-import CreateCard from './CreateCard';
 import DeleteCard from './DeleteCard';
-import FetchCardById from './FetchCardById';
-import FetchDeckById from './FetchDeckById';
-import Storage from '../storage';
+import { MockStorage } from '../storage';
+import { MockData } from '../data';
 
 describe('DeleteCard', function() {
 
-  beforeEach(() => {
-    Storage.reset();
-  });
-
   it('should delete card with success', () => {
-    const deck = new CreateDeck({ name: 'One' }).execute();
-    const card = new CreateCard({ deck: deck.id, front: 'A', back: 'B' }).execute();
-    expect(new FetchCardById(card.id).execute()).toEqual(card);
-    const deleted = new DeleteCard(card.id).execute();
-    expect(deleted).toEqual(card);
-    expect(new FetchCardById(card.id).execute()).toBeUndefined();
+    const storage = new MockStorage(MockData({ decksCount: 1, cardsPerDeck: 1 }));
+    expect(storage.data.cards).toHaveLength(1);
+    const deleted = new DeleteCard(storage).execute(storage.data.decks[0].cards[0]);
+    expect(deleted).toBeDefined();
+    expect(storage.data.cards).toHaveLength(0);
   });
 
   it('should remove deleted card reference from its parent deck', () => {
-    const deck = new CreateDeck({ name: 'One' }).execute();
-    const card = new CreateCard({ deck: deck.id, front: 'A', back: 'B' }).execute();
-    expect(new FetchDeckById(deck.id).execute()).toMatchObject({ cards: [card.id] });
-    new DeleteCard(card.id).execute();
-    expect(new FetchDeckById(deck.id).execute()).toMatchObject({ cards: [] });
+    const storage = new MockStorage(MockData({ decksCount: 1, cardsPerDeck: 2 }));
+    expect(storage.data.decks[0].cards).toHaveLength(2);
+    new DeleteCard(storage).execute(storage.data.decks[0].cards[0]);
+    expect(storage.data.decks[0].cards).toHaveLength(1);
   });
 
   it('should thrown an error when trying to delete non added card', () => {
-    expect(() => new DeleteCard(1).execute()).toThrow();
+    const storage = new MockStorage(MockData());
+    expect(() => new DeleteCard(storage).execute(1)).toThrow();
   });
 
 });

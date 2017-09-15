@@ -7,13 +7,12 @@ import { Deck } from '../data';
  */
 class FetchDeckByCriteria extends Operation {
 
-  constructor(criteria) {
-    super();
-    this.criteria = criteria;
+  constructor(storage) {
+    super(storage);
   }
 
-  execute() {
-    const deck = this.data.decks.find(this.criteria);
+  execute(criteria) {
+    const deck = this.data.decks.find(criteria);
     if (deck) {
       return Deck(deck);
     }

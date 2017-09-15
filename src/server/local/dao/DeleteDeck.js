@@ -5,17 +5,16 @@ import Operation from './Operation';
  */
 class DeleteDeck extends Operation {
 
-  constructor(id) {
-    super();
-    this.id = id;
+  constructor(storage) {
+    super(storage);
   }
 
-  execute() {
-    const index = this.data.decks.findIndex(deck => deck.id === this.id);
+  execute(id) {
+    const index = this.data.decks.findIndex(deck => deck.id === id);
     if (index !== -1) {
       return this.doExecute();
     } else {
-      throw new Error(`Not found deck with id: ${this.id}`);
+      throw new Error(`Not found deck with id: ${id}`);
     }
   }
 

@@ -1,46 +1,82 @@
-import CreateDeck from './CreateDeck';
 import CreateCard from './CreateCard';
-import FetchCardById from './FetchCardById';
-import Storage from '../storage';
+import { MockStorage } from '../storage/Storage';
+import { MockData } from '../data';
 
 describe('CreateCard', function() {
 
-  beforeEach(() => {
-    Storage.reset();
+  beforeAll(() => {
+    this.storage = new MockStorage(MockData({ decksCount: 1, cardsPerDeck: 0 }));
   });
 
   it('should add card with success', () => {
-    const deck = new CreateDeck({ name: 'One' }).execute();
-    const cardOne = new CreateCard({ front: 'A', back: 'B', deck: deck.id }).execute();
-    const cardTwo = new CreateCard({ front: 'C', back: 'D', deck: deck.id }).execute();
+    const cardOne = new CreateCard(this.storage).execute({ front: 'A', back: 'B', deck: 1 });
+    const cardTwo = new CreateCard(this.storage).execute({ front: 'C', back: 'D', deck: 1 });
     expect(cardOne).toMatchObject({ front: 'A', back: 'B' });
     expect(cardTwo).toMatchObject({ front: 'C', back: 'D' });
-    expect(new FetchCardById(cardOne.id).execute()).toEqual(cardOne);
-    expect(new FetchCardById(cardTwo.id).execute()).toEqual(cardTwo);
-  });
-
-  it('should throw an error when adding card with invalid front', () => {
-    const deck = new CreateDeck({ name: 'One' });
-    expect(() => new CreateCard({ deck: deck.id, back: 'B' }).execute()).toThrow();
-    expect(() => new CreateCard({ deck: deck.id, front: null, back: 'B' }).execute()).toThrow();
-    expect(() => new CreateCard({ deck: deck.id, front: '', back: 'B' }).execute()).toThrow();
-    expect(() => new CreateCard({ deck: deck.id, front: ' ', back: 'B' }).execute()).toThrow();
-  });
-
-  it('should throw an error when adding card with invalid back', () => {
-    const deck = new CreateDeck({ name: 'One' });
-    expect(() => new CreateCard({ deck: deck.id, front: 'A' }).execute()).toThrow();
-    expect(() => new CreateCard({ deck: deck.id, front: 'A', back: null }).execute()).toThrow();
-    expect(() => new CreateCard({ deck: deck.id, front: 'A', back: '' }).execute()).toThrow();
-    expect(() => new CreateCard({ deck: deck.id, front: 'A', back: ' ' }).execute()).toThrow();
+    expect(this.storage.data.cards[0]).toEqual(cardOne);
+    expect(this.storage.data.cards[1]).toEqual(cardTwo);
   });
 
   it('should throw an error when adding card into a non added deck', () => {
-    expect(() => new CreateCard({ deck: 1 }).execute()).toThrow();
+    expect(() => new CreateCard(this.storage).execute({ deck: 500, front: 'A', back: 'B' })).toThrow();
   });
 
   it('should throw an error when adding card without deck', () => {
-    expect(() => new CreateCard({ front: 'A', back: 'B' }).execute()).toThrow();
+    expect(() => new CreateCard(this.storage).execute({ front: 'A', back: 'B' })).toThrow();
+  });
+
+});
+
+describe('Front is not optional', function() {
+
+  beforeAll(() => {
+    this.storage = new MockStorage(MockData({
+      decksCount: 1,
+      cardsPerDeck: 1
+    }));
+  });
+
+  it('should throw an error when front is undefined', () => {
+    expect(() => new CreateCard(this.storage).execute({ deck: 1, back: 'B' })).toThrow();
+  });
+
+  it('should throw an error when front is null', () => {
+    expect(() => new CreateCard(this.storage).execute({ deck: 1, front: null, back: 'B' })).toThrow();
+  });
+
+  it('should throw an error when front is empty', () => {
+    expect(() => new CreateCard(this.storage).execute({ deck: 1, front: '', back: 'B' })).toThrow();
+  });
+
+  it('should throw an error when front contains only spaces', () => {
+    expect(() => new CreateCard(this.storage).execute({ deck: 1, front: ' ', back: 'B' })).toThrow();
+  });
+
+});
+
+describe('Back is not optional', function() {
+
+  beforeAll(() => {
+    this.storage = new MockStorage(MockData({
+      decksCount: 1,
+      cardsPerDeck: 1
+    }));
+  });
+
+  it('should throw an error when back is undefined', () => {
+    expect(() => new CreateCard(this.storage).execute({ deck: 1, front: 'A' })).toThrow();
+  });
+
+  it('should throw an error when back is null', () => {
+    expect(() => new CreateCard(this.storage).execute({ deck: 1, front: 'A', back: null })).toThrow();
+  });
+
+  it('should throw an error when back is empty', () => {
+    expect(() => new CreateCard(this.storage).execute({ deck: 1, front: 'A', back: '' })).toThrow();
+  });
+
+  it('should throw an error when back contains only spaces', () => {
+    expect(() => new CreateCard(this.storage).execute({ deck: 1, front: 'A', back: ' ' })).toThrow();
   });
 
 });

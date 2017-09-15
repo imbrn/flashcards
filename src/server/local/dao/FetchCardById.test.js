@@ -1,22 +1,21 @@
-import CreateDeck from './CreateDeck';
-import CreateCard from './CreateCard';
 import FetchCardById from './FetchCardById';
-import Storage from '../storage';
+import { MockStorage } from '../storage';
+import { MockData } from '../data';
 
 describe('FetchCardById', function() {
 
-  beforeEach(() => {
-    Storage.reset();
+  beforeAll(() => {
+    this.storage = new MockStorage(MockData({ decksCount: 1, cardsPerDeck: 2 }));
   });
 
   it('should fetch card with success', () => {
-    const deck = new CreateDeck({ name: 'One' }).execute();
-    const card = new CreateCard({ front: 'A', back: 'B', deck: deck.id }).execute();
-    expect(new FetchCardById(card.id).execute()).toEqual(card);
+    const card = new FetchCardById(this.storage).execute(1);
+    expect(card).toEqual(this.storage.data.cards[0]);
   });
 
   it('should return undefined when no card is found', () => {
-    expect(new FetchCardById(2).execute()).toBeUndefined();
+    const card = new FetchCardById(this.storage).execute(4);
+    expect(card).toBeUndefined();
   });
 
 });
