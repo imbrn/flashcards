@@ -25,7 +25,7 @@ class UpdateCard extends Operation {
     CardValidation(card);
     this.data.cards[index] = card;
     this.commit();
-    return card;
+    return Card(card);
   }
 
 }
