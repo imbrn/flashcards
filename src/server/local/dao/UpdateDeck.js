@@ -14,13 +14,13 @@ class UpdateDeck extends Operation {
   execute(params) {
     const index = this.data.decks.findIndex(it => it.id === params.id);
     if (index !== -1) {
-      return this.doExecute(index, params);
+      return this.doExecute(params, index);
     } else {
       throw new Error(`Not found deck with id: ${params.id}`);
     }
   }
 
-  doExecute(index, params) {
+  doExecute(params, index) {
     const deck = buildDeck(this.data.decks[index], params);
     DeckValidation(deck);
     this.data.decks[index] = deck;

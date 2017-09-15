@@ -45,7 +45,7 @@ describe('UpdateDeck', function() {
   
 });
 
-describe('Name is not null', function() {
+describe('Name is not optional', function() {
 
   beforeAll(() => {
     this.storage = new MockStorage(MockData({
@@ -71,7 +71,7 @@ describe('Name is not null', function() {
 
 });
 
-describe('Description can be null', function() {
+describe('Description is optional', function() {
 
   beforeAll(() => {
     this.storage = new MockStorage(MockData({ decksCount: 1 }));
