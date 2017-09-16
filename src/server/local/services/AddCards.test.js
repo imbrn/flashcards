@@ -20,7 +20,7 @@ describe('Add card success', function() {
 
 });
 
-describe('Texto auto trimming', function() {
+describe('Text auto trimming', function() {
 
   let deck;
 
