@@ -1,5 +1,7 @@
 import AddDeck from './AddDeck';
+import AddCard from './AddCard';
 
 export {
-  AddDeck
+  AddDeck,
+  AddCard
 };
