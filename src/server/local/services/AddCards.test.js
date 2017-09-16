@@ -1,5 +1,5 @@
 import AddCard from './AddCard';
-import AddDeck from './AddDeck';
+import { CreateDeck } from '../dao';
 import Storage from '../storage';
 
 describe('Add card success', function() {
@@ -9,7 +9,7 @@ describe('Add card success', function() {
   });
 
   it('should resolves to the added card', async () => {
-    const deck = await AddDeck({ name: 'One' });
+    const deck = new CreateDeck(Storage).execute({ name: 'One' });
     const card = await AddCard({ front: 'A', back: 'B', deck: deck.id });
     expect(card).toMatchObject({
       front: 'A',
@@ -26,7 +26,7 @@ describe('Texto auto trimming', function() {
 
   beforeEach(async () => {
     Storage.reset();
-    deck = await AddDeck({ name: 'One' });
+    deck = new CreateDeck(Storage).execute({ name: 'One' });
   });
 
   it('should trim front', async () => {
@@ -47,7 +47,7 @@ describe('Front is not optional', function() {
 
   beforeEach(async () => {
     Storage.reset();
-    deck = await AddDeck({ name: 'One' });
+    deck = new CreateDeck(Storage).execute({ name: 'One' });
   });
 
   it('should rejects when front is not defined', () => {
@@ -78,7 +78,7 @@ describe('Back is not optional', function() {
 
   beforeEach(async () => {
     Storage.reset();
-    deck = await AddDeck({ name: 'One' });
+    deck = new CreateDeck(Storage).execute({ name: 'One' });
   });
 
   it('should rejects when back is not defined', () => {
