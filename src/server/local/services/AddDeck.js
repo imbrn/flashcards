@@ -1,4 +1,4 @@
-import { CreateDeck as CreateDeckOperation } from '../dao';
+import { CreateDeck as CreateDeckDao } from '../dao';
 import Storage from '../storage';
 
 /**
@@ -9,7 +9,7 @@ import Storage from '../storage';
  */
 function AddDeck(params) {
   try {
-    const deck = new CreateDeckOperation(Storage).execute(params);
+    const deck = new CreateDeckDao(Storage).execute(params);
     return Promise.resolve(deck);
   } catch(error) {
     return Promise.reject(error);

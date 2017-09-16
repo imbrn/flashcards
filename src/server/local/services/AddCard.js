@@ -1,4 +1,4 @@
-import { CreateCard as CreateCardOperation } from '../dao';
+import { CreateCard as CreateCardDao } from '../dao';
 import Storage from '../storage';
 
 /**
@@ -9,7 +9,7 @@ import Storage from '../storage';
  */
 function AddCard(params) {
   try {
-    const card = new CreateCardOperation(Storage).execute(params);
+    const card = new CreateCardDao(Storage).execute(params);
     return Promise.resolve(card);
   } catch(error) {
     return Promise.reject(error);
