@@ -20,6 +20,18 @@ describe('Add card success', function() {
 
 });
 
+describe('Deck owner is not optional', function() {
+
+  it('should rejects when no deck is specified', () => {
+    expect(AddCard({ front: 'A', back: 'B' })).rejects.toBeDefined();
+  });
+
+  it('should rejects when the specified owner deck does not exist', () => {
+    expect(AddCard({ front: 'A', back: 'B', deck: 500 })).rejects.toBeDefined();
+  });
+
+});
+
 describe('Text auto trimming', function() {
 
   let deck;
