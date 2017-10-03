@@ -23,3 +23,6 @@ yarn-error.log*
 # editors and similars
 .vscode/
 .chrome/
+.vimrc
+.tern-project
+.tern-config

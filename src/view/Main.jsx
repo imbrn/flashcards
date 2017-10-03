@@ -1,59 +1,27 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import routes from './routes';
+import { Route } from 'react-router';
 import { withStyles } from 'material-ui/styles';
-import Routes from './page/routes';
-import Topbar from './component/Topbar';
-
-/*
-Stylesheets.
-*/
-const stylesheet = (theme) => {
-  return {
-    root: {
-      background: theme.palette.background.default,
-      height: '100%',
-      display: 'flex'
-    },
-    content: {
-      flexGrow:1,
-      paddingTop: 60
-    },
-    [theme.breakpoints.up('sm')]: {
-      content: {
-        paddingTop: 70
-      }
-    }
-  };
-};
+import stylesheets from './Main.style';
+import TopBar from './components/TopBar';
 
 /**
- * Main view.
+ * Application main.
  */
-class Main extends React.Component {
-
-  render() {
-    return (
-      <div className={this.props.classes.root}>
-        <Topbar />
-        <div className={this.props.classes.content}>
-          {this.mapContentRoutes()}
-        </div>
+function Main(props) {
+  return (
+    <div className={props.classes.root}>{props.children}
+      <TopBar/>
+      <div className={props.classes.page}>
+        {routes.map((route, index) => <Route
+          key={index}
+          path={route.path}
+          exact={route.exact}
+          component={route.page}
+        />)}
       </div>
-    );
-  }
-
-  mapContentRoutes() {
-    return Routes.map((route, index) => {
-      return <Route
-        key={index}
-        path={route.path}
-        exact={route.exact}
-        component={route.page} />;
-    });
-  }
-
+    </div>
+  );
 }
 
-const StyledMain = withStyles(stylesheet)(Main);
-
-export default StyledMain;
+export default withStyles(stylesheets)(Main);
