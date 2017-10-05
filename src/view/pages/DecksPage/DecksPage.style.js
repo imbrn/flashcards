@@ -19,7 +19,7 @@ const stylesheets = (theme) => {
       alignItems: 'center',
       justifyContent: 'center'
     }
-  }
+  };
 };
 
 export default stylesheets;

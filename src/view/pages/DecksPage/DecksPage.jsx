@@ -1,6 +1,5 @@
 import React from 'react';
 import { withStyles } from 'material-ui/styles';
-import DecksStore from '../../../stores/DecksStore';
 import CreateDeckAction from '../../../actions/CreateDeckAction';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
@@ -17,23 +16,18 @@ class DecksPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      decks: DecksStore.getState(),
+      decks: [],
       creatingDeck: true
     };
   }
 
   componentWillMount() {
-    this.removeOnDecksStoreChangeListener = DecksStore.addListener(this._decksStoreChanged.bind(this));
   }
 
   componentWillUnmount() {
-    this.removeOnDecksStoreChangeListener();
   }
 
   _decksStoreChanged() {
-    this.setState({
-      decks: DecksStore.getState()
-    });
   }
 
   render() {
@@ -41,8 +35,6 @@ class DecksPage extends React.Component {
     const decks = this.state.decks;
     return (
       <div className={classes.root}>
-        <DecksContainer classes={classes} decks={decks} creatingDeck={this.state.creatingDeck} />
-        <CreateDeckButton classes={classes} onClick={this.createDeck.bind(this)}/>
       </div>
     );
   }
@@ -61,7 +53,7 @@ function DecksContainer(props) {
   if (props.decks || props.creatingDeck) {
     return <DecksItems decks={props.decks} creating={props.creatingDeck} classes={props.classes} />;
   } else {
-    return <NoDecksItems classes={props.classes} />
+    return <NoDecksItems classes={props.classes} />;
   }
 }
 
@@ -82,7 +74,7 @@ function DecksItems(props) {
  * Displays the already added decks.
  */
 function AddedDecksItems(props) {
-  const items = props.decks.toArray().map(deck => 
+  const items = props.decks.map(deck => 
     <DeckCardDisplay
       key={deck.id}
       name={deck.name}
@@ -102,7 +94,11 @@ class AddDeckItem extends React.Component {
   }
 
   render() {
-    return <DeckCardEditable onDone={this.onDone} />
+    return <DeckCardEditable onDone={this.onDone} />;
+  }
+
+  onCancel() {
+    
   }
 
   onDone(data) {

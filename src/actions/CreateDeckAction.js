@@ -1,16 +1,16 @@
-import Decks from '../services/decks/Decks';
+import { firestore } from 'firebase';
 
 /**
- * Creates a new deck.
+ * Action to create a new deck in services.
  */
 class CreateDeckAction {
 
   constructor(data) {
-    this.data = data;
+    this._data = data;
   }
 
   execute() {
-    Decks.create(this.data);
+    firestore().collection('decks').add(this._data);    
   }
 
 }

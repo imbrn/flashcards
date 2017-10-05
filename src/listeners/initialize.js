@@ -1,12 +1,20 @@
-import AuthListeners from './AuthListeners';
-import DecksListeners from './DecksListeners';
+import AuthStateChangeListener from './AuthStateChangeListener';
+
+/*
+ * Listeners list.
+ */
+const listeners = [
+  new AuthStateChangeListener()
+];
 
 /*
  * Initializes all listeners.
  */
 function initialize() {
-  AuthListeners.initialize();
-  DecksListeners.initialize();
+  listeners.forEach(it => {
+    if (it.listen)
+      it.listen();
+  });
 }
 
 export default initialize;

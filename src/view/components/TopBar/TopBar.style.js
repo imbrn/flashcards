@@ -8,6 +8,6 @@ const stylesheets = {
     flexGrow: 1
   }
 
-}
+};
 
 export default stylesheets;
