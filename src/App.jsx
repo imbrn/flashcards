@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import { blueGrey, deepPurple } from 'material-ui/colors';
-import Main from './view/Main';
+import Layout from './Layout';
 
 /*
 Custom application theme
@@ -29,14 +29,18 @@ theme = {
   }
 };
 
-function App() {
-  return (
-    <BrowserRouter>
-      <MuiThemeProvider theme={theme}>
-        <Main />
-      </MuiThemeProvider>
-    </BrowserRouter>
-  );
+class App extends React.Component {
+
+  render() {
+    return (
+      <BrowserRouter>
+        <MuiThemeProvider theme={theme}>
+          <Layout />
+        </MuiThemeProvider>
+      </BrowserRouter>
+    );
+  }
+ 
 }
 
 export default App;
