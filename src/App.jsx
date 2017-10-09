@@ -24,7 +24,7 @@ theme = {
     ...theme.palette,
     background: {
       ...theme.palette.background,
-      default: '#f3f3f3'
+      default: '#f8f8f8'
     }
   }
 };
