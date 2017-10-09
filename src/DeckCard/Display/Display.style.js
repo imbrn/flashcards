@@ -5,7 +5,7 @@ const stylesheets = (theme) => {
       flexDirection: 'column',
       position: 'relative',
       width: 160,
-      minHeight: 110,
+      height: 110,
       paddingTop: theme.spacing.unit * 2,
       paddingBottom: theme.spacing.unit * 2,
       fontFamily: theme.typography.fontFamily

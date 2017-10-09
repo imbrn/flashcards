@@ -11,7 +11,7 @@ const Display = (props) => {
 
   const deck = props.deck;
   const classes = {
-    root: classnames(props.classes.root, props.rootClass),
+    root: classnames(props.className, props.classes.root, props.rootClass),
     menu: classnames(props.classes.menu, props.menuClass),
     name: classnames(props.classes.name, props.nameClass),
     description: classnames(props.classes.description, props.descriptionClass),

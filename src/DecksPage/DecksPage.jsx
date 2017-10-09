@@ -1,7 +1,9 @@
 import React from 'react';
+import { withStyles } from 'material-ui/styles';
 import { auth, firestore } from 'firebase';
 import UserDecksStore from '../flux/stores/UserDecksStore';
 import DeckDisplay from '../DeckCard/Display';
+import stylesheets from './DecksPage.style';
 
 class DecksPage extends React.Component {
 
@@ -28,21 +30,24 @@ class DecksPage extends React.Component {
   }
 
   render() {
+    const classes = this.props.classes;
     const items = this.state.decks.toArray().map(deck =>
-      <DeckDisplay key={deck.id} deck={deck} options={[
+      <DeckDisplay className={classes.deck} key={deck.id} deck={deck} options={[
         { label: 'Edit', action: () => console.log(`Editing deck ${deck.id}`) },
         { label: 'Delete', action: () => console.log(`Deleting deck ${deck.id}`) }
       ]}/>
     );
 
     return (
-      <div>
-        {items}
+      <div className={classes.root}>
+        <div className={classes.decks}>
+          {items}
+        </div>
       </div>
     );
   }
 
 }
 
-export default DecksPage;
+export default withStyles(stylesheets)(DecksPage);
 
