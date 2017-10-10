@@ -3,6 +3,7 @@ import { withStyles } from 'material-ui/styles';
 import { auth, firestore } from 'firebase';
 import UserDecksStore from '../flux/stores/UserDecksStore';
 import DeckDisplay from '../DeckCard/Display';
+import DeckEdit from '../DeckCard/Edit';
 import stylesheets from './DecksPage.style';
 
 class DecksPage extends React.Component {
@@ -42,6 +43,10 @@ class DecksPage extends React.Component {
       <div className={classes.root}>
         <div className={classes.decks}>
           {items}
+          <DeckEdit className={classes.deck}
+            validation={(prop, value) => value.length > 0}
+            onFinished={(deck) => console.log(deck)}
+          />
         </div>
       </div>
     );
