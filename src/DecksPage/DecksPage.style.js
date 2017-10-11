@@ -1,6 +1,7 @@
 const stylesheets = (theme) => {
   return {
     root: {
+      position: 'relative',
       height: '100%'
     },
     decks: {
@@ -21,6 +22,11 @@ const stylesheets = (theme) => {
       [theme.breakpoints.up(767)]: {
         width: 234
       }
+    },
+    actionButton: {
+      position: 'absolute',
+      right: theme.spacing.unit * 4,
+      bottom: theme.spacing.unit * 3
     }
   }
 };
