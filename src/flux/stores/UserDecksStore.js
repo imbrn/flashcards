@@ -21,6 +21,7 @@ class UserDecksStore extends ReduceStore {
       case Types.ON_DECK_CHANGED: return this.onDeckChanged(state, action);
       case Types.ON_DECK_REMOVED: return this.onDeckRemoved(state, action);
       case Types.ON_CARD_ADDED: return this.onCardAdded(state, action);
+      case Types.ON_CARD_CHANGED: return this.onCardChanged(state, action);
       case Types.ON_CARD_REMOVED: return this.onCardRemoved(state, action);
       default: return state;
     }
@@ -44,6 +45,14 @@ class UserDecksStore extends ReduceStore {
     let deck = state.get(action.deckId);
     let cards = deck.get('cards');
     cards = cards.set(action.id, Card(Object.assign({}, action.data, {id: action.id})));
+    deck = deck.set('cards', cards);
+    return state.set(deck.id, deck);
+  }
+
+  onCardChanged(state, action) {
+    let deck = state.get(action.deckId);
+    let cards = deck.get('cards');
+    cards = cards.set(action.id, Card(Object.assign({}, action.data, { id: action.id })));
     deck = deck.set('cards', cards);
     return state.set(deck.id, deck);
   }
