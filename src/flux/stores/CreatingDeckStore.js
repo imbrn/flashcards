@@ -18,6 +18,7 @@ class CreatingDeckStore extends ReduceStore {
       case Types.CREATING_DECK_START: return Deck();
       case Types.CREATING_DECK_FINISH: return null;
       case Types.CREATING_DECK_UPDATE_DECK: return action.deck;
+      case Types.CREATING_DECK_CANCEL: return null;
       default: return state;
     }
   }

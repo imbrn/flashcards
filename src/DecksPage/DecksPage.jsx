@@ -70,7 +70,7 @@ class DecksPage extends React.Component {
           validation={(key, value) => key === 'description' || value.length > -1}
           onDeckChanged={this.creatingDeckChanged.bind(this)}
           onFinished={this.creatingDeckFinished.bind(this)}
-          onCanceled={() => console.log('canceled')}
+          onCanceled={this.creatingDeckCanceled.bind(this)}
         />;
     }
     return null;
@@ -86,6 +86,10 @@ class DecksPage extends React.Component {
 
   creatingDeckFinished(deck) {
     CreatingDeckActions.finish(deck);
+  }
+
+  creatingDeckCanceled() {
+    CreatingDeckActions.cancel();
   }
 
 }

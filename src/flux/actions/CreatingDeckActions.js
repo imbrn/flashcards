@@ -36,6 +36,12 @@ class CreatingDeckActions {
     });
   }
 
+  cancel() {
+    Dispatcher.dispatch({
+      type: Types.CREATING_DECK_CANCEL
+    });
+  }
+
 }
 
 export default new CreatingDeckActions();
