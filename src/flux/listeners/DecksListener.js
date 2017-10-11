@@ -24,6 +24,7 @@ class DecksListener {
     this.removeDecksListener = firestore().collection('users')
       .doc(user.uid)
       .collection('decks')
+      .orderBy('createTime')
       .onSnapshot(this.onDecksSnapshot.bind(this));
   }
 

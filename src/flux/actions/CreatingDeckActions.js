@@ -28,9 +28,11 @@ class CreatingDeckActions {
   persistDeck() {
     const deck = CreatingDeckStore.getState();
     const decksRef = firestore().collection(`users/${auth().currentUser.uid}/decks`);
-    decksRef.add({
+    const ret = decksRef.add({
       name: deck.name,
-      description: deck.description
+      description: deck.description,
+      createTime: firestore.FieldValue.serverTimestamp(),
+      updateTime: firestore.FieldValue.serverTimestamp()
     });
   }
 
