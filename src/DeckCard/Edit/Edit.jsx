@@ -39,24 +39,26 @@ class Edit extends React.Component {
         <Input multiline disableUnderline className={classes.name} 
           inputRef={(ref) => this.nameRef = ref }
           placeholder="Name" value={this.state.name}
-          onChange={this.nameChanged.bind(this)}
-          onKeyPress={this.keyPressed.bind(this)} />
+          onChange={this.nameInputChanged.bind(this)}
+          onKeyPress={this.keyPressed.bind(this)}
+          onKeyUp={this.keyUp.bind(this)}/>
         <Input multiline disableUnderline className={classes.description} 
           inputRef={(ref) => this.descriptionRef = ref }
           placeholder="Description" value={this.state.description}
-          onChange={this.descriptionChanged.bind(this)}
-          onKeyPress={this.keyPressed.bind(this)} />
+          onChange={this.descriptionInputChanged.bind(this)}
+          onKeyPress={this.keyPressed.bind(this)}
+          onKeyUp={this.keyUp.bind(this)}/>
       </Paper>
     );
   }
 
-  nameChanged(e) {
+  nameInputChanged(e) {
     this.deck = this.state.deck.set('name', e.target.value);
     this.setState({ deck: this.deck });
     this.deckChanged(this.deck);
   }
 
-  descriptionChanged(e) {
+  descriptionInputChanged(e) {
     this.deck = this.state.deck.set('description', e.target.value);
     this.setState({ deck: this.deck });
     this.deckChanged(this.deck);
@@ -71,6 +73,12 @@ class Edit extends React.Component {
     if (e.key === 'Enter') {
       e.preventDefault();
       this.tryToFinish();
+    }
+  }
+
+  keyUp(e) {
+    if (e.key === 'Escape') {
+      this.cancel();
     }
   }
 
@@ -100,6 +108,11 @@ class Edit extends React.Component {
   finished() {
     if (this.props.onFinished)
       this.props.onFinished(this.deck, this);
+  }
+
+  cancel() {
+    if (this.props.onCanceled)
+      this.props.onCanceled(this);
   }
 
 }
