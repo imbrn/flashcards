@@ -28,6 +28,7 @@ class Edit extends React.Component {
 
   render() {
     const props = this.props;
+    const autoFocus = props.autoFocus;
     const classes = {
       root: classnames(props.classes.root, props.rootClass, props.className),
       name: classnames(props.classes.text, props.classes.name, props.nameClass),
@@ -36,7 +37,7 @@ class Edit extends React.Component {
 
     return (
       <Paper className={classes.root}>
-        <Input multiline disableUnderline className={classes.name} 
+        <Input autoFocus={autoFocus} multiline disableUnderline className={classes.name} 
           inputRef={(ref) => this.nameRef = ref }
           placeholder="Name" value={this.state.deck.name}
           onChange={this.nameInputChanged.bind(this)}

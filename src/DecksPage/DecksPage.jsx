@@ -77,7 +77,7 @@ class DecksPage extends React.Component {
   renderDeckItem(classes, deck) {
     const editingDeck = this.state.editingDeck.get('before');
     if (deck.equals(editingDeck)) {
-      return <DeckEdit key={deck.id} deck={editingDeck} className={classes.deck}
+      return <DeckEdit autoFocus key={deck.id} deck={editingDeck} className={classes.deck}
         validation={(key, value) => key === 'description' || value.length > -1}
         onDeckChanged={this.editingDeckChanged.bind(this)}
         onFinished={this.editingDeckFinished.bind(this)}
@@ -109,7 +109,7 @@ class DecksPage extends React.Component {
 
   renderCreatingDeck(classes) {
     if (this.state.creatingDeck) {
-        return <DeckEdit className={classes.deck}
+        return <DeckEdit autoFocus className={classes.deck}
           validation={(key, value) => key === 'description' || value.length > -1}
           onDeckChanged={this.creatingDeckChanged.bind(this)}
           onFinished={this.creatingDeckFinished.bind(this)}
