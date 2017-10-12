@@ -48,9 +48,9 @@ class DecksPage extends React.Component {
   }
 
   componentWillUnmount() {
-    this.removeUserDecksStoreListener();
-    this.removeCreatingDeckStoreListener();
-    this.removeEditingDeckStoreListener();
+    this.removeUserDecksStoreListener.remove();
+    this.removeCreatingDeckStoreListener.remove();
+    this.removeEditingDeckStoreListener.remove();
   }
 
   render() {
