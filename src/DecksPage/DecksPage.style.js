@@ -24,7 +24,7 @@ const stylesheets = (theme) => {
       }
     },
     actionButton: {
-      position: 'absolute',
+      position: 'fixed',
       right: theme.spacing.unit * 4,
       bottom: theme.spacing.unit * 3
     }
