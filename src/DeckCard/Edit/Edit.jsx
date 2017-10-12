@@ -38,13 +38,13 @@ class Edit extends React.Component {
       <Paper className={classes.root}>
         <Input multiline disableUnderline className={classes.name} 
           inputRef={(ref) => this.nameRef = ref }
-          placeholder="Name" value={this.state.name}
+          placeholder="Name" value={this.state.deck.name}
           onChange={this.nameInputChanged.bind(this)}
           onKeyPress={this.keyPressed.bind(this)}
           onKeyUp={this.keyUp.bind(this)}/>
         <Input multiline disableUnderline className={classes.description} 
           inputRef={(ref) => this.descriptionRef = ref }
-          placeholder="Description" value={this.state.description}
+          placeholder="Description" value={this.state.deck.description}
           onChange={this.descriptionInputChanged.bind(this)}
           onKeyPress={this.keyPressed.bind(this)}
           onKeyUp={this.keyUp.bind(this)}/>
