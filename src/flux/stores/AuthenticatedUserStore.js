@@ -1,4 +1,5 @@
 import { ReduceStore } from 'flux/utils';
+import Dispatcher from '../Dispatcher';
 import Types from '../actions/Types';
 
 class AuthenticatedUserStore extends ReduceStore {

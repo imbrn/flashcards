@@ -44,7 +44,7 @@ class UserDecksStore extends ReduceStore {
   onCardAdded(state, action) {
     let deck = state.get(action.deckId);
     let cards = deck.get('cards');
-    cards = cards.set(action.id, Card(Object.assign({}, action.data, {id: action.id})));
+    cards = cards.set(action.cardId, Card(Object.assign({}, action.cardData, { id: action.cardId })));
     deck = deck.set('cards', cards);
     return state.set(deck.id, deck);
   }
@@ -52,7 +52,7 @@ class UserDecksStore extends ReduceStore {
   onCardChanged(state, action) {
     let deck = state.get(action.deckId);
     let cards = deck.get('cards');
-    cards = cards.set(action.id, Card(Object.assign({}, action.data, { id: action.id })));
+    cards = cards.set(action.cardId, Card(Object.assign({}, action.cardData, { id: action.cardId })));
     deck = deck.set('cards', cards);
     return state.set(deck.id, deck);
   }
@@ -60,7 +60,7 @@ class UserDecksStore extends ReduceStore {
   onCardRemoved(state, action) {
     let deck = state.get(action.deckId);
     let cards = deck.get('cards');
-    cards = cards.remove(action.id);
+    cards = cards.remove(action.cardId);
     deck = deck.set('cards', cards);
     return state.set(deck.id, deck);
   }
