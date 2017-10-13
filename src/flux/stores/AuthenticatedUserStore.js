@@ -14,8 +14,8 @@ class AuthenticatedUserStore extends ReduceStore {
 
   reduce(state, action) {
     switch (action.type) {
-      case Types.ON_SIGN_IN: return action.user;
-      case Types.ON_SIGN_OUT: return null;
+      case Types.AUTH_SIGNED_IN: return action.user;
+      case Types.AUTH_SIGNED_OUT: return null;
       default: return state;
     }
   }

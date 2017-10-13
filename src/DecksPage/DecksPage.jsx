@@ -1,8 +1,6 @@
 import React from 'react';
 import { withStyles } from 'material-ui/styles';
 import { auth, firestore } from 'firebase';
-import AuthenticationActions from '../flux/actions/AuthenticationActions';
-import AuthenticatedUserStore from '../flux/stores/AuthenticatedUserStore';
 import UserDecksActions from '../flux/actions/UserDecksActions';
 import UserDecksStore from '../flux/stores/UserDecksStore';
 import CreatingDeckStore from '../flux/stores/CreatingDeckStore';
@@ -32,20 +30,9 @@ class DecksPage extends React.Component {
   }
 
   initStores() {
-    this.removeAuthenticatedUserStoreListener =
-      AuthenticatedUserStore.addListener(this.authenticatedUserStoreChanged.bind(this));
     this.removeUserDecksStoreListener = UserDecksStore.addListener(this.userDecksStoreChanged.bind(this));
     this.removeCreatingDeckStoreListener = CreatingDeckStore.addListener(this.creatingDeckStoreChanged.bind(this));
     this.removeEditingDeckStoreListener = EditingDeckStore.addListener(this.editingDeckStoreChanged.bind(this));
-  }
-
-  authenticatedUserStoreChanged() {
-    const user = AuthenticatedUserStore.getState();
-    if (user) {
-      UserDecksActions.listen();
-    } else {
-      AuthenticationActions.ensureSignedInUser();
-    }
   }
 
   userDecksStoreChanged() {
@@ -67,18 +54,30 @@ class DecksPage extends React.Component {
   }
 
   componentWillMount() {
-    AuthenticationActions.listen();
-    AuthenticationActions.ensureSignedInUser();
+    auth().onAuthStateChanged(user => {
+      if (user) {
+        this.userSignedIn(user);
+      } else {
+        this.userSignedOut();
+      }
+    });
+  }
+
+  userSignedIn(user) {
+    UserDecksActions.listen();
+  }
+
+  userSignedOut() {
+    UserDecksActions.unlisten();
+    auth().signInAnonymously();
   }
 
   componentWillUnmount() {
     UserDecksActions.unlisten();
-    AuthenticationActions.unlisten();
     this.removeStoresListeners();
   }
 
   removeStoresListeners() {
-    this.removeAuthenticatedUserStoreListener.remove();
     this.removeUserDecksStoreListener.remove();
     this.removeCreatingDeckStoreListener.remove();
     this.removeEditingDeckStoreListener.remove();
