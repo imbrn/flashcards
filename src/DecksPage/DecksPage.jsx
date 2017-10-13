@@ -72,7 +72,7 @@ class DecksPage extends React.Component {
   }
 
   componentWillUnmount() {
-    UserDecksStore.unlisten();
+    UserDecksActions.unlisten();
     AuthenticationActions.unlisten();
     this.removeStoresListeners();
   }
