@@ -3,28 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "classnames": "^2.2.5",
-    "firebase": "^4.5.0",
-    "flux": "^3.1.3",
-    "immutable": "^3.8.1",
-    "material-ui": "next",
-    "material-ui-icons": "^1.0.0-alpha.19",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-router-dom": "^4.1.2",
-    "react-scripts": "1.0.10"
+    "react-scripts": "1.0.14"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "lint:js": "eslint --fix --ext=js --ext=jsx .",
-    "test:unit": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "test": "run-s lint:js test:**"
-  },
-  "devDependencies": {
-    "eslint": "^4.4.0",
-    "eslint-plugin-react": "^7.1.0",
-    "npm-run-all": "^4.0.2"
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   }
 }
