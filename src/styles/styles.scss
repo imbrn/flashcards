@@ -1,0 +1,30 @@
+@import "bulma/sass/utilities/initial-variables";
+@import "./variables";
+@import "bulma/bulma";
+
+#root { background: $light; }
+
+.inherit { all: inherit; }
+
+.has-bg-white { background: $white; color: $black; }
+.has-bg-primary { background: $primary; color: $primary-invert; }
+.has-bg-grey-lighter { background: $grey-lighter; color: $grey-darker; } 
+.has-bg-danger { background: $danger; color: $danger-invert; }
+
+.raised { box-shadow: 0 2px 2px rgba($black, 0.1); }
+
+.gutters { padding: 10px 15px; }
+.gutter-left { padding-left: 10px; }
+
+.margin-right-0_5 { margin-right: 5px; }
+.margin-left-0_5 { margin-left: 5px; }
+.margin-bottom { margin-bottom: 10px; }
+
+.has-border { border: 1px solid $dark; }
+.has-border-bottom { border-width: 0 0 1px 0; }
+.has-border-grey-lighter { border-color: $grey-lighter; }
+
+.block {
+  display: block;
+  width: 100%;
+}
