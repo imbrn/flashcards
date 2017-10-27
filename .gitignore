@@ -24,6 +24,7 @@ yarn-error.log*
 .vscode/
 .chrome/
 .vimrc
+.nvimrc
 .tern-project
 .tern-config
 # See https://help.github.com/ignore-files/ for more about ignoring files.
