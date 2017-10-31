@@ -1,6 +1,9 @@
 import React from 'react';
 import styles from './Edit.module.css';
 import Base from '../Base';
+import TextField from '../../../TextField';
+import TextArea from '../../../TextArea';
+import Button from '../../../Button';
 
 const Edit = (props) => {
 
@@ -22,11 +25,9 @@ const Edit = (props) => {
 
   const renderTitle = () => {
     return (
-      <input className='input inherit' type='text' ref={inputNameRef}
-        autoFocus={autoFocus}
-        placeholder='Name' value={name}
-        onChange={inputNameChanged}
-      />
+      <TextField autoFocus={autoFocus} className='inherit'
+        ref={inputNameRef} placeholder='Name' value={name}
+        onChange={inputNameChanged} />
     );
   };
 
@@ -37,11 +38,9 @@ const Edit = (props) => {
 
   const renderContent = () => {
     return (
-      <textarea className={`textarea inherit ${styles.inputDescription}`}
-        rows="2" ref={inputDescriptionRef}
-        placeholder='Description' value={description}
-        onChange={inputDescriptionChanged}
-      />
+      <TextArea className={`inherit ${styles.inputDescription}`}
+        row='2' ref={inputDescriptionRef} placeholder='Description' value={description}
+        onChange={inputDescriptionChanged} />
     );
   };
 
@@ -58,14 +57,12 @@ const Edit = (props) => {
   const renderFooter = () => {
     return (
       <div className={styles.buttons}>
-        <button className='button is-primary is-outlined margin-right-0_5'
-          onClick={buttonConfirmClicked}>
+        <Button outlined type='primary' className='margin-right-0_5' onClick={buttonConfirmClicked}>
           {buttonConfirmText}
-        </button>
-        <button className='button is-danger is-outlined margin-left-0_5'
-          onClick={buttonCancelClicked}>
+        </Button>
+        <Button outlined className='margin-left-0_5' onClick={buttonCancelClicked}>
           {buttonCancelText}
-        </button>
+        </Button>
       </div>
     );
   };

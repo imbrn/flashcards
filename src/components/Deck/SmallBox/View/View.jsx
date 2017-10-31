@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './View.module.css';
 import Base from '../Base';
+import Button from '../../../Button';
+import IconButton from '../../../IconButton';
 
 class View extends React.Component {
 
@@ -42,12 +44,8 @@ class View extends React.Component {
         <div>
           <div className={`dropdown is-right ${activeClass}`}>
             <div className='dropdown-trigger'>
-              <button className='button is-primary is-small'
-                onClick={this._menuButtonClicked.bind(this)}>
-                <span className='icon'>
-                  <i className='fa fa-chevron-down' />
-                </span>
-              </button>
+              <IconButton type='primary' size='small' icon='fa-chevron-down'
+                onClick={this._menuButtonClicked.bind(this)} />
             </div>
             <div className='dropdown-menu'>
               <div className='dropdown-content'>
@@ -129,9 +127,9 @@ class View extends React.Component {
   _renderFooter() {
     return (
       <div>
-        <button className={`button is-outlined is-primary ${styles.studyButton}`}>
+        <Button outlined type='primary' className={styles.studyButton}>
           Study
-        </button>
+        </Button>
       </div>
     );
   }

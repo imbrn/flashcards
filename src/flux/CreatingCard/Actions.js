@@ -1,7 +1,5 @@
 import Dispatcher from '../Dispatcher';
 import ActionsTypes from './ActionsTypes';
-import DecksServices from '../../services/DecksServices';
-import EditingDeckStore from './Store';
 
 class Actions {
 
@@ -12,19 +10,16 @@ class Actions {
     });
   }
 
-  update(deck) {
+  update(card) {
     Dispatcher.dispatch({
       type: ActionsTypes.UPDATE,
-      deck
+      card
     });
   }
 
   finish() {
-    const deck = EditingDeckStore.getState().get('deck');
-    new DecksServices().changeDeck(deck);
     Dispatcher.dispatch({
-      type: ActionsTypes.FINISH,
-      deck
+      type: ActionsTypes.FINISH
     });
   }
 

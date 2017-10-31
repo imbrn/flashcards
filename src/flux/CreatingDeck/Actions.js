@@ -1,7 +1,6 @@
 import Dispatcher from '../Dispatcher';
 import Types from './ActionsTypes';
-import Decks from '../../model/Decks';
-import createDeck from '../../model/Decks/createDeck';
+import DecksServices from '../../services/DecksServices';
 import CreatingDeckStore from './Store';
 
 class Actions {
@@ -21,7 +20,7 @@ class Actions {
 
   finish() {
     const deck = CreatingDeckStore.getState().get('deck');
-    Decks().operation(createDeck).withParams(deck).done().execute();
+    new DecksServices().createDeck(deck);
     Dispatcher.dispatch({
       type: Types.FINISH,
       deck

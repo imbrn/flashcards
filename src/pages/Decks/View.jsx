@@ -1,5 +1,7 @@
 import React from 'react';
 import styles from './View.module.css';
+import ActionsBar from '../../components/ActionsBar';
+import IconButton from '../../components/IconButton';
 import DeckView from '../../components/Deck/SmallBox/View';
 import DeckEdit from '../../components/Deck/SmallBox/Edit';
 import DeckDelete from '../../components/Deck/SmallBox/Delete';
@@ -11,20 +13,12 @@ const View = (props) => {
 
   const renderNav = () => {
     return (
-      <div className={`${styles.actionBar} margin-bottom`}>
-        <div className={`container`}>
-          <div className={`has-border has-border-grey-lighter has-border-bottom
-              gutters ${styles.content}`}>
-            <div className={styles.actions}>
-              <button className='button is-primary'
-                onClick={onClickButtonCreateDeck}>
-                <span className='icon'><i className='fa fa-plus' /></span>
-                <span>Create deck</span>
-              </button>
-            </div>
-          </div>
+      <ActionsBar>
+        <div className='is-pulled-right'>
+          <IconButton type='primary' icon='fa-plus' text='Create Deck'
+            onClick={onClickButtonCreateDeck} />
         </div>
-      </div>
+      </ActionsBar>
     );
   };
 
@@ -34,7 +28,7 @@ const View = (props) => {
 
   const renderAddedDecks = () => {
     return props.decks.toArray().map(deck => (
-      <div key={deck.id} className={styles.deckWrapper}>
+      <div key={deck.id} className={`${styles.deckWrapper} gutters`}>
         {renderAddedDeck(deck)}
       </div>
     ));
@@ -120,7 +114,7 @@ const View = (props) => {
   const renderCreatingDeck = () => {
     if (props.creatingDeck.get('creating')) {
       return (
-        <div className={styles.deckWrapper}>
+        <div className={`${styles.deckWrapper} gutters`}>
           <DeckEdit className={styles.deck}
             deck={props.creatingDeck.get('deck')}
             onDeckChange={onCreatingDeckChange}
@@ -145,10 +139,10 @@ const View = (props) => {
   };
 
   return (
-    <div>
+    <div className='container'>
       { renderNav() }
       <div className={'container'}>
-        <div className={styles.decks}>
+        <div className={`${styles.decks} gutters`}>
           { renderAddedDecks() }
           { renderCreatingDeck() }
         </div>

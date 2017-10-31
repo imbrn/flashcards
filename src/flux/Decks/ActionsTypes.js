@@ -2,6 +2,6 @@ import typesWithPrefix from '../utils/typesWithPrefix';
 
 export default typesWithPrefix('DECKS', {
   ADD: 'ADD',
-  REMOVE: 'REMOVE',
+  DELETE: 'DELETE',
   CHANGE: 'CHANGE'
 });

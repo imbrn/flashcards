@@ -1,6 +1,7 @@
 import React from 'react';
 import Base from '../Base';
 import styles from './Delete.module.css';
+import Button from '../../../Button';
 
 const Delete = ({ deck, ...rest }) => {
 
@@ -25,14 +26,12 @@ const Delete = ({ deck, ...rest }) => {
   const renderFooter = () => {
     return (
       <div className={styles.buttons}>
-        <button className='button is-danger is-outlined margin-right-0_5'
-          onClick={buttonConfirmClicked}>
+        <Button outlined type='danger' className='margin-right-0_5' onClick={buttonConfirmClicked}>
           Yes
-        </button>
-        <button className='button is-outlined margin-left-0_5'
-          onClick={buttonCancelClicked}>
+        </Button>
+        <Button outlined className='margin-left-0_5' onClick={buttonCancelClicked}>
           No
-        </button>
+        </Button>
       </div>
     );
   };

@@ -1,14 +1,12 @@
 .decks {
   display: flex;
   flex-wrap: wrap;
-  padding: 10px;
 }
 
 .deckWrapper {
   box-sizing: border-box;
   width: 100%;
   min-height: 220px;
-  padding: 10px;
 }
 
 .deckWrapper .deck {
@@ -24,16 +22,6 @@
   .deckWrapper { width: 290px; }
 }
 
-.actionBar :global(.container) {
-  width: 100%;
-}
-
-.actionBar .content {
-  display: flex;
-}
-
-.actionBar .content .actions {
-  flex-grow: 1;
-  display: flex;
-  justify-content: flex-end;
+.actions {
+  float: right;
 }

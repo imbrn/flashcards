@@ -17,10 +17,10 @@ class Store extends ReduceStore {
   reduce(state, action) {
     switch (action.type) {
       case DecksActionsTypes.ADD: return this._addDeck(state, action);
-      case DecksActionsTypes.REMOVE: return this._removeDeck(state, action);
+      case DecksActionsTypes.DELETE: return this._deleteDeck(state, action);
       case DecksActionsTypes.CHANGE: return this._changeDeck(state, action);
       case CardsActionsTypes.ADD: return this._addCard(state, action);
-      case CardsActionsTypes.REMOVE: return this._removeCard(state, action);
+      case CardsActionsTypes.DELETE: return this._deleteCard(state, action);
       case CardsActionsTypes.CHANGE: return this._changeCard(state, action);
       default: return state;
     }
@@ -30,8 +30,8 @@ class Store extends ReduceStore {
     return state.set(action.deck.id, action.deck);
   }
 
-  _removeDeck(state, action) {
-    return state.remove(action.deck.id);
+  _deleteDeck(state, action) {
+    return state.delete(action.deck.id);
   }
 
   _changeDeck(state, action) {
@@ -46,9 +46,9 @@ class Store extends ReduceStore {
       cards.set(action.card.id, action.card));
   }
 
-  _removeCard(state, action) {
+  _deleteCard(state, action) {
     return this._changeCards(state, action.deckId, cards =>
-      cards.remove(action.card.id));
+      cards.delete(action.card.id));
   }
 
   _changeCard(state, action) {

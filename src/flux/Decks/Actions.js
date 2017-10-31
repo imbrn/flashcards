@@ -1,51 +1,40 @@
 import Dispatcher from '../Dispatcher';
-import Decks from '../../model/Decks';
-import watchAllDecks from '../../model/Decks/watchAllDecks';
+import DecksServices from '../../services/DecksServices';
 import DecksActionsTypes from './ActionsTypes';
 import CardsActionsTypes from '../Cards/ActionsTypes';
 
 class Actions {
 
   watchAllDecks() {
-    this._stopWatchingAllDecks = Decks().operation(watchAllDecks)
-      .withParams({
-        onAddDeck: this._onAddDeck,
-        onRemoveDeck: this._onRemoveDeck,
-        onChangeDeck: this._onChangeDeck,
-        onAddCard: this._onAddCard,
-        onRemoveCard: this._onRemoveCard,
-        onChangeCard: this._onChangeCard
-      }).done()
-      .execute();
+    this._watching = new DecksServices().watchAllDecks(this);
   }
 
   stopWatchingAllDecks() {
-    if (this._stopWatchingAllDecks)
-      this._stopWatchingAllDecks();
+    this._watching.stop();
   }
 
-  _onAddDeck(deck) {
+  onAddDeck(deck) {
     Dispatcher.dispatch({
       type: DecksActionsTypes.ADD,
       deck
     });
   }
 
-  _onRemoveDeck(deck) {
+  onDeleteDeck(deck) {
     Dispatcher.dispatch({
-      type: DecksActionsTypes.REMOVE,
+      type: DecksActionsTypes.DELETE,
       deck
     });
   }
 
-  _onChangeDeck(deck) {
+  onChangeDeck(deck) {
     Dispatcher.dispatch({
       type: DecksActionsTypes.CHANGE,
       deck
     });
   }
 
-  _onAddCard(deckId, card) {
+  onAddCard(card, deckId) {
     Dispatcher.dispatch({
       type: CardsActionsTypes.ADD,
       deckId,
@@ -53,7 +42,7 @@ class Actions {
     });
   }
 
-  _onChangeCard(deckId, card) {
+  onChangeCard(card, deckId) {
     Dispatcher.dispatch({
       type: CardsActionsTypes.CHANGE,
       deckId,
@@ -61,9 +50,9 @@ class Actions {
     });
   }
 
-  _onRemoveChard(deckId, card) {
+  onDeleteChard(deckId, card) {
     Dispatcher.dispatch({
-      type: CardsActionsTypes.REMOVE,
+      type: CardsActionsTypes.DELETE,
       deckId,
       card
     });

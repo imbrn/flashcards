@@ -1,8 +1,7 @@
 import Dispatcher from '../Dispatcher';
 import ActionsTypes from './ActionsTypes';
 import DeletingDeckStore from './Store';
-import Decks from '../../model/Decks';
-import deleteDeck from '../../model/Decks/deleteDeck';
+import DecksServices from '../../services/DecksServices';
 
 class Actions {
 
@@ -15,7 +14,7 @@ class Actions {
 
   confirm() {
     const deck = DeletingDeckStore.getState().get('deck');
-    Decks().operation(deleteDeck).withParams(deck).done().execute();
+    new DecksServices().deleteDeck(deck);
     Dispatcher.dispatch({
       type: ActionsTypes.CONFIRM,
       deck
