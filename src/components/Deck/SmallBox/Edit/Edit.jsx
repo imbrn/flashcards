@@ -11,80 +11,85 @@ const Edit = (props) => {
     className,
     deck,
     autoFocus = true,
-    buttonConfirmText = 'Done',
-    buttonCancelText = 'Cancel',
-    inputNameRef,
-    inputDescriptionRef,
-    onDeckChange,
-    onFinish,
-    onCancel
+    validate = () => true,
+    onDeckChange = (newDeck) => {},
+    onFinish = () => {},
+    onCancel = () => {}
   } = props;
 
-  const name = deck && deck.name ? deck.name : '';
-  const description = deck && deck.description ? deck.description : '';
-
-  const renderTitle = () => {
+  const render = () => {
     return (
-      <TextField autoFocus={autoFocus} className='inherit'
-        ref={inputNameRef} placeholder='Name' value={name}
-        onChange={inputNameChanged} />
+      <Base
+        tabIndex='1'
+        className={className} 
+        title={renderTitle()}
+        content={renderContent()}
+        onBlur={onBlur}
+        onKeyUp={onKeyUp}
+        onKeyPress={onKeyPress}
+      />
     );
   };
 
-  const inputNameChanged = (e) => {
-    const newDeck = deck.set('name', e.target.value);
-    fireDeckChanged(newDeck);
+  const renderTitle = () => {
+    return (
+      <TextField
+        autoFocus={autoFocus} className='inherit'
+        placeholder='Name'
+        value={deck && deck.name ? deck.name: ''}
+        onChange={inputNameChanged}
+      />
+    );
   };
 
   const renderContent = () => {
     return (
-      <TextArea className={`inherit ${styles.inputDescription}`}
-        row='2' ref={inputDescriptionRef} placeholder='Description' value={description}
-        onChange={inputDescriptionChanged} />
+      <TextArea
+        className={`inherit ${styles.inputDescription}`} row='2'
+        placeholder='Description'
+        value={deck && deck.description ? deck.description : ''}
+        onChange={inputDescriptionChanged}
+      />
     );
   };
 
-  const inputDescriptionChanged = (e) => {
-    const newDeck = deck.set('description', e.target.value);
-    fireDeckChanged(newDeck);
+  const onBlur = (e) => {
+    const target = e.currentTarget;
+    setTimeout(() => {
+      if (!target.contains(document.activeElement)) {
+        finish();
+      }
+    }, 0);
   };
 
-  const fireDeckChanged = (newDeck) => {
-    if (onDeckChange)
-      onDeckChange(newDeck);
-  };
-
-  const renderFooter = () => {
-    return (
-      <div className={styles.buttons}>
-        <Button outlined type='primary' className='margin-right-0_5' onClick={buttonConfirmClicked}>
-          {buttonConfirmText}
-        </Button>
-        <Button outlined className='margin-left-0_5' onClick={buttonCancelClicked}>
-          {buttonCancelText}
-        </Button>
-      </div>
-    );
-  };
-
-  const buttonConfirmClicked = () => {
-    if (onFinish)
-      onFinish();
-  };
-
-  const buttonCancelClicked = () => {
-    if (onCancel)
+  const onKeyUp = (e) => {
+    if (e.key === 'Escape')
       onCancel();
   };
 
-  return (
-    <Base className={className} 
-      title={renderTitle()}
-      content={renderContent()}
-      footer={renderFooter()}
-    />
-  );
+  const onKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      finish();
+    }
+  };
 
-};
+  const inputNameChanged = (e) => {
+    onDeckChange(deck.set('name', e.target.value));
+  };
+
+  const inputDescriptionChanged = (e) => {
+    onDeckChange(deck.set('description', e.target.value));
+  };
+
+  const finish = () => {
+    if (validate()) {
+      onFinish();
+    }
+  };
+
+  return render();
+
+}
 
 export default Edit;
