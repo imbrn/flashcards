@@ -1,0 +1,4 @@
+# Text editors configuration files
+.vimrc
+.tern-config
+.editorconfig
