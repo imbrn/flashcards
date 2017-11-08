@@ -1,0 +1,26 @@
+{
+  "name": "flashcards",
+  "version": "0.1.0",
+  "description": "Application for helping in words and terms memorization.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nwsapps/flashcards.git"
+  },
+  "keywords": [
+    "flashcards",
+    "memorization",
+    "cards",
+    "learning",
+    "words"
+  ],
+  "author": "Bruno C. Couto (brunodev02221@gmail.com)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/nwsapps/flashcards/issues"
+  },
+  "homepage": "https://github.com/nwsapps/flashcards#readme"
+}
