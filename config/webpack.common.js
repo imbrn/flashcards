@@ -15,7 +15,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env']
+            presets: ['env', 'react']
           }
         }
       }
@@ -25,5 +25,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html'
     })
-  ]
+  ],
+  resolve: {
+    extensions: ['.js', '.json', '.jsx']
+  }
 }

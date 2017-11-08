@@ -1,4 +1,9 @@
-import TestClass from './test';
+import React from 'react';
+import { render } from 'react-dom';
+import HelloWorld from './HelloWorld';
 
-const test = new TestClass();
-test.print('hello', 'world');
+render(
+  React.createElement(HelloWorld),
+  document.getElementById('root')
+);
+
