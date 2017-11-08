@@ -1,5 +1,6 @@
 function test() {
-  document.body.innerHTML = 'Hello world!';
+  const root = document.querySelector("#root");
+  root.innerHTML = 'Hello world inside root element';
 }
 
 export default test;
