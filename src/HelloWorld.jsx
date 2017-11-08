@@ -1,8 +1,8 @@
 import React from 'react';
 
-const HelloWorld = () => {
+const HelloWorld = ({ color = 'blue', ...rest }) => {
   return (
-    <div>
+    <div style={{ color }} {...rest}>
       Hello world with React component!
     </div>
   );
