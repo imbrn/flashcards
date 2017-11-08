@@ -2,3 +2,6 @@
 .vimrc
 .tern-config
 .editorconfig
+
+# Node
+node_modules/
