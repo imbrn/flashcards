@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/nwsapps/flashcards/issues"
   },
-  "homepage": "https://github.com/nwsapps/flashcards#readme"
+  "homepage": "https://github.com/nwsapps/flashcards#readme",
+  "devDependencies": {
+    "webpack": "^3.8.1"
+  }
 }
