@@ -1,5 +1,5 @@
 function test() {
-  console.log('testing');
+  document.body.innerHTML = 'Hello world';
 }
 
 export default test;
