@@ -1,3 +1,4 @@
-import test from './test';
+import TestClass from './test';
 
-test();
+const test = new TestClass();
+test.print('hello', 'world');

@@ -7,6 +7,20 @@ module.exports = {
     path: path.resolve(__dirname, '../build'),
     filename: 'bundle.js'
   },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['env']
+          }
+        }
+      }
+    ]
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html'
