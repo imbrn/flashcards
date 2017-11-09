@@ -35,7 +35,12 @@ module.exports = {
         use: extractCss.extract({
           fallback: 'style-loader',
           use: [
-            { loader: 'css-loader', options: { minimize: isProduction } }
+            { loader: 'css-loader', options: { minimize: isProduction, importLoaders: 1 } },
+            { loader: 'postcss-loader',
+              options: {
+               config: { path: paths.config }
+              }
+            }
           ]
         })
       }
