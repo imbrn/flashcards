@@ -44,6 +44,7 @@
     "webpack-merge": "^4.1.1"
   },
   "dependencies": {
-    "bulma": "^0.6.1"
+    "bulma": "^0.6.1",
+    "react-router-dom": "^4.2.2"
   }
 }
