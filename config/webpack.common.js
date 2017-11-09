@@ -1,22 +1,20 @@
 const path = require('path');
+const paths = require('./paths.js');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-
 // Variables
 const isProduction = process.env.NODE_ENV === 'production'
-
 
 const extractCss = new ExtractTextPlugin({
   filename: '[name].[contenthash].css',
   disable: !isProduction
 });
 
-
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, '../build'),
+    path: paths.build,
     filename: 'bundle.js'
   },
   module: {
@@ -46,7 +44,7 @@ module.exports = {
   plugins: [
     extractCss,
     new HtmlWebpackPlugin({
-      template: './public/index.html'
+      template: path.resolve(paths.public, 'index.html')
     })
   ],
   resolve: {
