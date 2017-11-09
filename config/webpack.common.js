@@ -31,7 +31,7 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/,
+        test: /\.(css|scss)$/,
         use: extractCss.extract({
           fallback: 'style-loader',
           use: [
@@ -40,7 +40,8 @@ module.exports = {
               options: {
                config: { path: paths.config }
               }
-            }
+            },
+            { loader: 'sass-loader' }
           ]
         })
       }
@@ -53,6 +54,7 @@ module.exports = {
     })
   ],
   resolve: {
+    modules: [ 'node_modules' ],
     extensions: ['.js', '.json', '.jsx']
   }
 }
