@@ -1,5 +1,17 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+
+// Variables
+const isProduction = process.env.NODE_ENV === 'production'
+
+
+const extractCss = new ExtractTextPlugin({
+  filename: '[name].[contenthash].css',
+  disable: !isProduction
+});
+
 
 module.exports = {
   entry: './src/index.js',
@@ -22,11 +34,17 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [ 'style-loader', 'css-loader' ]
+        use: extractCss.extract({
+          fallback: 'style-loader',
+          use: [
+            { loader: 'css-loader', options: { minimize: isProduction } }
+          ]
+        })
       }
     ]
   },
   plugins: [
+    extractCss,
     new HtmlWebpackPlugin({
       template: './public/index.html'
     })
