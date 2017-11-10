@@ -25,7 +25,11 @@ class PageOne extends Component {
 
   render() {
     if (this.state.user) {
-      return <div>Signed in as {this.state.user.get('displayName')}.</div>;
+      return (
+        <button className='button is-primary'>
+          Signed in as {this.state.user.displayName}
+        </button>
+      );
     } else {
       return <div>Signin in...</div>;
     }
