@@ -1,13 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const PageOne = () => {
+const PageOne = ({ counter, increment, decrement }) => {
   return (
     <div>
-      <h1>Page one</h1>
-      <Link to='/two'>Go to page two</Link>
+      <div>{counter}</div>
+      <button onClick={increment}>+</button>
+      <button onClick={decrement}>-</button>
     </div>
   );
 };
 
-export default PageOne;
+const mapStateToProps = (state) => {
+  return {
+    counter: state
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    increment: () => dispatch({ type: 'INCREMENT' }),
+    decrement: () => dispatch({ type: 'DECREMENT' })
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PageOne);
