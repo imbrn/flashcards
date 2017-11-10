@@ -1,28 +1,30 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, { Component } from 'react';
+import { auth } from 'firebase';
 
-const PageOne = ({ counter, increment, decrement }) => {
-  return (
-    <div>
-      <div>{counter}</div>
-      <button onClick={increment}>+</button>
-      <button onClick={decrement}>-</button>
-    </div>
-  );
-};
+class PageOne extends Component {
 
-const mapStateToProps = (state) => {
-  return {
-    counter: state
-  };
-};
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: null
+    };
+  }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    increment: () => dispatch({ type: 'INCREMENT' }),
-    decrement: () => dispatch({ type: 'DECREMENT' })
-  };
-};
+  componentWillMount() {
+    auth().onAuthStateChanged(user => {
+      this.setState({ user });
+    });
+    auth().signInAnonymously();
+  }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PageOne);
+  render() {
+    if (this.state.user) {
+      return <div>Signed in.</div>;
+    } else {
+      return <div>Signin in...</div>;
+    }
+  }
+
+}
+
+export default PageOne;
