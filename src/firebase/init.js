@@ -1,6 +1,6 @@
-import config from './config';
 import { initializeApp } from 'firebase';
+import config from './config';
 
-export function initialize() {
+export default function init() {
   initializeApp(config);
-};
+}
