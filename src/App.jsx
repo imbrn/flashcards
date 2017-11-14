@@ -17,7 +17,7 @@ const ContentRoutes = () => {
   return (
     <Switch>
       <Route path='/' exact={true} component={() => <Redirect to='/decks' />} />
-      <Route path='/decks' component={DeckPage} />
+      <Route path='/decks' component={DecksPage} />
       <Route path='/deck/:deckId' component={DeckPage} />
       <Route path='/study/:deckId' component={StudyPage} />
       <Route component={NotFoundPage} />
