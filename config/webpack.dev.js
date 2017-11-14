@@ -12,23 +12,25 @@ module.exports = merge(common, {
   module: {
     rules: [ 
       {
-        test: /\.(css|scss)$/,
+        test: /\.m(odule)?\.(css|scss)$/,
         exclude: /(node_modules|bower_components)/,
         use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-            }
-          },
-          { loader: 'postcss-loader',
-            options: {
-              config: { path: paths.config }
-            }
-          },
+          { loader: 'style-loader', },
+          { loader: 'css-loader', options: { importLoaders: 1, modules: true } },
+          { loader: 'postcss-loader', options: { config: { path: paths.config } } },
           { loader: 'sass-loader' }
         ]
-      }
+      },
+      {
+        test: /\.(css|scss)$/,
+        exclude: /(node_modules|bower_components|(\.m(odule)?\.(css|scss)$))/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader', options: { importLoaders: 1, } },
+          { loader: 'postcss-loader', options: { config: { path: paths.config } } },
+          { loader: 'sass-loader' }
+        ]
+      },
     ]
   },
   plugins: [

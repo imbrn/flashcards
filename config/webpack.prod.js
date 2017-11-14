@@ -14,26 +14,28 @@ module.exports = merge(common, {
   module: {
     rules: [
       {
-        test: /\.(css|scss)$/,
-        exclude: /(node_modules|bower_components)/,
+        test: /\.m(odule)?\.(css|scss)$/,
         use: extractCss.extract({
           fallback: 'style-loader',
           use: [
-            { loader: 'css-loader',
-              options: {
-                minimize: true,
-                importLoaders: 1,
-              }
-            },
-            { loader: 'postcss-loader',
-              options: {
-                config: { path: paths.config }
-              }
-            },
+            { loader: 'css-loader', options: { importLoaders: 1, modules: true } },
+            { loader: 'postcss-loader', options: { config: { path: paths.config } } },
             { loader: 'sass-loader' }
           ]
         })
-      }
+      },
+      {
+        test: /\.(css|scss)$/,
+        exclude: /(node_modules|bower_components|(\.m(odule)?\.(css|scss)$))/,
+        use: extractCss.extract({
+          fallback: 'style-loader',
+          use: [
+            { loader: 'css-loader', options: { minimize: true, importLoaders: 1 } },
+            { loader: 'postcss-loader', options: { config: { path: paths.config } } },
+            { loader: 'sass-loader' }
+          ]
+        })
+      },
     ]
   },
   plugins: [
