@@ -6,7 +6,7 @@ const Deck = Record({
   description: null,
   cards: List(),
   createTime: null,
-  updateTime: null
+  updateTime: null,
 });
 
 export default Deck;

@@ -5,7 +5,7 @@ const Card = Record({
   front: null,
   back: null,
   createTime: null,
-  updateTime: null
+  updateTime: null,
 });
 
 export default Card;
