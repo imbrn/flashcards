@@ -50,6 +50,7 @@
   },
   "dependencies": {
     "bulma": "^0.6.1",
+    "classnames": "^2.2.5",
     "firebase": "^4.6.2",
     "immutable": "^3.8.2",
     "prop-types": "^15.6.0",
