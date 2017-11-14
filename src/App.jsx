@@ -1,9 +1,9 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import DecksPage from './DecksPage';
-import DeckPage from './DeckPage';
-import StudyPage from './StudyPage';
-import NotFoundPage from './NotFoundPage';
+import DecksPage from './pages/DecksPage';
+import DeckPage from './pages/DeckPage';
+import StudyPage from './pages/StudyPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 const App = () => {
   return (
