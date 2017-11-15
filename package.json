@@ -4,10 +4,12 @@
   "description": "Application for helping in words and terms memorization.",
   "main": "index.js",
   "scripts": {
-    "lint:js": "eslint src/ --fix",
+    "lint:js": "eslint src/",
+    "lint-fix:js": "eslint src/ --fix",
     "lint": "npm run lint:js",
+    "lint-fix": "npm run lint-fix:js",
     "start": "webpack-dev-server --open --config config/webpack.dev.js",
-    "build": "npm run lint && webpack --config config/webpack.prod.js",
+    "build": "npm run lint-fix && webpack --config config/webpack.prod.js",
     "precommit": "npm run lint",
     "prepush": "npm run lint"
   },
