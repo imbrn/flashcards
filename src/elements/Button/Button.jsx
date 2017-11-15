@@ -21,7 +21,9 @@ const modeClass = (strong) => {
 };
 
 const typeClass = (type) => {
-  return `is-${type}`;
+  if (type) {
+    return `is-${type}`;
+  }
 }
 
 Button.propTypes = {
