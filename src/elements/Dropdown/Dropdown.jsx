@@ -15,10 +15,10 @@ class Dropdown extends React.Component {
   }
 
   render() {
-    const { button, type, strong, children } = this.props;
+    const { button, type, strong, children, className, ...rest } = this.props;
     
     return (
-      <Root open={this.state.open}>
+      <Root {...rest} open={this.state.open} className={className}>
         <Trigger type={type} strong={strong} onTrigger={this._onTrigger.bind(this)}>
           {button}
         </Trigger>
@@ -65,10 +65,11 @@ class Dropdown extends React.Component {
 
 }
 
-const Root = ({ children, open, ...rest }) => {
+const Root = ({ children, open, align, className, ...rest }) => {
   const activeClass = open ? 'is-active' : null;
+  const alignClass = align ? 'is-' + align : null;
   return (
-    <div {...rest} className={classnames('dropdown', activeClass)}>
+    <div {...rest} className={classnames('dropdown', className, alignClass, activeClass)}>
       {children}
     </div>
   );
