@@ -27,7 +27,7 @@ const typeClass = (type) => {
 }
 
 Button.propTypes = {
-  type: PropTypes.oneOf(['primary', 'link', 'info', 'success', 'warning',  'danger']),
+  type: PropTypes.oneOf(['primary', 'link', 'info', 'success', 'warning',  'danger', 'white']),
   strong: PropTypes.bool,
 };
 
