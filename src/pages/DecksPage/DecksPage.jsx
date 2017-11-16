@@ -1,26 +1,29 @@
 import React from 'react';
-import { Button } from '../../elements';
+import Dropdown, {
+  SimpleItem, Separator, ImageAndTextItem, ContentItem
+} from '../../elements/Dropdown';
+import { Link } from 'react-router-dom';
 
 const DecksPage = () => {
   return (
     <div>
       <div>
-        <Button>Button one</Button>
-        <Button type='primary'>Primary</Button>
-        <Button type='link'>Link</Button>
-        <Button type='info'>Info</Button>
-        <Button type='success'>Success</Button>
-        <Button type='warning'>Warning</Button>
-        <Button type='danger'>danger</Button>
-      </div>
-      <div>
-        <Button strong>Button one</Button>
-        <Button strong type='primary'>Primary</Button>
-        <Button strong type='link'>Link</Button>
-        <Button strong type='info'>Info</Button>
-        <Button strong type='success'>Success</Button>
-        <Button strong type='warning'>Warning</Button>
-        <Button strong type='danger'>danger</Button>
+        <Dropdown button='Dropdown' type='primary'>
+          <ImageAndTextItem text='Edit' icon='fa fa-pencil' />
+          <SimpleItem onClick={() => console.log('hello world')}>Hello</SimpleItem>
+          <SimpleItem>World</SimpleItem>
+          <Separator />
+          <ContentItem>
+            <div><strong>Hello</strong></div>
+            <div>
+              <p>This is a content item</p>
+            </div>
+            <Link to='/deck/1'>
+              Go to another page
+            </Link>
+          </ContentItem>
+          <SimpleItem>Hi</SimpleItem>
+        </Dropdown>
       </div>
     </div>
   );
