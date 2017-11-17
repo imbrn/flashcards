@@ -8,7 +8,6 @@ module.exports = merge(common, {
   devServer: {
     contentBase: './build',
     historyApiFallback: true,
-    host: process.env.HOST || '0.0.0.0',
   },
   module: {
     rules: [ 

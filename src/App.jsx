@@ -1,26 +1,26 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import DecksPage from './pages/DecksPage';
-import DeckPage from './pages/DeckPage';
-import StudyPage from './pages/StudyPage';
-import NotFoundPage from './pages/NotFoundPage';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import DecksPage from './decks/DecksPage';
+import CardsPage from './cards/CardsPage';
 
-const App = () => {
-  return (
-    <div>
-      <ContentRoutes />
-    </div>
-  );
-};
+class App extends React.Component {
 
-const ContentRoutes = () => {
+  render() {
+    return (
+      <BrowserRouter>
+        <ContentPages />
+      </BrowserRouter>
+    );
+  }
+
+}
+
+const ContentPages = () => {
   return (
     <Switch>
-      <Route path='/' exact={true} component={() => <Redirect to='/decks' />} />
-      <Route path='/decks' component={DecksPage} />
-      <Route path='/deck/:deckId' component={DeckPage} />
-      <Route path='/study/:deckId' component={StudyPage} />
-      <Route component={NotFoundPage} />
+      <Route path='/decks' exact={true} component={DecksPage} />
+      <Route path='/decks/:deckId' exact={true} component={CardsPage} />
+      <Route path='/' exact={true} component={DecksPage} />
     </Switch>
   );
 };

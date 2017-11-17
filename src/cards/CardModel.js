@@ -1,6 +1,6 @@
 import { Record } from 'immutable';
 
-const Card = Record({
+const CardModel = Record({
   id: null,
   front: null,
   back: null,
@@ -8,4 +8,4 @@ const Card = Record({
   updateTime: null,
 });
 
-export default Card;
+export default CardModel;

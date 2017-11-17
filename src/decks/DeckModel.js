@@ -1,6 +1,6 @@
 import { Record, List } from 'immutable';
 
-const Deck = Record({
+const DeckModel = Record({
   id: null,
   name: null,
   description: null,
@@ -9,4 +9,4 @@ const Deck = Record({
   updateTime: null,
 });
 
-export default Deck;
+export default DeckModel;
