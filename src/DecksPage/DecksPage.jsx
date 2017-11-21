@@ -1,9 +1,11 @@
 import React from 'react';
+import Deck from './components/Deck';
 
 const DecksPage = () => {
   return (
     <div>
-      DecksPage
+      <Deck/>
+      <Deck/>
     </div>
   );
 };

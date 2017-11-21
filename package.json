@@ -4,7 +4,11 @@
   "description": "React boilerplate with Webpack.",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config config/webpack.prod.js",
+    "lint:js": "eslint src/",
+    "lint:js:fix": "eslint src/ --fix",
+    "lint": "npm run lint:js",
+    "lint:fix": "npm run lint:js:fix",
+    "build": "npm run lint && webpack --config config/webpack.prod.js",
     "start": "webpack-dev-server --config config/webpack.dev.js"
   },
   "repository": {
@@ -37,6 +41,8 @@
     "babel-preset-react": "^6.24.1",
     "clean-webpack-plugin": "^0.1.17",
     "css-loader": "^0.28.7",
+    "eslint": "^4.11.0",
+    "eslint-plugin-react": "^7.5.1",
     "extract-text-webpack-plugin": "^3.0.2",
     "html-webpack-plugin": "^2.30.1",
     "openurl": "^1.1.1",
