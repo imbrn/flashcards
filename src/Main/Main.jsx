@@ -6,7 +6,9 @@ import NotFoundPage from '../NotFoundPage';
 const Main = () => {
   return (
     <BrowserRouter>
-      <MainContent />
+      <div className='font-sans'>
+        <MainContent />
+      </div>
     </BrowserRouter>
   );
 };

@@ -11,6 +11,7 @@ module.exports = merge(common, {
 
   module: {
     rules: [
+
       {
         test: /\.css$/,
         use: extractCss.extract({
@@ -25,7 +26,25 @@ module.exports = merge(common, {
             }
           ],
         })
+      },
+
+      {
+        test: /\.scss$/,
+        use: {
+          fallback: 'style-loader',
+          use: [
+            'css-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                config: { path: paths.config }
+              }
+            },
+            'sass-loader'
+          ]
+        }
       }
+
     ]
   },
 
