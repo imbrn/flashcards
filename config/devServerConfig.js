@@ -26,6 +26,7 @@ module.exports = {
   clientLogLevel: 'none',
   noInfo: true,
   https: protocol === 'https',
+  historyApiFallback: true,
   after: () => {
     const externalIp = network.findFirstExternalIPv4NetworkAddress();
     printServerAccessInformation(protocol, externalIp.address, port);
