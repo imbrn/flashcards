@@ -1,14 +1,23 @@
 const path = require('path');
 const paths = require('./paths.js');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const cleanOptions = {
+  root: paths.root
+};
+
 module.exports = {
-  entry: './src/index.js',
-  output: {
-    path: paths.build,
-    filename: 'bundle.js',
-    publicPath: '/'
+
+  entry: {
+    app: path.join(paths.src, 'index.js')
   },
+
+  output: {
+    filename: '[name].js',
+    path: paths.build
+  },
+
   module: {
     rules: [
       {
@@ -17,23 +26,28 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env', 'react'],
+            presets: [ 'env', 'react' ],
             plugins: [
-              'transform-object-rest-spread',
               'transform-class-properties',
+              'transform-object-rest-spread',
             ]
           }
         }
       }
     ]
   },
+
   plugins: [
+    new CleanWebpackPlugin([paths.build], cleanOptions),
     new HtmlWebpackPlugin({
-      template: path.resolve(paths.public, 'index.html')
+      title: 'es-boilerplate',
+      template: path.join(paths.public, 'index.html')
     })
   ],
+
   resolve: {
     modules: [ 'node_modules' ],
-    extensions: ['.js', '.json', '.jsx']
+    extensions: [ '.js', '.jsx', '.json' ],
   }
-}
+
+};

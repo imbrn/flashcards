@@ -1,12 +1,11 @@
 const path = require('path');
-const fs = require('fs');
 
-const appDirectory = fs.realpathSync(process.cwd());
-const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath)
+const pathFromRoot = (relativePath) => path.join(process.cwd(), relativePath);
 
 module.exports = {
-  root: appDirectory,
-  public: resolveApp('public'),
-  build: resolveApp('build'),
-  config: resolveApp('config')
+  root: pathFromRoot(''),
+  config: pathFromRoot('config'),
+  src: pathFromRoot('src'),
+  public: pathFromRoot('public'),
+  build: pathFromRoot('build')
 };

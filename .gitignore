@@ -1,10 +1,5 @@
-# Text editors configuration files
-.vimrc
-.tern-config
-.editorconfig
-
-# Node
+# Package manages
 node_modules/
 
-# Build
+# Build files
 build/

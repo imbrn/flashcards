@@ -1,52 +1,43 @@
-const webpack = require('webpack');
 const paths = require('./paths.js');
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const extractCss = new ExtractTextPlugin({
-  filename: '[name].[contenthash].css'
-});
+const extractCss = new ExtractTextPlugin('styles.css');
 
 module.exports = merge(common, {
+
   module: {
     rules: [
       {
-        test: /\.m(odule)?\.(css|scss)$/,
+        test: /\.css$/,
         use: extractCss.extract({
           fallback: 'style-loader',
           use: [
-            { loader: 'css-loader', options: { importLoaders: 1, modules: true } },
-            { loader: 'postcss-loader', options: { config: { path: paths.config } } },
-            { loader: 'sass-loader' }
-          ]
+            'css-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                config: { path: paths.config }
+              }
+            }
+          ],
         })
-      },
-      {
-        test: /\.(css|scss)$/,
-        exclude: /(node_modules|bower_components|(\.m(odule)?\.(css|scss)$))/,
-        use: extractCss.extract({
-          fallback: 'style-loader',
-          use: [
-            { loader: 'css-loader', options: { minimize: true, importLoaders: 1 } },
-            { loader: 'postcss-loader', options: { config: { path: paths.config } } },
-            { loader: 'sass-loader' }
-          ]
-        })
-      },
+      }
     ]
   },
+
   plugins: [
+    extractCss,
     new webpack.DefinePlugin({
       PRODUCTION: JSON.stringify(true),
-      'process.env.NODE_ENV': JSON.stringify('production')
+      'process.env.NODE_ENV': JSON.stringify('production'),
     }),
-    new CleanWebpackPlugin([ paths.build ], {
-      root: paths.root
+    new UglifyJsPlugin({
+      sourceMap: true
     }),
-    extractCss,
-    new UglifyJsPlugin(),
   ]
+
 });

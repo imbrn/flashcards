@@ -1,42 +1,38 @@
 const webpack = require('webpack');
-const paths = require('./paths.js');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
+const paths = require('./paths.js');
+const devServerConfig = require('./devServerConfig.js');
 
 module.exports = merge(common, {
+
   devtool: 'inline-source-map',
-  devServer: {
-    contentBase: './build',
-    historyApiFallback: true,
-  },
+  devServer: devServerConfig,
+
   module: {
-    rules: [ 
+    rules: [
       {
-        test: /\.m(odule)?\.(css|scss)$/,
-        exclude: /(node_modules|bower_components)/,
+        test: /\.css$/,
         use: [
-          { loader: 'style-loader', },
-          { loader: 'css-loader', options: { importLoaders: 1, modules: true } },
-          { loader: 'postcss-loader', options: { config: { path: paths.config } } },
-          { loader: 'sass-loader' }
+          'style-loader', 'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              config: { path: paths.config }
+            }
+          }
         ]
-      },
-      {
-        test: /\.(css|scss)$/,
-        exclude: /(node_modules|bower_components|(\.m(odule)?\.(css|scss)$))/,
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader', options: { importLoaders: 1, } },
-          { loader: 'postcss-loader', options: { config: { path: paths.config } } },
-          { loader: 'sass-loader' }
-        ]
-      },
+      }
     ]
   },
+
   plugins: [
     new webpack.DefinePlugin({
       DEVELOPMENT: JSON.stringify(true),
-      'process.env.NODE_ENV': JSON.stringify('development')
-    })
+      'process.env.NODE_ENV': JSON.stringify('development'),
+    }),
+    new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
   ]
+
 });
