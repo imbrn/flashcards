@@ -4,13 +4,13 @@ export function link({ text, icon, type, ...rest }) {
     text,
     icon,
     type,
-    ...rest
+    ...rest,
   };
 }
 
 export function separator({ ...rest }) {
   return {
     itemType: 'separator',
-    ...rest
+    ...rest,
   };
 }

@@ -6,4 +6,4 @@ export default DropdownMenu;
 export {
   DropdownMenuItem,
   DropdownMenuSeparator,
-}
+};

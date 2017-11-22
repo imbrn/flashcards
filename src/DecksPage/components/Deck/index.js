@@ -4,4 +4,4 @@ import * as DeckMenuModel from './DeckMenuModel';
 export default Deck;
 export { 
   DeckMenuModel,
-}
+};
