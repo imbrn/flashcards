@@ -1,3 +1,7 @@
 @tailwind preflight;
 
+@import './components/dropdown';
+@import './components/dropdown-menu';
+@import './components/deck';
+
 @tailwind utilities;

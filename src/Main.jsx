@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import DecksPage from '../DecksPage';
-import NotFoundPage from '../NotFoundPage';
+import DecksPage from './DecksPage';
+import NotFoundPage from './NotFoundPage';
 
 const Main = () => {
   return (
     <BrowserRouter>
-      <div className='font-sans text-black bg-grey-lightest h-full'>
+      <div className='font-sans font-light text-black bg-grey-lightest min-h-full'>
         <MainContent />
       </div>
     </BrowserRouter>

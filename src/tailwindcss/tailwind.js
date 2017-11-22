@@ -47,9 +47,19 @@ var colors = {
   'transparent': 'transparent',
 
   'black': '#1f1f1f',
-  'grey': '#808F96',
-  'grey-lightest': '#f5f6fb',
+  'grey': '#6f6f70',
+  'grey-light': '#c8c8c8',
+  'grey-lighter': '#f3f3f3',
+  'grey-lightest': '#f9fbff',
   'white': '#ffffff',
+
+  'primary': '#1bd5d0',
+  
+  'secondary': '#9e73e7',
+
+  'tertiary': '#ff55ba',
+  
+  'danger': '#e8455b',
 }
 
 module.exports = {
@@ -117,6 +127,7 @@ module.exports = {
 
   fonts: {
     'sans': [
+      'Barlow Semi Condensed',
       'Roboto',
       '-apple-system',
       'BlinkMacSystemFont',
@@ -130,6 +141,7 @@ module.exports = {
       'sans-serif',
     ],
     'serif': [
+      'Barlow Semi Condensed',
       'Constantia',
       'Lucida Bright',
       'Lucidabright',

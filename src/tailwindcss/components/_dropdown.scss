@@ -1,0 +1,15 @@
+.dropdown {
+
+  @apply relative;
+
+  & > .dropdown-content {
+    @apply hidden absolute z-10;
+  }
+
+  &.is-active {
+    & > .dropdown-content {
+      @apply block;
+    }
+  }
+
+}

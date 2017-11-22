@@ -1,0 +1,60 @@
+.deck {
+
+  @apply flex bg-white shadow rounded relative;
+  min-height: 200px;
+
+  & > .deck-content {
+
+    @apply flex-grow flex flex-col items-center justify-center p-6;
+
+    & > .name {
+      @apply font-semibold text-2xl text-black;
+    }
+
+    & > .description {
+      @apply font-medium text-center text-sm text-grey-light mt-2;
+    }
+
+    & > .info {
+      @apply flex-grow w-full flex items-center justify-center; 
+
+      & > .cards-count {
+        @apply bg-grey-lighter text-grey-light;
+        @apply px-2 py-1 rounded font-bold text-xs;
+      }
+    }
+
+    & > .actions {
+      @apply flex w-full items-center justify-center;
+
+      & > .button {
+        @apply font-medium px-4 py-2 rounded;
+        box-sizing: border-box;
+
+        &.study {
+          @apply text-primary;
+          &:hover { @apply text-white bg-primary };
+        }
+
+        &.add-card {
+          @apply text-secondary;
+          &:hover { @apply text-white bg-secondary; }
+        }
+      }
+    }
+
+  }
+
+  & > .deck-menu {
+    @apply absolute pin-t pin-r;
+
+    .dropdown-button {
+      @apply w-10 h-10;
+    }
+
+    .dropdown-content {
+      @apply pin-r;
+    }
+  }
+
+}
