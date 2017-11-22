@@ -18,7 +18,6 @@ const port = process.env.PORT || 3000;
 
 module.exports = {
   publicPath: '/',
-  contentBase: paths.build,
   compress: true,
   hot: true,
   host: host,
