@@ -1,3 +1,6 @@
+# Editors and IDEs
+.vimrc
+
 # Package manages
 node_modules/
 
