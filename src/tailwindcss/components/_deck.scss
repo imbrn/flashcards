@@ -1,14 +1,13 @@
 .deck {
 
   @apply flex bg-white shadow rounded relative;
-  min-height: 200px;
 
   & > .deck-content {
 
     @apply flex-grow flex flex-col items-center justify-center p-6;
 
     & > .name {
-      @apply font-semibold text-2xl text-black;
+      @apply font-medium text-3xl text-black text-center;
     }
 
     & > .description {
@@ -16,11 +15,24 @@
     }
 
     & > .info {
-      @apply flex-grow w-full flex items-center justify-center; 
+      @apply flex-grow w-full flex flex-col items-center justify-center; 
+
+      & > .cards-sides {
+        @apply flex items-center justify-between mt-2;
+
+        & > .card-side {
+          @apply text-grey bg-grey-lighter px-2 py-1 rounded font-normal;
+          @apply text-sm;
+        }
+
+        & > .card-side-front {
+          @apply mr-2;
+        }
+      }
 
       & > .cards-count {
-        @apply bg-grey-lighter text-grey-light;
-        @apply px-2 py-1 rounded font-bold text-xs;
+        @apply text-grey-light;
+        @apply px-2 py-1 rounded font-bold text-xs mt-2;
       }
     }
 
@@ -28,7 +40,7 @@
       @apply flex w-full items-center justify-center;
 
       & > .button {
-        @apply font-medium px-4 py-2 rounded;
+        @apply text-xl font-medium px-4 py-2 rounded;
         box-sizing: border-box;
 
         &.study {

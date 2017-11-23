@@ -1,19 +1,23 @@
 import React from 'react';
-
+import classnames from 'classnames';
 import DropdownMenu, {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from '../../../common/components/DropdownMenu';
 
-const Deck = ({ model, menuModel }) => {
+const Deck = ({ model, className, menuModel, ...rest }) => {
   return (
-    <div className='deck'>
+    <div {...rest} className={classnames('deck', className)}>
 
       <div className='deck-content'>
         <h1 className='name'>{model.name}</h1>
         <h2 className='description'>{model.description}</h2>
 
         <div className='info'>
+          <div className='cards-sides'>
+            <span className='card-side card-side-front'>{model.front}</span>
+            <span className='card-side card-side-back'>{model.back}</span>
+          </div>
           <span className='cards-count'>{model.cards.size} cards</span>
         </div>
 

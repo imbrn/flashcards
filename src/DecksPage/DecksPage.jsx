@@ -7,19 +7,25 @@ const models = [
 
   DeckModel({
     id: 1,
-    name: 'Deck one',
-    description: 'This is the deck one'
+    name: 'Phrasal verbs',
+    description: 'A phrasal verb is a phrase that indicates an action—such as turn down or ran into.',
+    front: 'English',
+    back: 'Português',
   }),
 
   DeckModel({
     id: 2,
-    name: 'The deck two',
+    name: 'Capitais brasileiras',
+    description: 'Cidades capitais dos estados brasileiros',
+    front: 'Estado',
+    back: 'Capital',
   }),
 
   DeckModel({
     id: 3,
-    name: 'Three',
-    description: 'Deck three, which is bit larger for testing purposes'
+    name: 'Sete maneiras de dizer "não entendi"',
+    front: 'English',
+    back: 'Português',
   })
 
 ];
@@ -54,8 +60,8 @@ const DecksPage = () => {
             ];
 
             return (
-              <div key={model.id} className='p-2' style={{ width: '260px' }}>
-                <Deck model={model} menuModel={menuModel} />
+              <div key={model.id} className='p-2' style={{ width: '280px', minHeight: '280px' }}>
+                <Deck model={model} menuModel={menuModel} className='h-full'/>
               </div>
             );
 
