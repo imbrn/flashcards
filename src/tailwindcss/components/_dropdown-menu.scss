@@ -1,7 +1,7 @@
 .dropdown-menu {
 
   & > .dropdown-content {
-    @apply bg-white shadow-md rounded py-2;
+    @apply bg-white shadow-md rounded py-1;
     min-width: 160px;
 
     & > .dropdown-menu-item {
@@ -26,7 +26,7 @@
     }
 
     & > .dropdown-menu-separator {
-      @apply bg-grey-lighter mx-0 my-2;
+      @apply bg-grey-lighter mx-0 my-1;
       height: 1px;
     }
   }
