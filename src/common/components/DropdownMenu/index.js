@@ -1,9 +1,7 @@
 import DropdownMenu from './DropdownMenu';
-import DropdownMenuItem from './DropdownMenuItem';
-import DropdownMenuSeparator from './DropdownMenuSeparator';
+import * as DropdownMenuModel from './DropdownMenuModel';
 
 export default DropdownMenu;
 export {
-  DropdownMenuItem,
-  DropdownMenuSeparator,
+  DropdownMenuModel,
 };

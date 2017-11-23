@@ -1,5 +1,6 @@
 import React from 'react';
-import Deck, { DeckMenuModel } from './components/Deck';
+import Deck from './components/Deck';
+import { DropdownMenuModel } from '../common/components/DropdownMenu';
 import DeckModel from './DeckModel';
 import { Link } from 'react-router-dom';
 
@@ -39,19 +40,19 @@ const DecksPage = () => {
           models.map(model => {
 
             const menuModel = [
-              DeckMenuModel.link({
+              DropdownMenuModel.link({
                 text: 'Manage cards',
                 icon: 'fa fa-sticky-note-o',
                 tag: Link,
                 to: `/decks/${model.id}`,
               }),
-              DeckMenuModel.link({
+              DropdownMenuModel.link({
                 text: 'Edit',
                 icon: 'fa fa-pencil',
                 onClick: () => console.log('Edit'),
               }),
-              DeckMenuModel.separator(),
-              DeckMenuModel.link({
+              DropdownMenuModel.separator(),
+              DropdownMenuModel.link({
                 text: 'Delete',
                 icon: 'fa fa-trash-o',
                 onClick: () => console.log('Delete'),

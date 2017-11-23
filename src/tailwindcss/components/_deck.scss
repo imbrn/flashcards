@@ -60,10 +60,6 @@
   & > .deck-menu {
     @apply absolute pin-t pin-r;
 
-    .dropdown-button {
-      @apply w-10 h-10;
-    }
-
     .dropdown-content {
       @apply pin-r;
     }

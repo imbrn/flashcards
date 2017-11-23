@@ -1,6 +1,7 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import DecksPage from './DecksPage';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import CardsPage from './cards/CardsPage';
+import DecksPage from './decks/DecksPage';
 import NotFoundPage from './NotFoundPage';
 
 const Main = () => {
@@ -16,8 +17,9 @@ const Main = () => {
 const MainContent = () => {
   return (
     <Switch>
+      <Route path='/decks/:deckId' exact={true} component={CardsPage} />
       <Route path='/decks' exact={true} component={DecksPage} />
-      <Route path='/' exact={true} component={DecksPage} />
+      <Route path='/' exact={true} component={() => <Redirect to='/decks/1' />} />
       <Route component={NotFoundPage} />
     </Switch>
   );
