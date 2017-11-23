@@ -7,7 +7,7 @@ import NotFoundPage from './NotFoundPage';
 const Main = () => {
   return (
     <BrowserRouter>
-      <div className='font-sans font-light text-black bg-grey-lightest min-h-full'>
+      <div className='font-sans font-light text-black bg-grey-lightest h-full'>
         <MainContent />
       </div>
     </BrowserRouter>

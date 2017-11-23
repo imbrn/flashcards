@@ -4,4 +4,4 @@ import DropdownMoreVertButton from './DropdownMoreVertButton';
 export default Dropdown;
 export {
   DropdownMoreVertButton,
-}
+};
