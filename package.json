@@ -4,8 +4,8 @@
   "description": "React boilerplate with Webpack.",
   "main": "index.js",
   "scripts": {
-    "lint:js": "eslint src/",
-    "lint:js:fix": "eslint src/ --fix",
+    "lint:js": "eslint src/ --ext .js --ext .jsx",
+    "lint:js:fix": "eslint src/ --ext .js --ext .jsx --fix",
     "lint": "npm run lint:js",
     "lint:fix": "npm run lint:js:fix",
     "build": "npm run lint && webpack --config config/webpack.prod.js",

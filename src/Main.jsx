@@ -1,7 +1,6 @@
 import React from "react";
 
-const main = () => {
-  const hello = 'hello';
+const Main = () => {
   return (
     <div>flashcards</div>
   );
