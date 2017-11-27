@@ -1,27 +1,9 @@
-import React from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import CardsPage from './cards/CardsPage';
-import DecksPage from './decks/DecksPage';
-import NotFoundPage from './NotFoundPage';
+import React from "react";
 
-const Main = () => {
+const main = () => {
+  const hello = 'hello';
   return (
-    <BrowserRouter>
-      <div className='font-sans font-light text-black bg-grey-lightest h-full'>
-        <MainContent />
-      </div>
-    </BrowserRouter>
-  );
-};
-
-const MainContent = () => {
-  return (
-    <Switch>
-      <Route path='/decks/:deckId' exact={true} component={CardsPage} />
-      <Route path='/decks' exact={true} component={DecksPage} />
-      <Route path='/' exact={true} component={() => <Redirect to='/decks/1' />} />
-      <Route component={NotFoundPage} />
-    </Switch>
+    <div>flashcards</div>
   );
 };
 
