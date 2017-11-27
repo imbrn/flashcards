@@ -5,7 +5,7 @@ const path = require('path');
 
 module.exports = {
   plugins: [
-    tailwindcss(path.join(paths.src, 'tailwindcss/tailwind.js')),
+    tailwindcss(path.join(paths.root, 'tailwind/tailwind.js')),
     autoprefixer,
   ]
 }
