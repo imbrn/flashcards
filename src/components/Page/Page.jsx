@@ -1,9 +1,10 @@
 import React from "react";
 import Topbar from "../Topbar";
+import styles from "./Page.m.css";
 
 const Page = () => {
   return (
-    <div className="min-h-full bg-grey-lightest font-sans flex flex-col">
+    <div className={styles.page}>
       <Topbar />
     </div>
   );

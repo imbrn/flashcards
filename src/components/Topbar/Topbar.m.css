@@ -1,8 +1,22 @@
+@import "../commons/_medias.css";
+@import "../commons/_colors.css";
+@import "../commons/_shadows.css";
+@import "../commons/_paddings.css";
+@import "../commons/_text.css";
+
 .topbar {
-  padding: 12px 18px 0;
+  background: var(--color-white);
+  box-shadow: var(--shadow);
+}
+
+.content {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  box-sizing: border-box;
+  padding-top: var(--padding);
+  padding-left: var(--padding);
+  padding-right: var(--padding);
 }
 
 .logo {
@@ -10,9 +24,13 @@
 }
 
 .title {
-  padding-left: 15%;
-  flex-grow: 1;
   order: 1;
+  flex-grow: 1;
+  padding-left: 15%;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color-secondary);
 }
 
 .social {
@@ -30,14 +48,29 @@
   padding-top: 12px;
 }
 
-.githubLinkText {
+.logoImageLarge {
   display: none;
 }
 
-@media screen and (min-width: 768px) {
-  .topbar {
-    padding-bottom: 12px;
+.socialLink {
+  display: flex;
+  line-height: 1;
+  align-items: center;
+  text-decoration: none;
+  color: var(--color-black);
+  font-size: var(--text-md);
+  font-weight: 500;
+}
+
+.socialLinkIcon {
+  margin-right: 6px;
+}
+
+@media (--media-md) {
+  .content {
+    padding-bottom: var(--padding);
   }
+
   .actions {
     order: 2;
     width: auto;
@@ -45,6 +78,5 @@
   }
 }
 
-@media screen and (min-width: 480px) {
-  .githubLinkText { display: inline-block; }
+@media (--media-lg) {
 }

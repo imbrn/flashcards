@@ -1,0 +1,6 @@
+@import "../commons/_colors.css";
+
+.page {
+  background: var(--color-grey-lightest);
+  min-height: 100%;
+}

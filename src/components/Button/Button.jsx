@@ -1,10 +1,12 @@
 import React from "react";
 import classnames from "classnames";
 import PropTypes from "prop-types";
+import styles from "./Button.m.css";
 
-const Button = ({ children, color, size, ...rest }) => {
+const Button = ({ children, icon, color, size, ...rest }) => {
   return (
-    <button {...rest} className={classnames("button", colorClass(color), sizeClass(size))}>
+    <button {...rest} className={classnames(styles.button, colorClass(color), sizeClass(size))}>
+      { icon ? <span className={styles.icon}><i className={icon} /></span> : null }
       {children}
     </button>
   );
@@ -16,11 +18,11 @@ Button.propTypes = {
 };
 
 function colorClass(color="normal") {
-  return `button-${color}`;
+  return styles[color];
 }
 
 function sizeClass(size="md") {
-  return `button-${size}`;
+  return styles[size];
 }
 
 export default Button;

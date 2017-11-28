@@ -1,0 +1,24 @@
+@import "../commons/_medias.css";
+@import "../commons/_screens.css";
+
+.container {
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (--media-sm) {
+  .container { width: var(--screen-sm); }
+}
+
+@media (--media-md) {
+  .container { width: var(--screen-md); }
+}
+
+@media (--media-lg) {
+  .container { width: var(--screen-lg); }
+}
+
+@media (--media-xl) {
+  .container { width: var(--screen-xl); }
+}
+

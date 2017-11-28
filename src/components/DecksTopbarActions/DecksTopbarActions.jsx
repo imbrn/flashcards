@@ -5,13 +5,11 @@ const DecksTopbarActions = () => {
   return (
     <div>
 
-      <Button color="tertiary">
-        <span className="icon"><i className="fa fa-search" /></span>
+      <Button color="tertiary" size="lg" icon="fa fa-search">
         Search
       </Button>
 
-      <Button color="tertiary">
-        <span className="icon"><i className="fa fa-plus" /></span>
+      <Button color="tertiary" size="lg" icon="fa fa-plus">
         Create deck
       </Button>
 
