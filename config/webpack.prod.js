@@ -13,7 +13,53 @@ module.exports = merge(common, {
     rules: [
 
       {
+        test: /\.m(odule)?\.css$/,
+        use: extractCss.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                localIdentName: '[path][name]__[local]--[hash:base64:5]',
+              },
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                config: { path: paths.config }
+              }
+            },
+          ],
+        }),
+      },
+
+      {
+        test: /\.m(odule)?\.scss$/,
+        use: extractCss.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                localIdentName: '[path][name]__[local]--[hash:base64:5]',
+              },
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                config: { path: paths.config }
+              }
+            },
+            'sass-loader',
+          ],
+        }),
+      },
+
+      {
         test: /\.css$/,
+        exclude: /\.m(odule)?\.css$/,
         use: extractCss.extract({
           fallback: 'style-loader',
           use: [
@@ -30,6 +76,7 @@ module.exports = merge(common, {
 
       {
         test: /\.scss$/,
+        exclude: /\.m(odule)?\.scss$/,
         use: {
           fallback: 'style-loader',
           use: [

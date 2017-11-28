@@ -44,6 +44,7 @@
     "eslint": "^4.11.0",
     "eslint-plugin-react": "^7.5.1",
     "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.5",
     "html-webpack-plugin": "^2.30.1",
     "node-sass": "^4.7.2",
     "openurl": "^1.1.1",

@@ -13,7 +13,49 @@ module.exports = merge(common, {
     rules: [
 
       {
+        test: /\.m(odule)?\.css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[path][name]__[local]--[hash:base64:5]'
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              config: { path: paths.config }
+            }
+          },
+        ],
+      },
+
+      {
+        test: /\.m(odule)?\.scss$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[path][name]__[local]--[hash:base64:5]',
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              config: { path: paths.config }
+            }
+          },
+          'sass-loader',
+        ],
+      },
+
+      {
         test: /\.css$/,
+        exclude: /\.m(odule)?\.css$/,
         use: [
           'style-loader', 'css-loader',
           {
@@ -21,12 +63,13 @@ module.exports = merge(common, {
             options: {
               config: { path: paths.config }
             }
-          }
-        ]
+          },
+        ],
       },
 
       {
         test: /\.scss$/,
+        exclude: /\.m(odule)?\.scss$/,
         use: [
           'style-loader',
           'css-loader',
@@ -34,10 +77,10 @@ module.exports = merge(common, {
             loader: 'postcss-loader',
             options: {
               config: { path: paths.config }
-            }
+            },
           },
-          'sass-loader'
-        ]
+          'sass-loader',
+        ],
       }
 
     ]

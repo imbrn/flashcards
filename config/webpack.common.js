@@ -34,7 +34,13 @@ module.exports = {
             ]
           }
         }
-      }
+      },
+      {
+        test: /\.(png|svg|jpg|git)$/,
+        use: [
+          'file-loader'
+        ],
+      },
     ]
   },
 
