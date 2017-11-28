@@ -18,7 +18,7 @@ const Topbar = () => {
           <Logo />
         </div>
 
-        <div className={classnames(styles.title, 'text-secondary font-bold text-base')}>
+        <div className={classnames(styles.title)}>
           <Switch>{routes.title.map(objectToRoute)}</Switch>
         </div>
 
