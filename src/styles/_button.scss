@@ -1,0 +1,22 @@
+.button {
+  @apply inline-block;
+  @apply .font-medium .text-base;
+  @apply .px-3 .py-2;
+
+  .icon {
+    @apply .inline-block .mr-2;
+  }
+
+  img {
+    height: 100%;
+  }
+}
+
+.button-tertiary {
+  @apply text-tertiary;
+}
+
+.button-sm {
+  .icon { height: 24px; }
+}
+

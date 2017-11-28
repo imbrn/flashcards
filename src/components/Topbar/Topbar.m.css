@@ -1,0 +1,50 @@
+.topbar {
+  padding: 12px 18px 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.logo {
+  order: 0;
+}
+
+.title {
+  text-align: center;
+  flex-grow: 1;
+  order: 1;
+}
+
+.social {
+  order: 2;
+}
+
+.auth {
+  order: 3;
+}
+
+.actions {
+  order: 4;
+  width: 100%;
+  text-align: right;
+  padding-top: 12px;
+}
+
+.githubLinkText {
+  display: none;
+}
+
+@media screen and (min-width: 992px) {
+  .topbar {
+    padding-bottom: 12px;
+  }
+  .actions {
+    order: 2;
+    width: auto;
+    padding: 0;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .githubLinkText { display: inline-block; }
+}

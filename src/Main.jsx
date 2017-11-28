@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter } from 'react-router-dom';
-import classnames from "classnames";
+import Page from "./components/Page";
 
 const Main = () => {
   return (
     <BrowserRouter>
-      <div>Hello</div>
+      <Page />
     </BrowserRouter>
   );
 };
