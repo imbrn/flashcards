@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 const paths = require('./paths.js');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -45,6 +46,9 @@ module.exports = {
   },
 
   plugins: [
+    new webpack.DefinePlugin({
+      GITHUB: JSON.stringify('https://github.com/nwsapps/flashcards'),
+    }),
     new CleanWebpackPlugin([paths.build], cleanOptions),
     new HtmlWebpackPlugin({
       title: 'es-boilerplate',
