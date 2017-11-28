@@ -1,8 +1,4 @@
-@import "../commons/_medias.css";
-@import "../commons/_colors.css";
-@import "../commons/_shadows.css";
-@import "../commons/_spacing.css";
-@import "../commons/_text.css";
+@import "../commons/_variables.css";
 
 .topbar {
   background: var(--color-white);
@@ -14,9 +10,9 @@
   flex-wrap: wrap;
   align-items: center;
   box-sizing: border-box;
-  padding-top: var(--spacing);
-  padding-left: var(--spacing);
-  padding-right: var(--spacing);
+  padding-top: var(--base-spacing);
+  padding-left: var(--base-spacing);
+  padding-right: var(--base-spacing);
 }
 
 .logo {
@@ -26,8 +22,8 @@
 .title {
   order: 1;
   flex-grow: 1;
-  padding-left: 15%;
-  font-size: var(--text-lg);
+  padding-left: calc(var(--base-spacing) * 3);
+  font-size: 1.15rem;
   font-weight: 600;
   text-transform: uppercase;
   color: var(--color-secondary);
@@ -45,7 +41,7 @@
   order: 4;
   width: 100%;
   text-align: right;
-  padding-top: calc(var(--spacing) * 0.5);
+  padding-top: calc(var(--base-spacing) * 0.5);
   margin: 0;
 }
 
@@ -59,24 +55,24 @@
   align-items: center;
   text-decoration: none;
   color: var(--color-black);
-  font-size: var(--text-md);
+  font-size: 1rem;
   font-weight: 500;
 }
 
 .socialLinkIcon {
-  margin-right: 6px;
+  margin-right: calc(var(--base-spacing) * 0.5);
 }
 
 @media (--media-md) {
   .content {
-    padding-bottom: var(--spacing);
+    padding-bottom: var(--base-spacing);
   }
 
   .actions {
     order: 2;
     width: auto;
     padding: 0;
-    margin-right: var(--spacing);
+    margin-right: var(--base-spacing);
   }
 }
 

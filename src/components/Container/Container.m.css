@@ -1,5 +1,4 @@
-@import "../commons/_medias.css";
-@import "../commons/_screens.css";
+@import "../commons/_variables.css";
 
 .container {
   margin: 0 auto;

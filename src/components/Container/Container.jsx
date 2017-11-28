@@ -13,7 +13,7 @@ const Container = ({ children, className, ...rest }) => {
 
 Container.propTypes = {
   children: PropTypes.node,
-  className: PropTypes.oneOf([
+  className: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(PropTypes.string),
   ]),

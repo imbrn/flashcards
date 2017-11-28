@@ -1,0 +1,26 @@
+:root {
+
+  --base-font-family: 'Barlow Semi Condensed';
+  --base-font-size: 16px;
+
+  --base-spacing: 12px;
+
+  --color-black: #313131;
+  --color-white: #ffffff;
+  --color-primary: #1bd5d0;
+  --color-secondary: #9e73e7;
+  --color-tertiary: #ff55ba;
+
+  --shadow: 0px 1px 1px 0 rgba(0, 0, 0, 0.10);
+
+  --screen-sm: 576px;
+  --screen-md: 768px;
+  --screen-lg: 992px;
+  --screen-xl: 1200px;
+
+  @custom-media --media-sm (min-width: 576px);
+  @custom-media --media-md (min-width: 768px);
+  @custom-media --media-lg (min-width: 992px);
+  @custom-media --media-xl (min-width: 1200px);
+
+}

@@ -1,6 +1,11 @@
-@import "../commons/_colors.css";
+@import "../commons/_variables.css";
+
+html {
+  font-family: var(--base-font-family);
+  font-size: var(--base-font-size);
+}
 
 .page {
-  background: var(--color-grey-lightest);
+  background: #f9fbff;
   min-height: 100%;
 }
