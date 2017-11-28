@@ -79,4 +79,6 @@
 }
 
 @media (--media-lg) {
+  .logoImageLarge { display: inline-block; }
+  .logoImageSmall { display: none; }
 }
