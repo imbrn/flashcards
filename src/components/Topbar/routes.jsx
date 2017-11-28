@@ -5,19 +5,19 @@ import DecksTopbarActions from "../DecksTopbarActions";
 const routes = {
   title: [
     {
-      path: '/decks',
+      path: "/decks",
       exact: true,
       component: () => "My decks",
     },
     {
-      path: '/',
+      path: "/",
       exact: true,
       component: () => <Redirect to="/decks" />,
     },
   ],
   actions: [
     {
-      path: '/decks',
+      path: "/decks",
       exact: true,
       component: DecksTopbarActions,
     },

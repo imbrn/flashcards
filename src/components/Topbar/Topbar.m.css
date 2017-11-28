@@ -46,6 +46,7 @@
   width: 100%;
   text-align: right;
   padding-top: calc(var(--padding) * 0.5);
+  margin: 0;
 }
 
 .logoImageLarge {
@@ -75,6 +76,7 @@
     order: 2;
     width: auto;
     padding: 0;
+    margin-right: var(--padding);
   }
 }
 
