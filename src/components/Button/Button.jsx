@@ -13,6 +13,8 @@ const Button = ({ children, icon, color, size, ...rest }) => {
 };
 
 Button.propTypes = {
+  children: PropTypes.node,
+  icon: PropTypes.string,
   color: PropTypes.oneOf(["normal", "primary", "secondary", "tertiary"]),
   size: PropTypes.oneOf(["xs", "sm", "md", "lg", "xl"]),
 };

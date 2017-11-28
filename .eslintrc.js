@@ -18,6 +18,9 @@ module.exports = {
   "plugins": [
     "react"
   ],
+  "globals": {
+    "GITHUB": true,
+  },
   "rules": {
     "indent": [
       "error",

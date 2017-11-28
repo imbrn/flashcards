@@ -1,3 +1,4 @@
+/* eslint react/display-name: "off" */
 import React from "react";
 import { Redirect } from "react-router-dom";
 import DecksTopbarActions from "../DecksTopbarActions";
