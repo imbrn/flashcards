@@ -1,7 +1,7 @@
 @import "../commons/_medias.css";
 @import "../commons/_colors.css";
 @import "../commons/_shadows.css";
-@import "../commons/_paddings.css";
+@import "../commons/_spacing.css";
 @import "../commons/_text.css";
 
 .topbar {
@@ -14,9 +14,9 @@
   flex-wrap: wrap;
   align-items: center;
   box-sizing: border-box;
-  padding-top: var(--padding);
-  padding-left: var(--padding);
-  padding-right: var(--padding);
+  padding-top: var(--spacing);
+  padding-left: var(--spacing);
+  padding-right: var(--spacing);
 }
 
 .logo {
@@ -45,7 +45,7 @@
   order: 4;
   width: 100%;
   text-align: right;
-  padding-top: calc(var(--padding) * 0.5);
+  padding-top: calc(var(--spacing) * 0.5);
   margin: 0;
 }
 
@@ -69,14 +69,14 @@
 
 @media (--media-md) {
   .content {
-    padding-bottom: var(--padding);
+    padding-bottom: var(--spacing);
   }
 
   .actions {
     order: 2;
     width: auto;
     padding: 0;
-    margin-right: var(--padding);
+    margin-right: var(--spacing);
   }
 }
 
