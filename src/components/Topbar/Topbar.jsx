@@ -3,8 +3,8 @@ import { Switch } from "react-router-dom";
 import routes from "./routes";
 import { objectToRoute } from "../utils";
 import classnames from "classnames";
-import logo from "../../images/logo.svg";
-import githubImage from "../../images/github.svg";
+import logo from "../commons/images/logo.svg";
+import githubImage from "../commons/images/github.svg";
 import ResponsiveContainer from "../ResponsiveContainer";
 import styles from "./Topbar.m.css";
 
