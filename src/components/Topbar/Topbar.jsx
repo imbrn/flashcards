@@ -3,8 +3,7 @@ import { Switch } from "react-router-dom";
 import routes from "./routes";
 import { objectToRoute } from "../utils";
 import classnames from "classnames";
-import logoSmall from "../../images/logo-sm.svg";
-import logoLarge from "../../images/logo-lg.svg";
+import logo from "../../images/logo.svg";
 import githubImage from "../../images/github.svg";
 import Container from "../Container";
 import styles from "./Topbar.m.css";
@@ -41,8 +40,8 @@ const Topbar = () => {
 const Logo = () => {
   return (
     <span className={styles.logo}>
-      <img src={logoSmall} alt="Flashcards" height="32" className={styles.logoImageSmall}/>
-      <img src={logoLarge} alt="Flashcards" height="32" className={styles.logoImageLarge}/>
+      <img src={logo} alt="Flashcards" height="32" className={styles.logoImage}/>
+      <span className={styles.logoText}>Flashcards</span>
     </span>
   );
 };

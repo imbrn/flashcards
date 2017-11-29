@@ -17,6 +17,18 @@
 
 .logo {
   order: 0;
+  display: flex;
+  align-items: flex-start;
+}
+
+.logoText {
+  position: relative;
+  display: none;
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--color-primary);
+  top: -4px;
+  margin-left: calc(var(--base-spacing));
 }
 
 .title {
@@ -43,10 +55,6 @@
   text-align: right;
   padding-top: calc(var(--base-spacing) * 0.5);
   margin: 0;
-}
-
-.logoImageLarge {
-  display: none;
 }
 
 .socialLink {
@@ -77,6 +85,5 @@
 }
 
 @media (--media-lg) {
-  .logoImageLarge { display: inline-block; }
-  .logoImageSmall { display: none; }
+  .logoText { display: inline-block; }
 }
