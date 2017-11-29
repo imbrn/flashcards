@@ -1,9 +1,9 @@
 import React from "react";
 import classnames from "classnames";
-import styles from "./Container.m.css";
+import styles from "./ResponsiveContainer.m.css";
 import PropTypes from "prop-types";
 
-const Container = ({ children, className, ...rest }) => {
+const ResponsiveContainer = ({ children, className, ...rest }) => {
   return (
     <div {...rest} className={classnames(styles.container, className)}>
       {children}
@@ -11,7 +11,7 @@ const Container = ({ children, className, ...rest }) => {
   );
 };
 
-Container.propTypes = {
+ResponsiveContainer.propTypes = {
   children: PropTypes.node,
   className: PropTypes.oneOfType([
     PropTypes.string,
@@ -19,4 +19,4 @@ Container.propTypes = {
   ]),
 };
 
-export default Container;
+export default ResponsiveContainer;

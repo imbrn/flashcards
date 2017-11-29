@@ -5,13 +5,13 @@ import { objectToRoute } from "../utils";
 import classnames from "classnames";
 import logo from "../../images/logo.svg";
 import githubImage from "../../images/github.svg";
-import Container from "../Container";
+import ResponsiveContainer from "../ResponsiveContainer";
 import styles from "./Topbar.m.css";
 
 const Topbar = () => {
   return (
     <div className={classnames(styles.topbar)}>
-      <Container className={styles.content}>
+      <ResponsiveContainer className={styles.content}>
 
         <div className={styles.logo}>
           <Logo />
@@ -32,7 +32,7 @@ const Topbar = () => {
         <div className={styles.auth}>
         </div>
 
-      </Container>
+      </ResponsiveContainer>
     </div>
   );
 };
