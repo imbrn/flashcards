@@ -1,0 +1,25 @@
+@import "../commons/_variables.css";
+
+.dropdown {
+  position: relative;
+}
+
+.button {
+  position: relative;
+}
+
+.box {
+  display: none;
+  position: absolute;
+  background: var(--color-white);
+  box-shadow: var(--shadow-3);
+  border-radius: calc(var(--base-rounding) / 2);
+}
+
+.box:global(.open) {
+  display: block;
+}
+
+.dropdown:global(.right) .box {
+  right: 0;
+}

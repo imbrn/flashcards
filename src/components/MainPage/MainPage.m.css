@@ -6,6 +6,6 @@ html {
 }
 
 .page {
-  background: #f9fbff;
+  background: var(--color-grey-lightest);
   min-height: 100%;
 }

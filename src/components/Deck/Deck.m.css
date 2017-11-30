@@ -1,0 +1,65 @@
+@import "../commons/_variables.css";
+
+.deck {
+  position: relative;
+  background: var(--color-white);
+  box-shadow: var(--shadow-2);
+  box-sizing: border-box;
+  border-radius: var(--base-rounding);
+  padding: var(--base-spacing);
+}
+
+.deckContent {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.deckContent h1, .deckContent h2 {
+  margin: 0;
+  padding: 0;
+}
+
+.deckContent h1 {
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--color-grey-dark);
+}
+
+.labels {
+  display: flex;
+  margin-top: calc(var(--base-spacing) / 2);
+}
+
+.labels label {
+  background: var(--color-grey-lighter);
+  color: var(--color-grey-light);
+  font-weight: 600;
+  font-size: 0.85rem;
+  border-radius: calc(var(--base-rounding) / 2);
+  padding: calc(var(--base-spacing) / 6) calc(var(--base-spacing) / 2);
+} 
+
+.labels label:first-child {
+  margin-right: calc(var(--base-spacing) / 2);
+}
+
+.deckContent h2 {
+  flex-grow: 1;
+  margin-top: var(--base-spacing);
+  font-weight: 300;
+  font-size: 1.25rem;
+  text-align: center;
+  color: var(--color-grey);
+}
+
+.deckMenu {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 10;
+}
+
