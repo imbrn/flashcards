@@ -5,7 +5,7 @@ import { auth, firestore, initializeApp } from "firebase";
 import firebaseConfig from "../firebase/config.js";
 import { connect } from "react-redux";
 import { authOperations, authSelectors } from "./auth";
-import { cardsOperations, CardModel, DeckModel } from "./cards";
+import { decksOperations, CardModel, DeckModel } from "./decks";
 import LoadingPage from "./components/LoadingPage";
 import AuthFailPage from "./components/AuthFailPage";
 import MainPage from "./components/MainPage";
@@ -55,18 +55,18 @@ class Main extends React.Component {
   }
 
   addDeck(doc) {
-    this.dispatch(cardsOperations.addDeck(this.parseDeck(doc)));
+    this.dispatch(decksOperations.addDeck(this.parseDeck(doc)));
     this.cardsListeners[doc.id] = this.listenToCards(doc);
   }
 
   removeDeck(doc) {
-    this.dispatch(cardsOperations.removeDeck(this.parseDeck(doc)));
+    this.dispatch(decksOperations.removeDeck(this.parseDeck(doc)));
     this.cardsListeners[doc.id]();
     delete this.cardsListeners[doc.id];
   }
 
   updateDeck(doc) {
-    this.dispatch(cardsOperations.updateDeck(this.parseDeck(doc)));
+    this.dispatch(decksOperations.updateDeck(this.parseDeck(doc)));
   }
 
   listenToCards(deckDoc) {
@@ -80,15 +80,15 @@ class Main extends React.Component {
   }
 
   addCard(deckDoc, cardDoc) {
-    this.dispatch(cardsOperations.addCard(this.parseCard(deckDoc, cardDoc)));
+    this.dispatch(decksOperations.addCard(this.parseCard(deckDoc, cardDoc)));
   }
 
   removeCard(deckDoc, cardDoc) {
-    this.dispatch(cardsOperations.removeCard(this.parseCard(deckDoc, cardDoc)));
+    this.dispatch(decksOperations.removeCard(this.parseCard(deckDoc, cardDoc)));
   }
 
   updateCard(deckDoc, cardDoc) {
-    this.dispatch(cardsOperations.updateCard(this.parseCard(deckDoc, cardDoc)));
+    this.dispatch(decksOperations.updateCard(this.parseCard(deckDoc, cardDoc)));
   }
 
   parseCard(deckDoc, cardDoc) {
