@@ -1,5 +1,6 @@
 # Editors and IDEs
 .vimrc
+.tern-project
 
 # Package manages
 node_modules/
