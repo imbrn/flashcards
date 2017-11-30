@@ -6,18 +6,18 @@
 }
 
 @media (--media-sm) {
-  .container { width: var(--screen-sm); }
+  .container { max-width: var(--screen-sm); }
 }
 
 @media (--media-md) {
-  .container { width: var(--screen-md); }
+  .container { max-width: var(--screen-md); }
 }
 
 @media (--media-lg) {
-  .container { width: var(--screen-lg); }
+  .container { max-width: var(--screen-lg); }
 }
 
 @media (--media-xl) {
-  .container { width: var(--screen-xl); }
+  .container { max-width: var(--screen-xl); }
 }
 
