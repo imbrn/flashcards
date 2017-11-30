@@ -1,8 +1,8 @@
 import React from "react";
 import Topbar from "../Topbar";
-import styles from "./Page.m.css";
+import styles from "./MainPage.m.css";
 
-const Page = () => {
+const MainPage = () => {
   return (
     <div className={styles.page}>
       <Topbar />
@@ -10,4 +10,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default MainPage;

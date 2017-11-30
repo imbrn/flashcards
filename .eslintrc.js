@@ -20,11 +20,15 @@ module.exports = {
   ],
   "globals": {
     "GITHUB": true,
+    "FIREBASE_CONFIG": true,
   },
   "rules": {
     "indent": [
       "error",
-      2
+      2,
+      {
+        "SwitchCase": 1,
+      }
     ],
     "linebreak-style": [
       "error",
