@@ -1,8 +1,19 @@
-import { Map } from "immutable";
+import { OrderedMap } from "immutable";
+import { combineReducers } from "redux";
 import types from "./actionsTypes";
+import { DecksInitialLoadingState } from "./models"; 
 
-const reducer = (state = Map(), action) => {
+const loadingState = (state = DecksInitialLoadingState.NOT_LOADED, action) => {
+  switch (action.type) {
+    case types.START_LOADING_INITIAL_DECKS: return DecksInitialLoadingState.LOADING;
+    case types.LOAD_INITIAL_DECKS: return DecksInitialLoadingState.LOADED;
+    default: return state;
+  }
+};
+
+const decks = (state = OrderedMap(), action) => {
   switch(action.type) {
+    case types.LOAD_INITIAL_DECKS: return loadInitialDecks(state, action);
     case types.ADD_DECK: return addDeck(state, action);
     case types.REMOVE_DECK: return removeDeck(state, action);
     case types.UPDATE_DECK: return updateDeck(state, action);
@@ -11,6 +22,10 @@ const reducer = (state = Map(), action) => {
     case types.UPDATE_CARD: return updateCard(state, action);
     default: return state;
   }
+};
+
+const loadInitialDecks = (state, action) => {
+  return OrderedMap(action.decks.map(deck => [deck.id, deck]));
 };
 
 const addDeck = (state, action) => {
@@ -50,5 +65,10 @@ const changeDeckCards = (state, deckId, changeFunction) => {
   deck = deck.set("cards", cards);
   return state.set(deckId, deck);
 };
+
+const reducer = combineReducers({
+  loadingState,
+  decks,
+});
 
 export default reducer;

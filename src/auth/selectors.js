@@ -1,19 +1,24 @@
-import { Situation } from "./models";
-
-const isSigningIn = (auth) => {
-  return auth.situation === Situation.SIGNING_IN;
-};
+import { SignInState } from "./models";
 
 const isSignedIn = (auth) => {
-  return auth.situation === Situation.SIGNED_IN;
+  return auth.signInState === SignInState.SIGNED_IN;
 };
 
 const isSignedOut = (auth) => {
-  return auth.situation === Situation.SIGNED_OUT;
+  return auth.signInState === SignInState.SIGNED_OUT;
+};
+
+const isSigningIn = (auth) => {
+  return auth.signInState === SignInState.SIGNING_IN;
+};
+
+const isFailed = (auth) => {
+  return auth.signInState === SignInState.FAILED;
 };
 
 export default {
-  isSigningIn,
   isSignedIn,
   isSignedOut,
+  isSigningIn,
+  isFailed,
 };

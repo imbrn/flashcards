@@ -1,13 +1,11 @@
 import actions from "./actions";
 
 const startSigningIn = actions.startSigningIn;
-const signIn = actions.signIn;
-const signOut = actions.signOut;
-const signInFailed = actions.signInFailed;
+const endSigningIn = actions.endSigningIn;
+const signingInFailed = actions.signingInFailed;
 
 export default {
   startSigningIn,
-  signIn,
-  signOut,
-  signInFailed,
+  endSigningIn,
+  signingInFailed,
 };

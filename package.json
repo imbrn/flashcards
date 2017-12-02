@@ -68,6 +68,7 @@
     "react-router-dom": "^4.2.2",
     "react-textarea-autosize": "^5.2.1",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "styled-components": "^2.2.4"
   }
 }

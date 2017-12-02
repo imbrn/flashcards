@@ -6,29 +6,23 @@ const startSigningIn = () => {
   };
 };
 
-const signIn = (user) => {
+const endSigningIn = (user) => {
   return {
-    type: actionsTypes.SIGN_IN,
+    type: actionsTypes.END_SIGNING_IN,
     user,
   };
 };
 
-const signOut = () => {
-  return {
-    type: actionsTypes.SIGN_OUT,
-  };
-};
-
-const signInFailed = () => {
+const signingInFailed = (cause) => {
   return {
     type: actionsTypes.SIGN_IN_FAILED,
+    cause,
   };
 };
 
 export default {
   startSigningIn,
-  signIn,
-  signOut,
-  signInFailed,
+  endSigningIn,
+  signingInFailed,
 };
 

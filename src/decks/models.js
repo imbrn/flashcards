@@ -19,3 +19,9 @@ export const CardModel = Record({
   createTime: null,
   updateTime: null,
 });
+
+export const DecksInitialLoadingState = {
+  NOT_LOADED: "NOT_LOADED",
+  LOADING: "LOADING",
+  LOADED: "LOADED",
+};

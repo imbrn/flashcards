@@ -1,5 +1,18 @@
 import types from "./actionsTypes";
 
+const startLoadingInitialDecks = () => {
+  return {
+    type: types.START_LOADING_INITIAL_DECKS,
+  }
+};
+
+const loadInitialDecks = (decks) => {
+  return {
+    type: types.LOAD_INITIAL_DECKS,
+    decks,
+  }
+};
+
 const addDeck = (deck) => {
   return {
     type: types.ADD_DECK,
@@ -43,6 +56,8 @@ const updateCard = (card) => {
 };
 
 export default {
+  startLoadingInitialDecks,
+  loadInitialDecks,
   addDeck,
   removeDeck,
   updateDeck,

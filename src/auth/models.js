@@ -5,11 +5,9 @@ export const UserModel = Record({
   displayName: null,
 });
 
-export const Situation = {
-  INITIALIZED: 0,
-  SIGNING_IN: 1,
-  SIGNED_IN: 2,
-  SIGNED_OUT: 3,
-  FAILED: 4,
+export const SignInState = {
+  SIGNING_IN: 'SIGNING_IN',
+  SIGNED_IN: 'SIGNED_IN',
+  SIGNED_OUT: 'SIGNED_OUT',
+  FAILED: 'FAILED',
 };
-
