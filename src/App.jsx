@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Main from "./components/Main";
-import services from "./firebase";
+import services from "./services";
 import { authOperations } from "./auth";
 import { decksOperations } from "./decks";
 
@@ -25,15 +25,13 @@ class App extends React.Component {
   loadDecks(user) {
     this.dispatch(decksOperations.startLoadingInitialDecks());
 
-    user.getDecks().then(this.convertDecksProxiesToModels).then(decksPromises => {
-      return Promise.all(decksPromises).then(decks => {
-        this.dispatch(decksOperations.loadInitialDecks(decks));
-      });
+    user.getDecks().then(this.convertDecksProxiesToModels).then(decks => {
+      this.dispatch(decksOperations.loadInitialDecks(decks));
     });
   }
 
   convertDecksProxiesToModels(decks) {
-    return decks.map(deck => deck.asDeepDeckModel());
+    return Promise.all(decks.map(deck => deck.asDeepDeckModel()));
   }
 
   dispatch(action) {

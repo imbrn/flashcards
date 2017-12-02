@@ -16,7 +16,7 @@ const signInState = (state = SignInState.SIGNED_OUT, action) => {
   switch (action.type) {
     case types.START_SIGNING_IN: return SignInState.SIGNING_IN;
     case types.END_SIGNING_IN: return action.user ?
-        SignInState.SIGNED_IN : SignInState.SIGNED_OUT;
+      SignInState.SIGNED_IN : SignInState.SIGNED_OUT;
     case types.SIGN_IN_FAILED: return SignInState.FAILED;
     default: return state;
   }

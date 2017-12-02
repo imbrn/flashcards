@@ -6,8 +6,8 @@ export const UserModel = Record({
 });
 
 export const SignInState = {
-  SIGNING_IN: 'SIGNING_IN',
-  SIGNED_IN: 'SIGNED_IN',
-  SIGNED_OUT: 'SIGNED_OUT',
-  FAILED: 'FAILED',
+  SIGNING_IN: "SIGNING_IN",
+  SIGNED_IN: "SIGNED_IN",
+  SIGNED_OUT: "SIGNED_OUT",
+  FAILED: "FAILED",
 };

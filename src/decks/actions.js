@@ -3,14 +3,14 @@ import types from "./actionsTypes";
 const startLoadingInitialDecks = () => {
   return {
     type: types.START_LOADING_INITIAL_DECKS,
-  }
+  };
 };
 
 const loadInitialDecks = (decks) => {
   return {
     type: types.LOAD_INITIAL_DECKS,
     decks,
-  }
+  };
 };
 
 const addDeck = (deck) => {

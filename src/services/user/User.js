@@ -13,7 +13,7 @@ class User {
       auth().signInAnonymously().then(user => {
         resolve(new User(user));
       })
-      .catch(reject);
+        .catch(reject);
     });
   }
 
@@ -33,9 +33,6 @@ class User {
       decks.push(new Deck(doc));
     });
     return decks;
-  }
-
-  listenToDecks(callbacks) {
   }
 
 }
