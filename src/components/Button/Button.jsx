@@ -16,7 +16,7 @@ const Button = ({ tag = "button", children, className, tertiary, ...rest }) => {
 };
 
 Button.propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   children: PropTypes.node,
   className: PropTypesUtils.className,
   tertiary: PropTypes.bool,

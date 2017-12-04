@@ -7,14 +7,12 @@ import AppPage from "../AppPage";
 import SigningInPage from "../SigningInPage";
 
 const Main = ({ auth }) => {
-
   if (authSelectors.isSigningIn(auth)) {
     return <SigningInPage />;
   } else {
     return <AppPage />;
   }
   // TODO: add support for sign in fail page
-
 };
 
 Main.propTypes = {

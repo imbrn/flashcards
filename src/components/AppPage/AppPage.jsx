@@ -7,13 +7,13 @@ const AppPage = () => {
   return (
     <div className={styles.root}>
       <Switch>
-        { routes.map(getRoute) }
+        { routes.map(asRoute) }
       </Switch>
     </div>
   );
 };
 
-const getRoute = (route, key) => {
+const asRoute = (route, key) => {
   return <Route
     key={key}
     path={route.path}

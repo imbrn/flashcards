@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Main from "./components/Main";
 import services from "./services";
@@ -48,4 +49,4 @@ App.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-export default connect()(App);
+export default withRouter(connect()(App));

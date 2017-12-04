@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import PropTypesUtils from "../prop-types-utils";
 import styles from "./Navbar.css";
 import classnames from "classnames";
-import logo from "../commons/images/logo.svg";
+import logo from "../images/logo.svg";
 import Container from "../ResponsiveContainer";
 import Button from "../Button";
 import Icon from "../Icon";
