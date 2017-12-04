@@ -6,6 +6,6 @@ html, body {
   height: 100%;
 }
 
-#root {
+:global(#root) {
   height: 100%;
 }

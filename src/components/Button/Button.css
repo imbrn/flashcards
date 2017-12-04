@@ -1,0 +1,17 @@
+@import "../commons/_variables.css";
+
+.button {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 500;
+  background: none;
+  border: none;
+  padding: calc(var(--base-spacing) / 2);
+  cursor: pointer;
+  color: var(--color-grey-dark);
+  text-decoration: none;
+}
+
+.button.tertiary {
+  color: var(--color-tertiary);
+}

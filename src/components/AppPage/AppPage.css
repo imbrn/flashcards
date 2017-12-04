@@ -1,0 +1,8 @@
+@import "../commons/_variables.css";
+
+.root {
+  font-family: var(--base-font-family);
+  font-size: var(--base-font-size);
+  background: var(--color-grey-lightest);
+  min-height: 100%;
+}

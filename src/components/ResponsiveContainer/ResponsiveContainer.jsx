@@ -1,19 +1,20 @@
-import styled from "styled-components";
+import React from "react";
+import PropTypes from "prop-types";
+import PropTypesUtils from "../commons/propTypesUtils";
+import classnames from "classnames";
+import styles from "./ResponsiveContainer.css";
 
-const screenSizes = (screens) => {
-  return Object.keys(screens).map(screen => {
-    return `
-      @media (min-width: ${screens[screen]}) {
-        max-width: ${screens[screen]};
-      }
-    `;
-  }).join("");
+const ResponsiveContainer = ({ children, className, ...rest }) => {
+  return (
+    <div {...rest} className={classnames(styles.root, className)}>
+      {children}
+    </div>
+  );
 };
 
-const ResponsiveContainer = styled.div`
-  width: 100%;
-  margin: 0 auto;
-  ${props => screenSizes(props.theme.screen)}
-`;
+ResponsiveContainer.propTypes = {
+  children: PropTypes.node.isRequired,
+  className: PropTypesUtils.className,
+};
 
 export default ResponsiveContainer;

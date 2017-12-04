@@ -1,10 +1,11 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import routes from "./routes";
+import styles from "./AppPage.css";
 
 const AppPage = () => {
   return (
-    <div>
+    <div className={styles.root}>
       <Switch>
         { routes.map(getRoute) }
       </Switch>

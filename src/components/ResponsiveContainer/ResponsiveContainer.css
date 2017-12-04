@@ -1,0 +1,10 @@
+@import "../commons/_variables.css";
+
+.root {
+  margin: 0 auto;
+
+  @media (--media-sm) { max-width: var(--screen-sm); }
+  @media (--media-md) { max-width: var(--screen-md); }
+  @media (--media-lg) { max-width: var(--screen-lg); }
+  @media (--media-xl) { max-width: var(--screen-xl); }
+}

@@ -1,7 +1,7 @@
 :root {
 
   --base-font-family: 'Barlow Semi Condensed';
-  --base-font-size: 16px;
+  --base-font-size: 18px;
 
   --base-spacing: calc(var(--base-font-size) * .86);
   --base-rounding: calc(var(--base-font-size) * .5);

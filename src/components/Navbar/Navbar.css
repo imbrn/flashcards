@@ -1,3 +1,75 @@
+@import "../commons/_variables.css";
+
 .root {
-  background: yellow;
+  background: var(--color-white);
+  box-shadow: var(--shadow);
+}
+
+.contentRoot {
+  display: flex;
+  padding: 0 var(--base-spacing);
+  flex-wrap: wrap;
+}
+
+.section {
+  display: flex;
+  align-items: center;
+  height: 56px;
+  box-sizing: border-box;
+}
+
+.logo {
+  order: 1;
+}
+
+.logo span {
+  color: var(--color-primary);
+  font-size: 1.25rem;
+  font-weight: 500;
+  display: none;
+  margin-left: calc(var(--base-spacing) / 2);
+}
+
+.title {
+  order: 2;
+  font-size: var(--base-font-size);
+  font-weight: bold;
+  flex-grow: 1;
+  padding-left: calc(var(--base-spacing) * 2);
+  color: var(--color-secondary);
+}
+
+.social {
+  order: 3;
+}
+
+.socialIcon {
+  margin-right: calc(var(--base-spacing) / 3);
+}
+
+.auth {
+  order: 4;
+}
+
+.actions {
+  order: 5;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.actionIcon {
+  margin-right: calc(var(--base-spacing) / 2);
+}
+
+@media (--media-sm) {
+  .actions {
+    order: 2;
+    width: auto;
+  }
+}
+
+@media (--media-md) {
+  .logo span {
+    display: block;
+  }
 }
