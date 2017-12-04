@@ -12,8 +12,7 @@ class User {
     return new Promise((resolve, reject) => {
       auth().signInAnonymously().then(user => {
         resolve(new User(user));
-      })
-        .catch(reject);
+      }).catch(reject);
     });
   }
 

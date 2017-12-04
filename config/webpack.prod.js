@@ -9,13 +9,31 @@ module.exports = merge(common, {
 
   module: {
     rules: [
+
       {
         test: /\.css$/,
+        exclude: /(node_modules)/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: 'css-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+              },
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                config: {
+                  path: paths.config,
+                },
+              },
+            },
+          ],
         }),
       },
+
     ],
   },
 

@@ -1,16 +1,18 @@
 const theme = {
 
-  fontFamily: "'Barlow Semi Condensed', sans-serif",
+  fontFamily: {
+    base: "'Barlow Semi Condensed', sans-serif",
+  },
 
   fontSize: {
     base: "16px",
   },
 
-  padding: {
+  spacing: {
     base: "12px",
   },
 
-  colors: {
+  color: {
     primary: {
       base: "#1bd5d0",
       invert: "#fff",
@@ -28,6 +30,17 @@ const theme = {
 
   rounding: {
     base: "8px",
+  },
+
+  screen: {
+    xs: "576px",
+    sm: "768px",
+    md: "992px",
+    lg: "1200px",
+  },
+
+  shadow: {
+    one: "0 1px 1px 0 rgba(0, 0, 0, 0.10)",
   },
 
 };

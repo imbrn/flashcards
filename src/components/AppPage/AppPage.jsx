@@ -1,25 +1,24 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { OrderedMap } from "immutable";
-import { connect } from "react-redux";
+import { Switch, Route } from "react-router-dom";
+import routes from "./routes";
 
-const AppPage = ({ decks }) => {
+const AppPage = () => {
   return (
     <div>
-      <div>AppPage</div>
-      {decks.loadingState}
+      <Switch>
+        { routes.map(getRoute) }
+      </Switch>
     </div>
   );
 };
 
-AppPage.propTypes = {
-  decks: PropTypes.objectOf(OrderedMap).isRequired,
+const getRoute = (route, key) => {
+  return <Route
+    key={key}
+    path={route.path}
+    component={route.component}
+    exact={route.exact}
+  />;
 };
 
-const mapStateToProps = (state) => {
-  return {
-    decks: state.decks,
-  };
-};
-
-export default connect(mapStateToProps)(AppPage);
+export default AppPage;
