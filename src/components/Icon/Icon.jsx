@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import PropTypesUtils from "../commons/propTypesUtils.js";
+import PropTypesUtils from "../prop-types-utils.js";
 import classnames from "classnames";
 
 const Icon = ({ icon, className, ...rest }) => {

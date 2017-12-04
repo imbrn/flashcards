@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types"; 
-import PropTypesUtils from "../commons/propTypesUtils";
+import PropTypesUtils from "../prop-types-utils";
 import styles from "./Navbar.css";
 import classnames from "classnames";
 import logo from "../commons/images/logo.svg";

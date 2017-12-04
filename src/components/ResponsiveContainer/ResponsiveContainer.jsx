@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import PropTypesUtils from "../commons/propTypesUtils";
+import PropTypesUtils from "../prop-types-utils";
 import classnames from "classnames";
 import styles from "./ResponsiveContainer.css";
 

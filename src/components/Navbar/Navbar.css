@@ -1,4 +1,4 @@
-@import "../commons/_variables.css";
+@import "../_variables.css";
 
 .root {
   background: var(--color-white);
