@@ -12,8 +12,8 @@
 
 .menu {
   position: absolute;
-  top: var(--base-spacing);
-  right: var(--base-spacing);
+  top: 0;
+  right: 0;
 }
 
 .content {
