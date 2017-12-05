@@ -10,19 +10,12 @@ import Icon from "../Icon";
 
 const Navbar = ({ title, actions, ...rest }) => {
 
-  const renderActions = () => {
-    if (actions) {
-      return <Actions actions={actions} />;
-    }
-    return null;
-  };
-
   return (
     <nav {...rest} className={styles.root}>
       <Container className={styles.contentRoot}>
         <Logo />
         <Title title={title} />
-        {renderActions()}
+        { actions ? <Actions actions={actions} /> : null }
         <Social />
         <Auth />
       </Container>
