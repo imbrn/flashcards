@@ -1,0 +1,19 @@
+@import "../_variables.css";
+
+.decks {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: var(--base-spacing);
+  padding: calc(var(--base-spacing)/2);
+}
+
+.deckWrapper {
+  width: 360px;
+  height: 240px;
+  padding: calc(var(--base-spacing)/2);
+}
+
+.deck {
+  width: 100%;
+  height: 100%;
+}

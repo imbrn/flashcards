@@ -6,10 +6,11 @@
   font-weight: 500;
   background: none;
   border: none;
-  padding: calc(var(--base-spacing) / 2);
+  padding: calc(var(--base-spacing) / 2) var(--base-spacing);
   cursor: pointer;
   color: var(--color-grey-dark);
   text-decoration: none;
+  border-radius: calc(var(--base-rounding) / 2);
 }
 
 .button.tertiary {

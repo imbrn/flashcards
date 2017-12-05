@@ -1,7 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { decksSelectors } from "../../decks";
+import styles from "./DecksPage.css";
 import Navbar from "../Navbar";
 import Container from "../ResponsiveContainer";
 import Deck from "../Deck";
@@ -10,30 +12,10 @@ const DecksPage = ({ decks }) => {
 
   const renderState = () => {
     if (decksSelectors.isLoaded(decks)) {
-      return renderLoadedState();
+      return <LoadedState decks={decks} />;
     } else {
-      return renderLoadingState();
+      return <LoadingState />;
     }
-  };
-
-  const renderLoadingState = () => {
-    return (
-      <div>
-        Loading
-      </div>
-    );
-  };
-
-  const renderLoadedState = () => {
-    return (
-      <div>
-        { decks.items.toArray().map(renderDeck) }
-      </div>
-    );
-  };
-
-  const renderDeck = (deck) => {
-    return <Deck key={deck.id} model={deck} />;
   };
 
   return (
@@ -48,6 +30,58 @@ const DecksPage = ({ decks }) => {
     </div>
   );
 
+};
+
+DecksPage.propTypes = {
+  decks: PropTypes.object.isRequired,
+};
+
+const LoadedState = ({ decks }) => {
+  return (
+    <div className={styles.decks}>
+      { decks.items.toArray().map((deck, index) => <DeckWrapper key={index} deck={deck} />) }
+    </div>
+  );
+};
+
+LoadedState.propTypes = {
+  decks: PropTypes.object.isRequired,
+};
+
+const LoadingState = () => {
+  return (
+    <div>
+      Loading decks...
+    </div>
+  );
+};
+
+const DeckWrapper = ({ deck }) => {
+  const menuModel = [
+    { icon: "fa fa-sticky-note-o", text: "Manage cards", tag: Link, to: "/" },
+    { separator: true },
+    { icon: "fa fa-pencil", text: "Edit" },
+    { icon: "fa fa-trash-o", text: "Delete", danger: true },
+  ];
+
+  const actionsModel = [
+    { text: "Study", primary: true },
+    { text: "Add card", secondary: true },
+  ];
+
+  return (
+    <div className={styles.deckWrapper}>
+      <Deck model={deck}
+        className={styles.deck}
+        menuModel={menuModel}
+        actionsModel={actionsModel}
+      />
+    </div>
+  );
+};
+
+DeckWrapper.propTypes = {
+  deck: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => {
