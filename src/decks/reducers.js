@@ -68,7 +68,7 @@ const changeDeckCards = (state, deckId, changeFunction) => {
 
 const reducer = combineReducers({
   loadingState,
-  decks,
+  items: decks,
 });
 
 export default reducer;
