@@ -1,5 +1,6 @@
 import DecksPage from "../DecksPage";
 import CreateDeckPage from "../CreateDeckPage";
+import NotFoundPage from "../NotFoundPage";
 
 const routes = [
   {
@@ -11,6 +12,9 @@ const routes = [
     path: "/decks/create",
     component: CreateDeckPage,
     exact: true,
+  },
+  {
+    component: NotFoundPage,
   },
 ];
 
