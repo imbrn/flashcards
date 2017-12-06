@@ -13,6 +13,15 @@
   border-radius: calc(var(--base-rounding) / 2);
 }
 
+.button:hover {
+  background: var(--color-grey-lighter);
+}
+
 .button.tertiary {
   color: var(--color-tertiary);
+}
+
+.button.tertiary:hover {
+  background: var(--color-tertiary);
+  color: var(--color-white);
 }
