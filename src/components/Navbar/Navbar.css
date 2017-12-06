@@ -30,6 +30,12 @@
   margin-left: calc(var(--base-spacing) / 2);
 }
 
+.logo a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
 .title {
   order: 2;
   font-size: var(--base-font-size);

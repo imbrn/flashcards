@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types"; 
 import PropTypesUtils from "../prop-types-utils";
+import { Link } from "react-router-dom";
 import styles from "./Navbar.css";
 import classnames from "classnames";
 import logo from "../images/logo.svg";
@@ -32,8 +33,10 @@ Navbar.propTypes = {
 const Logo = () => {
   return (
     <Section className={styles.logo} >
-      <img src={logo} alt="Flashcards" height="32" />
-      <span>Flashcards</span>
+      <Link to="/">
+        <img src={logo} alt="Flashcards" height="32" />
+        <span>Flashcards</span>
+      </Link>
     </Section>
   );
 };
