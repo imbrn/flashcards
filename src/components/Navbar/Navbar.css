@@ -61,14 +61,11 @@
   margin-right: calc(var(--base-spacing) / 2);
 }
 
-@media (--media-sm) {
+@media (--media-md) {
   .actions {
     order: 2;
     width: auto;
   }
-}
-
-@media (--media-md) {
   .logo span {
     display: block;
   }

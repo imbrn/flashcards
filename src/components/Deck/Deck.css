@@ -7,7 +7,7 @@
   box-sizing: border-box;
   box-shadow: var(--shadow-2);
   border-radius: calc(var(--base-rounding)/2);
-  padding: var(--base-spacing);
+  padding: calc(var(--base-spacing) * 2);
 }
 
 .menu {
