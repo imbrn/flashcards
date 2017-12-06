@@ -66,15 +66,15 @@ const Actions = ({ actions }) => {
     );
   };
 
-  Actions.propTypes = {
-    actions: PropTypes.arrayOf(PropTypes.object).isRequired,
-  };
-
   return (
     <Section className={styles.actions}>
       { actions.map(renderAction) }
     </Section>
   );
+};
+
+Actions.propTypes = {
+  actions: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 const Social = () => {
