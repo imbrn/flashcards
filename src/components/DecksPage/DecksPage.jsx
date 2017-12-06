@@ -57,15 +57,15 @@ const LoadingState = () => {
 
 const DeckWrapper = ({ deck }) => {
   const menuModel = [
-    { icon: "fa fa-sticky-note-o", text: "Manage cards", tag: Link, to: "/" },
+    { icon: "fa fa-sticky-note-o", text: "Manage cards", tag: Link, to: `decks/${deck.id}/cards` },
     { separator: true },
-    { icon: "fa fa-pencil", text: "Edit" },
-    { icon: "fa fa-trash-o", text: "Delete", danger: true },
+    { icon: "fa fa-pencil", text: "Edit", tag: Link, to: `decks/${deck.id}/edit` },
+    { icon: "fa fa-trash-o", text: "Delete", danger: true, tag: Link, to: `decks/${deck.id}/delete` },
   ];
 
   const actionsModel = [
-    { text: "Study", primary: true },
-    { text: "Add card", secondary: true },
+    { text: "Study", primary: true, tag: Link, to: `study/${deck.id}` },
+    { text: "Add card", secondary: true, tag: Link, to: `decks/${deck.id}/cards/create` },
   ];
 
   return (

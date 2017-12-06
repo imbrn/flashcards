@@ -58,8 +58,7 @@ Actions.propTypes = {
 };
 
 const Action = ({ model, ...rest }) => {
-  const { tag = Button, icon, text, className, primary, secondary, tertiary, ...params } = model;
-  const Tag = tag;
+  const { icon, text, className, primary, secondary, tertiary, ...params } = model;
 
   const classes = [
     styles.action,
@@ -70,10 +69,10 @@ const Action = ({ model, ...rest }) => {
   ];
 
   return (
-    <Tag {...rest} {...params} className={classnames(classes)}>
+    <Button {...rest} {...params} className={classnames(classes)}>
       { icon ? <Icon icon={icon} /> : null }
       { text ? text : null }
-    </Tag>
+    </Button>
   );
 };
 
