@@ -6,17 +6,28 @@ import { authSelectors } from "../../auth";
 import AppPage from "../AppPage";
 import SigningInPage from "../SigningInPage";
 
-const Main = ({ auth }) => {
-  if (authSelectors.isSigningIn(auth)) {
-    return <SigningInPage />;
-  } else {
-    return <AppPage />;
+class Main extends React.Component {
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.location !== this.props.location) {
+      window.scrollTo(0, 0);
+    }
   }
-  // TODO: add support for sign in fail page
-};
+
+  render() {
+    if (authSelectors.isSigningIn(this.props.auth)) {
+      return <SigningInPage />;
+    } else {
+      return <AppPage />;
+    }
+    // TODO: add support for sign in fail page
+  }
+
+}
 
 Main.propTypes = {
   auth: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => {
