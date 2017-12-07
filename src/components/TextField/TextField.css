@@ -1,0 +1,45 @@
+@import "../_variables.css";
+
+.textField {
+  width: 240px;
+  margin: 0;
+  padding: calc(var(--base-spacing)/2);
+  box-sizing: border-box;
+  box-shadow: var(--shadow-inner);
+  background: var(--color-white);
+  color: var(--color-grey-dark);
+  border: 0;
+  border-radius: calc(var(--base-rounding)/2);
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 500;
+}
+
+.textField::placeholder {
+  color: var(--color-grey-light);
+}
+
+.small {
+  font-size: 1rem;
+}
+
+.medium {
+  font-size: 1.25rem;
+}
+
+.big {
+  font-size: 2rem;
+}
+
+.primary {
+  color: var(--color-primary);
+}
+
+.danger {
+  color: var(--color-danger);
+}
+
+.success {
+  color: var(--color-success);
+}
+

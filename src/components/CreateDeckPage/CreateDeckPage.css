@@ -1,0 +1,6 @@
+@import "../_variables.css";
+
+.content {
+  margin-top: var(--base-spacing);
+  padding: var(--base-spacing);
+}
