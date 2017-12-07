@@ -25,7 +25,7 @@ const DecksPage = ({ decks }) => {
           {
             icon: "fa fa-plus",
             text: "Create deck",
-            tertiary: true,
+            type: "tertiary",
             tag: Link,
             to: "/decks/create"
           }

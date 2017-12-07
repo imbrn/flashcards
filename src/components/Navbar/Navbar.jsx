@@ -52,8 +52,8 @@ const Actions = ({ actions }) => {
     const { tag, icon, text, className, ...rest } = action;
     return (
       <Button
-        key={key}
         {...rest}
+        key={key}
         tag={tag}
         className={classnames(styles.actionItem, className)}
       >

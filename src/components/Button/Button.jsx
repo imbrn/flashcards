@@ -4,12 +4,22 @@ import PropTypesUtils from "../prop-types-utils";
 import classnames from "classnames";
 import styles from "./Button.css";
 
-const Button = ({ tag = "button", children, className, tertiary, ...rest }) => {
+const Button = ({
+  tag = "button",
+  children,
+  size = "medium",
+  type = "normal",
+  className,
+  ...rest
+}) => {
   const Tag = tag;
-  const typeClass = tertiary ? styles.tertiary : null;
+  const modifiersClasses = classnames(styles[size], styles[type]);
 
   return (
-    <Tag {...rest} className={classnames(styles.button, typeClass, className)}>
+    <Tag
+      {...rest}
+      className={classnames(styles.button, modifiersClasses, className)}
+    >
       {children}
     </Tag>
   );
@@ -18,8 +28,16 @@ const Button = ({ tag = "button", children, className, tertiary, ...rest }) => {
 Button.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   children: PropTypes.node,
-  className: PropTypesUtils.className,
-  tertiary: PropTypes.bool
+  size: PropTypes.oneOfType(["small", "medium", "large"]),
+  type: PropTypes.oneOfType([
+    "normal",
+    "primary",
+    "secondary",
+    "tertiary",
+    "danger",
+    "success"
+  ]),
+  className: PropTypesUtils.className
 };
 
 export default Button;
