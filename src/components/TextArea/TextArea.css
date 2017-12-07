@@ -1,6 +1,6 @@
 @import "../_variables.css";
 
-.textField {
+.textArea {
   width: 240px;
   margin: 0;
   padding: var(--base-spacing);
@@ -13,9 +13,11 @@
   font-family: inherit;
   font-size: inherit;
   font-weight: 500;
+  resize: none;
+  vertical-align: top;
 }
 
-.textField::placeholder {
+.textArea::placeholder {
   color: var(--color-grey-light);
 }
 
@@ -42,4 +44,3 @@
 .success {
   color: var(--color-success);
 }
-

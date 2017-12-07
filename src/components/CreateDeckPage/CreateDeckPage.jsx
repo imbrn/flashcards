@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./CreateDeckPage.css";
 import Navbar from "../Navbar";
-import TextField from "../TextField";
+import TextArea from "../TextArea";
 
 const CreateDeckPage = () => {
   return (
@@ -9,16 +9,16 @@ const CreateDeckPage = () => {
       <Navbar title="New deck" />
       <div className={styles.content}>
         <div>
-          <TextField placeholder="Example" type="primary" size="big" />
+          <TextArea placeholder="Example" type="primary" size="large" />
         </div>
         <div>
-          <TextField placeholder="Example" type="danger" size="small" />
+          <TextArea placeholder="Example" type="danger" size="small" />
         </div>
         <div>
-          <TextField placeholder="Example" />
+          <TextArea placeholder="Example" />
         </div>
         <div>
-          <TextField placeholder="Example" />
+          <TextArea placeholder="Example" />
         </div>
       </div>
     </div>

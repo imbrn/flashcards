@@ -23,15 +23,7 @@ const TextField = ({
 TextField.propTypes = {
   className: PropTypesUtils.className,
   size: PropTypes.oneOf(["small", "medium", "big"]),
-  type: PropTypes.oneOf([
-    "normal",
-    "primary",
-    "secondary",
-    "tertiary",
-    "danger",
-    "success",
-    "info"
-  ])
+  type: PropTypes.oneOf(["normal", "primary", "danger", "success"])
 };
 
 export default TextField;
