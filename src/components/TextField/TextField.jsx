@@ -22,7 +22,7 @@ const TextField = ({
 
 TextField.propTypes = {
   className: PropTypesUtils.className,
-  size: PropTypes.oneOf(["small", "medium", "big"]),
+  size: PropTypes.oneOf(["small", "medium", "large"]),
   type: PropTypes.oneOf(["normal", "primary", "danger", "success"])
 };
 
