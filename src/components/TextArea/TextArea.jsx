@@ -24,7 +24,7 @@ const TextArea = ({
 
 TextArea.propTypes = {
   className: PropTypesUtils.className,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
+  size: PropTypes.oneOf(["small", "medium", "big"]),
   type: PropTypes.oneOf(["normal", "primary", "danger", "success"]),
   rows: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 };
