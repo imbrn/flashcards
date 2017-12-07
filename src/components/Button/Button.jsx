@@ -28,8 +28,8 @@ const Button = ({
 Button.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   children: PropTypes.node,
-  size: PropTypes.oneOfType(["small", "medium", "big"]),
-  type: PropTypes.oneOfType([
+  size: PropTypes.oneOf(["small", "medium", "big"]),
+  type: PropTypes.oneOf([
     "normal",
     "primary",
     "secondary",
