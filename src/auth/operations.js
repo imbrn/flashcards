@@ -7,5 +7,5 @@ const signingInFailed = actions.signingInFailed;
 export default {
   startSigningIn,
   endSigningIn,
-  signingInFailed,
+  signingInFailed
 };

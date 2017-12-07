@@ -14,7 +14,7 @@ const ResponsiveContainer = ({ children, className, ...rest }) => {
 
 ResponsiveContainer.propTypes = {
   children: PropTypes.node.isRequired,
-  className: PropTypesUtils.className,
+  className: PropTypesUtils.className
 };
 
 export default ResponsiveContainer;

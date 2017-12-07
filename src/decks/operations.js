@@ -17,5 +17,5 @@ export default {
   updateDeck,
   addCard,
   removeCard,
-  updateCard,
+  updateCard
 };

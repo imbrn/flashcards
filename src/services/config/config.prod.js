@@ -4,7 +4,7 @@ const config = {
   databaseURL: "https://flashcards-f39c0.firebaseio.com",
   projectId: "flashcards-f39c0",
   storageBucket: "flashcards-f39c0.appspot.com",
-  messagingSenderId: "66998935010",
+  messagingSenderId: "66998935010"
 };
 
 module.exports = config;

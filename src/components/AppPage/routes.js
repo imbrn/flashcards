@@ -6,16 +6,16 @@ const routes = [
   {
     path: "/",
     component: DecksPage,
-    exact: true,
+    exact: true
   },
   {
     path: "/decks/create",
     component: CreateDeckPage,
-    exact: true,
+    exact: true
   },
   {
-    component: NotFoundPage,
-  },
+    component: NotFoundPage
+  }
 ];
 
 export default routes;

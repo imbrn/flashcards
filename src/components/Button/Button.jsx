@@ -19,7 +19,7 @@ Button.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   children: PropTypes.node,
   className: PropTypesUtils.className,
-  tertiary: PropTypes.bool,
+  tertiary: PropTypes.bool
 };
 
 export default Button;

@@ -7,12 +7,14 @@ import { Deck } from "../decks";
  * object.
  */
 class User {
-
   static anonymousUser() {
     return new Promise((resolve, reject) => {
-      auth().signInAnonymously().then(user => {
-        resolve(new User(user));
-      }).catch(reject);
+      auth()
+        .signInAnonymously()
+        .then(user => {
+          resolve(new User(user));
+        })
+        .catch(reject);
     });
   }
 
@@ -22,8 +24,11 @@ class User {
 
   getDecks() {
     return firestore()
-      .collection("users").doc(this._user.uid)
-      .collection("decks").get().then(this._convertToDecks);
+      .collection("users")
+      .doc(this._user.uid)
+      .collection("decks")
+      .get()
+      .then(this._convertToDecks);
   }
 
   _convertToDecks(snapshot) {
@@ -33,7 +38,6 @@ class User {
     });
     return decks;
   }
-
 }
 
 export default User;

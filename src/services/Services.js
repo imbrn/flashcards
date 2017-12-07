@@ -4,7 +4,6 @@ import { initializeApp } from "firebase";
 import config from "./config/config";
 
 class Services {
-
   initialize() {
     initializeApp(config);
   }
@@ -12,7 +11,6 @@ class Services {
   initialSignIn() {
     return User.anonymousUser();
   }
-
 }
 
 export default Services;

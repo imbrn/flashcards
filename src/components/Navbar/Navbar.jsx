@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types"; 
+import PropTypes from "prop-types";
 import PropTypesUtils from "../prop-types-utils";
 import { Link } from "react-router-dom";
 import styles from "./Navbar.css";
@@ -10,29 +10,27 @@ import Button from "../Button";
 import Icon from "../Icon";
 
 const Navbar = ({ title, actions, ...rest }) => {
-
   return (
     <nav {...rest} className={styles.root}>
       <Container className={styles.contentRoot}>
         <Logo />
         <Title title={title} />
-        { actions ? <Actions actions={actions} /> : null }
+        {actions ? <Actions actions={actions} /> : null}
         <Social />
         <Auth />
       </Container>
     </nav>
   );
-
 };
 
 Navbar.propTypes = {
   title: PropTypes.string.isRequired,
-  actions: PropTypes.arrayOf(PropTypes.object),
+  actions: PropTypes.arrayOf(PropTypes.object)
 };
 
 const Logo = () => {
   return (
-    <Section className={styles.logo} >
+    <Section className={styles.logo}>
       <Link to="/">
         <img src={logo} alt="Flashcards" height="32" />
         <span>Flashcards</span>
@@ -42,39 +40,36 @@ const Logo = () => {
 };
 
 const Title = ({ title }) => {
-  return (
-    <Section className={styles.title}>
-      {title}
-    </Section>
-  );
+  return <Section className={styles.title}>{title}</Section>;
 };
 
 Title.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired
 };
 
 const Actions = ({ actions }) => {
   const renderAction = (action, key) => {
     const { tag, icon, text, className, ...rest } = action;
     return (
-      <Button key={key} {...rest} tag={tag} className={classnames(styles.actionItem, className)}>
+      <Button
+        key={key}
+        {...rest}
+        tag={tag}
+        className={classnames(styles.actionItem, className)}
+      >
         <Icon icon={icon} className={styles.actionIcon} />
-        <span className={styles.actionText}>
-          { text }
-        </span>
+        <span className={styles.actionText}>{text}</span>
       </Button>
     );
   };
 
   return (
-    <Section className={styles.actions}>
-      { actions.map(renderAction) }
-    </Section>
+    <Section className={styles.actions}>{actions.map(renderAction)}</Section>
   );
 };
 
 Actions.propTypes = {
-  actions: PropTypes.arrayOf(PropTypes.object).isRequired,
+  actions: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 const Social = () => {
@@ -89,11 +84,7 @@ const Social = () => {
 };
 
 const Auth = () => {
-  return (
-    <Section className={styles.auth}>
-      Sign in
-    </Section>
-  );
+  return <Section className={styles.auth}>Sign in</Section>;
 };
 
 const Section = ({ children, className }) => {
@@ -106,7 +97,7 @@ const Section = ({ children, className }) => {
 
 Section.propTypes = {
   children: PropTypes.node.isRequired,
-  className: PropTypesUtils.className,
+  className: PropTypesUtils.className
 };
 
 export default Navbar;

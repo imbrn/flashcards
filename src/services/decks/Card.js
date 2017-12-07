@@ -1,7 +1,6 @@
 import { CardModel } from "../../decks";
 
 class Card {
-
   constructor(cardDoc) {
     this._cardDoc = cardDoc;
   }
@@ -10,10 +9,9 @@ class Card {
     return CardModel({
       ...this._cardDoc.data(),
       deck,
-      id: this._cardDoc.id,
+      id: this._cardDoc.id
     });
   }
-
 }
 
 export default Card;

@@ -8,27 +8,32 @@ import { authOperations } from "./auth";
 import { decksOperations } from "./decks";
 
 class App extends React.Component {
-
   componentWillMount() {
     services.initialize();
 
     // Initial sign in
     this.dispatch(authOperations.startSigningIn());
 
-    services.initialSignIn().then(user => {
-      this.dispatch(authOperations.endSigningIn(user));
-      this.loadDecks(user);
-    }).catch(error => {
-      this.dispatch(authOperations.signingInFailed(error));
-    });
+    services
+      .initialSignIn()
+      .then(user => {
+        this.dispatch(authOperations.endSigningIn(user));
+        this.loadDecks(user);
+      })
+      .catch(error => {
+        this.dispatch(authOperations.signingInFailed(error));
+      });
   }
 
   loadDecks(user) {
     this.dispatch(decksOperations.startLoadingInitialDecks());
 
-    user.getDecks().then(this.convertDecksProxiesToModels).then(decks => {
-      this.dispatch(decksOperations.loadInitialDecks(decks));
-    });
+    user
+      .getDecks()
+      .then(this.convertDecksProxiesToModels)
+      .then(decks => {
+        this.dispatch(decksOperations.loadInitialDecks(decks));
+      });
   }
 
   convertDecksProxiesToModels(decks) {
@@ -42,11 +47,10 @@ class App extends React.Component {
   render() {
     return <Main />;
   }
-
 }
 
 App.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired
 };
 
 export default withRouter(connect()(App));

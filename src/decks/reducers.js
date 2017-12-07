@@ -1,26 +1,37 @@
 import { OrderedMap } from "immutable";
 import { combineReducers } from "redux";
 import types from "./actionsTypes";
-import { DecksInitialLoadingState } from "./models"; 
+import { DecksInitialLoadingState } from "./models";
 
 const loadingState = (state = DecksInitialLoadingState.NOT_LOADED, action) => {
   switch (action.type) {
-    case types.START_LOADING_INITIAL_DECKS: return DecksInitialLoadingState.LOADING;
-    case types.LOAD_INITIAL_DECKS: return DecksInitialLoadingState.LOADED;
-    default: return state;
+    case types.START_LOADING_INITIAL_DECKS:
+      return DecksInitialLoadingState.LOADING;
+    case types.LOAD_INITIAL_DECKS:
+      return DecksInitialLoadingState.LOADED;
+    default:
+      return state;
   }
 };
 
 const decks = (state = OrderedMap(), action) => {
-  switch(action.type) {
-    case types.LOAD_INITIAL_DECKS: return loadInitialDecks(state, action);
-    case types.ADD_DECK: return addDeck(state, action);
-    case types.REMOVE_DECK: return removeDeck(state, action);
-    case types.UPDATE_DECK: return updateDeck(state, action);
-    case types.ADD_CARD: return addCard(state, action);
-    case types.REMOVE_CARD: return removeCard(state, action);
-    case types.UPDATE_CARD: return updateCard(state, action);
-    default: return state;
+  switch (action.type) {
+    case types.LOAD_INITIAL_DECKS:
+      return loadInitialDecks(state, action);
+    case types.ADD_DECK:
+      return addDeck(state, action);
+    case types.REMOVE_DECK:
+      return removeDeck(state, action);
+    case types.UPDATE_DECK:
+      return updateDeck(state, action);
+    case types.ADD_CARD:
+      return addCard(state, action);
+    case types.REMOVE_CARD:
+      return removeCard(state, action);
+    case types.UPDATE_CARD:
+      return updateCard(state, action);
+    default:
+      return state;
   }
 };
 
@@ -41,19 +52,19 @@ const updateDeck = (state, action) => {
 };
 
 const addCard = (state, action) => {
-  return changeDeckCards(state, action.card.deck.id, (cards) => {
+  return changeDeckCards(state, action.card.deck.id, cards => {
     return cards.set(action.card.id, action.card);
   });
 };
 
 const removeCard = (state, action) => {
-  return changeDeckCards(state, action.card.deck.id, (cards) => {
+  return changeDeckCards(state, action.card.deck.id, cards => {
     return cards.remove(action.card.id);
   });
 };
 
 const updateCard = (state, action) => {
-  return changeDeckCards(state, action.card.deck.id, (cards) => {
+  return changeDeckCards(state, action.card.deck.id, cards => {
     return cards.set(action.card.id, action.card);
   });
 };
@@ -68,7 +79,7 @@ const changeDeckCards = (state, deckId, changeFunction) => {
 
 const reducer = combineReducers({
   loadingState,
-  items: decks,
+  items: decks
 });
 
 export default reducer;

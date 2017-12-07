@@ -7,12 +7,11 @@ import Button from "../Button";
 import Icon from "../Icon";
 
 class Dropdown extends React.Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
-      open: false,
+      open: false
     };
 
     this.onClickButton = this.onClickButton.bind(this);
@@ -27,7 +26,7 @@ class Dropdown extends React.Component {
     const {
       icon = "fa fa-ellipsis-v",
       text,
-      side="left",
+      side = "left",
       actions,
       className,
       ...rest
@@ -36,7 +35,7 @@ class Dropdown extends React.Component {
     const popupClasses = [
       styles.popup,
       styles[side],
-      !this.state.open ? "hidden" : null,
+      !this.state.open ? "hidden" : null
     ];
 
     const renderAction = (action, key) => {
@@ -46,11 +45,11 @@ class Dropdown extends React.Component {
     return (
       <div {...rest} className={classnames(styles.dropdown, className)}>
         <Button onClick={this.onClickButton}>
-          { icon ? <Icon icon={icon} /> : null }
-          { text ? text : null }
+          {icon ? <Icon icon={icon} /> : null}
+          {text ? text : null}
         </Button>
         <div className={classnames(popupClasses)}>
-          { actions.map(renderAction) }
+          {actions.map(renderAction)}
         </div>
       </div>
     );
@@ -69,19 +68,25 @@ class Dropdown extends React.Component {
   }
 
   close() {
-    this.setState({
-      open: false,
-    }, () => {
-      this.stopHandlingOutsideClick();
-    });
+    this.setState(
+      {
+        open: false
+      },
+      () => {
+        this.stopHandlingOutsideClick();
+      }
+    );
   }
 
   open() {
-    this.setState(() => {
-      return { open: true };
-    }, () => {
-      this.startHandlingOutsideClick();
-    });
+    this.setState(
+      () => {
+        return { open: true };
+      },
+      () => {
+        this.startHandlingOutsideClick();
+      }
+    );
   }
 
   stopHandlingOutsideClick() {
@@ -95,21 +100,22 @@ class Dropdown extends React.Component {
   onClickOutside() {
     this.close();
   }
-
 }
 
 Dropdown.propTypes = {
   icon: PropTypes.string,
   text: PropTypes.string,
-  side: PropTypes.oneOf([ "left", "right" ]),
+  side: PropTypes.oneOf(["left", "right"]),
   actions: PropTypes.arrayOf(PropTypes.object),
-  className: PropTypesUtils.className,
+  className: PropTypesUtils.className
 };
 
 const MenuAction = ({ action, ...rest }) => {
-  if (action.hasOwnProperty("icon") ||
-      action.hasOwnProperty("text") ||
-      action.hasOwnProperty("tag")) {
+  if (
+    action.hasOwnProperty("icon") ||
+    action.hasOwnProperty("text") ||
+    action.hasOwnProperty("tag")
+  ) {
     return <MenuItem {...rest} action={action} />;
   } else {
     return <MenuSeparator {...rest} action={action} />;
@@ -117,7 +123,7 @@ const MenuAction = ({ action, ...rest }) => {
 };
 
 MenuAction.propTypes = {
-  action: PropTypes.object.isRequired,
+  action: PropTypes.object.isRequired
 };
 
 const MenuItem = ({ action, ...rest }) => {
@@ -127,22 +133,22 @@ const MenuItem = ({ action, ...rest }) => {
   const classes = [
     styles.menuItem,
     danger ? styles.menuItemDanger : null,
-    className,
+    className
   ];
 
   return (
     <Tag {...rest} {...params} className={classnames(classes)}>
-      { icon ? <Icon icon={icon} className={styles.menuItemIcon} /> : null }
-      { text ? text : null }
+      {icon ? <Icon icon={icon} className={styles.menuItemIcon} /> : null}
+      {text ? text : null}
     </Tag>
   );
 };
 
 MenuItem.propTypes = {
-  action: PropTypes.object.isRequired,
+  action: PropTypes.object.isRequired
 };
 
-const MenuSeparator = (props) => {
+const MenuSeparator = props => {
   return <hr {...props} className={styles.menuSeparator} />;
 };
 

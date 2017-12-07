@@ -5,5 +5,5 @@ const SIGN_IN_FAILED = "SIGN_IN_FAILED";
 export default {
   START_SIGNING_IN,
   END_SIGNING_IN,
-  SIGN_IN_FAILED,
+  SIGN_IN_FAILED
 };

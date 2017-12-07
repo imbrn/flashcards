@@ -5,6 +5,7 @@ module.exports = {
     "node": true
   },
   "extends": [
+    "prettier",
     "eslint:recommended",
     "plugin:react/recommended",
   ],
@@ -16,34 +17,14 @@ module.exports = {
     "sourceType": "module"
   },
   "plugins": [
-    "react"
+    "react",
+    "prettier",
   ],
   "globals": {
     "GITHUB": true,
     "FIREBASE_CONFIG": true,
   },
   "rules": {
-    "indent": [
-      "error",
-      2,
-      {
-        "SwitchCase": 1,
-      }
-    ],
-    "linebreak-style": [
-      "error",
-      "unix"
-    ],
-    "quotes": [
-      "error",
-      "double"
-    ],
-    "semi": [
-      "error",
-      "always"
-    ],
-    "comma-dangle": [
-      "error", "always-multiline"
-    ]
+    "prettier/prettier": "error",
   }
 };

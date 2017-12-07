@@ -4,8 +4,7 @@ import decksReducer from "./decks";
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  decks: decksReducer,
+  decks: decksReducer
 });
 
 export default rootReducer;
-

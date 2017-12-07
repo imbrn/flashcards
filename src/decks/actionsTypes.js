@@ -1,4 +1,5 @@
-const START_LOADING_INITIAL_DECKS = "decks/actionsTypes/START_LOADING_INITIAL_DECKS";
+const START_LOADING_INITIAL_DECKS =
+  "decks/actionsTypes/START_LOADING_INITIAL_DECKS";
 const LOAD_INITIAL_DECKS = "decks/actionsTypes/LOAD_INTIAL_DECKS";
 const ADD_DECK = "decks/actionsTypes/ADD_DECK";
 const REMOVE_DECK = "decks/actionsTypes/REMOVE_DECK";
@@ -15,5 +16,5 @@ export default {
   UPDATE_DECK,
   ADD_CARD,
   REMOVE_CARD,
-  UPDATE_CARD,
+  UPDATE_CARD
 };

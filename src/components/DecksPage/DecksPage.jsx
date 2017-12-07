@@ -9,7 +9,6 @@ import Container from "../ResponsiveContainer";
 import Deck from "../Deck";
 
 const DecksPage = ({ decks }) => {
-
   const renderState = () => {
     if (decksSelectors.isLoaded(decks)) {
       return <LoadedState decks={decks} />;
@@ -20,57 +19,83 @@ const DecksPage = ({ decks }) => {
 
   return (
     <div>
-      <Navbar title="My decks" actions={[
-        { icon: "fa fa-plus", text: "Create deck", tertiary: true, tag: Link, to: "/decks/create" },
-      ]} />
-      <Container>
-        { renderState() }
-      </Container>
+      <Navbar
+        title="My decks"
+        actions={[
+          {
+            icon: "fa fa-plus",
+            text: "Create deck",
+            tertiary: true,
+            tag: Link,
+            to: "/decks/create"
+          }
+        ]}
+      />
+      <Container>{renderState()}</Container>
     </div>
   );
-
 };
 
 DecksPage.propTypes = {
-  decks: PropTypes.object.isRequired,
+  decks: PropTypes.object.isRequired
 };
 
 const LoadedState = ({ decks }) => {
   return (
     <div className={styles.decks}>
-      { decks.items.toArray().map((deck, index) => <DeckWrapper key={index} deck={deck} />) }
+      {decks.items
+        .toArray()
+        .map((deck, index) => <DeckWrapper key={index} deck={deck} />)}
     </div>
   );
 };
 
 LoadedState.propTypes = {
-  decks: PropTypes.object.isRequired,
+  decks: PropTypes.object.isRequired
 };
 
 const LoadingState = () => {
-  return (
-    <div>
-      Loading decks...
-    </div>
-  );
+  return <div>Loading decks...</div>;
 };
 
 const DeckWrapper = ({ deck }) => {
   const menuModel = [
-    { icon: "fa fa-sticky-note-o", text: "Manage cards", tag: Link, to: `decks/${deck.id}/cards` },
+    {
+      icon: "fa fa-sticky-note-o",
+      text: "Manage cards",
+      tag: Link,
+      to: `decks/${deck.id}/cards`
+    },
     { separator: true },
-    { icon: "fa fa-pencil", text: "Edit", tag: Link, to: `decks/${deck.id}/edit` },
-    { icon: "fa fa-trash-o", text: "Delete", danger: true, tag: Link, to: `decks/${deck.id}/delete` },
+    {
+      icon: "fa fa-pencil",
+      text: "Edit",
+      tag: Link,
+      to: `decks/${deck.id}/edit`
+    },
+    {
+      icon: "fa fa-trash-o",
+      text: "Delete",
+      danger: true,
+      tag: Link,
+      to: `decks/${deck.id}/delete`
+    }
   ];
 
   const actionsModel = [
     { text: "Study", primary: true, tag: Link, to: `study/${deck.id}` },
-    { text: "Add card", secondary: true, tag: Link, to: `decks/${deck.id}/cards/create` },
+    {
+      text: "Add card",
+      secondary: true,
+      tag: Link,
+      to: `decks/${deck.id}/cards/create`
+    }
   ];
 
   return (
     <div className={styles.deckWrapper}>
-      <Deck model={deck}
+      <Deck
+        model={deck}
         className={styles.deck}
         menuModel={menuModel}
         actionsModel={actionsModel}
@@ -80,12 +105,12 @@ const DeckWrapper = ({ deck }) => {
 };
 
 DeckWrapper.propTypes = {
-  deck: PropTypes.object.isRequired,
+  deck: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    decks: state.decks,
+    decks: state.decks
   };
 };
 

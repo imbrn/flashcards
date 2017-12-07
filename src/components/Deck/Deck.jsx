@@ -11,7 +11,7 @@ import Icon from "../Icon";
 const Deck = ({ model, menuModel, actionsModel, className, ...rest }) => {
   return (
     <div {...rest} className={classnames(styles.deck, className)}>
-      { menuModel ? <Menu model={menuModel} /> : null }
+      {menuModel ? <Menu model={menuModel} /> : null}
       <div className={styles.content}>
         <h1>{model.name}</h1>
         <div className={styles.labels}>
@@ -19,7 +19,7 @@ const Deck = ({ model, menuModel, actionsModel, className, ...rest }) => {
           <span className={styles.label}>{model.back}</span>
         </div>
         <p>{model.description}</p>
-        { actionsModel ? <Actions model={actionsModel} /> : null }
+        {actionsModel ? <Actions model={actionsModel} /> : null}
       </div>
     </div>
   );
@@ -29,7 +29,7 @@ Deck.propTypes = {
   model: PropTypes.objectOf(DeckModel).isRequired,
   menuModel: PropTypes.arrayOf(PropTypes.object),
   actionsModel: PropTypes.arrayOf(PropTypes.object),
-  className: PropTypesUtils.className,
+  className: PropTypesUtils.className
 };
 
 const Menu = ({ model }) => {
@@ -41,43 +41,53 @@ const Menu = ({ model }) => {
 };
 
 Menu.propTypes = {
-  model: PropTypes.arrayOf(PropTypes.object).isRequired,
+  model: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 const Actions = ({ model, className, ...rest }) => {
   return (
     <div {...rest} className={classnames(styles.actions, className)}>
-      { model.map((actionModel, index) => <Action key={index} model={actionModel} />) }
+      {model.map((actionModel, index) => (
+        <Action key={index} model={actionModel} />
+      ))}
     </div>
   );
 };
 
 Actions.propTypes = {
   model: PropTypes.arrayOf(PropTypes.object).isRequired,
-  className: PropTypesUtils.className,
+  className: PropTypesUtils.className
 };
 
 const Action = ({ model, ...rest }) => {
-  const { icon, text, className, primary, secondary, tertiary, ...params } = model;
+  const {
+    icon,
+    text,
+    className,
+    primary,
+    secondary,
+    tertiary,
+    ...params
+  } = model;
 
   const classes = [
     styles.action,
-    tertiary ? styles.tertiaryAction: null,
+    tertiary ? styles.tertiaryAction : null,
     secondary ? styles.secondaryAction : null,
     primary ? styles.primaryAction : null,
-    className,
+    className
   ];
 
   return (
     <Button {...rest} {...params} className={classnames(classes)}>
-      { icon ? <Icon icon={icon} /> : null }
-      { text ? text : null }
+      {icon ? <Icon icon={icon} /> : null}
+      {text ? text : null}
     </Button>
   );
 };
 
 Action.propTypes = {
-  model: PropTypes.object.isRequired,
+  model: PropTypes.object.isRequired
 };
 
 export default Deck;

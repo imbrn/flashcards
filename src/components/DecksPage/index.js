@@ -1,3 +1,3 @@
-import DecksPage, {  } from "./DecksPage";
+import DecksPage from "./DecksPage";
 
 export default DecksPage;

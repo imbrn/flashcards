@@ -7,13 +7,15 @@ import { DeckModel } from "../../decks";
  * a plain object.
  */
 class Deck {
-
   constructor(deckDoc) {
     this._deckDoc = deckDoc;
   }
 
   getCards() {
-    return this._deckDoc.ref.collection("cards").get().then(this._convertToCards);
+    return this._deckDoc.ref
+      .collection("cards")
+      .get()
+      .then(this._convertToCards);
   }
 
   _convertToCards(snapshot) {
@@ -27,20 +29,21 @@ class Deck {
   asDeckModel() {
     return DeckModel({
       ...this._deckDoc.data(),
-      id: this._deckDoc.id,
+      id: this._deckDoc.id
     });
   }
 
   asDeepDeckModel() {
     const shallowDeck = this.asDeckModel();
 
-    return this.getCards().then(cards => {
-      return cards.map(card => card.asCardModel(shallowDeck));
-    }).then(cardsModels => {
-      return shallowDeck.set("cards", cardsModels);
-    });
+    return this.getCards()
+      .then(cards => {
+        return cards.map(card => card.asCardModel(shallowDeck));
+      })
+      .then(cardsModels => {
+        return shallowDeck.set("cards", cardsModels);
+      });
   }
-
 }
 
 export default Deck;

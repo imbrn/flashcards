@@ -2,56 +2,56 @@ import types from "./actionsTypes";
 
 const startLoadingInitialDecks = () => {
   return {
-    type: types.START_LOADING_INITIAL_DECKS,
+    type: types.START_LOADING_INITIAL_DECKS
   };
 };
 
-const loadInitialDecks = (decks) => {
+const loadInitialDecks = decks => {
   return {
     type: types.LOAD_INITIAL_DECKS,
-    decks,
+    decks
   };
 };
 
-const addDeck = (deck) => {
+const addDeck = deck => {
   return {
     type: types.ADD_DECK,
-    deck,
+    deck
   };
 };
 
-const removeDeck = (deck) => {
+const removeDeck = deck => {
   return {
     type: types.REMOVE_DECK,
-    deck,
+    deck
   };
 };
 
-const updateDeck = (deck) => {
+const updateDeck = deck => {
   return {
     type: types.UPDATE_DECK,
-    deck,
+    deck
   };
 };
 
-const addCard = (card) => {
+const addCard = card => {
   return {
     type: types.ADD_CARD,
-    card,
+    card
   };
 };
 
-const removeCard = (card) => {
+const removeCard = card => {
   return {
     type: types.REMOVE_CARD,
-    card,
+    card
   };
 };
 
-const updateCard = (card) => {
+const updateCard = card => {
   return {
     type: types.UPDATE_CARD,
-    card,
+    card
   };
 };
 
@@ -63,5 +63,5 @@ export default {
   updateDeck,
   addCard,
   removeCard,
-  updateCard,
+  updateCard
 };

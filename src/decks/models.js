@@ -8,7 +8,7 @@ export const DeckModel = Record({
   back: null,
   cards: List(),
   createTime: null,
-  updateTime: null,
+  updateTime: null
 });
 
 export const CardModel = Record({
@@ -17,11 +17,11 @@ export const CardModel = Record({
   front: null,
   back: null,
   createTime: null,
-  updateTime: null,
+  updateTime: null
 });
 
 export const DecksInitialLoadingState = {
   NOT_LOADED: "NOT_LOADED",
   LOADING: "LOADING",
-  LOADED: "LOADED",
+  LOADED: "LOADED"
 };
