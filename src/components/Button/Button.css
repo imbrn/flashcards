@@ -17,11 +17,59 @@
   background: var(--color-grey-lighter);
 }
 
-.button.tertiary {
+.primary {
+  color: var(--color-primary);
+}
+
+.primary:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.secondary {
+  color: var(--color-secondary);
+}
+
+.secondary:hover {
+  background: var(--color-secondary);
+  color: var(--color-white);
+}
+
+.tertiary {
   color: var(--color-tertiary);
 }
 
-.button.tertiary:hover {
+.tertiary:hover {
   background: var(--color-tertiary);
   color: var(--color-white);
+}
+
+.danger {
+  color: var(--color-danger);
+}
+
+.danger:hover {
+  background: var(--color-danger);
+  color: var(--color-white);
+}
+
+.success {
+  color: var(--color-success);
+}
+
+.success:hover {
+  background: var(--color-success);
+  color: var(--color-white);
+}
+
+.small {
+  font-size: 1rem;
+}
+
+.medium {
+  font-size: 1.25rem;
+}
+
+.big {
+  font-size: 2rem;
 }
