@@ -1,38 +1,37 @@
-const webpack = require('webpack');
-const path = require('path');
-const paths = require('./paths.js');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require("webpack");
+const path = require("path");
+const paths = require("./paths.js");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const cleanOptions = {
   root: paths.root
 };
 
 module.exports = {
-
   entry: {
-    app: path.join(paths.src, 'index.js')
+    app: path.join(paths.src, "index.js")
   },
 
   output: {
-    filename: '[name].js',
+    filename: "[name].js",
     path: paths.build,
-    publicPath: '/',
+    publicPath: "/"
   },
 
   module: {
     rules: [
-
       {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules|bower_components)/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: [ 'env', 'react' ],
+            presets: ["env", "react"],
             plugins: [
-              'transform-class-properties',
-              'transform-object-rest-spread',
+              "transform-class-properties",
+              "transform-object-rest-spread"
             ]
           }
         }
@@ -40,28 +39,24 @@ module.exports = {
 
       {
         test: /\.(png|svg|jpg|git)$/,
-        use: [
-          'file-loader'
-        ],
-      },
-
+        use: ["file-loader"]
+      }
     ]
   },
 
   plugins: [
     new webpack.DefinePlugin({
-      GITHUB: JSON.stringify('https://github.com/nwsapps/flashcards'),
+      GITHUB: JSON.stringify("https://github.com/nwsapps/flashcards")
     }),
     new CleanWebpackPlugin([paths.build], cleanOptions),
+    new FaviconsWebpackPlugin(path.join(paths.root, "logo.png")),
     new HtmlWebpackPlugin({
-      title: 'es-boilerplate',
-      template: path.join(paths.public, 'index.html')
+      template: path.join(paths.public, "index.html")
     })
   ],
 
   resolve: {
-    modules: [ 'node_modules' ],
-    extensions: [ '.js', '.jsx', '.json' ],
+    modules: ["node_modules"],
+    extensions: [".js", ".jsx", ".json"]
   }
-
 };
