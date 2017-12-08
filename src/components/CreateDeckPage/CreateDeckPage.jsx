@@ -59,7 +59,12 @@ const CreateDeckPage = () => {
             </label>
           </div>
           <div className={styles.buttons}>
-            <Button type="primary" size="big" className={styles.button}>
+            <Button
+              highlighted
+              type="primary"
+              size="big"
+              className={styles.button}
+            >
               Create
             </Button>
             <Button size="big" className={styles.button}>

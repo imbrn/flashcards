@@ -21,7 +21,7 @@
   color: var(--color-primary);
 }
 
-.primary:hover {
+.primary:hover, .primary.highlighted {
   background: var(--color-primary);
   color: var(--color-white);
 }

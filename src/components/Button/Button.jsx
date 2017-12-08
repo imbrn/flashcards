@@ -7,13 +7,18 @@ import styles from "./Button.css";
 const Button = ({
   tag = "button",
   children,
+  highlighted = false,
   size = "medium",
   type = "normal",
   className,
   ...rest
 }) => {
   const Tag = tag;
-  const modifiersClasses = classnames(styles[size], styles[type]);
+  const modifiersClasses = classnames(
+    styles[size],
+    styles[type],
+    highlighted && styles.highlighted
+  );
 
   return (
     <Tag
@@ -28,6 +33,7 @@ const Button = ({
 Button.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   children: PropTypes.node,
+  highlighted: PropTypes.bool,
   size: PropTypes.oneOf(["small", "medium", "big"]),
   type: PropTypes.oneOf([
     "normal",
