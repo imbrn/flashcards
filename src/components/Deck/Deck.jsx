@@ -10,6 +10,14 @@ import Button from "../Button";
 import Icon from "../Icon";
 
 const Deck = ({ model, menuModel, actionsModel, className, ...rest }) => {
+  const description = model.description
+    ? model.description
+    : "There's no description for this deck.";
+  const descriptionClass = !model.description ? styles.noDescription : null;
+
+  const front = model.front ? model.front : "Front";
+  const back = model.back ? model.back : "Back";
+
   return (
     <Box
       {...rest}
@@ -21,10 +29,10 @@ const Deck = ({ model, menuModel, actionsModel, className, ...rest }) => {
       <div className={styles.content}>
         <h1>{model.name}</h1>
         <div className={styles.labels}>
-          <span className={styles.label}>{model.front}</span>
-          <span className={styles.label}>{model.back}</span>
+          <span className={styles.label}>{front}</span>
+          <span className={styles.label}>{back}</span>
         </div>
-        <p>{model.description}</p>
+        <p className={descriptionClass}>{description}</p>
         {actionsModel ? <Actions model={actionsModel} /> : null}
       </div>
     </Box>

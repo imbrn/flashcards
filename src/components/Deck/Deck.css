@@ -58,6 +58,10 @@
   color: var(--color-grey);
 }
 
+.content p.noDescription {
+  font-style: italic;
+}
+
 .content .actions {
   width: 100%;
   display: flex;
