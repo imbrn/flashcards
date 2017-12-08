@@ -23,13 +23,13 @@
 }
 
 .row label {
-  margin-bottom: calc(var(--base-spacing)/2);
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .input {
   width: 100% !important;
+  margin-top: calc(var(--base-spacing)/4) !important;
 }
 
 .buttons {
@@ -43,6 +43,6 @@
 
 @media (--media-sm) {
   .form {
-    width: 400px;
+    width: 480px;
   }
 }

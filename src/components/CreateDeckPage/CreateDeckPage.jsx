@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./CreateDeckPage.css";
 import Navbar from "../Navbar";
 import Container from "../ResponsiveContainer";
+import Box from "../Box";
 import TextField from "../TextField";
 import TextArea from "../TextArea";
 import Button from "../Button";
@@ -11,31 +12,51 @@ const CreateDeckPage = () => {
     <div>
       <Navbar title="New deck" />
       <Container className={styles.content}>
-        <div className={styles.form}>
+        <Box elevation={2} className={styles.form}>
           <div className={styles.row}>
-            <TextField placeholder="Name" size="big" className={styles.input} />
+            <label>
+              Name
+              <TextField
+                name="name"
+                placeholder="What's the deck name?"
+                className={styles.input}
+                autoFocus
+              />
+            </label>
           </div>
           <div className={styles.row}>
-            <TextArea
-              placeholder="Description"
-              size="medium"
-              rows={2}
-              className={styles.input}
-            />
+            <label>
+              Description
+              <TextArea
+                name="description"
+                placeholder="How do you describe this deck?"
+                size="medium"
+                rows={2}
+                className={styles.input}
+              />
+            </label>
           </div>
           <div className={styles.row}>
-            <TextField
-              size="small"
-              placeholder="Front type (Ex: English)"
-              className={styles.input}
-            />
+            <label>
+              Cards front type
+              <TextField
+                name="front"
+                size="small"
+                placeholder="What' the cards front type? Ex: English"
+                className={styles.input}
+              />
+            </label>
           </div>
           <div className={styles.row}>
-            <TextField
-              size="small"
-              placeholder="Back type (Ex: Português)"
-              className={styles.input}
-            />
+            <label>
+              Cards back type
+              <TextField
+                name="back"
+                size="small"
+                placeholder="What's the back type? Ex: Português"
+                className={styles.input}
+              />
+            </label>
           </div>
           <div className={styles.buttons}>
             <Button type="primary" size="big" className={styles.button}>
@@ -45,7 +66,7 @@ const CreateDeckPage = () => {
               Cancel
             </Button>
           </div>
-        </div>
+        </Box>
       </Container>
     </div>
   );
