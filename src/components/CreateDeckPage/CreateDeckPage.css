@@ -34,11 +34,11 @@
 
 .buttons {
   display: flex;
-  justify-content: space-around;
   margin-top: var(--base-spacing);
 }
 
-.button {
+.button:first-child {
+  margin-right: var(--base-spacing);
 }
 
 @media (--media-sm) {
