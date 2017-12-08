@@ -2,7 +2,7 @@
 
 .root {
   background: var(--color-white);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-1);
 }
 
 .contentRoot {
