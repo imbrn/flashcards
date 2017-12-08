@@ -1,0 +1,31 @@
+@import "../_variables.css";
+
+.box {
+  background: var(--color-white);
+  box-sizing: border-box;
+  border-radius: calc(var(--base-rounding)/2);
+}
+
+.elevation-1 {
+  box-shadow: var(--shadow-1);
+}
+
+.elevation-2 {
+  box-shadow: var(--shadow-2);
+}
+
+.elevation-3 {
+  box-shadow: var(--shadow-3);
+}
+
+.room-small {
+  padding: calc(var(--base-spacing) / 2);
+}
+
+.room-normal {
+  padding: var(--base-spacing);
+}
+
+.room-big {
+  padding: calc(var(--base-spacing) * 2);
+}

@@ -4,13 +4,19 @@ import PropTypesUtils from "../prop-types-utils";
 import classnames from "classnames";
 import styles from "./Deck.css";
 import { DeckModel } from "../../decks";
+import Box from "../Box";
 import Dropdown from "../Dropdown";
 import Button from "../Button";
 import Icon from "../Icon";
 
 const Deck = ({ model, menuModel, actionsModel, className, ...rest }) => {
   return (
-    <div {...rest} className={classnames(styles.deck, className)}>
+    <Box
+      {...rest}
+      room="big"
+      elevation={2}
+      className={classnames(styles.deck, className)}
+    >
       {menuModel ? <Menu model={menuModel} /> : null}
       <div className={styles.content}>
         <h1>{model.name}</h1>
@@ -21,7 +27,7 @@ const Deck = ({ model, menuModel, actionsModel, className, ...rest }) => {
         <p>{model.description}</p>
         {actionsModel ? <Actions model={actionsModel} /> : null}
       </div>
-    </div>
+    </Box>
   );
 };
 
