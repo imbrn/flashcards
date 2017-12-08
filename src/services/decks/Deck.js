@@ -1,4 +1,4 @@
-import Card from "./Card";
+import Cards from "./Cards";
 import { DeckModel } from "../../decks";
 
 /**
@@ -12,18 +12,7 @@ class Deck {
   }
 
   getCards() {
-    return this._deckDoc.ref
-      .collection("cards")
-      .get()
-      .then(this._convertToCards);
-  }
-
-  _convertToCards(snapshot) {
-    const cards = [];
-    snapshot.forEach(doc => {
-      cards.push(new Card(doc));
-    });
-    return cards;
+    return Cards.getDeckCards(this);
   }
 
   asDeckModel() {
@@ -37,12 +26,17 @@ class Deck {
     const shallowDeck = this.asDeckModel();
 
     return this.getCards()
+      .getAll()
       .then(cards => {
         return cards.map(card => card.asCardModel(shallowDeck));
       })
       .then(cardsModels => {
         return shallowDeck.set("cards", cardsModels);
       });
+  }
+
+  get doc() {
+    return this._deckDoc;
   }
 }
 

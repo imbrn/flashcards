@@ -25,19 +25,37 @@ class App extends React.Component {
       });
   }
 
+  componentWillUnmount() {
+    this.stopListeningDecks();
+  }
+
   loadDecks(user) {
     this.dispatch(decksOperations.startLoadingInitialDecks());
 
-    user
-      .getDecks()
+    const userDecks = user.getDecks();
+
+    userDecks
+      .getAll()
       .then(this.convertDecksProxiesToModels)
-      .then(decks => {
-        this.dispatch(decksOperations.loadInitialDecks(decks));
+      .then(decksModels => {
+        this.dispatch(decksOperations.loadInitialDecks(decksModels));
+        this.startListeningDecks(userDecks);
       });
   }
 
   convertDecksProxiesToModels(decks) {
     return Promise.all(decks.map(deck => deck.asDeepDeckModel()));
+  }
+
+  startListeningDecks(decks) {
+    this.stopListeningDecks = decks.listen({
+      onAddDeck: deck => this.dispatch(decksOperations.addDeck(deck)),
+      onRemoveDeck: deck => this.dispatch(decksOperations.removeDeck(deck)),
+      onUpdateDeck: deck => this.dispatch(decksOperations.updateDeck(deck)),
+      onAddCard: card => this.dispatch(decksOperations.addCard(card)),
+      onRemoveCard: card => this.dispatch(decksOperations.removeCard(card)),
+      onUpdateCard: card => this.dispatch(decksOperations.updateCard(card))
+    });
   }
 
   dispatch(action) {

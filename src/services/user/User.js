@@ -1,5 +1,5 @@
-import { auth, firestore } from "firebase";
-import { Deck } from "../decks";
+import { auth } from "firebase";
+import { Decks } from "../decks";
 
 /**
  * Proxy class represeting an User data object.
@@ -23,20 +23,11 @@ class User {
   }
 
   getDecks() {
-    return firestore()
-      .collection("users")
-      .doc(this._user.uid)
-      .collection("decks")
-      .get()
-      .then(this._convertToDecks);
+    return Decks.getUserDecks(this);
   }
 
-  _convertToDecks(snapshot) {
-    const decks = [];
-    snapshot.forEach(doc => {
-      decks.push(new Deck(doc));
-    });
-    return decks;
+  get user() {
+    return this._user;
   }
 }
 
