@@ -12,13 +12,12 @@ import Button from "../Button";
 import { withFormik } from "formik";
 import validation, { required, maxLength } from "../../validation";
 
-const CreateDeckPage = ({ dispatch, decks, history }) => {
+const CreateDeckPage = ({ dispatch, history }) => {
   return (
     <div>
       <Navbar title="New deck" />
       <Container className={styles.content}>
         <Box elevation={2} className={styles.form}>
-          {decks.creatingState}
           <FormikForm dispatch={dispatch} cancel={history.goBack} />
         </Box>
       </Container>
@@ -28,7 +27,6 @@ const CreateDeckPage = ({ dispatch, decks, history }) => {
 
 CreateDeckPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  decks: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired
 };
 
@@ -173,10 +171,4 @@ const FormikForm = withFormik({
   }
 })(Form);
 
-const mapStateToProps = state => {
-  return {
-    decks: state.decks
-  };
-};
-
-export default connect(mapStateToProps)(CreateDeckPage);
+export default connect()(CreateDeckPage);
