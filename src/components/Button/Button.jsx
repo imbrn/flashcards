@@ -9,14 +9,14 @@ const Button = ({
   children,
   highlighted = false,
   size = "medium",
-  type = "normal",
+  color = "normal",
   className,
   ...rest
 }) => {
   const Tag = tag;
   const modifiersClasses = classnames(
     styles[size],
-    styles[type],
+    styles[color],
     highlighted && styles.highlighted
   );
 
@@ -35,7 +35,7 @@ Button.propTypes = {
   children: PropTypes.node,
   highlighted: PropTypes.bool,
   size: PropTypes.oneOf(["small", "medium", "big"]),
-  type: PropTypes.oneOf([
+  color: PropTypes.oneOf([
     "normal",
     "primary",
     "secondary",
