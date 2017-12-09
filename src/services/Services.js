@@ -9,7 +9,14 @@ class Services {
   }
 
   initialSignIn() {
-    return User.anonymousUser();
+    return User.anonymousUser().then(user => {
+      this._currentUser = user;
+      return user;
+    });
+  }
+
+  get currentUser() {
+    return this._currentUser;
   }
 }
 

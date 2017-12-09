@@ -13,6 +13,21 @@ const loadInitialDecks = decks => {
   };
 };
 
+const startCreatingDeck = deckData => {
+  return {
+    type: types.START_CREATING_DECK,
+    deckData
+  };
+};
+
+const finishCreatingDeck = (success, error) => {
+  return {
+    type: types.FINISH_CREATING_DECK,
+    success,
+    error
+  };
+};
+
 const addDeck = deck => {
   return {
     type: types.ADD_DECK,
@@ -58,6 +73,8 @@ const updateCard = card => {
 export default {
   startLoadingInitialDecks,
   loadInitialDecks,
+  startCreatingDeck,
+  finishCreatingDeck,
   addDeck,
   removeDeck,
   updateDeck,

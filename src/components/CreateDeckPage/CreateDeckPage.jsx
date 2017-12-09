@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styles from "./CreateDeckPage.css";
+import { connect } from "react-redux";
+import { decksOperations } from "../../decks";
 import Navbar from "../Navbar";
 import Container from "../ResponsiveContainer";
 import Box from "../Box";
@@ -10,17 +12,24 @@ import Button from "../Button";
 import { withFormik } from "formik";
 import validation, { required, maxLength } from "../../validation";
 
-const CreateDeckPage = () => {
+const CreateDeckPage = ({ dispatch, decks, history }) => {
   return (
     <div>
       <Navbar title="New deck" />
       <Container className={styles.content}>
         <Box elevation={2} className={styles.form}>
-          <FormikForm />
+          {decks.creatingState}
+          <FormikForm dispatch={dispatch} goBack={history.goBack} />
         </Box>
       </Container>
     </div>
   );
+};
+
+CreateDeckPage.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  decks: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 };
 
 const Form = ({
@@ -146,9 +155,16 @@ const FormikForm = withFormik({
     return errors;
   },
 
-  handleSubmit: () => {
-    // TODO: create deck in the back-end, using values parameter
+  handleSubmit: (values, { props }) => {
+    props.dispatch(decksOperations.requestCreateDeck(values));
+    props.goBack();
   }
 })(Form);
 
-export default CreateDeckPage;
+const mapStateToProps = state => {
+  return {
+    decks: state.decks
+  };
+};
+
+export default connect(mapStateToProps)(CreateDeckPage);

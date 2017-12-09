@@ -14,6 +14,17 @@ const loadingState = (state = DecksInitialLoadingState.NOT_LOADED, action) => {
   }
 };
 
+const creatingState = (state = "STOPPED", action) => {
+  switch (action.type) {
+    case types.START_CREATING_DECK:
+      return "CREATING";
+    case types.FINISH_CREATING_DECK:
+      return action.success ? "CREATED" : "FAILED";
+    default:
+      return state;
+  }
+};
+
 const decks = (state = OrderedMap(), action) => {
   switch (action.type) {
     case types.LOAD_INITIAL_DECKS:
@@ -79,6 +90,7 @@ const changeDeckCards = (state, deckId, changeFunction) => {
 
 const reducer = combineReducers({
   loadingState,
+  creatingState,
   items: decks
 });
 

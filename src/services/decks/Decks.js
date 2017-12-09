@@ -15,6 +15,18 @@ class Decks {
     this._collection = collection;
   }
 
+  push(deckData) {
+    return this._collection.add({
+      ...deckData,
+      createTime: firestore.FieldValue.serverTimestamp(),
+      updateTime: firestore.FieldValue.serverTimestamp()
+    });
+  }
+
+  add(deckData) {
+    return this.push(deckData);
+  }
+
   getAll() {
     return this._collection.get().then(snapshot => {
       const decks = [];
