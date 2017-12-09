@@ -27,6 +27,23 @@
   font-weight: 600;
 }
 
+.row label.labelError {
+  color: var(--color-danger);
+}
+
+.row label span {
+  font-weight: 400;
+  margin-left: calc(var(--base-spacing)/2);
+}
+
+.row label span:before {
+  content: '(';
+}
+
+.row label span:after {
+  content: ')';
+}
+
 .input {
   width: 100% !important;
   margin-top: calc(var(--base-spacing)/4) !important;
