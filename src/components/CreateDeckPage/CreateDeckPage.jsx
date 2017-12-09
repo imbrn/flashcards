@@ -23,15 +23,6 @@ const CreateDeckPage = () => {
   );
 };
 
-Form.propTypes = {
-  values: PropTypes.object,
-  errors: PropTypes.object,
-  touched: PropTypes.object,
-  handleChange: PropTypes.func,
-  handleBlur: PropTypes.func,
-  handleSubmit: PropTypes.func
-};
-
 const Form = ({
   values,
   errors,
@@ -125,6 +116,15 @@ const Form = ({
       </div>
     </form>
   );
+};
+
+Form.propTypes = {
+  values: PropTypes.object,
+  errors: PropTypes.object,
+  touched: PropTypes.object,
+  handleChange: PropTypes.func,
+  handleBlur: PropTypes.func,
+  handleSubmit: PropTypes.func
 };
 
 const FormikForm = withFormik({
