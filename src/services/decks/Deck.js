@@ -38,6 +38,10 @@ class Deck {
   get doc() {
     return this._deckDoc;
   }
+
+  get id() {
+    return this._deckDoc.id;
+  }
 }
 
 export default Deck;

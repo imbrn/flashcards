@@ -19,7 +19,7 @@ const CreateDeckPage = ({ dispatch, decks, history }) => {
       <Container className={styles.content}>
         <Box elevation={2} className={styles.form}>
           {decks.creatingState}
-          <FormikForm dispatch={dispatch} goBack={history.goBack} />
+          <FormikForm dispatch={dispatch} handleCancel={history.goBack} />
         </Box>
       </Container>
     </div>
@@ -38,7 +38,8 @@ const Form = ({
   touched,
   handleChange,
   handleBlur,
-  handleSubmit
+  handleSubmit,
+  handleCancel
 }) => {
   return (
     <form onSubmit={handleSubmit}>
@@ -119,7 +120,7 @@ const Form = ({
         <Button highlighted type="primary" size="big" className={styles.button}>
           Create
         </Button>
-        <Button size="big" className={styles.button}>
+        <Button size="big" className={styles.button} onClick={handleCancel}>
           Cancel
         </Button>
       </div>
@@ -133,7 +134,8 @@ Form.propTypes = {
   touched: PropTypes.object,
   handleChange: PropTypes.func,
   handleBlur: PropTypes.func,
-  handleSubmit: PropTypes.func
+  handleSubmit: PropTypes.func,
+  handleCancel: PropTypes.func
 };
 
 const FormikForm = withFormik({

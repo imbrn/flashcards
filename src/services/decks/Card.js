@@ -12,6 +12,10 @@ class Card {
       id: this._cardDoc.id
     });
   }
+
+  get id() {
+    return this._cardDoc.id;
+  }
 }
 
 export default Card;
