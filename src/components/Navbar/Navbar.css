@@ -49,8 +49,8 @@
   order: 3;
 }
 
-.socialIcon {
-  margin-right: calc(var(--base-spacing) / 3);
+.socialText {
+  display: none;
 }
 
 .auth {
@@ -65,6 +65,15 @@
 
 .actionIcon {
   margin-right: calc(var(--base-spacing) / 2);
+}
+
+@media (--media-sm) {
+  .socialIcon {
+    margin-right: calc(var(--base-spacing) / 3);
+  }
+  .socialText {
+    display: inline-block;
+  }
 }
 
 @media (--media-md) {

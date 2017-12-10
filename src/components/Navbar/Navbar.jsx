@@ -77,7 +77,7 @@ const Social = () => {
     <Section className={styles.social}>
       <Button tag="a" href={GITHUB}>
         <Icon icon="fa fa-github" className={styles.socialIcon} />
-        GitHub
+        <span className={styles.socialText}>GitHub</span>
       </Button>
     </Section>
   );
