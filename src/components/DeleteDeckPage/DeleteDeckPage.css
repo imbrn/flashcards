@@ -1,0 +1,40 @@
+@import "../_variables.css";
+
+.root {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--base-spacing);
+}
+
+.title {
+  padding: var(--base-spacing);
+}
+
+.deckContainer {
+  max-width: 320px;
+  width: 100%;
+  padding: var(--base-spacing);
+}
+
+.buttons {
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+@media (--media-md) {
+  .buttons {
+    padding: calc(var(--base-spacing)*2);
+    align-items: flex-start;
+  }
+}
