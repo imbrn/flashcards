@@ -21,12 +21,13 @@
 }
 
 .content .labels {
+  width: 100%;
   display: flex;
   margin-top: calc(var(--base-spacing)/2);
+  justify-content: center;
 }
 
 .content .label {
-  flex-basis: 0;
   background: var(--color-grey-lighter);
   color: var(--color-grey-light);
   font-size: 0.85rem;
