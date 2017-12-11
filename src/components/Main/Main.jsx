@@ -14,12 +14,12 @@ class Main extends React.Component {
   }
 
   render() {
+    // TODO: add support for sign in fail page
     if (authSelectors.isSigningIn(this.props.auth)) {
       return <SigningInPage />;
     } else {
       return <AppPage />;
     }
-    // TODO: add support for sign in fail page
   }
 }
 
