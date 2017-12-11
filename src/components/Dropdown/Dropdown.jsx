@@ -19,7 +19,7 @@ class Dropdown extends React.Component {
   }
 
   componentWillUnmount() {
-    this.close();
+    this.stopHandlingOutsideClick();
   }
 
   render() {
@@ -80,8 +80,8 @@ class Dropdown extends React.Component {
 
   open() {
     this.setState(
-      () => {
-        return { open: true };
+      {
+        open: true
       },
       () => {
         this.startHandlingOutsideClick();
@@ -90,11 +90,11 @@ class Dropdown extends React.Component {
   }
 
   stopHandlingOutsideClick() {
-    document.removeEventListener("click", this.onClickOutside);
+    document.removeEventListener("click", this.onClickOutside, false);
   }
 
   startHandlingOutsideClick() {
-    document.addEventListener("click", this.onClickOutside);
+    document.addEventListener("click", this.onClickOutside, false);
   }
 
   onClickOutside() {
