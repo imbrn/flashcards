@@ -1,5 +1,9 @@
 @import "../_variables.css";
 
+.root {
+  height: 100%;
+}
+
 .decks {
   display: flex;
   flex-wrap: wrap;

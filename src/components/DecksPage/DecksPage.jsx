@@ -18,7 +18,7 @@ const DecksPage = ({ decks }) => {
   };
 
   return (
-    <div>
+    <div className={styles.root}>
       <Navbar
         title="My decks"
         actions={[

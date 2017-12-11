@@ -20,20 +20,6 @@
   justify-content: center;
 }
 
-.content h1, .content p {
-  margin: 0;
-  padding: 0;
-  font-size: inherit;
-  font-weight: inherit;
-  text-align: center;
-}
-
-.content h1 {
-  color: var(--color-grey-dark);
-  font-size: 2rem;
-  font-weight: 500;
-}
-
 .content .labels {
   display: flex;
   margin-top: calc(var(--base-spacing)/2);
@@ -51,8 +37,11 @@
 }
 
 .content p {
-  flex-grow: 1;
+  margin: 0;
   margin-top: calc(var(--base-spacing)/2);
+  padding: 0;
+  text-align: center;
+  flex-grow: 1;
   font-size: 1.25rem;
   font-weight: 300;
   color: var(--color-grey);

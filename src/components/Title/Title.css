@@ -1,0 +1,24 @@
+@import "../_variables.css";
+
+.title {
+  margin: 0;
+  padding: 0;
+  font-family: var(--base-font-family);
+  font-size: var(--base-font-size);
+  font-weight: 600;
+  text-align: center;
+}
+
+.xs { font-size: 1rem; }
+.sm { font-size: 1.25rem; }
+.md { font-size: 1.75rem; }
+.lg { font-size: 2rem; }
+.xl { font-size: 2.25rem; }
+
+.normal { color: var(--color-grey-dark); }
+.primary { color: var(--color-primary); }
+.secondary { color: var(--color-secondary); }
+.tertiary { color: var(--color-tertiary); }
+.danger { color: var(--color-danger); }
+.primary { color: var(--color-primary); }
+

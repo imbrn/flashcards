@@ -5,6 +5,7 @@ import classnames from "classnames";
 import styles from "./Deck.css";
 import { DeckModel } from "../../decks";
 import Box from "../Box";
+import Title from "../Title";
 import Dropdown from "../Dropdown";
 import Button from "../Button";
 import Icon from "../Icon";
@@ -27,7 +28,7 @@ const Deck = ({ model, menuModel, actionsModel, className, ...rest }) => {
     >
       {menuModel ? <Menu model={menuModel} /> : null}
       <div className={styles.content}>
-        <h1>{model.name}</h1>
+        <Title>{model.name}</Title>
         <div className={styles.labels}>
           <span className={styles.label}>{front}</span>
           <span className={styles.label}>{back}</span>
