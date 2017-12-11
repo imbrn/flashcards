@@ -48,7 +48,7 @@
   color: var(--color-danger);
 }
 
-.danger:hover {
+.danger:hover, .danger.highlighted {
   background: var(--color-danger);
   color: var(--color-white);
 }
