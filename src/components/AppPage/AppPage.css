@@ -1,8 +1,10 @@
 @import "../_variables.css";
 
 .root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
   font-family: var(--base-font-family);
   font-size: var(--base-font-size);
   background: var(--color-grey-lightest);
-  min-height: 100%;
 }
