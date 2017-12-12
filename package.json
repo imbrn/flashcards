@@ -11,7 +11,9 @@
     "lint:fix": "npm run lint:js:fix",
     "build": "npm run lint && webpack --config config/webpack.prod.js",
     "start": "webpack-dev-server --config config/webpack.dev.js",
-    "deploy": "npm run build && firebase deploy"
+    "deploy:prod": "npm run build && firebase deploy --project prod",
+    "deploy:test": "npm run build && firebase deploy --project staging",
+    "deploy": "npm run deploy:test"
   },
   "repository": {
     "type": "git",
