@@ -23,7 +23,7 @@ const Text = ({
 };
 
 Text.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
   color: PropTypes.oneOf(["normal"]),
   size: PropTypes.oneOf(["xs", "sm", "md", "lg", "xl"]),
   className: PropTypesUtils.className
