@@ -47,12 +47,22 @@ const LoadedState = ({ decks }) => {
         .filter(
           deck => !decks.deletingDeck || decks.deletingDeck.id !== deck.id
         )
-        .sortBy(deck => deck.createTime)
+        .sort(timeSort)
         .toArray()
         .map((deck, index) => <DeckWrapper key={index} deck={deck} />)}
     </div>
   );
 };
+
+function timeSort(a, b) {
+  if (!a.createTime) {
+    return 1;
+  } else if (!b.createTime) {
+    return -1;
+  }
+
+  return a.createTime - b.createTime;
+}
 
 LoadedState.propTypes = {
   decks: PropTypes.object.isRequired
