@@ -1,4 +1,6 @@
 import Card from "./Card";
+import { firestore } from "firebase";
+import { deleteCollection } from "../utils";
 
 class Cards {
   static getDeckCards(deck) {
@@ -37,6 +39,10 @@ class Cards {
         }
       });
     });
+  }
+
+  deleteAll() {
+    return deleteCollection(firestore(), this._collection, 10);
   }
 }
 

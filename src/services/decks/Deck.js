@@ -15,6 +15,14 @@ class Deck {
     return Cards.getDeckCards(this);
   }
 
+  delete() {
+    return this.getCards()
+      .deleteAll()
+      .then(() => {
+        return this._deckDoc.ref.delete();
+      });
+  }
+
   asDeckModel() {
     return DeckModel({
       ...this._deckDoc.data(),

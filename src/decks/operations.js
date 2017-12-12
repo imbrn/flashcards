@@ -26,10 +26,31 @@ const requestCreateDeck = deckData => {
   };
 };
 
+const requestDeleteDeck = deck => {
+  return dispatch => {
+    dispatch(actions.startDeletingDeck(deck));
+
+    services.currentUser
+      .getDecks()
+      .getDeck(deck.id)
+      .then(deckProxy => {
+        deckProxy
+          .delete()
+          .then(() => {
+            dispatch(actions.finishDeletingDeck(true));
+          })
+          .catch(error => {
+            dispatch(actions.finishDeletingDeck(false, error));
+          });
+      });
+  };
+};
+
 export default {
   startLoadingInitialDecks,
   loadInitialDecks,
   requestCreateDeck,
+  requestDeleteDeck,
   addDeck,
   removeDeck,
   updateDeck,

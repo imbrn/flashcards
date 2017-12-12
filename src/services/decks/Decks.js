@@ -37,6 +37,15 @@ class Decks {
     });
   }
 
+  getDeck(deckId) {
+    return this._collection
+      .doc(deckId)
+      .get()
+      .then(snapshot => {
+        return new Deck(snapshot);
+      });
+  }
+
   listen({
     onAddDeck = () => {},
     onRemoveDeck = () => {},

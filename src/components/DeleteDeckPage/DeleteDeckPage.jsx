@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { decksSelectors } from "../../decks";
+import { decksOperations, decksSelectors } from "../../decks";
 import styles from "./DeleteDeckPage.css";
 import Navbar from "../Navbar";
 import Container from "../ResponsiveContainer";
@@ -10,10 +10,27 @@ import Deck from "../Deck";
 import Text from "../Text";
 import Button from "../Button";
 
-const DeleteDeckPage = ({ decks, match }) => {
+const DeleteDeckPage = ({ dispatch, decks, match, history }) => {
+  const onConfirmDeletion = deck => {
+    history.goBack();
+    dispatch(decksOperations.requestDeleteDeck(deck));
+  };
+
+  const onCancelDeletion = () => {
+    history.goBack();
+  };
+
   const renderContent = () => {
     if (decksSelectors.isLoaded(decks)) {
-      return <DeleteDeckContent deck={decks.items.get(match.params.deckId)} />;
+      const deck = decks.items.get(match.params.deckId);
+
+      return (
+        <DeleteDeckContent
+          deck={deck}
+          onConfirm={() => onConfirmDeletion(deck)}
+          onCancel={onCancelDeletion}
+        />
+      );
     } else {
       return <LoadingDecks />;
     }
@@ -28,15 +45,17 @@ const DeleteDeckPage = ({ decks, match }) => {
 };
 
 DeleteDeckPage.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   decks: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired
+  match: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 };
 
 const LoadingDecks = () => {
   return <Container>Loading deck...</Container>;
 };
 
-const DeleteDeckContent = ({ deck }) => {
+const DeleteDeckContent = ({ deck, onConfirm, onCancel }) => {
   return (
     <Container className={styles.content}>
       <Title size="md" color="danger" className={styles.title}>
@@ -53,17 +72,21 @@ const DeleteDeckContent = ({ deck }) => {
       </div>
 
       <div className={styles.buttons}>
-        <Button size="big" color="danger" highlighted>
+        <Button size="big" color="danger" highlighted onClick={onConfirm}>
           Delete
         </Button>
-        <Button size="big">Cancel</Button>
+        <Button size="big" onClick={onCancel}>
+          Cancel
+        </Button>
       </div>
     </Container>
   );
 };
 
 DeleteDeckContent.propTypes = {
-  deck: PropTypes.object.isRequired
+  deck: PropTypes.object.isRequired,
+  onConfirm: PropTypes.func,
+  onCancel: PropTypes.func
 };
 
 const mapStateToProps = state => {

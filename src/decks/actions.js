@@ -28,6 +28,21 @@ const finishCreatingDeck = (success, error) => {
   };
 };
 
+const startDeletingDeck = deck => {
+  return {
+    type: types.START_DELETING_DECK,
+    deck
+  };
+};
+
+const finishDeletingDeck = (success, error) => {
+  return {
+    type: types.FINISH_DELETING_DECK,
+    success,
+    error
+  };
+};
+
 const addDeck = deck => {
   return {
     type: types.ADD_DECK,
@@ -75,6 +90,8 @@ export default {
   loadInitialDecks,
   startCreatingDeck,
   finishCreatingDeck,
+  startDeletingDeck,
+  finishDeletingDeck,
   addDeck,
   removeDeck,
   updateDeck,
