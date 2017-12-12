@@ -1,4 +1,4 @@
-import { Record, List } from "immutable";
+import { Record, OrderedMap } from "immutable";
 
 export const DeckModel = Record({
   id: null,
@@ -6,7 +6,7 @@ export const DeckModel = Record({
   description: null,
   front: null,
   back: null,
-  cards: List(),
+  cards: OrderedMap(),
   createTime: null,
   updateTime: null
 });

@@ -67,8 +67,10 @@ const DeleteDeckContent = ({ deck, onConfirm, onCancel }) => {
       </div>
 
       <div className={styles.info}>
+        <Text>
+          <b>{deck.cards.size} cards</b> will be lost.
+        </Text>
         <Text>This operation is irreversible.</Text>
-        <Text>All of its cards will be lost.</Text>
       </div>
 
       <div className={styles.buttons}>

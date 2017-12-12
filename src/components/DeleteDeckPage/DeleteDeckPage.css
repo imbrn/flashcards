@@ -24,6 +24,12 @@
   padding: var(--base-spacing);
 }
 
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .buttons {
   width: 100%;
   flex-grow: 1;
