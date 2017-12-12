@@ -12,8 +12,8 @@ import Button from "../Button";
 
 const DeleteDeckPage = ({ dispatch, decks, match, history }) => {
   const onConfirmDeletion = deck => {
-    history.goBack();
     dispatch(decksOperations.requestDeleteDeck(deck));
+    history.goBack();
   };
 
   const onCancelDeletion = () => {
