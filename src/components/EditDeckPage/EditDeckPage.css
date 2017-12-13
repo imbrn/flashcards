@@ -1,0 +1,20 @@
+@import "../_variables.css";
+
+.editContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--base-spacing);
+  padding: var(--base-spacing);
+}
+
+.deckForm {
+  width: 100%;
+}
+
+@media (--media-sm) {
+  .deckForm {
+    width: 480px;
+  }
+}
