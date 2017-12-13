@@ -14,28 +14,6 @@ const loadingState = (state = DecksInitialLoadingState.NOT_LOADED, action) => {
   }
 };
 
-const creatingState = (state = "STOPPED", action) => {
-  switch (action.type) {
-    case types.START_CREATING_DECK:
-      return "CREATING";
-    case types.FINISH_CREATING_DECK:
-      return action.success ? "CREATED" : "FAILED";
-    default:
-      return state;
-  }
-};
-
-const deletingState = (state = "STOPPED", action) => {
-  switch (action.type) {
-    case types.START_DELETING_DECK:
-      return "DELETING";
-    case types.FINISH_DELETING_DECK:
-      return action.success ? "DELETED" : "FAILED";
-    default:
-      return state;
-  }
-};
-
 const deletingDeck = (state = null, action) => {
   switch (action.type) {
     case types.START_DELETING_DECK:
@@ -123,8 +101,6 @@ const changeDeckCards = (state, deckId, changeFunction) => {
 
 const reducer = combineReducers({
   loadingState,
-  creatingState,
-  deletingState,
   deletingDeck,
   editingDeck,
   items
