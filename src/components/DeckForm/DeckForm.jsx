@@ -131,6 +131,7 @@ RawForm.propTypes = {
   handleChange: PropTypes.func,
   handleBlur: PropTypes.func,
   handleSubmit: PropTypes.func,
+  onSubmit: PropTypes.func,
   onCancel: PropTypes.func
 };
 
@@ -154,7 +155,9 @@ const DeckForm = withFormik({
   },
 
   handleSubmit: (values, { props }) => {
-    props.onSubmit(values);
+    if (props.onSubmit) {
+      props.onSubmit(values);
+    }
   }
 })(RawForm);
 
