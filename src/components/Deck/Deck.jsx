@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import PropTypesUtils from "../prop-types-utils";
 import classnames from "classnames";
 import styles from "./Deck.css";
-import { DeckModel } from "../../decks";
 import Box from "../Box";
 import Title from "../Title";
 import Dropdown from "../Dropdown";
@@ -41,7 +40,7 @@ const Deck = ({ model, menuModel, actionsModel, className, ...rest }) => {
 };
 
 Deck.propTypes = {
-  model: PropTypes.objectOf(DeckModel).isRequired,
+  model: PropTypes.object.isRequired,
   menuModel: PropTypes.arrayOf(PropTypes.object),
   actionsModel: PropTypes.arrayOf(PropTypes.object),
   className: PropTypesUtils.className

@@ -1,6 +1,6 @@
 import { Record, OrderedMap } from "immutable";
 
-export const DeckModel = Record({
+export class DeckModel extends Record({
   id: null,
   name: null,
   description: null,
@@ -9,7 +9,16 @@ export const DeckModel = Record({
   cards: OrderedMap(),
   createTime: null,
   updateTime: null
-});
+}) {
+  asUpdatableModel() {
+    return {
+      name: this.name,
+      description: this.description,
+      front: this.front,
+      back: this.back
+    };
+  }
+}
 
 export const CardModel = Record({
   id: null,

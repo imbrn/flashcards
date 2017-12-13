@@ -47,6 +47,17 @@ const deletingDeck = (state = null, action) => {
   }
 };
 
+const editingDeck = (state = null, action) => {
+  switch (action.type) {
+    case types.START_EDITING_DECK:
+      return action.deck;
+    case types:
+      return null;
+    default:
+      return state;
+  }
+};
+
 const items = (state = OrderedMap(), action) => {
   switch (action.type) {
     case types.LOAD_INITIAL_DECKS:
@@ -115,6 +126,7 @@ const reducer = combineReducers({
   creatingState,
   deletingState,
   deletingDeck,
+  editingDeck,
   items
 });
 

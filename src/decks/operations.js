@@ -46,11 +46,32 @@ const requestDeleteDeck = deck => {
   };
 };
 
+const requestEditDeck = deck => {
+  return dispatch => {
+    dispatch(actions.startEditingDeck(deck));
+
+    services.currentUser
+      .getDecks()
+      .getDeck(deck.id)
+      .then(deckProxy => {
+        deckProxy
+          .update(deck.asUpdatableModel())
+          .then(() => {
+            dispatch(actions.finishEditingDeck(true));
+          })
+          .catch(error => {
+            dispatch(actions.finishEditingDeck(false, error));
+          });
+      });
+  };
+};
+
 export default {
   startLoadingInitialDecks,
   loadInitialDecks,
   requestCreateDeck,
   requestDeleteDeck,
+  requestEditDeck,
   addDeck,
   removeDeck,
   updateDeck,

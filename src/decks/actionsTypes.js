@@ -5,6 +5,8 @@ const START_CREATING_DECK = "decks/actionsTypes/START_CREATING_DECK";
 const FINISH_CREATING_DECK = "deck/actionsTypes/FINISH_CREATING_DECK";
 const START_DELETING_DECK = "decks/actionsTypes/START_DELETING_DECK";
 const FINISH_DELETING_DECK = "decks/actionsTypes/FINISH_DELETING_DECK";
+const START_EDITING_DECK = "decks/actionsTypes/START_EDITING_DECK";
+const FINISH_EDITING_DECK = "decks/actionsTypes/FINISH_EDITING_DECK";
 const ADD_DECK = "decks/actionsTypes/ADD_DECK";
 const REMOVE_DECK = "decks/actionsTypes/REMOVE_DECK";
 const UPDATE_DECK = "decks/actionsTypes/UPDATE_DECK";
@@ -19,6 +21,8 @@ export default {
   FINISH_CREATING_DECK,
   START_DELETING_DECK,
   FINISH_DELETING_DECK,
+  START_EDITING_DECK,
+  FINISH_EDITING_DECK,
   ADD_DECK,
   REMOVE_DECK,
   UPDATE_DECK,

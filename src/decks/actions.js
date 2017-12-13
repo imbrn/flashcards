@@ -43,6 +43,21 @@ const finishDeletingDeck = (success, error) => {
   };
 };
 
+const startEditingDeck = deck => {
+  return {
+    type: types.START_EDITING_DECK,
+    deck
+  };
+};
+
+const finishEditingDeck = (success, error) => {
+  return {
+    type: types.FINISH_EDITING_DECK,
+    success,
+    error
+  };
+};
+
 const addDeck = deck => {
   return {
     type: types.ADD_DECK,
@@ -92,6 +107,8 @@ export default {
   finishCreatingDeck,
   startDeletingDeck,
   finishDeletingDeck,
+  startEditingDeck,
+  finishEditingDeck,
   addDeck,
   removeDeck,
   updateDeck,

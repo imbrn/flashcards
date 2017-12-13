@@ -1,3 +1,4 @@
+import { firestore } from "firebase";
 import Cards from "./Cards";
 import { DeckModel } from "../../decks";
 
@@ -23,8 +24,15 @@ class Deck {
       });
   }
 
+  update(data) {
+    return this._deckDoc.ref.update({
+      ...data,
+      updateTime: firestore.FieldValue.serverTimestamp()
+    });
+  }
+
   asDeckModel() {
-    return DeckModel({
+    return new DeckModel({
       ...this._deckDoc.data(),
       id: this._deckDoc.id
     });
