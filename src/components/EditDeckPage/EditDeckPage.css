@@ -1,6 +1,6 @@
 @import "../_variables.css";
 
-.editContent {
+.contentRoot {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,12 +9,12 @@
   padding: var(--base-spacing);
 }
 
-.deckForm {
+.editContent {
   width: 100%;
 }
 
 @media (--media-sm) {
-  .deckForm {
+  .editContent {
     width: 480px;
   }
 }

@@ -5,6 +5,7 @@ import { decksSelectors, decksOperations } from "../../decks";
 import styles from "./EditDeckPage.css";
 import Navbar from "../Navbar";
 import Container from "../ResponsiveContainer";
+import Box from "../Box";
 import DeckForm from "../DeckForm";
 
 const EditDeckPage = ({ dispatch, match, history, decks }) => {
@@ -43,14 +44,14 @@ const EditContent = ({ dispatch, history, deck }) => {
   };
 
   return (
-    <div className={styles.editContent}>
+    <Box elevation={2} className={styles.editContent}>
       <DeckForm
         className={styles.deckForm}
         defaultValue={deck}
         onSubmit={onSubmit}
         onCancel={onCancel}
       />
-    </div>
+    </Box>
   );
 };
 
