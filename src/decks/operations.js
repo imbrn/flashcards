@@ -51,7 +51,7 @@ const requestEditDeck = deck => {
   return dispatch => {
     dispatch(actions.startEditingDeck(deck));
 
-    services.currentUser
+    return services.currentUser
       .getDecks()
       .getDeck(deck.id)
       .then(deckProxy => {

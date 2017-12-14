@@ -40,7 +40,7 @@ const editingDeck = (state = null, action) => {
   switch (action.type) {
     case types.START_EDITING_DECK:
       return action.deck;
-    case types:
+    case types.FINISH_EDITING_DECK:
       return null;
     default:
       return state;

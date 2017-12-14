@@ -16,9 +16,14 @@ const isCreatingDeck = decks => {
   return decks.creatingDeck;
 };
 
+const isEditingDeck = decks => {
+  return !!decks.editingDeck;
+};
+
 export default {
   isNotLoaded,
   isLoading,
   isLoaded,
-  isCreatingDeck
+  isCreatingDeck,
+  isEditingDeck
 };

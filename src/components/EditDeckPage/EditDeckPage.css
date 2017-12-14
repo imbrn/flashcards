@@ -1,20 +1,54 @@
 @import "../_variables.css";
 
-.contentRoot {
+.root {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: var(--base-spacing);
-  padding: var(--base-spacing);
 }
 
-.editContent {
+.container {
+  display: flex;
+  flex: 1;
   width: 100%;
 }
 
-@media (--media-sm) {
-  .editContent {
+.loadingContent {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.editContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  padding: var(--base-spacing);
+}
+
+.editingProgress {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.formContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.formBox {
+  width: 100%;
+}
+
+@media (--media-md) {
+  .formBox {
     width: 480px;
   }
 }

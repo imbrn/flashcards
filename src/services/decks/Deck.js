@@ -26,10 +26,18 @@ class Deck {
   }
 
   update(data) {
-    return this._deckDoc.ref.update({
-      ...data,
-      updateTime: firestore.FieldValue.serverTimestamp()
-    });
+    return this._deckDoc.ref
+      .update({
+        ...data,
+        updateTime: firestore.FieldValue.serverTimestamp()
+      })
+      .then(deckRef => {
+        // Returns a promise which resolves to a Deck proxy containing the fresh
+        // updated deck.
+        return deckRef.get().then(doc => {
+          return new Deck(doc);
+        });
+      });
   }
 
   asDeckModel() {

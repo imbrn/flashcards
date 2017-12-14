@@ -12,7 +12,14 @@ const EditDeckPage = ({ dispatch, match, history, decks }) => {
   const renderContent = () => {
     if (decksSelectors.isLoaded(decks)) {
       const deck = decks.items.get(match.params.deckId);
-      return <EditContent dispatch={dispatch} deck={deck} history={history} />;
+      return (
+        <EditContent
+          dispatch={dispatch}
+          history={history}
+          decks={decks}
+          deck={deck}
+        />
+      );
     } else {
       return <LoadingContent />;
     }
@@ -21,7 +28,7 @@ const EditDeckPage = ({ dispatch, match, history, decks }) => {
   return (
     <div className={styles.root}>
       <Navbar title="Edit deck" />
-      <Container className={styles.contentRoot}>{renderContent()}</Container>
+      <Container className={styles.container}>{renderContent()}</Container>
     </div>
   );
 };
@@ -33,36 +40,65 @@ EditDeckPage.propTypes = {
   decks: PropTypes.object.isRequired
 };
 
-const EditContent = ({ dispatch, history, deck }) => {
+const EditContent = ({ dispatch, history, decks, deck }) => {
   const onSubmit = deckData => {
-    dispatch(decksOperations.requestEditDeck(deck.merge(deckData)));
-    history.goBack();
+    // Redirects to the main page when finished the updating
+    dispatch(decksOperations.requestEditDeck(deck.merge(deckData))).then(() => {
+      history.push("/");
+    });
   };
 
   const onCancel = () => {
     history.goBack();
   };
 
-  return (
-    <Box elevation={2} className={styles.editContent}>
-      <DeckForm
-        className={styles.deckForm}
-        defaultValue={deck}
-        onSubmit={onSubmit}
-        onCancel={onCancel}
-      />
-    </Box>
-  );
+  const renderContent = () => {
+    if (decksSelectors.isEditingDeck(decks)) {
+      return <EditingProgress />;
+    } else {
+      return (
+        <FormContent deck={deck} onSubmit={onSubmit} onCancel={onCancel} />
+      );
+    }
+  };
+
+  return <div className={styles.editContent}>{renderContent()}</div>;
 };
 
 EditContent.propTypes = {
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
+  decks: PropTypes.object.isRequired,
   deck: PropTypes.object.isRequired
 };
 
+const EditingProgress = () => {
+  return <div className={styles.editingProgress}>Saving changes...</div>;
+};
+
+const FormContent = ({ deck, onSubmit, onCancel }) => {
+  return (
+    <div className={styles.formContent}>
+      <Box elevation={2} className={styles.formBox}>
+        <DeckForm
+          className={styles.form}
+          defaultValue={deck}
+          onSubmit={onSubmit}
+          onCancel={onCancel}
+        />
+      </Box>
+    </div>
+  );
+};
+
+FormContent.propTypes = {
+  deck: PropTypes.object.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired
+};
+
 const LoadingContent = () => {
-  return <div className={styles.loadingContent}>Loading</div>;
+  return <div className={styles.loadingContent}>Loading deck...</div>;
 };
 
 const mapStateToProps = state => {
