@@ -45,7 +45,11 @@ class Deck {
     return this.getCards()
       .getAll()
       .then(cards => {
-        return OrderedMap(cards.map(card => card.asCardModel(shallowDeck)));
+        return OrderedMap(
+          cards
+            .map(card => card.asCardModel(shallowDeck))
+            .map(card => [card.id, card])
+        );
       })
       .then(cardsModels => {
         return shallowDeck.set("cards", cardsModels);
