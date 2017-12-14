@@ -95,7 +95,7 @@ const DeckWrapper = ({ deck }) => {
     {
       icon: "fa fa-trash-o",
       text: "Delete",
-      danger: true,
+      color: "danger",
       tag: Link,
       to: `decks/${deck.id}/delete`
     }

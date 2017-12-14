@@ -50,11 +50,11 @@
   margin-right: calc(var(--base-spacing)/2);
 }
 
-.menuItemDanger {
+.menuItem.danger {
   color: var(--color-danger);
 }
 
-.menuItemDanger:hover {
+.menuItem.danger:hover {
   color: var(--color-white);
   background: var(--color-danger);
 }

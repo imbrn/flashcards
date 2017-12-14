@@ -127,14 +127,17 @@ MenuAction.propTypes = {
 };
 
 const MenuItem = ({ action, ...rest }) => {
-  const { tag = Button, icon, text, className, danger, ...params } = action;
+  const {
+    tag = Button,
+    icon,
+    text,
+    className,
+    color = "normal",
+    ...params
+  } = action;
   const Tag = tag;
 
-  const classes = [
-    styles.menuItem,
-    danger ? styles.menuItemDanger : null,
-    className
-  ];
+  const classes = [styles.menuItem, styles[color], className];
 
   return (
     <Tag {...rest} {...params} className={classnames(classes)}>
