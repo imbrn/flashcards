@@ -12,6 +12,7 @@
 }
 
 .deckWrapper {
+  box-sizing: border-box;
   padding: var(--base-spacing);
   width: 100%;
   min-height: 240px;
@@ -24,6 +25,12 @@
 
 @media (--media-md) {
   .deckWrapper {
-    width: 320px;
+    width: 50%;
+  }
+}
+
+@media (--media-xl) {
+  .deckWrapper {
+    width: 33.3%;
   }
 }
