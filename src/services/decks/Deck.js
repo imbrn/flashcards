@@ -1,5 +1,6 @@
 import { firestore } from "firebase";
 import Cards from "./Cards";
+import { OrderedMap } from "immutable";
 import { DeckModel } from "../../decks";
 
 /**
@@ -44,7 +45,7 @@ class Deck {
     return this.getCards()
       .getAll()
       .then(cards => {
-        return cards.map(card => card.asCardModel(shallowDeck));
+        return OrderedMap(cards.map(card => card.asCardModel(shallowDeck)));
       })
       .then(cardsModels => {
         return shallowDeck.set("cards", cardsModels);
