@@ -46,7 +46,7 @@ module.exports = {
 
   plugins: [
     new webpack.DefinePlugin({
-      GITHUB: JSON.stringify("https://github.com/nwsapps/flashcards")
+      GITHUB: JSON.stringify("https://github.com/open-flashcards/flashcards")
     }),
     new CleanWebpackPlugin([paths.build], cleanOptions),
     new FaviconsWebpackPlugin(path.join(paths.root, "logo.png")),
