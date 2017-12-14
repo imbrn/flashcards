@@ -2,6 +2,7 @@ import DecksPage from "../DecksPage";
 import CreateDeckPage from "../CreateDeckPage";
 import EditDeckPage from "../EditDeckPage";
 import DeleteDeckPage from "../DeleteDeckPage";
+import CardsPage from "../CardsPage";
 import NotFoundPage from "../NotFoundPage";
 
 const routes = [
@@ -23,6 +24,11 @@ const routes = [
   {
     path: "/decks/:deckId/delete",
     component: DeleteDeckPage,
+    exact: true
+  },
+  {
+    path: "/decks/:deckId/cards",
+    component: CardsPage,
     exact: true
   },
   {
