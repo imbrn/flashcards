@@ -1,11 +1,12 @@
 import { User } from "./user";
 import "firebase/firestore";
-import { initializeApp } from "firebase";
+import { initializeApp, firestore } from "firebase";
 import config from "./config/config";
 
 class Services {
   initialize() {
     initializeApp(config);
+    firestore().enablePersistence();
   }
 
   initialSignIn() {

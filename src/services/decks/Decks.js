@@ -16,11 +16,19 @@ class Decks {
   }
 
   push(deckData) {
-    return this._collection.add({
-      ...deckData,
-      createTime: firestore.FieldValue.serverTimestamp(),
-      updateTime: firestore.FieldValue.serverTimestamp()
-    });
+    return this._collection
+      .add({
+        ...deckData,
+        createTime: firestore.FieldValue.serverTimestamp(),
+        updateTime: firestore.FieldValue.serverTimestamp()
+      })
+      .then(deckRef => {
+        // It gets the newly created deck and wraps it inside a Deck proxy
+        // object to repass through the promise chain.
+        return deckRef.get().then(deckDoc => {
+          return new Deck(deckDoc);
+        });
+      });
   }
 
   add(deckData) {

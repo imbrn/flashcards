@@ -12,13 +12,14 @@ const updateCard = actions.updateCard;
 
 const requestCreateDeck = deckData => {
   return dispatch => {
-    dispatch(actions.startCreatingDeck());
+    dispatch(actions.startCreatingDeck(deckData));
 
-    services.currentUser
+    return services.currentUser
       .getDecks()
       .add(deckData)
-      .then(() => {
+      .then(deckProxy => {
         dispatch(actions.finishCreatingDeck(true));
+        return deckProxy;
       })
       .catch(error => {
         dispatch(actions.finishCreatingDeck(false, error));

@@ -9,12 +9,12 @@
   padding: var(--base-spacing);
 }
 
-.form {
+.box {
   width: 100%;
 }
 
 @media (--media-sm) {
-  .form {
+  .box {
     width: 480px;
   }
 }

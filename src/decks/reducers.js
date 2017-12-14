@@ -14,6 +14,17 @@ const loadingState = (state = DecksInitialLoadingState.NOT_LOADED, action) => {
   }
 };
 
+const creatingDeck = (state = false, action) => {
+  switch (action.type) {
+    case types.START_CREATING_DECK:
+      return true;
+    case types.FINISH_CREATING_DECK:
+      return false;
+    default:
+      return state;
+  }
+};
+
 const deletingDeck = (state = null, action) => {
   switch (action.type) {
     case types.START_DELETING_DECK:
@@ -101,6 +112,7 @@ const changeDeckCards = (state, deckId, changeFunction) => {
 
 const reducer = combineReducers({
   loadingState,
+  creatingDeck,
   deletingDeck,
   editingDeck,
   items

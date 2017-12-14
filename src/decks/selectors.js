@@ -13,22 +13,12 @@ const isLoaded = decks => {
 };
 
 const isCreatingDeck = decks => {
-  return decks.creatingState === "CREATING";
-};
-
-const hasCreatedDeck = decks => {
-  return decks.creatingState === "CREATED";
-};
-
-const hasFailedCreatingDeck = decks => {
-  return decks.creatingState === "FAILED";
+  return decks.creatingDeck;
 };
 
 export default {
   isNotLoaded,
   isLoading,
   isLoaded,
-  isCreatingDeck,
-  hasCreatedDeck,
-  hasFailedCreatingDeck
+  isCreatingDeck
 };
