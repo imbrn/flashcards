@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { decksSelectors } from "../../decks";
 import styles from "./CardsPage.css";
@@ -24,9 +25,16 @@ CardsPage.propTypes = {
 };
 
 const Root = ({ loaded, deck }) => {
+  const pageActions = [
+    { icon: "fa fa-plus", text: "Add card", color: "tertiary" }
+  ];
+
   return (
     <div className={styles.root}>
-      <Navbar title={loaded ? deck.name : ""} />
+      <Navbar
+        title={loaded ? deck.name : ""}
+        actions={loaded ? pageActions : null}
+      />
       <Container>
         {loaded ? <LoadedContent deck={deck} /> : <LoadingContent />}
       </Container>
@@ -42,8 +50,19 @@ Root.propTypes = {
 const LoadedContent = ({ deck }) => {
   const renderCard = card => {
     const menuModel = [
-      { icon: "fa fa-pencil", text: "Edit" },
-      { icon: "fa fa-trash-o", text: "Delete" }
+      {
+        icon: "fa fa-pencil",
+        text: "Edit",
+        tag: Link,
+        to: `/decks/${deck.id}/cards/edit`
+      },
+      {
+        icon: "fa fa-trash-o",
+        text: "Delete",
+        color: "danger",
+        tag: Link,
+        to: `/decks/${deck.id}/cards/delete`
+      }
     ];
 
     return (
