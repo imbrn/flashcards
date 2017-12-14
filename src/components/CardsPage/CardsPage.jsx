@@ -5,6 +5,7 @@ import { decksSelectors } from "../../decks";
 import styles from "./CardsPage.css";
 import Navbar from "../Navbar";
 import Container from "../ResponsiveContainer";
+import Card from "../Card";
 
 const CardsPage = ({ match, decks }) => {
   const loaded = decksSelectors.isLoaded(decks);
@@ -39,7 +40,24 @@ Root.propTypes = {
 };
 
 const LoadedContent = ({ deck }) => {
-  return <div className={styles.contentPage}>{deck.name}</div>;
+  const renderCard = card => {
+    const menuModel = [
+      { icon: "fa fa-pencil", text: "Edit" },
+      { icon: "fa fa-trash-o", text: "Delete" }
+    ];
+
+    return (
+      <div key={card.id} className={styles.cardWrapper}>
+        <Card model={card} menuModel={menuModel} className={styles.card} />
+      </div>
+    );
+  };
+
+  return (
+    <div className={styles.contentPage}>
+      <div className={styles.cards}>{deck.cards.toArray().map(renderCard)}</div>
+    </div>
+  );
 };
 
 LoadedContent.propTypes = {
