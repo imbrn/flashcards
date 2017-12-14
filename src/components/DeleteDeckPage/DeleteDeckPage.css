@@ -22,12 +22,14 @@
   max-width: 320px;
   width: 100%;
   padding: var(--base-spacing);
+  margin-top: var(--base-spacing);
 }
 
 .info {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: var(--base-spacing);
 }
 
 .buttons {
