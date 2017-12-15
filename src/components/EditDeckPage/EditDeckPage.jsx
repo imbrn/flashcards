@@ -6,6 +6,7 @@ import styles from "./EditDeckPage.css";
 import Navbar from "../Navbar";
 import Container from "../ResponsiveContainer";
 import Box from "../Box";
+import Text from "../Text";
 import DeckForm from "../DeckForm";
 
 const EditDeckPage = ({ dispatch, match, history, decks }) => {
@@ -73,7 +74,13 @@ EditContent.propTypes = {
 };
 
 const EditingProgress = () => {
-  return <div className={styles.editingProgress}>Saving changes...</div>;
+  return (
+    <div className={styles.editingProgress}>
+      <Text bold color="secondary" size="lg">
+        Saving changes...
+      </Text>
+    </div>
+  );
 };
 
 const FormContent = ({ deck, onSubmit, onCancel }) => {
@@ -98,7 +105,13 @@ FormContent.propTypes = {
 };
 
 const LoadingContent = () => {
-  return <div className={styles.loadingContent}>Loading deck...</div>;
+  return (
+    <div className={styles.loadingContent}>
+      <Text bold size="lg">
+        Loading deck...
+      </Text>
+    </div>
+  );
 };
 
 const mapStateToProps = state => {
