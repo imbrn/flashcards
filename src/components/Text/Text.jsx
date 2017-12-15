@@ -29,7 +29,14 @@ const Text = ({
 
 Text.propTypes = {
   children: PropTypes.node.isRequired,
-  color: PropTypes.oneOf(["normal"]),
+  color: PropTypes.oneOf([
+    "normal",
+    "primary",
+    "secondary",
+    "tertiary",
+    "danger",
+    "success"
+  ]),
   size: PropTypes.oneOf(["xs", "sm", "md", "lg", "xl"]),
   bold: PropTypes.bool,
   className: PropTypesUtils.className
