@@ -7,61 +7,129 @@ import Navbar from "../Navbar";
 import Container from "../ResponsiveContainer";
 import Box from "../Box";
 import DeckForm from "../DeckForm";
+import Text from "../Text";
 
 const CreateDeckPage = ({ dispatch, history, decks }) => {
-  const onSubmit = deckData => {
-    dispatch(decksOperations.requestCreateDeck(deckData)).then(deck => {
-      // Go to the newly created deck cards page
-      history.push(`/decks/${deck.id}/cards`);
-    });
-  };
-
-  const onCancel = () => {
-    history.goBack();
-  };
-
-  const renderBoxContent = () => {
-    if (decksSelectors.isCreatingDeck(decks)) {
-      return <CreatingDeckProgress />;
-    } else {
-      return <CreateFormContent onSubmit={onSubmit} onCancel={onCancel} />;
-    }
-  };
+  const loaded = decksSelectors.isLoaded(decks);
 
   return (
-    <div>
-      <Navbar title="New deck" />
-      <Container className={styles.content}>{renderBoxContent()}</Container>
+    <div className={styles.root}>
+      <NavbarContent loaded={loaded} />
+      <MainContent
+        loaded={loaded}
+        decks={decks}
+        dispatch={dispatch}
+        history={history}
+      />
     </div>
   );
 };
 
 CreateDeckPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired,
+  history: PropTypes.object,
   decks: PropTypes.object.isRequired
 };
 
-const CreatingDeckProgress = () => {
-  return <span>Creating deck...</span>;
+const NavbarContent = ({ loaded }) => {
+  return <Navbar title={loaded ? "New deck" : ""} />;
 };
 
-const CreateFormContent = ({ onSubmit, onCancel }) => {
+NavbarContent.propTypes = {
+  loaded: PropTypes.bool.isRequired
+};
+
+const MainContent = ({ loaded, decks, dispatch, history }) => {
   return (
-    <Box elevation={2} className={styles.box}>
-      <DeckForm
-        className={styles.deckForm}
-        onSubmit={onSubmit}
-        onCancel={onCancel}
-        confirmText="Create"
-      />
-    </Box>
+    <Container className={styles.mainContent}>
+      {loaded ? (
+        <CreatingDeckContent
+          decks={decks}
+          dispatch={dispatch}
+          history={history}
+        />
+      ) : (
+        <LoadingDecksProgressContent />
+      )}
+    </Container>
   );
 };
 
-CreateFormContent.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired
+MainContent.propTypes = {
+  loaded: PropTypes.bool.isRequired,
+  decks: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired
+};
+
+const CreatingDeckContent = ({ decks, dispatch, history }) => {
+  const creating = decksSelectors.isCreatingDeck(decks);
+
+  return (
+    <div className={styles.creatingDeckContent}>
+      {creating ? (
+        <CreatingDeckProgressContent />
+      ) : (
+        <CreateDeckFormContent dispatch={dispatch} history={history} />
+      )}
+    </div>
+  );
+};
+
+CreatingDeckContent.propTypes = {
+  decks: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired
+};
+
+const CreatingDeckProgressContent = () => {
+  return (
+    <div className={styles.creatingDeckProgressContent}>
+      <Text bold color="secondary" size="lg">
+        Creating deck...
+      </Text>
+    </div>
+  );
+};
+
+const CreateDeckFormContent = ({ dispatch, history }) => {
+  const onSubmit = data => {
+    dispatch(decksOperations.requestCreateDeck(data)).then(deck => {
+      history.push(`/decks/${deck.id}/cards`);
+    });
+  };
+
+  const onCancel = () => {
+    history.push("/");
+  };
+
+  return (
+    <div className={styles.createDeckFormContent}>
+      <Box elevation={2} className={styles.creatingDeckBox}>
+        <DeckForm
+          className={styles.deckForm}
+          onSubmit={onSubmit}
+          onCancel={onCancel}
+          confirmText="Create"
+        />
+      </Box>
+    </div>
+  );
+};
+
+CreateDeckFormContent.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired
+};
+
+const LoadingDecksProgressContent = () => {
+  return (
+    <div className={styles.loadingDecksProgressContent}>
+      <Text size="lg" bold>
+        Loading decks...
+      </Text>
+    </div>
+  );
 };
 
 const mapStateToProps = state => ({
