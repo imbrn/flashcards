@@ -20,3 +20,5 @@
 .tertiary { color: var(--color-tertiary); }
 .danger { color: var(--color-danger); }
 .primary { color: var(--color-primary); }
+
+.bold { font-weight: 600; }
