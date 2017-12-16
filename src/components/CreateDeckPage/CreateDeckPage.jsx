@@ -85,7 +85,7 @@ CreatingDeckContent.propTypes = {
 const CreatingDeckProgressContent = () => {
   return (
     <div className={styles.creatingDeckProgressContent}>
-      <Text bold color="secondary" size="lg">
+      <Text bold size="lg">
         Creating deck...
       </Text>
     </div>

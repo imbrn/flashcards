@@ -76,7 +76,7 @@ EditContent.propTypes = {
 const EditingProgress = () => {
   return (
     <div className={styles.editingProgress}>
-      <Text bold color="secondary" size="lg">
+      <Text bold size="lg">
         Saving changes...
       </Text>
     </div>
