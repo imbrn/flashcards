@@ -6,44 +6,62 @@
   flex-direction: column;
 }
 
-.content {
+.container {
+  flex-grow: 1;
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  padding: calc(var(--base-spacing)*2);
+}
+
+.deleteDeckContent {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: var(--base-spacing);
 }
 
-.title {
-  padding: var(--base-spacing);
-}
-
-.deckContainer {
-  max-width: 320px;
+.deckWrapper {
   width: 100%;
-  padding: var(--base-spacing);
-  margin-top: var(--base-spacing);
+  padding: calc(var(--base-spacing)*2);
 }
 
 .info {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: var(--base-spacing);
+  padding: var(--base-spacing);
 }
 
 .buttons {
-  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 220px;
+  padding: var(--base-spacing);
+}
+
+.deletingDeckProgressContent {
   flex-grow: 1;
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  margin-top: var(--base-spacing);
+  justify-content: center;
 }
 
-@media (--media-md) {
-  .buttons {
-    padding: calc(var(--base-spacing)*2);
-    align-items: flex-start;
+.loadingDecksProgressContent {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+@media (--media-sm) {
+  .deckWrapper {
+    width: 320px;
+  }
+  .info {
+    flex-grow: 0;
   }
 }

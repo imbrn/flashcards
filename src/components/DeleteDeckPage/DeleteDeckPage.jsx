@@ -10,59 +10,86 @@ import Deck from "../Deck";
 import Text from "../Text";
 import Button from "../Button";
 
-const DeleteDeckPage = ({ dispatch, decks, match, history }) => {
-  const onConfirmDeletion = deck => {
-    dispatch(decksOperations.requestDeleteDeck(deck));
-    history.goBack();
-  };
-
-  const onCancelDeletion = () => {
-    history.goBack();
-  };
-
-  const renderContent = () => {
-    if (decksSelectors.isLoaded(decks)) {
-      const deck = decks.items.get(match.params.deckId);
-
-      return (
-        <DeleteDeckContent
-          deck={deck}
-          onConfirm={() => onConfirmDeletion(deck)}
-          onCancel={onCancelDeletion}
-        />
-      );
-    } else {
-      return <LoadingDecks />;
-    }
-  };
+const DeleteDeckPage = ({ decks, dispatch, match, history }) => {
+  const loaded = decksSelectors.isLoaded(decks);
 
   return (
     <div className={styles.root}>
-      <Navbar title="Delete deck" />
-      {renderContent()}
+      <Navbar title={loaded ? "Delete deck" : ""} />
+      <Container className={styles.container}>
+        {loaded ? (
+          <DeletingDeckContent
+            decks={decks}
+            dispatch={dispatch}
+            match={match}
+            history={history}
+          />
+        ) : (
+          <LoadingDecksProgressContent />
+        )}
+      </Container>
     </div>
   );
 };
 
 DeleteDeckPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   decks: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired
 };
 
-const LoadingDecks = () => {
-  return <Container>Loading deck...</Container>;
+const DeletingDeckContent = ({ decks, dispatch, match, history }) => {
+  const deck = decks.items.get(match.params.deckId);
+
+  if (decksSelectors.isDeletingDeck(decks)) {
+    return <DeletingDeckProgressContent />;
+  } else if (deck) {
+    return (
+      <DeleteDeckContent deck={deck} dispatch={dispatch} history={history} />
+    );
+  } else {
+    // This is needed for the transaction between pages to be done without
+    // errors.
+    return null;
+  }
 };
 
-const DeleteDeckContent = ({ deck, onConfirm, onCancel }) => {
+DeletingDeckContent.propTypes = {
+  decks: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
+};
+
+const DeletingDeckProgressContent = () => {
   return (
-    <Container className={styles.content}>
-      <Title size="md" color="danger" className={styles.title}>
+    <div className={styles.deletingDeckProgressContent}>
+      <Text bold size="lg">
+        Deleting deck...
+      </Text>
+    </div>
+  );
+};
+
+const DeleteDeckContent = ({ deck, dispatch, history }) => {
+  const onConfirm = () => {
+    dispatch(decksOperations.requestDeleteDeck(deck)).then(() => {
+      history.goBack();
+    });
+  };
+
+  const onCancel = () => {
+    history.goBack();
+  };
+
+  return (
+    <div className={styles.deleteDeckContent}>
+      <Title size="sm" color="danger" className={styles.title}>
         Are you sure you want to delete this deck?
       </Title>
 
-      <div className={styles.deckContainer}>
+      <div className={styles.deckWrapper}>
         <Deck model={deck} className={styles.deck} />
       </div>
 
@@ -74,21 +101,37 @@ const DeleteDeckContent = ({ deck, onConfirm, onCancel }) => {
       </div>
 
       <div className={styles.buttons}>
-        <Button size="big" color="danger" highlighted onClick={onConfirm}>
+        <Button
+          size="lg"
+          color="danger"
+          highlighted
+          onClick={onConfirm}
+          className={styles.button}
+        >
           Delete
         </Button>
-        <Button size="big" onClick={onCancel}>
+        <Button size="lg" onClick={onCancel} className={styles.button}>
           Cancel
         </Button>
       </div>
-    </Container>
+    </div>
   );
 };
 
 DeleteDeckContent.propTypes = {
   deck: PropTypes.object.isRequired,
-  onConfirm: PropTypes.func,
-  onCancel: PropTypes.func
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired
+};
+
+const LoadingDecksProgressContent = () => {
+  return (
+    <div className={styles.loadingDecksProgressContent}>
+      <Text bold size="lg">
+        Loading data...
+      </Text>
+    </div>
+  );
 };
 
 const mapStateToProps = state => {
@@ -96,5 +139,4 @@ const mapStateToProps = state => {
     decks: state.decks
   };
 };
-
 export default connect(mapStateToProps)(DeleteDeckPage);

@@ -44,15 +44,6 @@ const LoadedState = ({ decks }) => {
   return (
     <div className={styles.decks}>
       {decks.items
-        .map(
-          deck =>
-            !decks.editingDeck || deck.id !== decks.editingDeck.id
-              ? deck
-              : decks.editingDeck
-        )
-        .filter(
-          deck => !decks.deletingDeck || decks.deletingDeck.id !== deck.id
-        )
         .sort(creationTimeSort)
         .toArray()
         .map((deck, index) => <DeckWrapper key={index} deck={deck} />)}

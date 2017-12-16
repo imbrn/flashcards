@@ -31,11 +31,11 @@ const requestDeleteDeck = deck => {
   return dispatch => {
     dispatch(actions.startDeletingDeck(deck));
 
-    services.currentUser
+    return services.currentUser
       .getDecks()
       .getDeck(deck.id)
       .then(deckProxy => {
-        deckProxy
+        return deckProxy
           .delete()
           .then(() => {
             dispatch(actions.finishDeletingDeck(true));

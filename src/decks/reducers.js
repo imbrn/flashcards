@@ -25,12 +25,12 @@ const creatingDeck = (state = false, action) => {
   }
 };
 
-const deletingDeck = (state = null, action) => {
+const deletingDeck = (state = false, action) => {
   switch (action.type) {
     case types.START_DELETING_DECK:
-      return action.deck;
+      return true;
     case types.FINISH_DELETING_DECK:
-      return null;
+      return false;
     default:
       return state;
   }
@@ -111,11 +111,11 @@ const changeDeckCards = (state, deckId, changeFunction) => {
 };
 
 const reducer = combineReducers({
+  items,
   loadingState,
   creatingDeck,
   deletingDeck,
-  editingDeck,
-  items
+  editingDeck
 });
 
 export default reducer;
