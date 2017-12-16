@@ -62,14 +62,8 @@
   color: var(--color-white);
 }
 
-.small {
-  font-size: 1rem;
-}
-
-.medium {
-  font-size: 1.25rem;
-}
-
-.big {
-  font-size: 2rem;
-}
+.xs { font-size: 1rem; }
+.sm { font-size: 1rem; }
+.md { font-size: 1.25rem; }
+.lg { font-size: 1.5rem; }
+.xl { font-size: 1.75rem; }

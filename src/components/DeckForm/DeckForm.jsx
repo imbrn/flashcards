@@ -100,20 +100,10 @@ const RawForm = ({
         </label>
       </div>
       <div className={styles.buttons}>
-        <Button
-          highlighted
-          color="primary"
-          size="medium"
-          className={styles.button}
-        >
+        <Button highlighted color="primary" className={styles.button}>
           {confirmText}
         </Button>
-        <Button
-          type="button"
-          size="medium"
-          className={styles.button}
-          onClick={onCancel}
-        >
+        <Button type="button" className={styles.button} onClick={onCancel}>
           {cancelText}
         </Button>
       </div>

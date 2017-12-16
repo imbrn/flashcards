@@ -8,7 +8,7 @@ const Button = ({
   tag = "button",
   children,
   highlighted = false,
-  size = "medium",
+  size = "md",
   color = "normal",
   className,
   ...rest
@@ -34,7 +34,7 @@ Button.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   children: PropTypes.node,
   highlighted: PropTypes.bool,
-  size: PropTypes.oneOf(["small", "medium", "big"]),
+  size: PropTypes.oneOf(["xs", "sm", "md", "lg", "xl"]),
   color: PropTypes.oneOf([
     "normal",
     "primary",
