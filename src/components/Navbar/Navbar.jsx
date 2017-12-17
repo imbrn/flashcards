@@ -84,7 +84,7 @@ const Social = () => {
 };
 
 const Auth = () => {
-  return <Section className={styles.auth}>Sign in</Section>;
+  return <Section className={styles.auth} />;
 };
 
 const Section = ({ children, className }) => {
@@ -96,7 +96,7 @@ const Section = ({ children, className }) => {
 };
 
 Section.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   className: PropTypesUtils.className
 };
 
