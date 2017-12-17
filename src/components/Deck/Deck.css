@@ -30,11 +30,12 @@
 .content .label {
   background: var(--color-grey-lighter);
   color: var(--color-grey-light);
-  font-size: 0.85rem;
+  font-size: 0.65rem;
   font-weight: 600;
   padding: calc(var(--base-spacing) / 8) calc(var(--base-spacing) / 4);
   border-radius: calc(var(--base-rounding) / 2);
   margin-right: calc(var(--base-spacing) / 2);
+  text-align: center;
 }
 
 .content p {
@@ -93,4 +94,10 @@
 .content .tertiaryAction:hover {
   background: var(--color-tertiary);
   color: var(--color-white);
+}
+
+@media (--media-xs) {
+  .content .label {
+    font-size: 0.85rem;
+  }
 }

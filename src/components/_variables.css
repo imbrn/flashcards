@@ -35,6 +35,7 @@
   --zIndex-2: 200;
   --zIndex-3: 300;
 
+  @custom-media --media-xs (min-width: 380px);
   @custom-media --media-sm (min-width: 576px);
   @custom-media --media-md (min-width: 768px);
   @custom-media --media-lg (min-width: 992px);
