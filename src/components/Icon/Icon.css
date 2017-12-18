@@ -1,0 +1,6 @@
+@import "../_variables.css";
+
+.primary { color: var(--color-primary); }
+.secondary { color: var(--color-secondary); }
+.tertiary { color: var(--color-tertiary); }
+.info { color: var(--color-info); }
