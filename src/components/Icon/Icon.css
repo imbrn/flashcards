@@ -4,3 +4,4 @@
 .secondary { color: var(--color-secondary); }
 .tertiary { color: var(--color-tertiary); }
 .info { color: var(--color-info); }
+.lighter { color: var(--color-grey-lighter) }

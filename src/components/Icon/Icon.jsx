@@ -4,12 +4,13 @@ import PropTypesUtils from "../prop-types-utils.js";
 import classnames from "classnames";
 import styles from "./Icon.css";
 
-const Icon = ({ icon, color="normal", className, ...rest }) => {
-  const modifiersClasses = classnames(
-    styles[color]
-  );
+const Icon = ({ icon, color = "normal", className, ...rest }) => {
+  const modifiersClasses = classnames(styles[color]);
   return (
-    <span {...rest} className={classnames(styles.icon, modifiersClasses, className)}>
+    <span
+      {...rest}
+      className={classnames(styles.icon, modifiersClasses, className)}
+    >
       <i className={icon} />
     </span>
   );
@@ -17,7 +18,14 @@ const Icon = ({ icon, color="normal", className, ...rest }) => {
 
 Icon.propTypes = {
   icon: PropTypes.string.isRequired,
-  color: PropTypes.oneOf(["normal", "primary", "secondary", "tertiary", "info"]),
+  color: PropTypes.oneOf([
+    "normal",
+    "primary",
+    "secondary",
+    "tertiary",
+    "info",
+    "lighter"
+  ]),
   className: PropTypesUtils.className
 };
 
