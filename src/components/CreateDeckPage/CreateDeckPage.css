@@ -6,42 +6,28 @@
   flex-direction: column;
 }
 
-.mainContent {
-  flex-grow: 1;
-  display: flex;
-  width: 100%;
-}
-
-.creatingDeckContent {
+.container {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 100%;
 }
 
-.creatingDeckProgressContent {
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.createDeckFormContent {
+.createDeckContent {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
   width: 100%;
-  padding: calc(var(--base-spacing)*2);
+  padding: var(--base-spacing);
 }
 
-.creatingDeckBox {
+.createDeckBox {
   width: 100%;
 }
 
-.loadingDecksProgressContent {
+.loadingDataProgress {
   flex-grow: 1;
   display: flex;
   align-items: center;
@@ -49,9 +35,9 @@
 }
 
 @media (--media-sm) {
-  .creatingDeckBox { width: 480px; }
+  .createDeckBox { width: 480px; }
 }
 
 @media (--media-md) {
-  .creatingDeckBox { width: 600px; }
+  .createDeckBox { width: 600px; }
 }

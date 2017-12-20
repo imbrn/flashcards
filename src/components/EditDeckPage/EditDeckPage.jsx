@@ -1,35 +1,48 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { decksSelectors, decksOperations } from "../../decks";
+import { decksOperations } from "../../decks";
 import styles from "./EditDeckPage.css";
 import Navbar from "../Navbar";
 import Container from "../ResponsiveContainer";
 import Box from "../Box";
-import Text from "../Text";
 import DeckForm from "../DeckForm";
 
 const EditDeckPage = ({ dispatch, match, history, decks }) => {
-  const renderContent = () => {
-    if (decksSelectors.isLoaded(decks)) {
-      const deck = decks.items.get(match.params.deckId);
-      return (
-        <EditContent
-          dispatch={dispatch}
-          history={history}
-          decks={decks}
-          deck={deck}
-        />
-      );
-    } else {
-      return <LoadingContent />;
-    }
+  if (decks.isEmpty()) return null;
+
+  const deckId = match.params.deckId;
+  const deck = decks.get(deckId);
+
+  if (!deck) {
+    return <Redirect to="/page-not-found" />;
+  }
+
+  const onSubmit = data => {
+    dispatch(decksOperations.updateDeck(deckId, data));
+    history.goBack();
+  };
+
+  const onCancel = () => {
+    history.goBack();
   };
 
   return (
     <div className={styles.root}>
       <Navbar title="Edit deck" />
-      <Container className={styles.container}>{renderContent()}</Container>
+      <Container className={styles.container}>
+        <div className={styles.formContent}>
+          <Box elevation={2} className={styles.formBox}>
+            <DeckForm
+              className={styles.form}
+              defaultValue={deck}
+              onSubmit={onSubmit}
+              onCancel={onCancel}
+            />
+          </Box>
+        </div>
+      </Container>
     </div>
   );
 };
@@ -39,79 +52,6 @@ EditDeckPage.propTypes = {
   match: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   decks: PropTypes.object.isRequired
-};
-
-const EditContent = ({ dispatch, history, decks, deck }) => {
-  const onSubmit = deckData => {
-    // Redirects to the main page when finished the updating
-    dispatch(decksOperations.requestEditDeck(deck.merge(deckData))).then(() => {
-      history.push("/");
-    });
-  };
-
-  const onCancel = () => {
-    history.goBack();
-  };
-
-  const renderContent = () => {
-    if (decksSelectors.isEditingDeck(decks)) {
-      return <EditingProgress />;
-    } else {
-      return (
-        <FormContent deck={deck} onSubmit={onSubmit} onCancel={onCancel} />
-      );
-    }
-  };
-
-  return <div className={styles.editContent}>{renderContent()}</div>;
-};
-
-EditContent.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired,
-  decks: PropTypes.object.isRequired,
-  deck: PropTypes.object.isRequired
-};
-
-const EditingProgress = () => {
-  return (
-    <div className={styles.editingProgress}>
-      <Text bold size="lg">
-        Saving changes...
-      </Text>
-    </div>
-  );
-};
-
-const FormContent = ({ deck, onSubmit, onCancel }) => {
-  return (
-    <div className={styles.formContent}>
-      <Box elevation={2} className={styles.formBox}>
-        <DeckForm
-          className={styles.form}
-          defaultValue={deck}
-          onSubmit={onSubmit}
-          onCancel={onCancel}
-        />
-      </Box>
-    </div>
-  );
-};
-
-FormContent.propTypes = {
-  deck: PropTypes.object.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired
-};
-
-const LoadingContent = () => {
-  return (
-    <div className={styles.loadingContent}>
-      <Text bold size="lg">
-        Loading deck...
-      </Text>
-    </div>
-  );
 };
 
 const mapStateToProps = state => {

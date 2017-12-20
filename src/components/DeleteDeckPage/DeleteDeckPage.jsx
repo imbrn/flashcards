@@ -1,7 +1,8 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { decksOperations, decksSelectors } from "../../decks";
+import { decksOperations } from "../../decks";
 import styles from "./DeleteDeckPage.css";
 import Navbar from "../Navbar";
 import Container from "../ResponsiveContainer";
@@ -10,73 +11,21 @@ import Deck from "../Deck";
 import Text from "../Text";
 import Button from "../Button";
 
-const DeleteDeckPage = ({ decks, dispatch, match, history }) => {
-  const loaded = decksSelectors.isLoaded(decks);
+const DeleteDeckPage = ({ decks, cards, dispatch, match, history }) => {
+  if (decks.isEmpty()) return null;
 
-  return (
-    <div className={styles.root}>
-      <Navbar title={loaded ? "Delete deck" : ""} />
-      <Container className={styles.container}>
-        {loaded ? (
-          <DeletingDeckContent
-            decks={decks}
-            dispatch={dispatch}
-            match={match}
-            history={history}
-          />
-        ) : (
-          <LoadingDecksProgressContent />
-        )}
-      </Container>
-    </div>
-  );
-};
+  const deckId = match.params.deckId;
+  const deck = decks.get(deckId);
+  const deckCards = cards.filter(card => card.deckId === deckId);
 
-DeleteDeckPage.propTypes = {
-  decks: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  match: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
-};
-
-const DeletingDeckContent = ({ decks, dispatch, match, history }) => {
-  const deck = decks.items.get(match.params.deckId);
-
-  if (decksSelectors.isDeletingDeck(decks)) {
-    return <DeletingDeckProgressContent />;
-  } else if (deck) {
-    return (
-      <DeleteDeckContent deck={deck} dispatch={dispatch} history={history} />
-    );
-  } else {
-    // This is needed for the transaction between pages to be done without
-    // errors.
-    return null;
+  // There's no deck for the specified ID
+  if (!deck) {
+    return <Redirect to="/page-not-found" />;
   }
-};
 
-DeletingDeckContent.propTypes = {
-  decks: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  match: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
-};
-
-const DeletingDeckProgressContent = () => {
-  return (
-    <div className={styles.deletingDeckProgressContent}>
-      <Text bold size="lg">
-        Deleting deck...
-      </Text>
-    </div>
-  );
-};
-
-const DeleteDeckContent = ({ deck, dispatch, history }) => {
   const onConfirm = () => {
-    dispatch(decksOperations.requestDeleteDeck(deck)).then(() => {
-      history.goBack();
-    });
+    dispatch(decksOperations.deleteDeck(deckId));
+    history.goBack();
   };
 
   const onCancel = () => {
@@ -84,59 +33,57 @@ const DeleteDeckContent = ({ deck, dispatch, history }) => {
   };
 
   return (
-    <div className={styles.deleteDeckContent}>
-      <Title size="sm" color="danger" className={styles.title}>
-        Are you sure you want to delete this deck?
-      </Title>
+    <div className={styles.root}>
+      <Navbar title="Deleting deck" />
+      <Container className={styles.container}>
+        <div className={styles.deleteDeckContent}>
+          <Title size="sm" color="danger" className={styles.title}>
+            Are you sure you want to delete this deck?
+          </Title>
 
-      <div className={styles.deckWrapper}>
-        <Deck model={deck} className={styles.deck} />
-      </div>
+          <div className={styles.deckWrapper}>
+            <Deck model={deck} className={styles.deck} />
+          </div>
 
-      <div className={styles.info}>
-        <Text>
-          <b>{deck.cards.size} cards</b> will be lost.
-        </Text>
-        <Text>This operation is irreversible.</Text>
-      </div>
+          <div className={styles.info}>
+            <Text>
+              <b>{deckCards.size} cards</b> will be lost.
+            </Text>
+            <Text>This operation is irreversible.</Text>
+          </div>
 
-      <div className={styles.buttons}>
-        <Button
-          size="lg"
-          color="danger"
-          highlighted
-          onClick={onConfirm}
-          className={styles.button}
-        >
-          Delete
-        </Button>
-        <Button size="lg" onClick={onCancel} className={styles.button}>
-          Cancel
-        </Button>
-      </div>
+          <div className={styles.buttons}>
+            <Button
+              size="lg"
+              color="danger"
+              highlighted
+              onClick={onConfirm}
+              className={styles.button}
+            >
+              Delete
+            </Button>
+            <Button size="lg" onClick={onCancel} className={styles.button}>
+              Cancel
+            </Button>
+          </div>
+        </div>
+      </Container>
     </div>
   );
 };
 
-DeleteDeckContent.propTypes = {
-  deck: PropTypes.object.isRequired,
+DeleteDeckPage.propTypes = {
+  decks: PropTypes.object.isRequired,
+  cards: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired
-};
-
-const LoadingDecksProgressContent = () => {
-  return (
-    <div className={styles.loadingDecksProgressContent}>
-      <Text bold size="lg">
-        Loading data...
-      </Text>
-    </div>
-  );
 };
 
 const mapStateToProps = state => {
   return {
-    decks: state.decks
+    decks: state.decks,
+    cards: state.cards
   };
 };
 export default connect(mapStateToProps)(DeleteDeckPage);

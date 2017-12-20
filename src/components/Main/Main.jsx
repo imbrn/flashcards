@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { authSelectors } from "../../auth";
+import { userSelectors } from "../../user";
 import AppPage from "../AppPage";
 import SigningInPage from "../SigningInPage";
 
@@ -14,23 +14,22 @@ class Main extends React.Component {
   }
 
   render() {
-    // TODO: add support for sign in fail page
-    if (authSelectors.isSigningIn(this.props.auth)) {
-      return <SigningInPage />;
-    } else {
+    if (userSelectors.isSignedIn(this.props.user)) {
       return <AppPage />;
+    } else {
+      return <SigningInPage />;
     }
   }
 }
 
 Main.propTypes = {
-  auth: PropTypes.object.isRequired,
+  user: PropTypes.object,
   location: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => {
   return {
-    auth: state.auth
+    user: state.user
   };
 };
 

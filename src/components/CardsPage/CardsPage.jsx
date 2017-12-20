@@ -1,67 +1,58 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { decksSelectors } from "../../decks";
 import styles from "./CardsPage.css";
 import Navbar from "../Navbar";
 import Container from "../ResponsiveContainer";
 import Card from "../Card";
 
-const CardsPage = ({ match, decks }) => {
-  const loaded = decksSelectors.isLoaded(decks);
+const CardsPage = ({ match, decks, cards }) => {
+  if (decks.isEmpty()) return null;
 
-  let deck;
-  if (loaded) {
-    deck = decks.items.get(match.params.deckId);
+  const deckId = match.params.deckId;
+  const deck = decks.get(deckId);
+  const deckCards = cards.filter(card => card.deckId === deckId).toArray();
+
+  if (!deck) {
+    return <Redirect to="/page-not-found" />;
   }
 
-  return <Root loaded={loaded} deck={deck} />;
-};
-
-CardsPage.propTypes = {
-  match: PropTypes.object.isRequired,
-  decks: PropTypes.object.isRequired
-};
-
-const Root = ({ loaded, deck }) => {
   const pageActions = [
     { icon: "fa fa-plus", text: "Add card", color: "tertiary" }
   ];
 
   return (
     <div className={styles.root}>
-      <Navbar
-        title={loaded ? deck.name : ""}
-        actions={loaded ? pageActions : null}
-      />
+      <Navbar title={deck.name} actions={pageActions} />
       <Container>
-        {loaded ? <LoadedContent deck={deck} /> : <LoadingContent />}
+        <Content deck={deck} cards={deckCards} />
       </Container>
     </div>
   );
 };
 
-Root.propTypes = {
-  loaded: PropTypes.bool.isRequired,
-  deck: PropTypes.object
+CardsPage.propTypes = {
+  match: PropTypes.object.isRequired,
+  decks: PropTypes.object.isRequired,
+  cards: PropTypes.object.isRequired
 };
 
-const LoadedContent = ({ deck }) => {
+const Content = ({ deck, cards }) => {
   const renderCard = card => {
     const menuModel = [
       {
         icon: "fa fa-pencil",
         text: "Edit",
         tag: Link,
-        to: `/decks/${deck.id}/cards/edit`
+        to: `/decks/${deck.id}/cards/${card.id}/edit`
       },
       {
         icon: "fa fa-trash-o",
         text: "Delete",
         color: "danger",
         tag: Link,
-        to: `/decks/${deck.id}/cards/delete`
+        to: `/decks/${deck.id}/cards/${card.id}/delete`
       }
     ];
 
@@ -74,21 +65,19 @@ const LoadedContent = ({ deck }) => {
 
   return (
     <div className={styles.contentPage}>
-      <div className={styles.cards}>{deck.cards.toArray().map(renderCard)}</div>
+      <div className={styles.cards}>{cards.map(renderCard)}</div>
     </div>
   );
 };
 
-LoadedContent.propTypes = {
-  deck: PropTypes.object.isRequired
-};
-
-const LoadingContent = () => {
-  return <div className={styles.LoadingContent}>Loading cards...</div>;
+Content.propTypes = {
+  deck: PropTypes.object.isRequired,
+  cards: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({
-  decks: state.decks
+  decks: state.decks,
+  cards: state.cards
 });
 
 export default connect(mapStateToProps)(CardsPage);

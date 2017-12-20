@@ -6,6 +6,12 @@ export function deleteCollection(db, collectionRef, batchSize) {
   });
 }
 
+export function deleteQuery(db, query, batchSize) {
+  return new Promise((resolve, reject) => {
+    deleteQueryBatch(db, query, batchSize, resolve, reject);
+  });
+}
+
 function deleteQueryBatch(db, query, batchSize, resolve, reject) {
   query
     .get()

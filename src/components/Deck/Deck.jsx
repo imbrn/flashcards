@@ -10,13 +10,14 @@ import Button from "../Button";
 import Icon from "../Icon";
 
 const Deck = ({ model, menuModel, actionsModel, className, ...rest }) => {
-  const description = model.description
+  const hasDescription = !!model.description;
+  const description = hasDescription
     ? model.description
     : "There's no description for this deck.";
-  const descriptionClass = !model.description ? styles.noDescription : null;
+  const descriptionClass = !hasDescription ? styles.noDescription : null;
 
-  const front = model.front ? model.front : "Front";
-  const back = model.back ? model.back : "Back";
+  const front = model.front ? model.front : "No front";
+  const back = model.front ? model.back : "No back";
 
   return (
     <Box
@@ -25,7 +26,14 @@ const Deck = ({ model, menuModel, actionsModel, className, ...rest }) => {
       elevation={2}
       className={classnames(styles.deck, className)}
     >
-      {menuModel ? <Menu model={menuModel} /> : null}
+      <div className={styles.bar}>
+        {model.fromCache || model.hasPendingWrites ? (
+          <div>
+            <Icon color="lighter" icon="fa fa-refresh fa-spin" />
+          </div>
+        ) : null}
+        {menuModel ? <Menu model={menuModel} /> : null}
+      </div>
       <div className={styles.content}>
         <Title>{model.name}</Title>
         <div className={styles.labels}>

@@ -2,21 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { decksSelectors } from "../../decks";
 import styles from "./DecksPage.css";
 import Navbar from "../Navbar";
 import Container from "../ResponsiveContainer";
 import Deck from "../Deck";
 
 const DecksPage = ({ decks }) => {
-  const renderState = () => {
-    if (decksSelectors.isLoaded(decks)) {
-      return <LoadedState decks={decks} />;
-    } else {
-      return <LoadingState />;
-    }
-  };
-
   return (
     <div className={styles.root}>
       <Navbar
@@ -31,24 +22,20 @@ const DecksPage = ({ decks }) => {
           }
         ]}
       />
-      <Container>{renderState()}</Container>
+      <Container>
+        <div className={styles.decks}>
+          {decks
+            .sort(creationTimeSort)
+            .toArray()
+            .map((deck, index) => <DeckWrapper key={index} deck={deck} />)}
+        </div>
+      </Container>
     </div>
   );
 };
 
 DecksPage.propTypes = {
   decks: PropTypes.object.isRequired
-};
-
-const LoadedState = ({ decks }) => {
-  return (
-    <div className={styles.decks}>
-      {decks.items
-        .sort(creationTimeSort)
-        .toArray()
-        .map((deck, index) => <DeckWrapper key={index} deck={deck} />)}
-    </div>
-  );
 };
 
 function creationTimeSort(a, b) {
@@ -59,14 +46,6 @@ function creationTimeSort(a, b) {
   }
   return a.createTime - b.createTime;
 }
-
-LoadedState.propTypes = {
-  decks: PropTypes.object.isRequired
-};
-
-const LoadingState = () => {
-  return <div>Loading decks...</div>;
-};
 
 const DeckWrapper = ({ deck }) => {
   const menuModel = [

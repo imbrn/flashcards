@@ -4,57 +4,30 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Main from "./components/Main";
 import services from "./services";
-import { authOperations } from "./auth";
+import { userOperations } from "./user";
 import { decksOperations } from "./decks";
+import { cardsOperations } from "./cards";
 
 class App extends React.Component {
   componentWillMount() {
     services.initialize();
 
     // Initial sign in
-    this.dispatch(authOperations.startSigningIn());
-
-    services
-      .initialSignIn()
-      .then(user => {
-        this.dispatch(authOperations.endSigningIn(user));
-        this.loadDecks(user);
-      })
-      .catch(error => {
-        this.dispatch(authOperations.signingInFailed(error));
-      });
+    services.auth.initialSignIn().then(user => {
+      this.dispatch(userOperations.signIn(user));
+      this.loadData();
+    });
   }
 
-  componentWillUnmount() {
-    this.stopListeningDecks();
-  }
+  loadData() {
+    // Listen to decks
+    this.stopListeningDecks = services.decks.listen(decks => {
+      this.dispatch(decksOperations.updateDecks(decks));
+    });
 
-  loadDecks(user) {
-    this.dispatch(decksOperations.startLoadingInitialDecks());
-
-    const userDecks = user.getDecks();
-
-    userDecks
-      .getAll()
-      .then(this.convertDecksProxiesToModels)
-      .then(decksModels => {
-        this.dispatch(decksOperations.loadInitialDecks(decksModels));
-        this.startListeningDecks(userDecks);
-      });
-  }
-
-  convertDecksProxiesToModels(decks) {
-    return Promise.all(decks.map(deck => deck.asDeepDeckModel()));
-  }
-
-  startListeningDecks(decks) {
-    this.stopListeningDecks = decks.listen({
-      onAddDeck: deck => this.dispatch(decksOperations.addDeck(deck)),
-      onRemoveDeck: deck => this.dispatch(decksOperations.removeDeck(deck)),
-      onUpdateDeck: deck => this.dispatch(decksOperations.updateDeck(deck)),
-      onAddCard: card => this.dispatch(decksOperations.addCard(card)),
-      onRemoveCard: card => this.dispatch(decksOperations.removeCard(card)),
-      onUpdateCard: card => this.dispatch(decksOperations.updateCard(card))
+    // and cards.
+    this.stopListeningCards = services.cards.listen(cards => {
+      this.dispatch(cardsOperations.updateCards(cards));
     });
   }
 
@@ -64,6 +37,11 @@ class App extends React.Component {
 
   render() {
     return <Main />;
+  }
+
+  componentWillUnmount() {
+    this.stopListeningCards();
+    this.stopListeningDecks();
   }
 }
 

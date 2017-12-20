@@ -1,32 +1,13 @@
-const START_LOADING_INITIAL_DECKS =
-  "decks/actionsTypes/START_LOADING_INITIAL_DECKS";
-const LOAD_INITIAL_DECKS = "decks/actionsTypes/LOAD_INTIAL_DECKS";
-const START_CREATING_DECK = "decks/actionsTypes/START_CREATING_DECK";
-const FINISH_CREATING_DECK = "deck/actionsTypes/FINISH_CREATING_DECK";
-const START_DELETING_DECK = "decks/actionsTypes/START_DELETING_DECK";
-const FINISH_DELETING_DECK = "decks/actionsTypes/FINISH_DELETING_DECK";
-const START_EDITING_DECK = "decks/actionsTypes/START_EDITING_DECK";
-const FINISH_EDITING_DECK = "decks/actionsTypes/FINISH_EDITING_DECK";
-const ADD_DECK = "decks/actionsTypes/ADD_DECK";
-const REMOVE_DECK = "decks/actionsTypes/REMOVE_DECK";
-const UPDATE_DECK = "decks/actionsTypes/UPDATE_DECK";
-const ADD_CARD = "decks/actionsTypes/ADD_CARD";
-const REMOVE_CARD = "decks/actionsTypes/REMOVE_CARD";
-const UPDATE_CARD = "decks/actionsTypes/UPDATE_CARD";
+const UPDATE_DECKS = "decks/actions/UPDATE_DECKS";
+const CREATE_DECK = "decks/actions/CREATE_DECK";
+const FINISH_CREATE_DECK = "decks/actions/FINISH_CREATE_DECK";
+const DELETE_DECK = "decks/actions/DELETE_DECK";
+const UPDATE_DECK = "decks/actions/UPDATE_DECK";
 
 export default {
-  START_LOADING_INITIAL_DECKS,
-  LOAD_INITIAL_DECKS,
-  START_CREATING_DECK,
-  FINISH_CREATING_DECK,
-  START_DELETING_DECK,
-  FINISH_DELETING_DECK,
-  START_EDITING_DECK,
-  FINISH_EDITING_DECK,
-  ADD_DECK,
-  REMOVE_DECK,
-  UPDATE_DECK,
-  ADD_CARD,
-  REMOVE_CARD,
-  UPDATE_CARD
+  UPDATE_DECKS,
+  CREATE_DECK,
+  FINISH_CREATE_DECK,
+  DELETE_DECK,
+  UPDATE_DECK
 };

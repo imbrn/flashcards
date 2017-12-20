@@ -1,9 +1,8 @@
 import { Record } from "immutable";
 
-export const DeckItem = Record({
+export const CardItem = Record({
   id: null,
-  name: null,
-  description: null,
+  deckId: null,
   front: null,
   back: null,
   createTime: null,
