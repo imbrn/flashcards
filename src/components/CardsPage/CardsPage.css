@@ -22,7 +22,7 @@
   height: 100%;
 }
 
-@media (--media-md) {
+@media (min-width: 480px) {
   .cardWrapper {
     width: 50%;
   }
