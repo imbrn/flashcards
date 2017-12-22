@@ -77,7 +77,7 @@ const DeckWrapper = ({ deck }) => {
       text: "Add card",
       secondary: true,
       tag: Link,
-      to: `decks/${deck.id}/cards/create`
+      to: `decks/${deck.id}/cards/add`
     }
   ];
 

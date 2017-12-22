@@ -19,7 +19,13 @@ const CardsPage = ({ match, decks, cards }) => {
   }
 
   const pageActions = [
-    { icon: "fa fa-plus", text: "Add card", color: "tertiary" }
+    {
+      icon: "fa fa-plus",
+      text: "Add card",
+      color: "tertiary",
+      tag: Link,
+      to: `/decks/${deckId}/cards/add`
+    }
   ];
 
   return (
