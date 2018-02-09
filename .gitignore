@@ -1,10 +1,6 @@
-# Editors and IDEs
-.vimrc
-.nvimrc
-.tern-project
-
 # Package manages
 node_modules/
 
 # Build files
 build/
+dist/

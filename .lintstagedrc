@@ -1,8 +1,0 @@
-{
-  "linters": {
-    "*.{js,jsx}": [
-      "npm run lint:fix",
-      "git add"
-    ]
-  }
-}
