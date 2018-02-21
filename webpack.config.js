@@ -1,6 +1,5 @@
 const path = require("path");
 const webpack = require("webpack");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: [
@@ -9,16 +8,14 @@ module.exports = {
   ],
   output: {
     filename: "bundle.js",
-    path: path.resolve(__dirname, "dist")
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/"
   },
   module: {
     rules: [{ test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebpackPlugin({
-      template: "./src/index.html"
-    })
+    new webpack.HotModuleReplacementPlugin()
   ],
   devtool: "inline-source-map"
 };
