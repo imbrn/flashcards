@@ -16,8 +16,8 @@ app.use(
   require("webpack-dev-middleware")(webpackCompiler, {
     publicPath: webpackConfig.output.publicPath,
     quiet: true,
-    noInfo: true,
-    logLevel: "silent"
+    logLevel: "silent",
+    hot: true
   })
 );
 app.use(require("webpack-hot-middleware")(webpackCompiler));

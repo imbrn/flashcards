@@ -1,7 +1,7 @@
 import React from "react";
 
 const Deck = () => {
-  return "Deck";
+  return <div>Deck</div>;
 };
 
 export default Deck;
