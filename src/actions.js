@@ -77,6 +77,31 @@ export function deleteDeck(deckId) {
   };
 }
 
+export function createCard(cardData) {
+  return function(dispatch) {
+    dispatch({
+      type: Types.REQUEST_CREATE_CARD,
+      cardData
+    });
+
+    return dataSource
+      .createCard(cardData)
+      .then(card => {
+        dispatch({
+          type: Types.CREATE_CARD_SUCCESS,
+          card
+        });
+      })
+      .catch(error => {
+        dispatch({
+          type: Types.CREATE_CARD_FAILURE,
+          cardData,
+          error
+        });
+      });
+  };
+}
+
 export function setDataSource(it) {
   dataSource = it;
 }
