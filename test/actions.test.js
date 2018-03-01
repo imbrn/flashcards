@@ -209,18 +209,19 @@ describe("actions", function() {
     });
 
     it("dispatch request create card", () => {
-      return store.dispatch(createCard(cardData)).then(() => {
+      return store.dispatch(createCard(deck.id, cardData)).then(() => {
         expect(store.getActions()[0]).toEqual({
           type: Types.REQUEST_CREATE_CARD,
+          deckId: deck.id,
           cardData
         });
       });
     });
 
     it("dispatch success when card is created", () => {
-      return store.dispatch(createCard(cardData)).then(() => {
+      return store.dispatch(createCard(deck.id, cardData)).then(() => {
         expect(store.getActions()).toEqual([
-          { type: Types.REQUEST_CREATE_CARD, cardData },
+          { type: Types.REQUEST_CREATE_CARD, cardData, deckId: deck.id },
           {
             type: Types.CREATE_CARD_SUCCESS,
             card: mockDataSource.lastCreatedCard
@@ -231,12 +232,13 @@ describe("actions", function() {
 
     it("dispatch failure when card is not created", () => {
       mockDataSource.failure = "Error";
-      return store.dispatch(createCard(cardData)).then(() => {
+      return store.dispatch(createCard(deck.id, cardData)).then(() => {
         expect(store.getActions()).toEqual([
-          { type: Types.REQUEST_CREATE_CARD, cardData },
+          { type: Types.REQUEST_CREATE_CARD, cardData, deckId: deck.id },
           {
             type: Types.CREATE_CARD_FAILURE,
             cardData,
+            deckId: deck.id,
             error: mockDataSource.failure
           }
         ]);
