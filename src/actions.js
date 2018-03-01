@@ -77,15 +77,16 @@ export function deleteDeck(deckId) {
   };
 }
 
-export function createCard(cardData) {
+export function createCard(deckId, cardData) {
   return function(dispatch) {
     dispatch({
       type: Types.REQUEST_CREATE_CARD,
+      deckId,
       cardData
     });
 
     return dataSource
-      .createCard(cardData)
+      .createCard(deckId, cardData)
       .then(card => {
         dispatch({
           type: Types.CREATE_CARD_SUCCESS,
@@ -95,6 +96,7 @@ export function createCard(cardData) {
       .catch(error => {
         dispatch({
           type: Types.CREATE_CARD_FAILURE,
+          deckId,
           cardData,
           error
         });
