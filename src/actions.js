@@ -27,15 +27,16 @@ export function createDeck(deckData) {
   };
 }
 
-export function updateDeck(deckDataToUpdate) {
+export function updateDeck(id, deckDataToUpdate) {
   return function(dispatch) {
     dispatch({
       type: Types.REQUEST_UPDATE_DECK,
+      id,
       deckDataToUpdate
     });
 
     return dataSource
-      .updateDeck(deckDataToUpdate)
+      .updateDeck(id, deckDataToUpdate)
       .then(deck => {
         dispatch({
           type: Types.UPDATE_DECK_SUCCESS,
@@ -45,6 +46,7 @@ export function updateDeck(deckDataToUpdate) {
       .catch(error => {
         dispatch({
           type: Types.UPDATE_DECK_FAILURE,
+          id,
           deckDataToUpdate,
           error
         });
