@@ -95,7 +95,7 @@ describe("actions", function() {
     });
 
     beforeEach(() => {
-      mockDataSource.addDeck(currentDeckData);
+      mockDataSource.createDeck(currentDeckData);
     });
 
     it("dispatch request update deck", () => {
@@ -200,7 +200,7 @@ describe("actions", function() {
 
     beforeEach(() => {
       mockDataSource
-        .addDeck({
+        .createDeck({
           name: "Deck A"
         })
         .then(addedDeck => {

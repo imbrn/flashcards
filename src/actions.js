@@ -10,7 +10,7 @@ export function createDeck(deckData) {
     });
 
     return dataSource
-      .addDeck(deckData)
+      .createDeck(deckData)
       .then(deck => {
         dispatch({
           type: Types.CREATE_DECK_SUCCESS,
