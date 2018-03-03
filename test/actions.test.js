@@ -78,17 +78,10 @@ describe("actions", function() {
   });
 
   describe("updateDeck", () => {
-    let currentDeckData;
+    let deck;
     let deckDataToUpdate;
 
     beforeAll(() => {
-      currentDeckData = {
-        name: "Deck one",
-        description: "The deck one",
-        front: "en",
-        back: "pt"
-      };
-
       deckDataToUpdate = {
         name: "Deck two",
         description: "The deck two"
@@ -96,22 +89,30 @@ describe("actions", function() {
     });
 
     beforeEach(() => {
-      mockDataSource.createDeck(currentDeckData);
+      mockDataSource
+        .createDeck({
+          name: "One",
+          description: "Deck one",
+          front: "en",
+          back: "pt"
+        })
+        .then(createdDeck => (deck = createdDeck));
     });
 
     it("dispatch request update deck", () => {
-      return store.dispatch(updateDeck(deckDataToUpdate)).then(() => {
+      return store.dispatch(updateDeck(deck.id, deckDataToUpdate)).then(() => {
         expect(store.getActions()[0]).toEqual({
           type: Types.REQUEST_UPDATE_DECK,
+          id: deck.id,
           deckDataToUpdate
         });
       });
     });
 
     it("dispatch success when update deck", () => {
-      return store.dispatch(updateDeck(deckDataToUpdate)).then(() => {
+      return store.dispatch(updateDeck(deck.id, deckDataToUpdate)).then(() => {
         expect(store.getActions()).toEqual([
-          { type: Types.REQUEST_UPDATE_DECK, deckDataToUpdate },
+          { type: Types.REQUEST_UPDATE_DECK, id: deck.id, deckDataToUpdate },
           {
             type: Types.UPDATE_DECK_SUCCESS,
             deck: mockDataSource.lastUpdatedDeck
@@ -122,11 +123,12 @@ describe("actions", function() {
 
     it("dispatch failure when deck is not updated", () => {
       mockDataSource.failure = "Ocurred an error";
-      return store.dispatch(updateDeck(deckDataToUpdate)).then(() => {
+      return store.dispatch(updateDeck(deck.id, deckDataToUpdate)).then(() => {
         expect(store.getActions()).toEqual([
-          { type: Types.REQUEST_UPDATE_DECK, deckDataToUpdate },
+          { type: Types.REQUEST_UPDATE_DECK, id: deck.id, deckDataToUpdate },
           {
             type: Types.UPDATE_DECK_FAILURE,
+            id: deck.id,
             deckDataToUpdate,
             error: mockDataSource.failure
           }

@@ -34,15 +34,15 @@ const mockDataSource = {
     });
   },
 
-  updateDeck(deckDataToUpdate) {
+  updateDeck(id, deckDataToUpdate) {
     return new Promise((resolve, reject) => {
       if (!this.failure) {
-        const { id, ...rest } = deckDataToUpdate;
         const index = this.decks.findIndex(it => it.id === id);
         const updatedDeck = {
           ...this.decks[index],
-          updateTime: ++this.lastDeckUpdateTime,
-          ...rest
+          ...deckDataToUpdate,
+          id,
+          updateTime: ++this.lastDeckUpdateTime
         };
         this.decks[index] = updatedDeck;
         this.lastUpdatedDeck = updatedDeck;
