@@ -16,7 +16,7 @@ const mockDataSource = {
     this.failure = null;
   },
 
-  addDeck(deckData) {
+  createDeck(deckData) {
     return new Promise((resolve, reject) => {
       if (!this.failure) {
         const deck = {
