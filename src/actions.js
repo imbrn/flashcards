@@ -10,7 +10,7 @@ export function createDeck(deckData) {
     });
 
     return dataSource
-      .addDeck(deckData)
+      .createDeck(deckData)
       .then(deck => {
         dispatch({
           type: Types.CREATE_DECK_SUCCESS,
@@ -100,6 +100,33 @@ export function createCard(deckId, cardData) {
           type: Types.CREATE_CARD_FAILURE,
           deckId,
           cardData,
+          error
+        });
+      });
+  };
+}
+
+export function updateCard(cardId, cardDataToUpdate) {
+  return function(dispatch) {
+    dispatch({
+      type: Types.REQUEST_UPDATE_CARD,
+      id: cardId,
+      cardDataToUpdate
+    });
+
+    return dataSource
+      .updateCard(cardId, cardDataToUpdate)
+      .then(card => {
+        dispatch({
+          type: Types.UPDATE_CARD_SUCCESS,
+          card
+        });
+      })
+      .catch(error => {
+        dispatch({
+          type: Types.UPDATE_CARD_FAILURE,
+          id: cardId,
+          cardDataToUpdate,
           error
         });
       });

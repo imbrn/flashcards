@@ -12,10 +12,11 @@ const mockDataSource = {
     this.lastUpdatedDeck = null;
     this.lastDeletedDeck = null;
     this.lastCreatedCard = null;
+    this.lastUpdatedCard = null;
     this.failure = null;
   },
 
-  addDeck(deckData) {
+  createDeck(deckData) {
     return new Promise((resolve, reject) => {
       if (!this.failure) {
         const deck = {
@@ -78,6 +79,25 @@ const mockDataSource = {
         };
         this.cards.push(card);
         this.lastCreatedCard = card;
+        resolve(card);
+      } else {
+        reject(this.failure);
+      }
+    });
+  },
+
+  updateCard(cardId, cardDataToUpdate) {
+    return new Promise((resolve, reject) => {
+      if (!this.failure) {
+        const index = this.cards.findIndex(it => it.id === cardId);
+        const card = {
+          ...this.cards[index],
+          ...cardDataToUpdate,
+          id: cardId,
+          updateTime: ++this.lastCardUpdateTime
+        };
+        this.cards[index] = card;
+        this.lastUpdatedCard = card;
         resolve(card);
       } else {
         reject(this.failure);

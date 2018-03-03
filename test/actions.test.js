@@ -5,7 +5,8 @@ import {
   createDeck,
   updateDeck,
   deleteDeck,
-  createCard
+  createCard,
+  updateCard
 } from "../src/actions";
 import mockDataSource from "./mockDataSource";
 import reduxThunk from "redux-thunk";
@@ -89,7 +90,7 @@ describe("actions", function() {
 
     beforeEach(() => {
       mockDataSource
-        .addDeck({
+        .createDeck({
           name: "One",
           description: "Deck one",
           front: "en",
@@ -202,7 +203,7 @@ describe("actions", function() {
 
     beforeEach(() => {
       mockDataSource
-        .addDeck({
+        .createDeck({
           name: "Deck A"
         })
         .then(addedDeck => {
@@ -241,6 +242,67 @@ describe("actions", function() {
             type: Types.CREATE_CARD_FAILURE,
             cardData,
             deckId: deck.id,
+            error: mockDataSource.failure
+          }
+        ]);
+      });
+    });
+  });
+
+  describe("updateCard", () => {
+    let card;
+    let cardDataToUpdate;
+
+    beforeAll(() => {
+      cardDataToUpdate = {
+        front: "Two",
+        back: "Dois"
+      };
+    });
+
+    beforeEach(() => {
+      mockDataSource
+        .createDeck({
+          name: "Deck"
+        })
+        .then(deck => {
+          mockDataSource
+            .createCard(deck.id, { front: "One", back: "Two" })
+            .then(it => (card = it));
+        });
+    });
+
+    it("dispatch request update card", () => {
+      return store.dispatch(updateCard(card.id, cardDataToUpdate)).then(() => {
+        expect(store.getActions()[0]).toEqual({
+          type: Types.REQUEST_UPDATE_CARD,
+          id: card.id,
+          cardDataToUpdate
+        });
+      });
+    });
+
+    it("dispatch success when card is updated", () => {
+      return store.dispatch(updateCard(card.id, cardDataToUpdate)).then(() => {
+        expect(store.getActions()).toEqual([
+          { type: Types.REQUEST_UPDATE_CARD, id: card.id, cardDataToUpdate },
+          {
+            type: Types.UPDATE_CARD_SUCCESS,
+            card: mockDataSource.lastUpdatedCard
+          }
+        ]);
+      });
+    });
+
+    it("dispatch failure when card is not updated", () => {
+      mockDataSource.failure = "An error";
+      return store.dispatch(updateCard(card.id, cardDataToUpdate)).then(() => {
+        expect(store.getActions()).toEqual([
+          { type: Types.REQUEST_UPDATE_CARD, id: card.id, cardDataToUpdate },
+          {
+            type: Types.UPDATE_CARD_FAILURE,
+            id: card.id,
+            cardDataToUpdate,
             error: mockDataSource.failure
           }
         ]);
