@@ -260,7 +260,7 @@ describe("actions", function() {
 
     beforeEach(() => {
       mockDataSource
-        .addDeck({
+        .createDeck({
           name: "Deck"
         })
         .then(deck => {
