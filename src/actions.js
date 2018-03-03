@@ -104,6 +104,33 @@ export function createCard(deckId, cardData) {
   };
 }
 
+export function updateCard(cardId, cardDataToUpdate) {
+  return function(dispatch) {
+    dispatch({
+      type: Types.REQUEST_UPDATE_CARD,
+      id: cardId,
+      cardDataToUpdate
+    });
+
+    return dataSource
+      .updateCard(cardId, cardDataToUpdate)
+      .then(card => {
+        dispatch({
+          type: Types.UPDATE_CARD_SUCCESS,
+          card
+        });
+      })
+      .catch(error => {
+        dispatch({
+          type: Types.UPDATE_CARD_FAILURE,
+          id: cardId,
+          cardDataToUpdate,
+          error
+        });
+      });
+  };
+}
+
 export function setDataSource(it) {
   dataSource = it;
 }
