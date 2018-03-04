@@ -13,6 +13,7 @@ const mockDataSource = {
     this.lastDeletedDeck = null;
     this.lastCreatedCard = null;
     this.lastUpdatedCard = null;
+    this.lastDeletedCard = null;
     this.failure = null;
   },
 
@@ -98,6 +99,20 @@ const mockDataSource = {
         };
         this.cards[index] = card;
         this.lastUpdatedCard = card;
+        resolve(card);
+      } else {
+        reject(this.failure);
+      }
+    });
+  },
+
+  deleteCard(cardId) {
+    return new Promise((resolve, reject) => {
+      if (!this.failure) {
+        const index = this.cards.findIndex(it => it.id === cardId);
+        const card = this.cards[index];
+        this.cards.splice(index, 1);
+        this.lastDeletedCard = card;
         resolve(card);
       } else {
         reject(this.failure);

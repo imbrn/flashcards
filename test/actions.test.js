@@ -6,7 +6,8 @@ import {
   updateDeck,
   deleteDeck,
   createCard,
-  updateCard
+  updateCard,
+  deleteCard
 } from "../src/actions";
 import mockDataSource from "./mockDataSource";
 import reduxThunk from "redux-thunk";
@@ -303,6 +304,57 @@ describe("actions", function() {
             type: Types.UPDATE_CARD_FAILURE,
             id: card.id,
             cardDataToUpdate,
+            error: mockDataSource.failure
+          }
+        ]);
+      });
+    });
+  });
+
+  describe("deleteCard", () => {
+    let card;
+
+    beforeEach(() => {
+      mockDataSource
+        .createDeck({
+          name: "One"
+        })
+        .then(deck => {
+          mockDataSource
+            .createCard(deck.id, {
+              front: "One",
+              back: "Um"
+            })
+            .then(it => (card = it));
+        });
+    });
+
+    it("dispatch request delete card", () => {
+      return store.dispatch(deleteCard(card.id)).then(() => {
+        expect(store.getActions()[0]).toEqual({
+          type: Types.REQUEST_DELETE_CARD,
+          id: card.id
+        });
+      });
+    });
+
+    it("dispatch success when card is deleted", () => {
+      return store.dispatch(deleteCard(card.id)).then(() => {
+        expect(store.getActions()).toEqual([
+          { type: Types.REQUEST_DELETE_CARD, id: card.id },
+          { type: Types.DELETE_CARD_SUCCESS, card }
+        ]);
+      });
+    });
+
+    it("dispatch failure when card is not deleted", () => {
+      mockDataSource.failure = "An error";
+      return store.dispatch(deleteCard(card.id)).then(() => {
+        expect(store.getActions()).toEqual([
+          { type: Types.REQUEST_DELETE_CARD, id: card.id },
+          {
+            type: Types.DELETE_CARD_FAILURE,
+            id: card.id,
             error: mockDataSource.failure
           }
         ]);
