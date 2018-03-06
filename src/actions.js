@@ -133,6 +133,31 @@ export function updateCard(cardId, cardDataToUpdate) {
   };
 }
 
+export function deleteCard(cardId) {
+  return function(dispatch) {
+    dispatch({
+      type: Types.REQUEST_DELETE_CARD,
+      id: cardId
+    });
+
+    return dataSource
+      .deleteCard(cardId)
+      .then(card => {
+        dispatch({
+          type: Types.DELETE_CARD_SUCCESS,
+          card
+        });
+      })
+      .catch(error => {
+        dispatch({
+          type: Types.DELETE_CARD_FAILURE,
+          id: cardId,
+          error
+        });
+      });
+  };
+}
+
 export function setDataSource(it) {
   dataSource = it;
 }
