@@ -46,4 +46,51 @@ describe("reducers", function() {
       ).toEqual(expected);
     });
   });
+
+  describe("cards", () => {
+    it("returns the same value for unknown actions", () => {
+      const before = [{ id: 1, front: "One", back: "Um" }];
+      expect(
+        reducers.cards(before, {
+          type: "UNKNOW_ACTION"
+        })
+      ).toEqual(before);
+    });
+
+    it("adds card when create card is performed", () => {
+      const before = [{ id: 1, front: "One", back: "Um" }];
+      expect(
+        reducers.cards(before, {
+          type: Types.CREATE_CARD_SUCCESS,
+          card: { id: 2, front: "Two", back: "Dois" }
+        })
+      ).toEqual([
+        { id: 1, front: "One", back: "Um" },
+        { id: 2, front: "Two", back: "Dois" }
+      ]);
+    });
+
+    it("removes card when delete card is performed", () => {
+      const before = [
+        { id: 1, front: "One", back: "Um" },
+        { id: 2, front: "Two", back: "Dois" }
+      ];
+      expect(
+        reducers.cards(before, {
+          type: Types.DELETE_CARD_SUCCESS,
+          card: { id: 1, front: "One", back: "Um" }
+        })
+      ).toEqual([{ id: 2, front: "Two", back: "Dois" }]);
+    });
+
+    it("updates card when update card is performed", () => {
+      const before = [{ id: 1, front: "One", back: "Dois" }];
+      expect(
+        reducers.cards(before, {
+          type: Types.UPDATE_CARD_SUCCESS,
+          card: { id: 1, front: "One", back: "Um" }
+        })
+      ).toEqual([{ id: 1, front: "One", back: "Um" }]);
+    });
+  });
 });
