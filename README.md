@@ -1,7 +1,7 @@
 # flashcards
-The main purpose of this project is to provide an easy to understand real-life application made with React, Redux and other related libraries.
+The main purpose of this project is to provide an easy to understand real-life application made with React and some other related libraries.
 
-It's intended to be really an easy to contribute project, even for begginners in the React and Redux world. All its features, and processes will be very good documented for helping people to get started hacking the application and also learn with it.
+It's intended to be an easy to contribute project, even for beginners in the React world. All of its features, and processes will be very good documented for helping people to get started hacking the application and also learn with it.
 
 ## What the application is about?
 
